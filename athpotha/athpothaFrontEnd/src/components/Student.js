@@ -5,6 +5,7 @@ import Card from "./ui/Card";
 function Student() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [IsLoading, setIsLoading] = useState(true);
   const [students, setStudents] = useState([]);
 
   const handleClicked = (e) => {
@@ -17,21 +18,31 @@ function Student() {
       body: JSON.stringify(student),
     }).then(() => {
       console.log("New Student added");
-      fetch("http://localhost:8080/student/getAll")
-        .then((res) => res.json())
-        .then((result) => {
-          setStudents(result);
-        });
+      // fetch("http://localhost:8080/student/getAll")
+      //   .then((res) => res.json())
+      //   .then((result) => {
+      //     setStudents(result);
+      //   });
     });
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:8080/student/getAll")
       .then((res) => res.json())
       .then((result) => {
+        setIsLoading(false);
         setStudents(result);
       });
   }, []);
+
+  if (IsLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   return (
     <div>
