@@ -1,0 +1,16 @@
+.outer-box {
+    margin-left: 109px;
+}
+
+.inner-box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.submitBtn {
+    width: 100px;
+    height: auto;
+    background-color: blue;
+    color: white;
+}

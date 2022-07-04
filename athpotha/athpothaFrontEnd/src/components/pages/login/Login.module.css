@@ -13,7 +13,7 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
-main {
+.mainDiv {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
@@ -122,7 +122,14 @@ form.sign-up-form {
 .input-wrap {
   position: relative;
   height: 37px;
+  width: 90%;
   margin-bottom: 2rem;
+}
+
+.input-wrap-eye {
+  position: relative;
+  /* height: 37px; */
+  /* margin-bottom: 2rem; */
 }
 
 .input-field {
@@ -148,6 +155,32 @@ label {
   color: #bbb;
   pointer-events: none;
   transition: 0.4s;
+}
+
+.input-wrap-eye {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  /* font-size: 0.95rem; */
+  color: #bbb;
+  display: none;
+  /* pointer-events: none; */
+  transition: 0.4s;
+  left: 100%;
+}
+
+.input-wrap-eye:hover {
+    color: #151111;
+}
+
+.input-wrap-eye.active {
+    color: #151111;
+}
+
+.input-wrap-eye.show {
+  display: inline;
+  /* transform: none; */
 }
 
 .input-field.active {
@@ -191,21 +224,21 @@ label {
   color: #0aa1dd;
 }
 
-main.sign-up-mode form.sign-in-form {
+.mainDiv.sign-up-mode form.sign-in-form {
   opacity: 0;
   pointer-events: none;
 }
 
-main.sign-up-mode form.sign-up-form {
+.mainDiv.sign-up-mode form.sign-up-form {
   opacity: 1;
   pointer-events: all;
 }
 
-main.sign-up-mode .forms-wrap {
+.mainDiv.sign-up-mode .forms-wrap {
   left: 55%;
 }
 
-main.sign-up-mode .carousel {
+.mainDiv.sign-up-mode .carousel {
   left: 0%;
 }
 
@@ -340,11 +373,11 @@ main.sign-up-mode .carousel {
     transform: translateX(100%);
   }
 
-  main.sign-up-mode form.sign-in-form {
+  .mainDiv.sign-up-mode form.sign-in-form {
     transform: translateX(-100%);
   }
 
-  main.sign-up-mode form.sign-up-form {
+  .mainDiv.sign-up-mode form.sign-up-form {
     transform: translateX(0%);
   }
 
@@ -366,7 +399,7 @@ main.sign-up-mode .carousel {
 }
 
 @media (max-width: 530px) {
-  main {
+  .mainDiv {
     padding: 1rem;
   }
 

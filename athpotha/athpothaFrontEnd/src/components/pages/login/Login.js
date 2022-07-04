@@ -1,102 +1,156 @@
 import React, { useState } from "react";
-import "./login.css";
+import classes from "./Login.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Login() {
-  const main = document.querySelector("main");
+  const main = document.querySelector(`.${classes.mainDiv}`);
   const [toggleClicked, setToggleBtn] = useState(false);
 
   function changeFocus(e) {
     const input = e.target;
-    if (input.classList !== "active") {
-      input.classList.add("active");
+    const eyes = document.querySelectorAll(`.${classes["input-wrap-eye"]}`);
+    if (input.classList !== classes.active) {
+      input.classList.add(classes.active);
+      if (input.id === "password") {
+        eyes.forEach((eye) => {
+          eye.classList.add(classes.active);
+        });
+      }
     }
     input.addEventListener("blur", () => {
       if (input.value !== "") return;
-      input.classList.remove("active");
+      input.classList.remove(classes.active);
+      if (input.id === "password") {
+        eyes.forEach((eye) => {
+          eye.classList.remove(classes.active);
+        });
+      }
     });
   }
 
-  if (toggleClicked == true) {
-    if (main.classList != "sign-up-mode") {
-      main.classList.add("sign-up-mode");
-    } else {
-      main.classList.remove("sign-up-mode");
-    }
+  if (toggleClicked === true) {
+    main.classList.toggle(classes["sign-up-mode"]);
     setToggleBtn(false);
   }
 
   function moveSlider(e) {
     let index = e.target.dataset.value;
-    const images = document.querySelectorAll(".image");
-    const bullets = document.querySelectorAll(".bullets span");
-    console.log(index);
+    let images = document.querySelectorAll(`.${classes.image}`);
+    let bullets = document.querySelectorAll(`.${classes.bullets} span`);
 
-    let currentImage = document.querySelector(`.img-${index}`);
+    let imageNumber = "img-" + index;
+    let currentImage = document.querySelector(`.${classes[imageNumber]}`);
     images.forEach((img) => {
-      img.classList.remove("show");
+      img.classList.remove(classes.show);
     });
-    currentImage.classList.add("show");
+    currentImage.classList.add(classes.show);
 
-    const textSlider = document.querySelector(".text-group");
+    let textSlider = document.querySelector(`.${classes["text-group"]}`);
     textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
 
-    bullets.forEach((bull) => bull.classList.remove("active"));
-    e.target.classList.add("active");
+    bullets.forEach((bull) => bull.classList.remove(classes.active));
+    e.target.classList.add(classes.active);
   }
 
-  //   bullets.forEach((bullet) => {
-  //     bullet.addEventListener("click", moveSlider);
-  //   });
+  function toggleEye(eye) {
+    if (eye.id === "password-hide") {
+      eye.classList.remove(classes.show);
+      document.getElementById("password-show").classList.add(classes.show);
+      document.getElementById("password").type = "text";
+    } else if (eye.id === "password-show") {
+      eye.classList.remove(classes.show);
+      document.getElementById("password-hide").classList.add(classes.show);
+      document.getElementById("password").type = "password";
+    }
+  }
+
+  function eyeClickHandler(e) {
+    let eye = e.target.parentNode;
+    if (eye.classList[0] === classes["input-wrap-eye"]) {
+      toggleEye(eye);
+    } else if (eye.classList[0] === "svg-inline--fa") {
+      eye = eye.parentNode;
+      toggleEye(eye);
+    } else {
+      console.log("else");
+    }
+  }
   return (
-    <main>
-      <div className="box">
-        <div className="inner-box">
-          <div className="forms-wrap">
+    <main className={classes.mainDiv}>
+      <div className={classes.box}>
+        <div className={classes["inner-box"]}>
+          <div className={classes["forms-wrap"]}>
             <form
               action="index.html"
               autoComplete="off"
-              className="sign-in-form"
+              className={classes["sign-in-form"]}
             >
-              <div className="logo">
+              <div className={classes.logo}>
                 <img src="/images/athpotha_v3.png" alt="අත්පොත" />
               </div>
 
-              <div className="heading">
+              <div className={classes.heading}>
                 <h2>Welcome Back</h2>
                 <h6>Not registred yet? </h6>
-                <span className="toggle" onClick={() => setToggleBtn(true)}>
+                <span
+                  className={classes.toggle}
+                  onClick={() => setToggleBtn(true)}
+                >
                   Sign up
                 </span>
               </div>
 
-              <div className="actual-form">
-                <div className="input-wrap">
+              <div className={classes["actual-form"]}>
+                <div className={classes["input-wrap"]}>
                   <input
                     type="text"
                     minLength="4"
-                    className="input-field"
+                    className={classes["input-field"]}
                     autoComplete="off"
                     required
                     onClick={changeFocus}
                   />
                   <label>Name</label>
                 </div>
-                <div className="input-wrap">
+                <div className={classes["input-wrap"]}>
                   <input
                     type="password"
                     minLength="4"
-                    className="input-field"
+                    className={classes["input-field"]}
                     autoComplete="off"
                     required
-                    // onClick={() => setFocus(true)}
                     onClick={changeFocus}
+                    id="password"
                   />
                   <label>Password</label>
+                  <span
+                    className={classes["input-wrap-eye"]}
+                    id="password-show"
+                  >
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon="fa-solid fa-eye-slash"
+                      onClick={eyeClickHandler}
+                    />
+                  </span>
+                  <span
+                    className={`${classes["input-wrap-eye"]} ${classes.show}`}
+                    id="password-hide"
+                  >
+                    <FontAwesomeIcon
+                      style={{ cursor: "pointer" }}
+                      icon="fa-solid fa-eye"
+                      onClick={eyeClickHandler}
+                    />
+                  </span>
                 </div>
+                <input
+                  type="submit"
+                  value="Sign In"
+                  className={classes["sign-btn"]}
+                />
 
-                <input type="submit" value="Sign In" className="sign-btn" />
-
-                <p className="text">
+                <p className={classes.text}>
                   <a href="#">Foget Password?</a>
                 </p>
               </div>
@@ -105,26 +159,29 @@ function Login() {
             <form
               action="index.html"
               autoComplete="off"
-              className="sign-up-form"
+              className={classes["sign-up-form"]}
             >
-              <div className="logo">
+              <div className={classes.logo}>
                 <img src="/images/athpotha_v3.png" alt="easyclassName" />
               </div>
 
-              <div className="heading">
+              <div className={classes.heading}>
                 <h2>Get Started</h2>
                 <h6>Already have an account? </h6>
-                <span className="toggle" onClick={() => setToggleBtn(true)}>
+                <span
+                  className={classes.toggle}
+                  onClick={() => setToggleBtn(true)}
+                >
                   Sign in
                 </span>
               </div>
 
-              <div className="actual-form">
-                <div className="input-wrap">
+              <div className={classes["actual-form"]}>
+                <div className={classes["input-wrap"]}>
                   <input
                     type="text"
                     minLength="4"
-                    className="input-field"
+                    className={classes["input-field"]}
                     autoComplete="off"
                     required
                     onClick={changeFocus}
@@ -132,10 +189,10 @@ function Login() {
                   <label>Name</label>
                 </div>
 
-                <div className="input-wrap">
+                <div className={classes["input-wrap"]}>
                   <input
                     type="email"
-                    className="input-field"
+                    className={classes["input-field"]}
                     autoComplete="off"
                     required
                     onClick={changeFocus}
@@ -143,11 +200,11 @@ function Login() {
                   <label>Email</label>
                 </div>
 
-                <div className="input-wrap">
+                <div className={classes["input-wrap"]}>
                   <input
                     type="password"
                     minLength="4"
-                    className="input-field"
+                    className={classes["input-field"]}
                     autoComplete="off"
                     required
                     onClick={changeFocus}
@@ -155,9 +212,13 @@ function Login() {
                   <label>Password</label>
                 </div>
 
-                <input type="submit" value="Sign Up" className="sign-btn" />
+                <input
+                  type="submit"
+                  value="Sign Up"
+                  className={classes["sign-btn"]}
+                />
 
-                <p className="text">
+                <p className={classes.text}>
                   By signing up, I agree to the
                   <a href="#"> Terms of Services </a> and{" "}
                   <a href="#">Privacy Policy</a>
@@ -166,29 +227,37 @@ function Login() {
             </form>
           </div>
 
-          <div className="carousel">
-            <div className="images-wrapper">
+          <div className={classes.carousel}>
+            <div className={classes["images-wrapper"]}>
               <img
                 src="/images/image1.png"
-                className="image img-1 show"
+                className={`${classes.image} ${classes["img-1"]} ${classes.show}`}
                 alt=""
               />
-              <img src="/images/image2.png" className="image img-2" alt="" />
-              <img src="/images/image3.png" className="image img-3" alt="" />
+              <img
+                src="/images/image2.png"
+                className={`${classes.image} ${classes["img-2"]}`}
+                alt=""
+              />
+              <img
+                src="/images/image3.png"
+                className={`${classes.image} ${classes["img-3"]}`}
+                alt=""
+              />
             </div>
 
-            <div className="text-slider">
-              <div className="text-wrap">
-                <div className="text-group">
+            <div className={classes["text-slider"]}>
+              <div className={classes["text-wrap"]}>
+                <div className={classes["text-group"]}>
                   <h2>Create your own courses</h2>
                   <h2>Customize as you like</h2>
                   <h2>Invite students to your className</h2>
                 </div>
               </div>
 
-              <div className="bullets">
+              <div className={classes.bullets}>
                 <span
-                  className="active"
+                  className={classes.active}
                   data-value="1"
                   onClick={moveSlider}
                 ></span>
