@@ -56,7 +56,7 @@ input {
 }
 
 form {
-  max-width: 260px;
+  max-width: 280px;
   width: 100%;
   margin: 0 auto;
   height: 100%;
@@ -100,9 +100,9 @@ form.sign-up-form {
 }
 
 .heading h6 {
-  color: #bababa;
+  color: rgb(169, 169, 169);
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   display: inline;
 }
 
@@ -120,16 +120,14 @@ form.sign-up-form {
 }
 
 .input-wrap {
-  position: relative;
-  height: 37px;
-  width: 90%;
+  /* position: relative; */
+  /* height: 37px; */
+  width: 100%;
   margin-bottom: 2rem;
 }
 
-.input-wrap-eye {
-  position: relative;
-  /* height: 37px; */
-  /* margin-bottom: 2rem; */
+.textFieldError {
+  color: red;
 }
 
 .input-field {
@@ -157,30 +155,8 @@ label {
   transition: 0.4s;
 }
 
-.input-wrap-eye {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  /* font-size: 0.95rem; */
-  color: #bbb;
-  display: none;
-  /* pointer-events: none; */
-  transition: 0.4s;
-  left: 100%;
-}
-
-.input-wrap-eye:hover {
-    color: #151111;
-}
-
-.input-wrap-eye.active {
-    color: #151111;
-}
-
-.input-wrap-eye.show {
-  display: inline;
-  /* transform: none; */
+label.active {
+  color: #151111;
 }
 
 .input-field.active {
@@ -193,26 +169,38 @@ label {
 }
 
 .sign-btn {
-  display: inline-block;
   width: 100%;
-  height: 43px;
   background-color: #151111;
   color: #fff;
-  border: none;
-  cursor: pointer;
   border-radius: 0.8rem;
-  font-size: 0.8rem;
-  margin-bottom: 2rem;
-  transition: 0.3s;
+  margin: 1rem 0;
 }
 /* 285e89 */
 .sign-btn:hover {
   background-color: #0aa1dd;
 }
 
+.sign-btn-others {
+  display: inline-block;
+  width: 100%;
+  height: 43px;
+  background-color: #285e89;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.8rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  transition: 0.3s;
+}
+
+.sign-btn-others:hover {
+  background-color: #0aa1dd;
+}
+
 .text {
-  color: #bbb;
-  font-size: 0.7rem;
+  color: rgb(169, 169, 169);
+  font-size: 0.85rem;
 }
 
 .text a {
