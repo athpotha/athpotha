@@ -17,7 +17,7 @@ const tutors = [
     typographyAlign: "center",
     align: "center",
     name: "Mohomad Perera",
-    jobRole: "Teacher",
+    jobRole: "Chemistry Tutor",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
@@ -35,7 +35,7 @@ const tutors = [
     typographyAlign: "center",
     align: "center",
     name: "Mohomad Perera",
-    jobRole: "Teacher",
+    jobRole: "Physics Tutor",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
@@ -53,7 +53,7 @@ const tutors = [
     typographyAlign: "center",
     align: "center",
     name: "Mohomad Perera",
-    jobRole: "Teacher",
+    jobRole: "O/L Maths Tutor",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
@@ -71,7 +71,7 @@ const tutors = [
     typographyAlign: "center",
     align: "center",
     name: "Mohomad Perera",
-    jobRole: "Teacher",
+    jobRole: "Science Tutor",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
@@ -118,7 +118,7 @@ function TopRatedTutors() {
               spacing={1}
               headingColor="secondary.contrastText"
               headingVariant="h4"
-              heading="Are You a Teacher? Get Yourself Registerd"
+              heading="Are You a Tutor? Get Yourself Registerd"
               subtitleColor="secondary.contrastText"
               subtitleVariant="h6"
               subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
