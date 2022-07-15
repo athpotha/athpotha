@@ -5,17 +5,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { StyledEngineProvider } from "@mui/material/styles";
-// import IconButton from "@mui/material/IconButton";
-// import MenuIcon from "@mui/icons-material/Menu";
-import { Grid, makeStyles, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import classes from "./HomeAppBar.module.css";
-
-// const useStyles = makeStyles({
-//   appBar: {
-//     backgroundColor: 'red',
-//     color: 'rede'
-//   },
-// });
+import { Link } from "react-router-dom";
 
 export default function HomeAppBar() {
   // const classes = useStyles();
@@ -38,12 +30,16 @@ export default function HomeAppBar() {
               </Grid>
             </Grid>
           </Paper>
-          <Button variant="outlined" className={classes.btn}>
-            Sign In
-          </Button>
-          <Button variant="contained" className={classes.btn}>
-            Sign Up
-          </Button>
+          <Link to="/login" style={{ textDecoration: "none", marginRight: 10 }}>
+            <Button variant="outlined">
+              Sign In
+            </Button>
+          </Link>
+          <Link to="/registration" style={{ textDecoration: "none" }}>
+            <Button variant="contained">
+              Sign Up
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </StyledEngineProvider>

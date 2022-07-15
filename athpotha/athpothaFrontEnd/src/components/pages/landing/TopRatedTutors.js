@@ -1,8 +1,15 @@
-import { StyledEngineProvider, Grid, Paper, Stack } from "@mui/material";
+import {
+  StyledEngineProvider,
+  Grid,
+  Paper,
+  Stack,
+  Tabs,
+  Tab,
+} from "@mui/material";
 import React from "react";
-import HomeHeading from "./HomeHeading";
-import HomeTabButtons from "./HomeTabButtons";
-import ShowDetails from "./ShowDetails";
+import HomeHeading from "../../ui/landing/HomeHeading";
+import HomeTabButtons from "../../ui/landing/HomeTabButtons";
+import ShowDetails from "../../ui/landing/ShowDetails";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
@@ -22,7 +29,7 @@ const tutors = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 400,
+    
     bgColor: "background.light",
   },
   {
@@ -40,7 +47,7 @@ const tutors = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 400,
+    
     bgColor: "background.light",
   },
   {
@@ -58,7 +65,7 @@ const tutors = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 400,
+    
     bgColor: "background.light",
   },
   {
@@ -76,7 +83,25 @@ const tutors = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 400,
+    
+    bgColor: "background.light",
+  },
+  {
+    id: "t-5",
+    profileHeight: "16rem",
+    profileWidth: "16rem",
+    profileMargin: "20px",
+    profileBorderRadius: "50%",
+    imagePath: "images/tutors/tutor-1.jpg",
+    typographyAlign: "center",
+    align: "center",
+    name: "Mohomad Perera",
+    jobRole: "Science Tutor",
+    icon: StarIcon,
+    emptyIcon: StarBorderIcon,
+    value: 5,
+    review: 2400,
+    
     bgColor: "background.light",
   },
 ];
@@ -90,7 +115,11 @@ function TopRatedTutors() {
         container
         spacing={8}
         alignSelf="center"
-        sx={{ backgroundColor: "background.light", padding: "30px 0" }}
+        sx={{
+          backgroundColor: "background.light",
+          padding: "30px 0",
+          width: "1550px",
+        }}
       >
         <Grid item xs={12}>
           <HomeHeading
@@ -103,14 +132,20 @@ function TopRatedTutors() {
             subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
           />
         </Grid>
-        <Grid item>
-          <Grid container xs={12} spacing={5}>
+        <Grid item xs={12}>
+          <Tabs
+            variant="scrollable"
+            scrollButtons
+            allowScrollButtonsMobile
+            aria-label="scrollable force tabs example"
+            sx={{
+              maxWidth: { xs: 320, sm: 800, md: 1400 },
+            }}
+          >
             {tutors.map((tutor) => (
-              <Grid item xs={12} sm={6} md={3}>
-                <ShowDetails key={tutor.id} item={tutor} />
-              </Grid>
+              <ShowDetails key={tutor.id} item={tutor} />
             ))}
-          </Grid>
+          </Tabs>
         </Grid>
         <Grid item container direction="column" spacing={2}>
           <Grid item>

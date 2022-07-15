@@ -5,9 +5,14 @@ import Login from "./components/pages/login/Login";
 import Test from "./components/pages/test/Test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
-import Home from "./components/pages/home/Home";
+import Home from "./components/pages/landing/Home";
 import { blue, lightBlue } from "@mui/material/colors";
-
+import Registration from "./components/pages/login/Registration";
+import Main from "./components/pages/wall-home/Main";
+import { Theme } from "@mui/material";
+import Notifications from "./components/pages/notifications/Notifications";
+import Profile from "./components/pages/profile/Profile";
+import Chat from "./components/pages/chat/Chat";
 function App() {
   const theme = createTheme({
     palette: {
@@ -45,9 +50,15 @@ function App() {
     // <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home />} exact></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/registration" element={<Registration />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/main" element={<Main />}></Route>
+          <Route path="/my-network" element={<Main />}></Route> {/*Ashani methana hdnna*/}
+          <Route path="/notifications" element={<Notifications />}></Route>
+          <Route path="/chat" element={<Chat />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="/test" element={<Test />}></Route>
         </Routes>
       </ThemeProvider>

@@ -1,6 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import CardMedia from "@mui/material/CardMedia";
 
 export default function CenteredBox(props) {
   const commonStyles = {

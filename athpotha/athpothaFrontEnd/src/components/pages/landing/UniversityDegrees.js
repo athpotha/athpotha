@@ -1,11 +1,12 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import HomeHeading from "./HomeHeading";
-import HomeTabButtons from "./HomeTabButtons";
+import HomeHeading from "../../ui/landing/HomeHeading";
+import HomeTabButtons from "../../ui/landing/HomeTabButtons";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import ShowDetails from "./ShowDetails";
-
+import ShowDetails from "../../ui/landing/ShowDetails";
+import { Tab, Tabs } from "@mui/material";
+import { styled } from '@mui/material/styles';
 
 const universities = [
   {
@@ -15,12 +16,13 @@ const universities = [
     profileMargin: "0px",
     profileBorderRadius: 0,
     imagePath: "images/tutors/tutor-1.jpg",
+    typographyAlign: "left",
     name: "BIT University of Colombo",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 450,
+    
     bgColor: "background.light",
   },
   {
@@ -30,12 +32,13 @@ const universities = [
     profileMargin: "0px",
     profileBorderRadius: 0,
     imagePath: "images/tutors/tutor-1.jpg",
+    typographyAlign: "left",
     name: "BIT University of Colombo",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 450,
+    
     bgColor: "background.light",
   },
   {
@@ -45,12 +48,13 @@ const universities = [
     profileMargin: "0px",
     profileBorderRadius: 0,
     imagePath: "images/tutors/tutor-1.jpg",
+    typographyAlign: "left",
     name: "BIT University of Colombo",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 450,
+    
     bgColor: "background.light",
   },
   {
@@ -60,12 +64,13 @@ const universities = [
     profileMargin: "0px",
     profileBorderRadius: 0,
     imagePath: "images/tutors/tutor-1.jpg",
+    typographyAlign: "left",
     name: "BIT University of Colombo",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 450,
+    
     bgColor: "background.light",
   },
   {
@@ -75,30 +80,22 @@ const universities = [
     profileMargin: "0px",
     profileBorderRadius: 0,
     imagePath: "images/tutors/tutor-1.jpg",
+    typographyAlign: "left",
     name: "BIT University of Colombo",
     icon: StarIcon,
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    maxwidth: 450,
-    bgColor: "background.light",
-  },
-  {
-    id: "u-6",
-    profileHeight: "16rem",
-    profileWidth: "100%",
-    profileMargin: "0px",
-    profileBorderRadius: 0,
-    imagePath: "images/tutors/tutor-1.jpg",
-    name: "BIT University of Colombo",
-    icon: StarIcon,
-    emptyIcon: StarBorderIcon,
-    value: 5,
-    review: 2400,
-    maxwidth: 450,
+    
     bgColor: "background.light",
   },
 ];
+
+const AnyTab = styled(Tab)({
+  "&:hover": {
+    opacity: 0.8,
+  },
+});
 
 function UniversityDegrees() {
   return (
@@ -107,7 +104,8 @@ function UniversityDegrees() {
       xs={12}
       direction="column"
       spacing={8}
-      sx={{ bgcolor: "background.light", padding: "30px 0" }}
+      sx={{ bgcolor: "background.light", padding: "30px 0", width: "1550px" }}
+      alignSelf="center"
     >
       <Grid item>
         <HomeHeading
@@ -120,12 +118,22 @@ function UniversityDegrees() {
           subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
         />
       </Grid>
-      <Grid item container xs={12} spacing={3}>
-        {universities.map((university) => (
-          <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12}>
+        <Tabs
+          // value={value}
+          // onChange={handleChange}
+          variant="scrollable"
+          // scrollButtons
+          // allowScrollButtonsMobile
+          aria-label="scrollable force tabs example"
+          sx={{
+            maxWidth: { xs: 320, sm: 800, md: 1400 },
+          }}
+        >
+          {universities.map((university) => (
             <ShowDetails key={university.id} item={university} />
-          </Grid>
-        ))}
+          ))}
+        </Tabs>
       </Grid>
       <Grid item container direction="column" spacing={2}>
         <Grid item>

@@ -1,13 +1,12 @@
 import { StyledEngineProvider } from "@mui/material";
 import React, { useState } from "react";
-// import { useHistory } from "react-router";
 import classes from "./Login.module.css";
 // import PasswordEye from "./PasswordEye";
 
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 
-function Login() {
+function Registration() {
   const main = document.querySelector(`.${classes.mainDiv}`);
   const [toggleClicked, setToggleBtn] = useState(false);
 
@@ -52,28 +51,6 @@ function Login() {
                 className={classes["sign-in-form"]}
               >
                 <div className={classes.logo}>
-                  <img src="/images/athpotha_v3.png" alt="අත්පොත" />
-                </div>
-
-                <div className={classes.heading}>
-                  <h2>Welcome Back</h2>
-                  <h6>Not registred as a student yet? </h6>
-                  <span
-                    className={classes.toggle}
-                    onClick={() => setToggleBtn(true)}
-                  >
-                    Sign up
-                  </span>
-                  <SignInForm />
-                </div>
-              </form>
-
-              <form
-                action="index.html"
-                autoComplete="off"
-                className={classes["sign-up-form"]}
-              >
-                <div className={classes.logo}>
                   <img src="/images/athpotha_v3.png" alt="easyclassName" />
                 </div>
 
@@ -89,6 +66,28 @@ function Login() {
                 </div>
 
                 <SignUpForm />
+              </form>
+
+              <form
+                action="index.html"
+                autoComplete="off"
+                className={classes["sign-up-form"]}
+              >
+                <div className={classes.logo}>
+                  <img src="/images/athpotha_v3.png" alt="අත්පොත" />
+                </div>
+
+                <div className={classes.heading}>
+                  <h2>Welcome Back</h2>
+                  <h6>Not registred as a student yet? </h6>
+                  <span
+                    className={classes.toggle}
+                    onClick={() => setToggleBtn(true)}
+                  >
+                    Sign up
+                  </span>
+                  <SignInForm />
+                </div>
               </form>
             </div>
 
@@ -138,4 +137,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Registration;
