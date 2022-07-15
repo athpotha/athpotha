@@ -1,5 +1,5 @@
 import React from "react";
-import HomeAppBar from "./HomeAppBar";
+import HomeAppBar from "../../ui/landing/HomeAppBar";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import StudentLogin from "./StudentLogin";
 import TopRatedTutors from "./TopRatedTutors";

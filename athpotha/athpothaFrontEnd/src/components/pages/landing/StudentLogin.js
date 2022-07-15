@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined"; // import { makeStyles } from '@mui/material';
 import classes from "./StudentLogin.module.css";
-import HomeHeading from "./HomeHeading";
-import HomeTabButtons from "./HomeTabButtons";
+import HomeHeading from "../../ui/landing/HomeHeading";
+import HomeTabButtons from "../../ui/landing/HomeTabButtons";
 
 // const useStyles = makeStyles({
 //   root: {

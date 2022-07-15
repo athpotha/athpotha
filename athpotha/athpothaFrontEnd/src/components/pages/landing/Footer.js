@@ -6,7 +6,7 @@ import { StyledEngineProvider } from "@mui/material/styles";
 // import IconButton from "@mui/material/IconButton";
 // import MenuIcon from "@mui/icons-material/Menu";
 import Grid from "@mui/material/Grid";
-import CenteredBox from "./CenteredBox";
+import CenteredBox from "../../ui/CenteredBox";
 
 // const useStyles = makeStyles({
 //   appBar: {
