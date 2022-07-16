@@ -4,8 +4,8 @@ import MainHeader from "../../ui/wall-main/MainHeader";
 function Chat() {
   return (
     <>
-      <MainHeader />
-      Chat Page
+      <MainHeader value={3} />
+      <p>Chat Page</p>
     </>
   );
 }

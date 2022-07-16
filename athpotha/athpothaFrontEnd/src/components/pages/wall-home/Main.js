@@ -5,8 +5,8 @@ import MainHeader from "../../ui/wall-main/MainHeader";
 function Main() {
   return (
     <StyledEngineProvider injectFirst>
-      <MainHeader />
-      <Typography variant="h1">Main Wall</Typography>
+      <MainHeader value={0} />
+      <p>Main Wall</p>
     </StyledEngineProvider>
   );
 }

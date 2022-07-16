@@ -5,7 +5,6 @@ import { styled } from "@mui/material/styles";
 // import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
-import { Box } from "@mui/system";
 import Profile from "./Profile";
 import CenteredBox from "../CenteredBox";
 import PropTypes from "prop-types";
@@ -32,13 +31,12 @@ const AnyTab = styled(Tab) ({
 function ShowDetails(props) {
   const Icon = props.item.icon ? props.item.icon : "";
   const EmptyIcon = props.item.emptyIcon ? props.item.emptyIcon : "";
-  console.log(props);
+  // console.log(props);
   return (
     <AnyTab
-      label={
+      icon={
         <Card
           sx={{
-            // maxWidth: `${props.item.maxwidth}`,
             bgcolor: `${props.item.bgColor}`,
           }}
         >
@@ -77,9 +75,9 @@ function ShowDetails(props) {
                   icon={<Icon />}
                   emptyIcon={<EmptyIcon />}
                 />
-                <Typography>
+                <div>
                   <CenteredBox>({props.item.review})</CenteredBox>
-                </Typography>
+                </div>
               </Stack>
             </CenteredBox>
             {props.children}
