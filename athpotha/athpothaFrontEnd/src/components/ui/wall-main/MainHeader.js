@@ -21,6 +21,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MainTab from "./MainTab";
+import { Link } from "react-router-dom";
 // interface Props {
 //   window?: () => Window;
 // }
@@ -32,6 +33,13 @@ const navItems = [
   <NotificationsIcon sx={{ fontSize: 30 }} />,
   <ChatBubbleIcon sx={{ fontSize: 30 }} />,
 ];
+
+const slidbarItems = [
+  {id:"slider-icon-1", icon: <div><HouseIcon sx={{ fontSize: 30 }} /> Home</div>, linkName: "/main"},
+  {id: "slider-icon-2", icon: <div><PeopleAltIcon sx={{ fontSize: 30 }} /> Connections</div>, linkName: "/my-network" },
+  {id: "slider-icon-3", icon:<div><NotificationsIcon sx={{ fontSize: 30 }} /> Notifications</div>, linkName: "/notifications"},
+  {id: "slider-icon-4", icon:<div><ChatBubbleIcon sx={{ fontSize: 30 }} /> Chats</div>,linkName: "/chat"},
+]
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -78,25 +86,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function MainHeader() {
+export default function MainHeader(props) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [tabValue, setTabValue] = useState(props.value);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         AthPotha
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+        {slidbarItems.map((item) => (
+          <ListItem key={item.id} disablePadding>
+            <ListItemButton sx={{ textAlign: 'left' }} component={Link} to={item.linkName} onClick={() => setTabValue(false)}>
+              <ListItemText primary={item.icon} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -105,10 +114,12 @@ export default function MainHeader() {
   );
 
   // const container = window !== undefined ? () => window().document.body : undefined;
-
+// console.log(document.getElementById("nav-container-list").style.display)
+  // if(document.getElementById("nav-container-list").style.display == "none") {
+  //   console.log('hello')
+  // }
   return (
-    // <Box sx={{ display: "flex" }}>
-    <div>
+    <Box sx={{ display: "flex", mb: 13 }}>
       <AppBar component="nav" sx={{ backgroundColor: "#fff" }}>
         <Toolbar>
           <IconButton
@@ -130,8 +141,8 @@ export default function MainHeader() {
             ></img>
           </Typography>
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <MainTab />
+          <Box id="nav-container-list" sx={{ display: { xs: "none", sm: "block" } }}>
+            <MainTab value={tabValue} />
             {/* {navItems.map((item) => (
               <Button key={item} sx={{ color: "#0F6096", borderBottom: 3, borderRadius: 0, padding: 1.5}}>
                 {item}
@@ -147,7 +158,7 @@ export default function MainHeader() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Button container>Ask Question</Button>
+          <Button>Ask Question</Button>
         </Toolbar>
       </AppBar>
       <Box component="nav">
@@ -170,7 +181,7 @@ export default function MainHeader() {
           {drawer}
         </Drawer>
       </Box>
-      </div>
-    // </Box>
+      {/* </div> */}
+    </Box>
   );
 }

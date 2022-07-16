@@ -143,7 +143,6 @@ function CommiunityExperts() {
   return (
     <StyledEngineProvider injectFirst>
       <Grid
-        xs={12}
         direction="column"
         container
         spacing={8}
@@ -168,7 +167,7 @@ function CommiunityExperts() {
         </Grid>
         <Grid item xs={12}>
           <Tabs
-            // value={value}
+            value={false}
             // onChange={handleChange}
             variant="scrollable"
             scrollButtons
@@ -181,7 +180,7 @@ function CommiunityExperts() {
             {members.map((member) => (
               <ShowDetails key={member.id} item={member}>
                 <CenteredBox align="center">
-                  <Stack sx={{padding: 0}} direction="row" spacing={0}>
+                  <Stack direction="row" spacing={0}>
                     <FacebookIcon sx={{ fontSize: 50 }} />
                     <InstagramIcon sx={{ fontSize: 50 }} />
                     <LinkedInIcon sx={{ fontSize: 50 }} />

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -13,27 +12,25 @@ import {
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
-import { blue, lightBlue } from "@mui/material/colors";
 
-export default function MainTab() {
-  const [value, setValue] = useState(2);
+export default function MainTab(props) {
+  const [value, setValue] = useState(props.value);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  console.log(value);
+  if(props.value === null) {
+    setValue(false);
+    console.log("hello")
+  }
 
   const theme = createTheme({
     palette: {
       primary: {
         main: "#0F6096",
       },
-    },
-    typography: {
-      fontFamily: "Poppins",
-      fontWeightLight: 400,
-      fontWeightRegular: 500,
-      fontWeightMedium: 600,
-      fontWeightBold: 700,
     },
   });
 
@@ -49,7 +46,7 @@ export default function MainTab() {
         >
           <Tab
             sx={{ minWidth: 0 }}
-            value="one"
+            value={0}
             icon={<HomeIcon />}
             component={Link}
             to={"/main"}
@@ -57,7 +54,7 @@ export default function MainTab() {
           />
           <Tab
             sx={{ minWidth: 0 }}
-            value="two"
+            value={1}
             icon={<PeopleAltIcon />}
             component={Link}
             to={"/my-network"}
@@ -65,7 +62,7 @@ export default function MainTab() {
           />
           <Tab
             sx={{ minWidth: 0 }}
-            value="three"
+            value={2}
             icon={<NotificationsIcon />}
             component={Link}
             to={"/notifications"}
@@ -73,7 +70,7 @@ export default function MainTab() {
           />
           <Tab
             sx={{ minWidth: 0 }}
-            value="four"
+            value={3}
             icon={<ChatBubbleIcon />}
             component={Link}
             to={"/chat"}
@@ -81,7 +78,7 @@ export default function MainTab() {
           />
           <Tab
             sx={{ minWidth: 0 }}
-            value="five"
+            value={4}
             icon={
               <Avatar
                 // alt="Remy Sharp"

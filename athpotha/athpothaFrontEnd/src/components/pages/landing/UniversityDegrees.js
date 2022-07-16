@@ -101,7 +101,6 @@ function UniversityDegrees() {
   return (
     <Grid
       container
-      xs={12}
       direction="column"
       spacing={8}
       sx={{ bgcolor: "background.light", padding: "30px 0", width: "1550px" }}
@@ -120,7 +119,7 @@ function UniversityDegrees() {
       </Grid>
       <Grid item xs={12}>
         <Tabs
-          // value={value}
+          value={false}
           // onChange={handleChange}
           variant="scrollable"
           // scrollButtons
