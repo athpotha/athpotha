@@ -7,7 +7,7 @@ function MyNetwork(){
 
     return(
         <StyledEngineProvider injectFirst>
-            <MainHeader />
+            <MainHeader value={1} />
             <Content></Content>
         </StyledEngineProvider>
     );
