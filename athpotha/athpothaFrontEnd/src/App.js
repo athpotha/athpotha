@@ -13,6 +13,7 @@ import { Theme } from "@mui/material";
 import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
+import MyNetwork from "./components/pages/my-network/MyNetwork";
 function App() {
   const theme = createTheme({
     palette: {
@@ -55,7 +56,7 @@ function App() {
           <Route path="/registration" element={<Registration />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/main" element={<Main />}></Route>
-          <Route path="/my-network" element={<Main />}></Route> {/*Ashani methana hdnna*/}
+          <Route path="/my-network" element={<MyNetwork />}></Route> 
           <Route path="/notifications" element={<Notifications />}></Route>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
