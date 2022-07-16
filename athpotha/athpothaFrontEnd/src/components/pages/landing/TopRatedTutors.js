@@ -110,7 +110,6 @@ function TopRatedTutors() {
   return (
     <StyledEngineProvider injectFirst>
       <Grid
-        xs={12}
         direction="column"
         container
         spacing={8}
@@ -134,6 +133,7 @@ function TopRatedTutors() {
         </Grid>
         <Grid item xs={12}>
           <Tabs
+            value={false}
             variant="scrollable"
             scrollButtons
             allowScrollButtonsMobile

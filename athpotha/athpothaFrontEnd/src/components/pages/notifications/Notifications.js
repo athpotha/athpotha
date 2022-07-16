@@ -4,7 +4,8 @@ import MainHeader from '../../ui/wall-main/MainHeader'
 function Notifications() {
   return (
     <>
-    <MainHeader />
+    <MainHeader value={2} />
+    <p>Notifications</p>
     </>
     )
 }
