@@ -7,7 +7,7 @@ function HomeHeading(props) {
       <Grid container spacing={props.spacing} direction="column">
         <Grid item>
           <Typography
-            fontWeight={600}
+            sx={{fontWeight: {md: 600}, fontSize:{sm: 30, md: 40} }}
             align="center"
             noWrap
             color={props.headingColor}
@@ -18,7 +18,7 @@ function HomeHeading(props) {
         </Grid>
         <Grid item>
           <Typography
-            fontWeight={500}
+            sx={{fontWeight: {sm: 400, md: 500}, fontSize:{xs:15 , sm: 15, md: 23} }}
             align="center"
             color={props.subtitleColor}
             variant={props.subtitleVariant}

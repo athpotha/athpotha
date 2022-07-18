@@ -1,0 +1,12 @@
+.wall-container {
+  box-sizing: initial;
+  width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: stretch;
+  background-color: rgb(242, 250, 255);
+}
+
+.wall-container-out {
+  background-color: rgb(242, 250, 255);
+}

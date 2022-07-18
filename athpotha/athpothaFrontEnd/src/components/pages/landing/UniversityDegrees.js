@@ -6,7 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import ShowDetails from "../../ui/landing/ShowDetails";
 import { Tab, Tabs } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
 const universities = [
   {
@@ -22,7 +22,7 @@ const universities = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    
+
     bgColor: "background.light",
   },
   {
@@ -38,7 +38,7 @@ const universities = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    
+
     bgColor: "background.light",
   },
   {
@@ -54,7 +54,7 @@ const universities = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    
+
     bgColor: "background.light",
   },
   {
@@ -70,7 +70,7 @@ const universities = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    
+
     bgColor: "background.light",
   },
   {
@@ -86,7 +86,7 @@ const universities = [
     emptyIcon: StarBorderIcon,
     value: 5,
     review: 2400,
-    
+
     bgColor: "background.light",
   },
 ];
@@ -103,7 +103,11 @@ function UniversityDegrees() {
       container
       direction="column"
       spacing={8}
-      sx={{ bgcolor: "background.light", padding: "30px 0", width: "1550px" }}
+      sx={{
+        bgcolor: "background.light",
+        padding: "30px 0",
+        maxWidth: { xs: 500, sm: 800, md: 1200, lg: 1550 },
+      }}
       alignSelf="center"
     >
       <Grid item>
@@ -126,7 +130,7 @@ function UniversityDegrees() {
           // allowScrollButtonsMobile
           aria-label="scrollable force tabs example"
           sx={{
-            maxWidth: { xs: 320, sm: 800, md: 1400 },
+            maxWidth: { xs: 320, sm: 620, md: 1030, lg: 1400 },
           }}
         >
           {universities.map((university) => (

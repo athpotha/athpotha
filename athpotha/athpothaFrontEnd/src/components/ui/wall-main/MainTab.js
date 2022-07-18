@@ -8,6 +8,7 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { Link } from "react-router-dom";
 import {
     Avatar,
+  Badge,
   createTheme,
   StyledEngineProvider,
   ThemeProvider,
@@ -63,7 +64,7 @@ export default function MainTab(props) {
           <Tab
             sx={{ minWidth: 0 }}
             value={2}
-            icon={<NotificationsIcon />}
+            icon={<Badge badgeContent={4} color="primary"><NotificationsIcon /></Badge>}
             component={Link}
             to={"/notifications"}
             // label="Notifications"
@@ -81,9 +82,7 @@ export default function MainTab(props) {
             value={4}
             icon={
               <Avatar
-                // alt="Remy Sharp"
                 src="/images/tutors/tutor-1.jpg"
-                // sx={{ width: 56, height: 56 }}
               />
             }
             //   label="Chat"
