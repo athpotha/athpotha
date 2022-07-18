@@ -46,7 +46,10 @@ const slidbarItems = [
     id: "slider-icon-1",
     icon: (
       <div>
-        <Badge badgeContent={0} color="primary"><HouseIcon sx={{ fontSize: 30 }} /></Badge> Home
+        <Badge badgeContent={0} color="primary">
+          <HouseIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Home
       </div>
     ),
     linkName: "/main",
@@ -55,7 +58,10 @@ const slidbarItems = [
     id: "slider-icon-2",
     icon: (
       <div>
-        <Badge badgeContent={0} color="primary"><PeopleAltIcon sx={{ fontSize: 30 }} /></Badge> Connections
+        <Badge badgeContent={0} color="primary">
+          <PeopleAltIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Connections
       </div>
     ),
     linkName: "/my-network",
@@ -64,7 +70,10 @@ const slidbarItems = [
     id: "slider-icon-3",
     icon: (
       <div>
-        <Badge badgeContent={0} color="primary"><NotificationsIcon sx={{ fontSize: 30 }} /></Badge> Notifications
+        <Badge badgeContent={0} color="primary">
+          <NotificationsIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Notifications
       </div>
     ),
     linkName: "/notifications",
@@ -73,7 +82,10 @@ const slidbarItems = [
     id: "slider-icon-4",
     icon: (
       <div>
-        <Badge badgeContent={0} color="primary"><ChatBubbleIcon sx={{ fontSize: 30 }} /></Badge> Chats
+        <Badge badgeContent={0} color="primary">
+          <ChatBubbleIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Chats
       </div>
     ),
     linkName: "/chat",
@@ -82,7 +94,13 @@ const slidbarItems = [
     id: "slider-icon-4",
     icon: (
       <Chip
-        avatar={<Avatar alt="Natacha" src="/images/tutors/tutor-1.jpg" sx={{ fontSize: 30 }} />}
+        avatar={
+          <Avatar
+            alt="Natacha"
+            src="/images/tutors/tutor-1.jpg"
+            sx={{ fontSize: 30 }}
+          />
+        }
         label="Kumud perera"
         variant="outlined"
         size="large"
@@ -188,7 +206,7 @@ export default function MainHeader(props) {
   // }
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex", mb: 13 }}>
+      <Box sx={{ display: "flex"}}>
         <AppBar component="nav" sx={{ backgroundColor: "#fff" }}>
           <Toolbar>
             <IconButton
@@ -230,7 +248,7 @@ export default function MainHeader(props) {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <Button>Ask Question</Button>
+            <Button variant="contained" style={{borderRadius: 10, textTransform: "none"}}>Add Question</Button>
           </Toolbar>
         </AppBar>
         <Box component="nav">
