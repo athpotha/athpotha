@@ -79,7 +79,7 @@ function Comment(props) {
                 ) : (
                   ""
                 )}
-                <IconButton aria-label="share">
+                <IconButton aria-label="share" disabled>
                   <Typography>1d ago</Typography>
                 </IconButton>
               </Grid>

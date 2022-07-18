@@ -1,5 +1,4 @@
 import { StyledEngineProvider, Typography, Grid } from "@mui/material";
-import { Container } from "@mui/system";
 import React from "react";
 import MainHeader from "../../ui/wall-main/MainHeader";
 import Feeds from "./Feeds";
@@ -12,13 +11,31 @@ function Main() {
     <StyledEngineProvider injectFirst>
       <MainHeader value={0} />
       <Grid container spacing={2} className={classes["wall-container"]}>
-        <Grid item xs={2}>
+        <Grid
+          item
+          xs={2}
+          style={{
+            height: "100vh",
+            position: "sticky",
+            top: 0,
+            paddingTop: 100,
+          }}
+        >
           <Leftbar></Leftbar>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={7} style={{ paddingTop: 120 }}>
           <Feeds></Feeds>
         </Grid>
-        <Grid item xs={3}>
+        <Grid
+          item
+          xs={3}
+          style={{
+            height: "100vh",
+            position: "sticky",
+            top: 0,
+            paddingTop: 100,
+          }}
+        >
           <Rightbar></Rightbar>
         </Grid>
       </Grid>
