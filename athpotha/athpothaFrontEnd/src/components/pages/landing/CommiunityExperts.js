@@ -150,8 +150,7 @@ function CommiunityExperts() {
         sx={{
           backgroundColor: "background",
           padding: "30px 0",
-          // width: "1550px",
-          maxWidth: { sm: 700, md: 1550 },
+          maxWidth: { xs: 500, sm: 800, md: 1200, lg: 1550 },
         }}
       >
         <Grid item xs={12}>
@@ -174,7 +173,7 @@ function CommiunityExperts() {
             allowScrollButtonsMobile
             aria-label="scrollable force tabs example"
             sx={{
-              maxWidth: { xs: 320, sm: 600, md: 1400 },
+              maxWidth: { xs: 320, sm: 620, md: 1030, lg: 1400 },
             }}
           >
             {members.map((member) => (
