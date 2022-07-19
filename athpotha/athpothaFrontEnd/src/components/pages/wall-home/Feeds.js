@@ -36,6 +36,64 @@ const postDetails = [
     noOfPostUpvotes: 123,
     noOfComments: 23,
   },
+
+  {
+    id: "post-3",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
+
+
+  {
+    id: "post-4",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
+
+
+  {
+    id: "post-5",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
+
+  {
+    id: "post-6",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
 ];
 
 function Feeds() {
