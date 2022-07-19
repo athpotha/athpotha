@@ -4,8 +4,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
 import { Grid, ListItemButton } from "@mui/material";
 import LeftbarList from "./LeftbarList";
 // import BeachAccessIcon from '@mui/icons-material/BeachAccess';
@@ -28,7 +26,7 @@ function Leftbar(props) {
           </ListItem>
         </Grid>
         <Grid item xs={12}>
-          <LeftbarList />
+          <LeftbarList>{props.children}</LeftbarList>
         </Grid>
       </Grid>
     </div>
