@@ -1,0 +1,14 @@
+.rounded-inputField {
+    border-radius: 25px;
+    border: 2px solid #898787;
+    padding: 20px; 
+    /* width: 200px; */
+    height: 15px;
+    width: 100%;
+}
+
+.rounded-inputField:focus {
+    outline: none !important;
+    border:2px solid #0F6096;
+    /* box-shadow: 0 0 10px #719ECE; */
+  }

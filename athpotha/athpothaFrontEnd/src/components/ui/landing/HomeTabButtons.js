@@ -5,10 +5,10 @@ function HomeTabButtons() {
   return (
     <StyledEngineProvider injectFirst>
       <Stack direction="row" spacing={3} alignSelf="center">
-        <Button size="large" color="background" variant="contained">
+        <Button sx={{size:{sm: "small",md:"medium" ,lg: "large"}}} color="background" variant="contained">
           Learn More
         </Button>
-        <Button size="large" variant="contained" endIcon={<SendOutlinedIcon />}>
+        <Button sx={{size:{sm: "small",md:"medium" ,lg: "large"}}} variant="contained" endIcon={<SendOutlinedIcon />}>
           Get Started
         </Button>
       </Stack>

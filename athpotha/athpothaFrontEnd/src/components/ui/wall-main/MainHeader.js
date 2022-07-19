@@ -13,7 +13,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { alpha, styled } from "@mui/system";
-import { InputBase } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Chip,
+  createTheme,
+  InputBase,
+  ThemeProvider,
+} from "@mui/material";
 
 import SearchIcon from "@mui/icons-material/Search";
 import HouseIcon from "@mui/icons-material/House";
@@ -35,11 +42,73 @@ const navItems = [
 ];
 
 const slidbarItems = [
-  {id:"slider-icon-1", icon: <div><HouseIcon sx={{ fontSize: 30 }} /> Home</div>, linkName: "/main"},
-  {id: "slider-icon-2", icon: <div><PeopleAltIcon sx={{ fontSize: 30 }} /> Connections</div>, linkName: "/my-network" },
-  {id: "slider-icon-3", icon:<div><NotificationsIcon sx={{ fontSize: 30 }} /> Notifications</div>, linkName: "/notifications"},
-  {id: "slider-icon-4", icon:<div><ChatBubbleIcon sx={{ fontSize: 30 }} /> Chats</div>,linkName: "/chat"},
-]
+  {
+    id: "slider-icon-1",
+    icon: (
+      <div>
+        <Badge badgeContent={0} color="primary">
+          <HouseIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Home
+      </div>
+    ),
+    linkName: "/main",
+  },
+  {
+    id: "slider-icon-2",
+    icon: (
+      <div>
+        <Badge badgeContent={0} color="primary">
+          <PeopleAltIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Connections
+      </div>
+    ),
+    linkName: "/my-network",
+  },
+  {
+    id: "slider-icon-3",
+    icon: (
+      <div>
+        <Badge badgeContent={0} color="primary">
+          <NotificationsIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Notifications
+      </div>
+    ),
+    linkName: "/notifications",
+  },
+  {
+    id: "slider-icon-4",
+    icon: (
+      <div>
+        <Badge badgeContent={0} color="primary">
+          <ChatBubbleIcon sx={{ fontSize: 30 }} />
+        </Badge>{" "}
+        Chats
+      </div>
+    ),
+    linkName: "/chat",
+  },
+  {
+    id: "slider-icon-4",
+    icon: (
+      <Chip
+        avatar={
+          <Avatar
+            alt="Natacha"
+            src="/images/tutors/tutor-1.jpg"
+            sx={{ fontSize: 30 }}
+          />
+        }
+        label="Kumud perera"
+        variant="outlined"
+        size="large"
+      />
+    ),
+    linkName: "/profile",
+  },
+];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -86,6 +155,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
+
 export default function MainHeader(props) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -104,7 +185,12 @@ export default function MainHeader(props) {
       <List>
         {slidbarItems.map((item) => (
           <ListItem key={item.id} disablePadding>
-            <ListItemButton sx={{ textAlign: 'left' }} component={Link} to={item.linkName} onClick={() => setTabValue(false)}>
+            <ListItemButton
+              sx={{ textAlign: "left" }}
+              component={Link}
+              to={item.linkName}
+              onClick={() => setTabValue(false)}
+            >
               <ListItemText primary={item.icon} />
             </ListItemButton>
           </ListItem>
@@ -114,74 +200,78 @@ export default function MainHeader(props) {
   );
 
   // const container = window !== undefined ? () => window().document.body : undefined;
-// console.log(document.getElementById("nav-container-list").style.display)
+  // console.log(document.getElementById("nav-container-list").style.display)
   // if(document.getElementById("nav-container-list").style.display == "none") {
   //   console.log('hello')
   // }
   return (
-    <Box sx={{ display: "flex", mb: 13 }}>
-      <AppBar component="nav" sx={{ backgroundColor: "#fff" }}>
-        <Toolbar>
-          <IconButton
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" }, color: "#000" }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            <img
-              src="/images/athpotha_v2.png"
-              style={{ width: 60, height: 60 }}
-            ></img>
-          </Typography>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: "flex"}}>
+        <AppBar component="nav" sx={{ backgroundColor: "#fff" }}>
+          <Toolbar>
+            <IconButton
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: "none" }, color: "#000" }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            >
+              <img
+                src="/images/athpotha_v2.png"
+                style={{ width: 60, height: 60 }}
+              ></img>
+            </Typography>
 
-          <Box id="nav-container-list" sx={{ display: { xs: "none", sm: "block" } }}>
-            <MainTab value={tabValue} />
-            {/* {navItems.map((item) => (
+            <Box
+              id="nav-container-list"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              <MainTab value={tabValue} />
+              {/* {navItems.map((item) => (
               <Button key={item} sx={{ color: "#0F6096", borderBottom: 3, borderRadius: 0, padding: 1.5}}>
                 {item}
               </Button>
             ))} */}
-          </Box>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Button>Ask Question</Button>
-        </Toolbar>
-      </AppBar>
-      <Box component="nav">
-        <Drawer
-          // container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
+            </Box>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            <Button variant="contained" style={{borderRadius: 10, textTransform: "none"}}>Add Question</Button>
+          </Toolbar>
+        </AppBar>
+        <Box component="nav">
+          <Drawer
+            // container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Box>
       </Box>
-      {/* </div> */}
-    </Box>
+    </ThemeProvider>
   );
 }

@@ -48,7 +48,7 @@ function App() {
     },
   });
   return (
-    // <StyledEngineProvider injectFirst>
+    <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/" element={<Home />} exact></Route>
@@ -63,7 +63,7 @@ function App() {
           <Route path="/test" element={<Test />}></Route>
         </Routes>
       </ThemeProvider>
-    // </StyledEngineProvider>
+    </StyledEngineProvider>
   );
 }
 
