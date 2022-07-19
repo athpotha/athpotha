@@ -45,7 +45,7 @@ function Content() {
 
   return (
     <StyledEngineProvider injectFirst>
-      <Container sx={{ width: '75%',mt:12 }}>
+      <Container sx={{ width: '75%',mt:12,maxHeight: '80vh', overflow: 'auto' }}>
         <Typography component="div" style={{ backgroundColor: '#ffffff', height: '100vh' }}>
           <div style={{ width: '100%' }}>
             <Invitation></Invitation>
