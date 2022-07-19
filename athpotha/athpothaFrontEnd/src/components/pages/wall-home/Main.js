@@ -10,7 +10,18 @@ function Main() {
   return (
     <StyledEngineProvider injectFirst>
       <MainHeader value={0} />
-      <Grid container spacing={2} className={classes["wall-container"]}>
+      <Grid
+        container
+        spacing={2}
+        style={{
+          boxSizing: "initial",
+          width: "1500px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          alignItems: "stretch",
+          backgroundColor: "rgb(242, 250, 255)",
+        }}
+      >
         <Grid
           item
           xs={2}
