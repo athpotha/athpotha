@@ -1,11 +1,12 @@
 import { Avatar, Chip, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import HomeCard from "../../ui/wall-main/Feeds/HomeCard";
 import CenteredBox from "../../ui/CenteredBox";
+import BeforeDisplay from "../../ui/BeforeDisplay";
 
 const postDetails = [
   {
@@ -38,6 +39,21 @@ const postDetails = [
 ];
 
 function Feeds() {
+  // const [isLoading, setIsLoading] = useState(false);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   // for(var i = 0; i < 100000; i++) {
+  //   //   console.log('hello')
+  //   // }
+  //   setIsLoading(false);
+  // }, [])
+
+  // if(isLoading) {
+  //   return (
+  //     <BeforeDisplay />
+  //   )
+  // }
+
   return (
     <div>
       <Grid container>

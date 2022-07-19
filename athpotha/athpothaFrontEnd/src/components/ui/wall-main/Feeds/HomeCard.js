@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, StyledEngineProvider } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -35,6 +35,7 @@ import ForumIcon from "@mui/icons-material/Forum";
 
 import Comment from "./Comment";
 import RoundedInputField from "../../RoundedInputField";
+import BeforeDisplay from "../../BeforeDisplay";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -50,7 +51,8 @@ const ExpandMore = styled((props) => {
 const commentDetatils = [
   {
     id: "comment-1",
-    avatarImage: "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    avatarImage:
+      "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     commentOwnerName: "Melaka Pathiranagama",
     commentContent:
       "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
@@ -96,6 +98,22 @@ const commentDetatils = [
 export default function HomeCard(props) {
   const [expanded, setExpanded] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    setIsLoading(true);
+    // for(var i = 0; i < 100000; i++) {
+    //   console.log('hello')
+    // }
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Grid item xs={12} sx={{mb: 5}}>
+        <BeforeDisplay width="100%" height={450} />
+      </Grid>
+    );
+  }
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
