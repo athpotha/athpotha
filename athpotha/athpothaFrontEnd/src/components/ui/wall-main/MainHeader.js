@@ -8,17 +8,20 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { alpha, styled } from "@mui/system";
+import { styled } from "@mui/system";
 import {
   Avatar,
   Badge,
   Chip,
+  Collapse,
   createTheme,
   InputBase,
+  ListItemAvatar,
   ThemeProvider,
 } from "@mui/material";
 
@@ -29,6 +32,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MainTab from "./MainTab";
 import { Link } from "react-router-dom";
+import CloseIcon from '@mui/icons-material/Close';
 // interface Props {
 //   window?: () => Window;
 // }
@@ -91,7 +95,7 @@ const slidbarItems = [
     linkName: "/chat",
   },
   {
-    id: "slider-icon-4",
+    id: "slider-icon-5",
     icon: (
       <Chip
         avatar={
@@ -125,6 +129,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: "auto",
   },
+  zIndex: 100,
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -145,11 +150,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
-    width: "100%",
+    width: "90%",
+    
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "20ch",
       "&:focus": {
-        width: "20ch",
+        cursor: "pointer",
+        // width: "20ch",
       },
     },
   },
@@ -171,9 +178,15 @@ export default function MainHeader(props) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [tabValue, setTabValue] = useState(props.value);
+  const [expanded, setExpanded] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const expandHandler = () => {
+    console.log("hello my dear");
+    setExpanded(!expanded);
   };
 
   const drawer = (
@@ -206,9 +219,9 @@ export default function MainHeader(props) {
   // }
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex"}}>
+      <Box sx={{ display: "flex" }}>
         <AppBar component="nav" sx={{ backgroundColor: "#fff" }}>
-          <Toolbar>
+          <Toolbar style={{ position: "relative" }}>
             <IconButton
               aria-label="open drawer"
               edge="start"
@@ -241,14 +254,75 @@ export default function MainHeader(props) {
             </Box>
             <Search>
               <SearchIconWrapper>
-                <SearchIcon />
+                {(expanded) ? <CloseIcon onClick={expandHandler} /> : <SearchIcon />}
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                onClick={expandHandler}
               />
+              <Collapse
+                in={expanded}
+                timeout="auto"
+                unmountOnExit
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  top: 40,
+                  zIndex: 99,
+                  width: "100%",
+                  backgroundColor: "#DBF0FE",
+                  border: "2px solid #FFF",
+                  borderTop: "none"
+                }}
+              >
+                {/* <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                    onClick={expandHandler}
+                  />
+                </Search> */}
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemAvatar sx={{ mr: 1 }}>
+                        <Avatar
+                          src="/images/tutors/tutor-1.jpg"
+                          sx={{ width: 56, height: 56 }}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText
+                      style={{color: "#000"}}
+                        primary="Kumud Perera"
+                        secondary="O/L Qualified"
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </Collapse>
             </Search>
-            <Button variant="contained" style={{borderRadius: 10, textTransform: "none"}}>Add Question</Button>
+
+            {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <List style={{position: "absolute", top: 70, right: 195, backgroundColor: "#000"}}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon></ListItemIcon>
+                    <ListItemText primary="kumud" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Collapse> */}
+            <Button
+              variant="contained"
+              style={{ borderRadius: 10, textTransform: "none" }}
+            >
+              Add Question
+            </Button>
           </Toolbar>
         </AppBar>
         <Box component="nav">
