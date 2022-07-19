@@ -45,9 +45,9 @@ function Content() {
 
   return (
     <StyledEngineProvider injectFirst>
-      <Container sx={{ width: '75%',mt:12,maxHeight: '80vh', overflow: 'auto' }}>
-        <Typography component="div" style={{ backgroundColor: '#ffffff', height: '100vh' }}>
-          <div style={{ width: '100%' }}>
+      {/* <Container> */}
+        <Typography component="div" style={{ backgroundColor: '#ffffff'}}>
+          <div >
             <Invitation></Invitation>
             <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(4, 1fr)' }}>
               <Item>
@@ -77,7 +77,7 @@ function Content() {
             </Box>
           </div>
         </Typography>
-      </Container>
+      {/* </Container> */}
     </StyledEngineProvider>
   );
 }

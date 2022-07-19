@@ -1,11 +1,12 @@
 import { Avatar, Chip, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import HomeCard from "../../ui/wall-main/Feeds/HomeCard";
 import CenteredBox from "../../ui/CenteredBox";
+import BeforeDisplay from "../../ui/BeforeDisplay";
 
 const postDetails = [
   {
@@ -35,9 +36,82 @@ const postDetails = [
     noOfPostUpvotes: 123,
     noOfComments: 23,
   },
+
+  {
+    id: "post-3",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
+
+
+  {
+    id: "post-4",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
+
+
+  {
+    id: "post-5",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
+
+  {
+    id: "post-6",
+    personName: "Kumud perera",
+    postDate: "Jan 9, 2014",
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    postedImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage:
+      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    userImage: "/images/tutors/tutor-1.jpg",
+    noOfPostUpvotes: 123,
+    noOfComments: 23,
+  },
 ];
 
 function Feeds() {
+  // const [isLoading, setIsLoading] = useState(false);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   // for(var i = 0; i < 100000; i++) {
+  //   //   console.log('hello')
+  //   // }
+  //   setIsLoading(false);
+  // }, [])
+
+  // if(isLoading) {
+  //   return (
+  //     <BeforeDisplay />
+  //   )
+  // }
+
   return (
     <div>
       <Grid container>
