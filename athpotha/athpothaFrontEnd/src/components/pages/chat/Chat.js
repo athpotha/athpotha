@@ -2,8 +2,8 @@ import React from "react";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import MainHeader from "../../ui/wall-main/MainHeader";
 import Content from "./Content";
-import Leftbar from "../wall-home/Leftbar";
-import Rightbar from "../wall-home/Rightbar";
+import Leftbar from "../../ui/insight/leftbar/Leftbar";
+import Rightbar from "../../ui/insight/rightbar/Rightbar";
 import { Grid } from "@mui/material";
 
 function Chat() {
