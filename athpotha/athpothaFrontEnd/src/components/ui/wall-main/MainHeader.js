@@ -20,6 +20,7 @@ import {
   Chip,
   Collapse,
   createTheme,
+  Grid,
   InputBase,
   ListItemAvatar,
   ThemeProvider,
@@ -32,7 +33,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MainTab from "./MainTab";
 import { Link } from "react-router-dom";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
+import ModalOpenButton from "./ModalOpenButton";
+import AddPostQuestionModal from "../insight/AddPostQuestionModal";
 // interface Props {
 //   window?: () => Window;
 // }
@@ -151,7 +154,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "90%",
-    
+
     [theme.breakpoints.up("sm")]: {
       width: "20ch",
       "&:focus": {
@@ -254,7 +257,11 @@ export default function MainHeader(props) {
             </Box>
             <Search>
               <SearchIconWrapper>
-                {(expanded) ? <CloseIcon onClick={expandHandler} /> : <SearchIcon />}
+                {expanded ? (
+                  <CloseIcon onClick={expandHandler} />
+                ) : (
+                  <SearchIcon />
+                )}
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
@@ -274,7 +281,7 @@ export default function MainHeader(props) {
                   width: "100%",
                   backgroundColor: "#DBF0FE",
                   border: "2px solid #FFF",
-                  borderTop: "none"
+                  borderTop: "none",
                 }}
               >
                 {/* <Search>
@@ -297,7 +304,7 @@ export default function MainHeader(props) {
                         />
                       </ListItemAvatar>
                       <ListItemText
-                      style={{color: "#000"}}
+                        style={{ color: "#000" }}
                         primary="Kumud Perera"
                         secondary="O/L Qualified"
                       />
@@ -306,23 +313,13 @@ export default function MainHeader(props) {
                 </List>
               </Collapse>
             </Search>
-
-            {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <List style={{position: "absolute", top: 70, right: 195, backgroundColor: "#000"}}>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon></ListItemIcon>
-                    <ListItemText primary="kumud" />
-                  </ListItemButton>
-                </ListItem>
-              </List>
-            </Collapse> */}
-            <Button
+            <ModalOpenButton
+              title="Add Question"
+              borderRadius={10}
               variant="contained"
-              style={{ borderRadius: 10, textTransform: "none" }}
             >
-              Add Question
-            </Button>
+              <AddPostQuestionModal />
+            </ModalOpenButton>
           </Toolbar>
         </AppBar>
         <Box component="nav">
