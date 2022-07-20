@@ -46,8 +46,8 @@ function Content() {
   return (
     <StyledEngineProvider injectFirst>
       {/* <Container> */}
-        <Typography component="div" style={{ backgroundColor: '#ffffff'}}>
-          <div >
+        <Typography component="div" sx={{mb:'30px', }}>
+          <div style={{height:"81vh", overflow: "auto",}}>
             <Invitation></Invitation>
             <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(4, 1fr)' }}>
               <Item>
