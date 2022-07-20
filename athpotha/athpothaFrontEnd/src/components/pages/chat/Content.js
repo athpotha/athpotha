@@ -40,13 +40,14 @@ function Item(props) {
   };
 
 
-function Content(props) {
+function Content() {
 
-  const [selectContact,setSelectContact] = useState()
+  const [selectContactid,setSelectContactid] = useState()
+  const [selectContactdetails,setSelectContactdetails]= useState({})
 
     return (
         <StyledEngineProvider injectFirst>
-            <Container sx={{ width: '60vw', mt: 12, maxHeight: '82vh' }}>
+            <Container sx={{ maxHeight: '82vh' }}>
                 <Typography component="div" style={{ backgroundColor: '#ffffff' }}>
                     <Box sx={{
                         display: 'grid' , gridTemplateColumns: 'auto auto'}}>
@@ -54,12 +55,12 @@ function Content(props) {
                             height: '82vh',
                             width:'22vw',
                             borderRadius:'7px 0 0 7px',
-                        }}><ContactList setSelectContact={setSelectContact}/></Item>
+                        }}><ContactList setSelectContactdetails={setSelectContactdetails} /></Item>
                         <Item sx={{
                             height: '82vh',
-                            width:'35vw',
+                            width:'31vw',
                             borderRadius:'0 7px 7px 0',
-                        }}><Wall selectContact={selectContact}/></Item>
+                        }}><Wall selectContactdetails={selectContactdetails} /></Item>
                     </Box>
                 </Typography>
             </Container>

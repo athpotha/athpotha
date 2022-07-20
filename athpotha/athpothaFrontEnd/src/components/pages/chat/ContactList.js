@@ -118,8 +118,8 @@ function ContactList(props) {
     const [active, setActive] = useState(-1);
     const selectItem = (id, name) => {
         setActive(id)
-        { props.setSelectContact(id) }
-    }
+        { props.setSelectContactdetails((obj)=>({...obj,value1:id,value2:name})) }
+}
 
     return (
         <StyledEngineProvider injectFirst>
