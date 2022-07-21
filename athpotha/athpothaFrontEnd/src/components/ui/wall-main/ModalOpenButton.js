@@ -16,7 +16,7 @@ function ModalOpenButton(props) {
       >
         {props.title}
       </Button>
-      <BasicModal open={open} onClose={handleClose}>{props.children} </BasicModal>
+      <BasicModal modalStyle={props.modalStyle} open={open} onClose={handleClose}>{props.children} </BasicModal>
     </>
   );
 }

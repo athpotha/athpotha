@@ -8,23 +8,23 @@ import { Grid, IconButton } from "@mui/material";
 import CenteredBox from "../CenteredBox";
 
 export default function BasicModal(props) {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 700,
-    // height: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: "10px 0 10px 30px",
-    // p: 4,
-    borderRadius: 5,
-    // pr: 0,
-    // pt: 1,
-    // pb: 2
-  };
+  // const style = {
+  //   position: "absolute",
+  //   top: "50%",
+  //   left: "50%",
+  //   transform: "translate(-50%, -50%)",
+  //   width: 700,
+  //   // height: 400,
+  //   bgcolor: "background.paper",
+  //   border: "2px solid #000",
+  //   boxShadow: 24,
+  //   p: "10px 0 10px 30px",
+  //   // p: 4,
+  //   borderRadius: 5,
+  //   // pr: 0,
+  //   // pt: 1,
+  //   // pb: 2
+  // };
   return (
     // <div>
     <Modal
@@ -34,7 +34,7 @@ export default function BasicModal(props) {
       aria-describedby="modal-modal-description"
     >
       
-      <Box sx={style} >
+      <Box sx={props.modalStyle} >
         <Grid container>
           <Grid item xs={11}>
             {props.children}
