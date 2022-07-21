@@ -9,7 +9,7 @@ import Home from "./components/pages/landing/Home";
 import { blue, lightBlue } from "@mui/material/colors";
 import Registration from "./components/pages/login/Registration";
 import Main from "./components/pages/wall-home/Main";
-import { Theme } from "@mui/material";
+// import { Theme } from "@mui/material";
 import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
