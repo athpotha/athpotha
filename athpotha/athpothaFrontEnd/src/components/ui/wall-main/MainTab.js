@@ -21,7 +21,7 @@ export default function MainTab(props) {
     setValue(newValue);
   };
 
-  console.log(value);
+  // console.log(value);
   if (props.value === null) {
     setValue(false);
     console.log("hello");

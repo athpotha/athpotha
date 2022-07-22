@@ -8,48 +8,24 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/system";
-import {
-  Avatar,
-  Badge,
-  Chip,
-  Collapse,
-  createTheme,
-  Grid,
-  InputBase,
-  ListItemAvatar,
-  ThemeProvider,
-} from "@mui/material";
+import { Avatar, Badge, Chip, createTheme, ThemeProvider } from "@mui/material";
 
-import SearchIcon from "@mui/icons-material/Search";
 import HouseIcon from "@mui/icons-material/House";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MainTab from "./MainTab";
 import { Link } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close";
 import ModalOpenButton from "./ModalOpenButton";
-import AddPostQuestionModal from "../insight/AddPostQuestionModal";
-import BasicModal from "../insight/BasicModal";
-// interface Props {
-//   window?: () => Window;
-// }
+import ModalTabs from "../insight/ModalTabs";
+import SearchProfiles from "./SearchProfiles";
 
 const drawerWidth = 240;
-const navItems = [
-  <HouseIcon sx={{ fontSize: 30 }} />,
-  <PeopleAltIcon sx={{ fontSize: 30 }} />,
-  <NotificationsIcon sx={{ fontSize: 30 }} />,
-  <ChatBubbleIcon sx={{ fontSize: 30 }} />,
-];
 
-const slidbarItems = [
+const slidebarItems = [
   {
     id: "slider-icon-1",
     icon: (
@@ -118,54 +94,6 @@ const slidbarItems = [
   },
 ];
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  // backgroundColor: alpha(theme.palette.common.white, 0.15),
-  // "&:hover": {
-  //   backgroundColor: alpha(theme.palette.common.white, 0.25),
-  // },
-  backgroundColor: "#DBF0FE",
-  marginLeft: 0,
-  marginRight: 20,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-  zIndex: 100,
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "#0F6096",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "#0F6096",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "90%",
-
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
-      "&:focus": {
-        // cursor: "pointer",
-        // width: "20ch",
-      },
-    },
-  },
-}));
-
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -196,36 +124,12 @@ const addQuestionModalStyle = {
   // pb: 2
 };
 
-const searchModalStyle = {
-  position: "absolute",
-  top: "40%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 700,
-  // height: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: "10px 0 10px 30px",
-  // p: 4,
-  borderRadius: 5,
-  // pr: 0,
-  // pt: 1,
-  // pb: 2
-};
 export default function MainHeader(props) {
-  // const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [tabValue, setTabValue] = useState(props.value);
-  const [expanded, setExpanded] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-
-  const expandHandler = () => {
-    console.log("hello my dear");
-    setExpanded(!expanded);
   };
 
   const drawer = (
@@ -235,7 +139,7 @@ export default function MainHeader(props) {
       </Typography>
       <Divider />
       <List>
-        {slidbarItems.map((item) => (
+        {slidebarItems.map((item) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton
               sx={{ textAlign: "left" }}
@@ -270,9 +174,10 @@ export default function MainHeader(props) {
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
               <img
+                alt="athpotha"
                 src="/images/athpotha_v2.png"
                 style={{ width: 60, height: 60 }}
-              ></img>
+              />
             </Typography>
 
             <Box
@@ -281,80 +186,20 @@ export default function MainHeader(props) {
             >
               <MainTab value={tabValue} />
             </Box>
-            <Search>
-              <SearchIconWrapper>
-                  <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onClick={expandHandler}
-              />
-              {/* <Collapse
-                in={expanded}
-                timeout="auto"
-                unmountOnExit
-                style={{
-                  // position: "absolute",
-                  // left: 0,
-                  // right: 0,
-                  // top: 40,
-                  // zIndex: 99,
-                  // width: "100%",
-                  // backgroundColor: "#DBF0FE",
-                  // border: "2px solid #FFF",
-                  // borderTop: "none",
-                }}
-              > */}
-              <BasicModal
-                open={expanded}
-                modalStyle={searchModalStyle}
-                onClose={expandHandler}
-              >
-                <Search>
-                  <SearchIconWrapper>
-                      <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                    style={{width: "100%"}}
-                  />
-                </Search>
-                <List>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemAvatar sx={{ mr: 1 }}>
-                        <Avatar
-                          src="/images/tutors/tutor-1.jpg"
-                          sx={{ width: 56, height: 56 }}
-                        />
-                      </ListItemAvatar>
-                      <ListItemText
-                        style={{ color: "#000" }}
-                        primary="Kumud Perera"
-                        secondary="O/L Qualified"
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-              </BasicModal>
-
-              {/* </Collapse> */}
-            </Search>
+            <SearchProfiles />
             <ModalOpenButton
+              modalName="addQuestion-post-modal"
+              isTabHave={true}
               title="Add Question"
               borderRadius={10}
               variant="contained"
               modalStyle={addQuestionModalStyle}
-            >
-              <AddPostQuestionModal />
-            </ModalOpenButton>
+              header={<ModalTabs />}
+            />
           </Toolbar>
         </AppBar>
         <Box component="nav">
           <Drawer
-            // container={container}
             variant="temporary"
             open={mobileOpen}
             onClose={handleDrawerToggle}

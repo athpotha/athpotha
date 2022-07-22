@@ -90,7 +90,7 @@ function Main() {
         >
           <Rightbar show="">
             <Grid item xs={12}>
-              <div>
+              {/* <div>
                 <Grid container>
                   <Grid item xs={9}>
                     <Typography variant="h6">New Contacts</Typography>
@@ -104,7 +104,7 @@ function Main() {
                     </Link>
                   </Grid>
                 </Grid>
-              </div>
+              </div> */}
               <List>
                 <NewContacts />
               </List>
