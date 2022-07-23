@@ -10,7 +10,7 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 const listItems = [
   {
     id: "listItem-1",
-    listName: "Connections",
+    listName: "Connections", 
     icon: <InboxIcon />,
   },
   {
