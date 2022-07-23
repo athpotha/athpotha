@@ -28,7 +28,7 @@ const listItems = [
 function Notifications() {
   return (
     <StyledEngineProvider injectFirst>
-      <MainHeader value={1} />
+      <MainHeader value={2} />
       <Grid
         container
         spacing={2}
