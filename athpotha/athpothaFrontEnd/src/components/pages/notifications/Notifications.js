@@ -6,7 +6,7 @@ import Leftbar from "../../ui/insight/leftbar/Leftbar";
 import Rightbar from "../../ui/insight/rightbar/Rightbar";
 import InboxIcon from "@mui/icons-material/Inbox";
 import DraftsIcon from "@mui/icons-material/Drafts";
-
+import Content from "./Content"
 const listItems = [
   {
     id: "listItem-1",
@@ -28,7 +28,7 @@ const listItems = [
 function Notifications() {
   return (
     <StyledEngineProvider injectFirst>
-      <MainHeader value={1} />
+      <MainHeader value={2} />
       <Grid
         container
         spacing={2}
@@ -65,7 +65,8 @@ function Notifications() {
           </Leftbar>
         </Grid>
         <Grid item xs={7} style={{ paddingTop: 120 }}>
-          dsdfsdf
+        {/* Middle Section comes here */}
+          <Content></Content> 
         </Grid>
         <Grid
           item
