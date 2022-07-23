@@ -2,7 +2,7 @@ import { Grid, StyledEngineProvider, Typography } from "@mui/material";
 import React from "react";
 import { Box, Container } from '@mui/system';
 import { Button } from "@mui/material";
-function UpperBox() {
+function UpperBox(props) {
   return (
     <StyledEngineProvider injectFirst>
       <div sx={{ width: '100%' }}>
@@ -14,7 +14,8 @@ function UpperBox() {
                             
                     </Box>
                     <Box  sx={{ fontWeight: 'light' }}>
-                    <p>You have new notifications</p>
+                    {props.notiCount != 0?<p>You have new notifications</p>:<p>No notifications to display</p>}
+                    
                     </Box>
                     </Typography>
                 </Box>

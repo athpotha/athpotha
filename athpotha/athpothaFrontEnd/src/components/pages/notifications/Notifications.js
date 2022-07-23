@@ -65,7 +65,8 @@ function Notifications() {
           </Leftbar>
         </Grid>
         <Grid item xs={7} style={{ paddingTop: 120 }}>
-          <Content></Content>
+        {/* Middle Section comes here */}
+          <Content></Content> 
         </Grid>
         <Grid
           item
