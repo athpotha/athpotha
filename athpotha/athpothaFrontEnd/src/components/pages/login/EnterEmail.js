@@ -1,15 +1,14 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import InputField from "./InputField";
 import classes from "./Login.module.css";
 
-function SignUpForm(props) {
+function EnterEmail(props) {
   return (
     <form
       action="index.html"
       autoComplete="off"
-      className={classes["sign-up-form"]}
+      className={classes[props.className]}
     >
       <div className={classes.logo}>
         <img src="/images/athpotha_v3.png" alt="easyclassName" />
@@ -25,19 +24,7 @@ function SignUpForm(props) {
 
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]}>
-          <TextField label="Name" variant="standard" required fullWidth />
-        </div>
-        <div className={classes["input-wrap"]}>
-          <InputField
-            label="Password"
-            id="standard-adornment-sign-up-password"
-          />
-        </div>
-        <div className={classes["input-wrap"]}>
-          <InputField
-            label="Confirm Password"
-            id="standard-adornment-sign-up-confirm-password"
-          />
+          <TextField type="email" label="Email address" variant="standard" required fullWidth />
         </div>
         <p className={classes.text}>
           By signing up, I agree to the
@@ -51,4 +38,4 @@ function SignUpForm(props) {
   );
 }
 
-export default SignUpForm;
+export default EnterEmail;

@@ -13,11 +13,11 @@ function NewContacts() {
         </ListItemAvatar>
         <ListItemText
           primary={
-            <Typography>Kumud Perera</Typography>
+            <Typography component="div">Kumud Perera</Typography>
           }
           // secondary="O/L Qualified"
           secondary={
-            <div>
+            <Typography component="div">
               <Typography>O/L Qualified</Typography>
               <ButtonGroup>
                 <Button
@@ -37,7 +37,7 @@ function NewContacts() {
                   Cancel
                 </Button>
               </ButtonGroup>
-            </div>
+            </Typography>
           }
         />
       </ListItemButton>
