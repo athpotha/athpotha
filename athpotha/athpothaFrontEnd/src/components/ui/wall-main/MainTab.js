@@ -7,7 +7,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { Link } from "react-router-dom";
 import {
-    Avatar,
+  Avatar,
   Badge,
   createTheme,
   StyledEngineProvider,
@@ -22,9 +22,9 @@ export default function MainTab(props) {
   };
 
   console.log(value);
-  if(props.value === null) {
+  if (props.value === null) {
     setValue(false);
-    console.log("hello")
+    console.log("hello");
   }
 
   const theme = createTheme({
@@ -64,7 +64,11 @@ export default function MainTab(props) {
           <Tab
             sx={{ minWidth: 0 }}
             value={2}
-            icon={<Badge badgeContent={4} color="primary"><NotificationsIcon /></Badge>}
+            icon={
+              <Badge badgeContent={4} color="primary">
+                <NotificationsIcon />
+              </Badge>
+            }
             component={Link}
             to={"/notifications"}
             // label="Notifications"
@@ -80,11 +84,7 @@ export default function MainTab(props) {
           <Tab
             sx={{ minWidth: 0 }}
             value={4}
-            icon={
-              <Avatar
-                src="/images/tutors/tutor-1.jpg"
-              />
-            }
+            icon={<Avatar src="/images/tutors/tutor-1.jpg" />}
             //   label="Chat"
             component={Link}
             to={"/profile"}

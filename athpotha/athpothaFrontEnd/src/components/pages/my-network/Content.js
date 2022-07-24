@@ -3,7 +3,6 @@ import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Invitation from "./Invitation";
 import Follow from "./Follow";
 import { Button } from "@mui/material";
@@ -47,7 +46,7 @@ function Content() {
     <StyledEngineProvider injectFirst>
       {/* <Container> */}
         <Typography component="div" sx={{mb:'30px', }}>
-          <div style={{height:"81vh", overflow: "auto",}}>
+          <div>
             <Invitation></Invitation>
             <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(4, 1fr)' }}>
               <Item>

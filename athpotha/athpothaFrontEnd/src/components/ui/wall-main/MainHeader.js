@@ -20,6 +20,7 @@ import {
   Chip,
   Collapse,
   createTheme,
+  Grid,
   InputBase,
   ListItemAvatar,
   ThemeProvider,
@@ -32,7 +33,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MainTab from "./MainTab";
 import { Link } from "react-router-dom";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
+import ModalOpenButton from "./ModalOpenButton";
+import AddPostQuestionModal from "../insight/AddPostQuestionModal";
+import BasicModal from "../insight/BasicModal";
 // interface Props {
 //   window?: () => Window;
 // }
@@ -151,11 +155,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "90%",
-    
+
     [theme.breakpoints.up("sm")]: {
       width: "20ch",
       "&:focus": {
-        cursor: "pointer",
+        // cursor: "pointer",
         // width: "20ch",
       },
     },
@@ -174,6 +178,41 @@ const theme = createTheme({
   },
 });
 
+const addQuestionModalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 700,
+  // height: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: "10px 0 10px 30px",
+  // p: 4,
+  borderRadius: 5,
+  // pr: 0,
+  // pt: 1,
+  // pb: 2
+};
+
+const searchModalStyle = {
+  position: "absolute",
+  top: "40%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 700,
+  // height: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: "10px 0 10px 30px",
+  // p: 4,
+  borderRadius: 5,
+  // pr: 0,
+  // pt: 1,
+  // pb: 2
+};
 export default function MainHeader(props) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -212,11 +251,6 @@ export default function MainHeader(props) {
     </Box>
   );
 
-  // const container = window !== undefined ? () => window().document.body : undefined;
-  // console.log(document.getElementById("nav-container-list").style.display)
-  // if(document.getElementById("nav-container-list").style.display == "none") {
-  //   console.log('hello')
-  // }
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
@@ -246,47 +280,47 @@ export default function MainHeader(props) {
               sx={{ display: { xs: "none", sm: "block" } }}
             >
               <MainTab value={tabValue} />
-              {/* {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#0F6096", borderBottom: 3, borderRadius: 0, padding: 1.5}}>
-                {item}
-              </Button>
-            ))} */}
             </Box>
             <Search>
               <SearchIconWrapper>
-                {(expanded) ? <CloseIcon onClick={expandHandler} /> : <SearchIcon />}
+                  <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
                 onClick={expandHandler}
               />
-              <Collapse
+              {/* <Collapse
                 in={expanded}
                 timeout="auto"
                 unmountOnExit
                 style={{
-                  position: "absolute",
-                  left: 0,
-                  right: 0,
-                  top: 40,
-                  zIndex: 99,
-                  width: "100%",
-                  backgroundColor: "#DBF0FE",
-                  border: "2px solid #FFF",
-                  borderTop: "none"
+                  // position: "absolute",
+                  // left: 0,
+                  // right: 0,
+                  // top: 40,
+                  // zIndex: 99,
+                  // width: "100%",
+                  // backgroundColor: "#DBF0FE",
+                  // border: "2px solid #FFF",
+                  // borderTop: "none",
                 }}
+              > */}
+              <BasicModal
+                open={expanded}
+                modalStyle={searchModalStyle}
+                onClose={expandHandler}
               >
-                {/* <Search>
+                <Search>
                   <SearchIconWrapper>
-                    <SearchIcon />
+                      <SearchIcon />
                   </SearchIconWrapper>
                   <StyledInputBase
                     placeholder="Search…"
                     inputProps={{ "aria-label": "search" }}
-                    onClick={expandHandler}
+                    style={{width: "100%"}}
                   />
-                </Search> */}
+                </Search>
                 <List>
                   <ListItem disablePadding>
                     <ListItemButton>
@@ -297,32 +331,25 @@ export default function MainHeader(props) {
                         />
                       </ListItemAvatar>
                       <ListItemText
-                      style={{color: "#000"}}
+                        style={{ color: "#000" }}
                         primary="Kumud Perera"
                         secondary="O/L Qualified"
                       />
                     </ListItemButton>
                   </ListItem>
                 </List>
-              </Collapse>
-            </Search>
+              </BasicModal>
 
-            {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <List style={{position: "absolute", top: 70, right: 195, backgroundColor: "#000"}}>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon></ListItemIcon>
-                    <ListItemText primary="kumud" />
-                  </ListItemButton>
-                </ListItem>
-              </List>
-            </Collapse> */}
-            <Button
+              {/* </Collapse> */}
+            </Search>
+            <ModalOpenButton
+              title="Add Question"
+              borderRadius={10}
               variant="contained"
-              style={{ borderRadius: 10, textTransform: "none" }}
+              modalStyle={addQuestionModalStyle}
             >
-              Add Question
-            </Button>
+              <AddPostQuestionModal />
+            </ModalOpenButton>
           </Toolbar>
         </AppBar>
         <Box component="nav">
