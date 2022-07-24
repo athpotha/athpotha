@@ -3,25 +3,54 @@ import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import { Box } from '@mui/system';
 import { Avatar, Button, Divider, ButtonBase } from "@mui/material";
 import { List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
 
 const style = {
     bgcolor: '#ffffff',
     borderRadius: '5px',
     m: 1,
+    p:1,
     alignItems: 'center',
     border: '1px solid',
     borderColor: 'grey.300'
 
 };
 
-const sendbtnstyle = {
-    mr: 4,
-    mb: 1,
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
 }
 
-const recievedbtnstyle = {
-    mr: 2,
-    mb: 1,
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
 }
 
 function Invitation() {
@@ -37,14 +66,11 @@ function Invitation() {
         }
     }
 
-    const [sendrecieved, setSendRecieved] = useState("Received")
-    if (sendrecieved == "Received") {
-        recievedbtnstyle.background = "#D6EAF8"
-        sendbtnstyle.background = "#FFFFFF"
-    } else {
-        sendbtnstyle.background = "#D6EAF8"
-        recievedbtnstyle.background = "#FFFFFF"
-    }
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <StyledEngineProvider injectFirst>
@@ -60,12 +86,13 @@ function Invitation() {
                 {active === "true" && <Box
                     sx={style}>
                     <Box sx={{ p: 1 }}>Manage Invitation</Box>
-                    <Box sx={{ pl: 1, display: 'flex', justifyContent: 'start' }}>
-                        <Button sx={recievedbtnstyle} onClick={() => setSendRecieved("Received")}>Received</Button>
-                        <Button sx={sendbtnstyle} onClick={() => setSendRecieved("Send")}>Sent</Button>
-                    </Box>
-                    {sendrecieved === "Received" &&
-                        <Box>
+                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                        <Tab label="Received" {...a11yProps(0)} />
+                        <Tab label="Send" {...a11yProps(1)} />
+                    </Tabs>
+
+                    <TabPanel value={value} index={0}>
+                    <Box>
                             <List>
                                 <Divider />
                                 <ListItem >
@@ -86,8 +113,10 @@ function Invitation() {
                                     <Button variant="outlined" color="success">Accept</Button>
                                 </ListItem>
                             </List>
-                        </Box>}
-                    {sendrecieved === "Send" && <Box>
+                        </Box>
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                    <Box>
                         <List>
                             <Divider />
                             <ListItem >
@@ -98,7 +127,8 @@ function Invitation() {
                                 <Button sx={{ mr: 5 }} color="warning">Withdraw</Button>
                             </ListItem>
                         </List>
-                    </Box>}
+                    </Box>
+                    </TabPanel>
                 </Box>
                 }
             </div>
