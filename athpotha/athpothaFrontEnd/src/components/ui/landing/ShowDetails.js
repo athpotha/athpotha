@@ -1,8 +1,7 @@
-import { Card, Link, Rating, StyledEngineProvider, Tab } from "@mui/material";
+import { Card, Rating, Tab } from "@mui/material";
 import React from "react";
 import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
-// import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
 import Profile from "./Profile";
@@ -23,15 +22,12 @@ const AnyTab = styled(Tab) ({
   "&:hover": {
     opacity: 0.8
   },
-  // padding: 0,
   maxWidth: 330,
-  // border: 
 });
 
 function ShowDetails(props) {
   const Icon = props.item.icon ? props.item.icon : "";
   const EmptyIcon = props.item.emptyIcon ? props.item.emptyIcon : "";
-  // console.log(props);
   return (
     <AnyTab
       icon={
@@ -85,8 +81,6 @@ function ShowDetails(props) {
         </Card>
       }
     />
-
-    // </StyledEngineProvider>
   );
 }
 
