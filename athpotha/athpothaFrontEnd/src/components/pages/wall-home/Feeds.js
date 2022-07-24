@@ -1,11 +1,14 @@
 import { Avatar, Chip, Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import HomeCard from "../../ui/wall-main/Feeds/HomeCard";
 import CenteredBox from "../../ui/CenteredBox";
+import SimpleSnackbar from "../../ui/wall-main/Feeds/SimpleSnackbar";
+import { useSelector } from "react-redux";
+import BeforeDisplay from "../../ui/BeforeDisplay";
 
 const postDetails = [
   {
@@ -96,20 +99,20 @@ const postDetails = [
 ];
 
 function Feeds() {
-  // const [isLoading, setIsLoading] = useState(false);
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   // for(var i = 0; i < 100000; i++) {
-  //   //   console.log('hello')
-  //   // }
-  //   setIsLoading(false);
-  // }, [])
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    setIsLoading(true);
+    // for(var i = 0; i < 100000; i++) {F
+    //   console.log('hello')
+    // }
+    setIsLoading(false);
+  }, [])
 
-  // if(isLoading) {
-  //   return (
-  //     <BeforeDisplay />
-  //   )
-  // }
+  if(isLoading) {
+    return (
+      <BeforeDisplay />
+    )
+  }
 
   return (
     <div>
@@ -172,7 +175,7 @@ function Feeds() {
         </Grid>
 
         {postDetails.map((post) => (
-          <HomeCard key={post.id} postItem={post} />
+          <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
         ))}
       </Grid>
     </div>

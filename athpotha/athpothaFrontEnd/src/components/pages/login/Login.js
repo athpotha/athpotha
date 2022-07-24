@@ -1,5 +1,6 @@
 import { StyledEngineProvider } from "@mui/material";
 import React, { useState } from "react";
+import EnterEmail from "./EnterEmail";
 // import { useHistory } from "react-router";
 import classes from "./Login.module.css";
 // import PasswordEye from "./PasswordEye";
@@ -10,12 +11,7 @@ import SignUpForm from "./SignUpForm";
 function Login() {
   const main = document.querySelector(`.${classes.mainDiv}`);
   const [toggleClicked, setToggleBtn] = useState(false);
-
-  // const handleMouseDownPassword = (event) => {
-  //   event.preventDefault();
-  // };
-  // const [passwordEyeFocus, setPasswordEyeFocus] = useState("");
-
+  // us
   if (toggleClicked === true) {
     main.classList.toggle(classes["sign-up-mode"]);
     setToggleBtn(false);
@@ -46,50 +42,9 @@ function Login() {
         <div className={classes.box}>
           <div className={classes["inner-box"]}>
             <div className={classes["forms-wrap"]}>
-              <form
-                action="index.html"
-                autoComplete="off"
-                className={classes["sign-in-form"]}
-              >
-                <div className={classes.logo}>
-                  <img src="/images/athpotha_v3.png" alt="අත්පොත" />
-                </div>
+              <SignInForm className="sign-in-form" onClick={() => setToggleBtn(true)} />
 
-                <div className={classes.heading}>
-                  <h2>Welcome Back</h2>
-                  <h6>Not registred as a student yet? </h6>
-                  <span
-                    className={classes.toggle}
-                    onClick={() => setToggleBtn(true)}
-                  >
-                    Sign up
-                  </span>
-                  <SignInForm />
-                </div>
-              </form>
-
-              <form
-                action="index.html"
-                autoComplete="off"
-                className={classes["sign-up-form"]}
-              >
-                <div className={classes.logo}>
-                  <img src="/images/athpotha_v3.png" alt="easyclassName" />
-                </div>
-
-                <div className={classes.heading}>
-                  <h2>Get Started</h2>
-                  <h6>Already have a student account? </h6>
-                  <span
-                    className={classes.toggle}
-                    onClick={() => setToggleBtn(true)}
-                  >
-                    Sign in
-                  </span>
-                </div>
-
-                <SignUpForm />
-              </form>
+              <EnterEmail className="sign-up-form" onClick={() => setToggleBtn(true)} />
             </div>
 
             <div className={classes.carousel}>

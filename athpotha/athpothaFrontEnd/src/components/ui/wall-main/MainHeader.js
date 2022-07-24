@@ -155,6 +155,10 @@ export default function MainHeader(props) {
     </Box>
   );
 
+  const addQuestionModalTabs = [
+    { id: "addQuestionModalTab-1", label: "Add Question", value: 0 },
+    { id: "addQuestionModalTab-2", label: "Add Post", value: 1 },
+  ];
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
@@ -194,7 +198,7 @@ export default function MainHeader(props) {
               borderRadius={10}
               variant="contained"
               modalStyle={addQuestionModalStyle}
-              header={<ModalTabs />}
+              header={<ModalTabs tabs={addQuestionModalTabs} />}
             />
           </Toolbar>
         </AppBar>

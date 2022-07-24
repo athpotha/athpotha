@@ -15,10 +15,19 @@ export default function ModalTabs(props) {
 
   console.log(tabValue);
 
+  const tabs = props.tabs;
+  const tabWidth = 100 / tabs.length;
   return (
     <Tabs value={value} onChange={handleChange}>
-      <Tab sx={{ width: "50%" }} value={0} label="Home" />
-      <Tab sx={{ width: "50%" }} value={1} label="Connections" />
+      {tabs.map((tab) => (
+        <Tab
+          key={tab.id}
+          sx={{ width: `${tabWidth}%` }}
+          value={tab.value}
+          label={tab.label}
+        />
+      ))}
+      {/* <Tab sx={{ width: `${tabWidth}%` }} value={1} label="Connections" /> */}
     </Tabs>
   );
 }

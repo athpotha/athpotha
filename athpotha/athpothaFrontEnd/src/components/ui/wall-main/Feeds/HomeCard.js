@@ -27,6 +27,9 @@ import ForumIcon from "@mui/icons-material/Forum";
 import Comment from "./Comment";
 import RoundedInputField from "../../RoundedInputField";
 import BeforeDisplay from "../../BeforeDisplay";
+import BasicMenu from "./BasicMenu";
+import { useDispatch, useSelector } from "react-redux";
+import SimpleSnackbar from "./SimpleSnackbar";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -97,7 +100,7 @@ export default function HomeCard(props) {
 
   if (isLoading) {
     return (
-      <Grid item xs={12} sx={{mb: 5}}>
+      <Grid item xs={12} sx={{ mb: 5 }}>
         <BeforeDisplay width="100%" height={450} />
       </Grid>
     );
@@ -105,6 +108,22 @@ export default function HomeCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    console.log("In home card");
+  };
+  const bookmarkPosts = useSelector((state) => state.bookmarks.bookmarkedPosts);
+  var isBookmarkAdded = null;
+  var isBookmarkRemoved = null;
+  const bookmarkIndex = bookmarkPosts.findIndex(
+    (bookmark) => bookmark.id === props.homeCardId
+  );
+  if (bookmarkIndex !== -1) {
+    isBookmarkAdded = bookmarkPosts[bookmarkIndex].isBookmarkAdded;
+    isBookmarkRemoved = bookmarkPosts[bookmarkIndex].isBookmarkRemoved;
+  }
 
   return (
     <StyledEngineProvider injectFirst>
@@ -168,7 +187,7 @@ export default function HomeCard(props) {
               // aria-expanded={expanded}
               // aria-label="show more"
               >
-                <MoreVertIcon />
+                <BasicMenu menuId={props.homeCardId} />
               </ExpandMore>
             </CardActions>
 
@@ -206,15 +225,16 @@ export default function HomeCard(props) {
                     subcommentMargin={comment.haveReplies ? 7 : 0}
                   />
                 ))}
-                {/* {commentDetatils.map((comment) => {
-              <Comment key={comment.id} commentItem={comment} />;
-            })} */}
-                {/* <Comment />
-            <Comment /> */}
               </Grid>
               {/* <Divider variant="inset" component="li" /> */}
             </Collapse>
           </Card>
+          {isBookmarkAdded && (
+            <SimpleSnackbar message="Post added to your bookmarks" />
+          )}
+          {isBookmarkRemoved && (
+            <SimpleSnackbar message="Post remove from your bookmarks" />
+          )}
         </div>
       </Grid>
     </StyledEngineProvider>
