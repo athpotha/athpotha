@@ -1,20 +1,10 @@
 import {
-  Avatar,
-  Button,
-  ButtonGroup,
-  Divider,
   Grid,
-  Link,
   List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import React from "react";
 import Contacts from "./Contacts";
-import NewContacts from "./NewContacts";
 
 function Rightbar(props) {
   return (

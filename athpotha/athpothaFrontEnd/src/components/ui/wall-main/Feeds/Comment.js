@@ -23,7 +23,6 @@ function Comment(props) {
   const [viewReplyExpanded, setViewReplyExpanded] = useState(false);
 
   const handleReplyExpandClick = () => {
-    // console.log(replyExpanded);
     setReplyExpanded(!replyExpanded);
   };
 

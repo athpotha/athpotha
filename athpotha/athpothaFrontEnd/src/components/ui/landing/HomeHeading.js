@@ -1,4 +1,4 @@
-import { StyledEngineProvider, Typography, Stack, Grid } from "@mui/material";
+import { StyledEngineProvider, Typography, Grid } from "@mui/material";
 import React from "react";
 
 function HomeHeading(props) {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 // import { Box, ThemeProvider, createTheme } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,8 +8,17 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import { Grid, Paper } from "@mui/material";
 import classes from "./HomeAppBar.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+
+import { landingActions } from "../../../store";
 
 export default function HomeAppBar() {
+  const dispatch = useDispatch();
+
+  const clickButtonHandler = () => {
+    dispatch(landingActions.setClickedButton("sign-up")); //{ type: SOME_UNIQUE_IDENTIFIER, payload: 10 }
+  }
   // const classes = useStyles();
   return (
     <StyledEngineProvider injectFirst>
@@ -36,7 +45,7 @@ export default function HomeAppBar() {
             </Button>
           </Link>
           <Link to="/registration" style={{ textDecoration: "none" }}>
-            <Button variant="contained">
+            <Button variant="contained" onClick={clickButtonHandler}>
               Sign Up
             </Button>
           </Link>
