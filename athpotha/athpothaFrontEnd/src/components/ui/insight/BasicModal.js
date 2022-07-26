@@ -4,10 +4,12 @@ import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { Grid, IconButton } from "@mui/material";
 import CenteredBox from "../CenteredBox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Addquestion from "./Addquestion";
 import Addpost from "./Addpost";
 import PropTypes from "prop-types";
+
+// import modalActions
 
 // const tabs = [];
 BasicModal.propTypes = {
@@ -15,6 +17,12 @@ BasicModal.propTypes = {
 };
 
 export default function BasicModal(props) {
+  const dispatch = useDispatch();
+  // const click = () => {
+  if (props.isTabHave) {
+  }
+
+  // }
   const tabValue = useSelector((state) => state.modal.modalTabValue);
   return (
     <Modal
