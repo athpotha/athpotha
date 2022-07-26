@@ -18,7 +18,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialUpvoteDevoteState = { posts: [] };
 const upvoteDevoteSlice = createSlice({
   name: "snackbar",
-  initialState: initialSnackbarState,
+  initialState: initialUpvoteDevoteState,
   reducers: {
     createPost(state, action) {
       const newPost = action.payload;
