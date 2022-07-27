@@ -7,6 +7,8 @@ import Avatar from '@mui/material/Avatar';
 import { Link } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 function CoverSection(props) {
 
@@ -70,11 +72,15 @@ function CoverSection(props) {
                       }
                     />
                     <Link to="/profile"></Link>
+                    <Button sx={{}} variant="text" startIcon={<BorderColorIcon /> }>
+ Edit Info
+</Button>
                   </div>
+
                 </div>
                 <div style={{ marginTop: "90px", marginLeft: "16px" }}>
-                  <Box>Ashani Imalsha</Box>
-                  <Box sx={{ fontSize: "10pt" }}>Software Engineer at 99X</Box>
+                <Box sx={{ fontWeight: 'bold' }}>Melaka Pathiranagama</Box>
+                  <Box sx={{ fontSize: "10pt" }}>O/L Qualified</Box>
 
                   {/* <Box sx={{mt:3,fontSize:'10pt'}}>1,100 followers</Box> */}
                 </div>
