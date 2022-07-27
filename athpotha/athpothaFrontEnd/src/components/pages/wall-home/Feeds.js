@@ -156,14 +156,22 @@ function Feeds() {
                 <Avatar src="/images/tutors/tutor-1.jpg" />
               </Grid>
               <Grid item xs={11}>
-                <Chip
-                  label="Are you in a problem? Share with us"
-                  //   component="a"
-                  //   href="#basic-chip"
-                  variant="outlined"
-                  clickable
-                  sx={{ width: "90%", textAlign: "left" }}
-                />
+                <ModalOpenButton
+                  modalName="addQuestion-post-modal"
+                  isTabHave={true}
+                  tabValue={0}
+                  modalStyle={addQuestionModalStyle}
+                  header={<ModalTabs tabs={addQuestionModalTabs} />}
+                >
+                  <Chip
+                    label="Are you in a problem? Share with us"
+                    //   component="a"
+                    //   href="#basic-chip"
+                    variant="outlined"
+                    clickable
+                    sx={{ width: "90%", textAlign: "left" }}
+                  />
+                </ModalOpenButton>
               </Grid>
             </Grid>
             <Grid container>
