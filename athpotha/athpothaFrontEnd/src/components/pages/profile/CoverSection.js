@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import { Link } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 function CoverSection(props) {
 
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function CoverSection(props) {
     const handleProfileClick = (event, param) => {
         navigate('/profile')
     };
-    
+    const fileInput = React.useRef();
   return (
     <StyledEngineProvider injectFirst>
       <div sx={{ maxWidth: "100%" }}>
@@ -39,19 +39,25 @@ function CoverSection(props) {
                   />
 
                   <div
-                    style={{ position: "absolute", top: "30px", right: "16px" }}
+                    style={{ position: "absolute", top: "20px", right: "16px" }}
                   >
-                    <Button>
-                    <IconButton
-                    color="primary"
-                    aria-label="upload picture"
-                    component="label"
-                  >
-                    <input hidden accept="image/*" type="file" />
-                    <PhotoCamera />
-                  </IconButton>
-                  </Button>
+                    
+                    {/* Upload phot button on cover */}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => fileInput.current.click()}
+                    >
+                      <PhotoCamera />
+                    </Button>
+
+                    <input
+                      ref={fileInput}
+                      type="file"
+                      style={{ display: "none" }}
+                    />
                   </div>
+
                   <div
                     style={{ position: "absolute", top: "130px", left: "16px" }}
                   >
@@ -72,7 +78,6 @@ function CoverSection(props) {
 
                   {/* <Box sx={{mt:3,fontSize:'10pt'}}>1,100 followers</Box> */}
                 </div>
-                
               </Card>
             </Box>
           ))}
