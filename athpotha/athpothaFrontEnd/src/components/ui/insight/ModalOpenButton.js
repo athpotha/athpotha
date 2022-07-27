@@ -1,21 +1,23 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import BasicModal from "../insight/BasicModal";
+import BasicModal from "./BasicModal";
+import { modalActions } from "../../../store/modal-slice";
+import { useDispatch } from "react-redux";
 
 function ModalOpenButton(props) {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const dispatch = useDispatch();
+  const handleOpen = () => {
+    setOpen(true);
+    if (props.isTabHave) {
+      dispatch(modalActions.setModalTabValue(props.tabValue));
+    }
+  };
   const handleClose = () => setOpen(false);
 
   return (
     <>
-      <Button
-        variant={props.variant}
-        style={{ borderRadius: props.borderRadius, textTransform: "none" }}
-        onClick={handleOpen}
-      >
-        {props.title}
-      </Button>
+      <div onClick={handleOpen}>{props.children}</div>
       <BasicModal
         modalName={props.modalName}
         isTabHave={props.isTabHave}

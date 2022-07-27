@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BasicModal from "../insight/BasicModal";
+import BasicModal from "./BasicModal";
 import styled from "@mui/system/styled";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";

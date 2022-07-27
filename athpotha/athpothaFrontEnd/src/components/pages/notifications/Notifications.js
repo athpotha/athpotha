@@ -1,27 +1,48 @@
 import React from "react";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
-import MainHeader from "../../ui/wall-main/MainHeader";
-import { Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import MainHeader from "../../ui/insight/MainHeader";
+import {
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import Leftbar from "../../ui/insight/leftbar/Leftbar";
 import Rightbar from "../../ui/insight/rightbar/Rightbar";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import Content from "./Content"
+import Content from "./Content";
+
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import CellTowerIcon from "@mui/icons-material/CellTower";
+import CastForEducationIcon from "@mui/icons-material/CastForEducation";
+import SchoolIcon from "@mui/icons-material/School";
 const listItems = [
   {
-    id: "listItem-1",
-    listName: "Connections", 
-    icon: <InboxIcon />,
+    id: "leftbar-listItem-1",
+    listName: "Connections",
+    icon: <PeopleAltIcon />,
   },
   {
-    id: "listItem-2",
-    listName: "Teachers",
-    icon: <DraftsIcon />,
-  },
-  {
-    id: "listItem-3",
+    id: "leftbar-listItem-3",
     listName: "Commiunity Experts",
-    icon: <DraftsIcon />,
+    icon: <CellTowerIcon />,
+  },
+  {
+    id: "leftbar-listItem-2",
+    listName: "Teachers",
+    icon: <CastForEducationIcon />,
+  },
+  {
+    id: "leftbar-listItem-5",
+    listName: "Courses",
+    icon: <SchoolIcon />,
+  },
+  {
+    id: "leftbar-listItem-4",
+    listName: "Bookmarks",
+    icon: <BookmarksIcon />,
   },
 ];
 
@@ -65,8 +86,8 @@ function Notifications() {
           </Leftbar>
         </Grid>
         <Grid item xs={7} style={{ paddingTop: 120 }}>
-        {/* Middle Section comes here */}
-          <Content></Content> 
+          {/* Middle Section comes here */}
+          <Content></Content>
         </Grid>
         <Grid
           item

@@ -1,25 +1,8 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import bookmarkSlice from "./bookmark-slice";
+import modalSlice from "./modal-slice";
+import upvoteDevoteSlice from "./upvoteDevote-slice";
 
-
-const initialModalState = { modalTabValue: 0 };
-const modalSlice = createSlice({
-  name: "modal-tab",
-  initialState: initialModalState,
-  reducers: {
-    // setIsTabhave(state, action) {
-    //     state.isTabHave = action.payload
-    // },
-    // setModalname(state, action) {
-    //     state.modalName = action.payload
-    // },
-    setModalTabValue(state, action) {
-      state.modalTabValue = action.payload;
-    },
-  },
-});
-
-//
 const initialLandingState = { clickedButton: "" };
 const landingSlice = createSlice({
   name: "landing",
@@ -31,9 +14,6 @@ const landingSlice = createSlice({
   },
 });
 
-//
-
-
 
 const store = configureStore({
   reducer: {
@@ -43,7 +23,6 @@ const store = configureStore({
   },
 });
 
-export const modalActions = modalSlice.actions;
 export const landingActions = landingSlice.actions;
 
 export default store;
