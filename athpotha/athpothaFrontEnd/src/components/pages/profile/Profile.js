@@ -1,6 +1,6 @@
 import { StyledEngineProvider } from "@mui/material";
 import React from "react";
-import MainHeader from "../../ui/wall-main/MainHeader";
+import MainHeader from "../../ui/insight/MainHeader";
 
 function Profile() {
   return (

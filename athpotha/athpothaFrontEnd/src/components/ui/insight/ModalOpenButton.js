@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import BasicModal from "../insight/BasicModal";
+import BasicModal from "./BasicModal";
 import { modalActions } from "../../../store/modal-slice";
 import { useDispatch } from "react-redux";
 

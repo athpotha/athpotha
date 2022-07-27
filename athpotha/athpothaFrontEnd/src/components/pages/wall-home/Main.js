@@ -1,38 +1,46 @@
 import {
   StyledEngineProvider,
-  Typography,
   Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Link,
 } from "@mui/material";
 import React from "react";
-import MainHeader from "../../ui/wall-main/MainHeader";
+import MainHeader from "../../ui/insight/MainHeader";
 import Feeds from "./Feeds";
 import Leftbar from "../../ui/insight/leftbar/Leftbar";
 import Rightbar from "../../ui/insight/rightbar/Rightbar";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
+
 import NewContacts from "../../ui/insight/rightbar/NewContacts";
 
+
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import CellTowerIcon from '@mui/icons-material/CellTower';
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import SchoolIcon from '@mui/icons-material/School';
 const listItems = [
   {
-    id: "listItem-1",
+    id: "leftbar-listItem-1",
     listName: "Connections",
-    icon: <InboxIcon />,
+    icon: <PeopleAltIcon />,
   },
   {
-    id: "listItem-2",
-    listName: "Teachers",
-    icon: <DraftsIcon />,
-  },
-  {
-    id: "listItem-3",
+    id: "leftbar-listItem-3",
     listName: "Commiunity Experts",
-    icon: <DraftsIcon />,
+    icon: <CellTowerIcon />,
+  },
+  {
+    id: "leftbar-listItem-2",
+    listName: "Teachers",
+    icon: <CastForEducationIcon />,
+  },
+  {
+    id: "leftbar-listItem-5",
+    listName: "Courses",
+    icon: <SchoolIcon />,
+  },
+  {
+    id: "leftbar-listItem-4",
+    listName: "Bookmarks",
+    icon: <BookmarksIcon />,
   },
 ];
 
