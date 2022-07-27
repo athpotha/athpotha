@@ -20,7 +20,7 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MainTab from "./MainTab";
 import { Link } from "react-router-dom";
 import ModalOpenButton from "./ModalOpenButton";
-import ModalTabs from "../insight/ModalTabs";
+import ModalTabs from "./ModalTabs";
 import SearchProfiles from "./SearchProfiles";
 
 const drawerWidth = 240;

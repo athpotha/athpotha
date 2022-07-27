@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
-import HomeCard from "../../ui/wall-main/Feeds/HomeCard";
+import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
 import CenteredBox from "../../ui/CenteredBox";
-import SimpleSnackbar from "../../ui/wall-main/Feeds/SimpleSnackbar";
+import SimpleSnackbar from "../../ui/insight/wall-main/Feeds/SimpleSnackbar";
 import { useDispatch, useSelector } from "react-redux";
 import BeforeDisplay from "../../ui/BeforeDisplay";
-import ModalOpenButton from "../../ui/wall-main/ModalOpenButton";
+import ModalOpenButton from "../../ui/insight/ModalOpenButton";
 import ModalTabs from "../../ui/insight/ModalTabs";
 
 const postDetails = [
