@@ -1,11 +1,43 @@
 import React from "react";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
-import MainHeader from "../../ui/wall-main/MainHeader";
+import MainHeader from "../../ui/insight/MainHeader";
 import Content from "./Content";
 import Leftbar from "../../ui/insight/leftbar/Leftbar";
 import Rightbar from "../../ui/insight/rightbar/Rightbar";
-import { Grid } from "@mui/material";
+import { Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import CellTowerIcon from "@mui/icons-material/CellTower";
+import CastForEducationIcon from "@mui/icons-material/CastForEducation";
+import SchoolIcon from "@mui/icons-material/School";
+const listItems = [
+  {
+    id: "leftbar-listItem-1",
+    listName: "Connections",
+    icon: <PeopleAltIcon />,
+  },
+  {
+    id: "leftbar-listItem-3",
+    listName: "Commiunity Experts",
+    icon: <CellTowerIcon />,
+  },
+  {
+    id: "leftbar-listItem-2",
+    listName: "Teachers",
+    icon: <CastForEducationIcon />,
+  },
+  {
+    id: "leftbar-listItem-5",
+    listName: "Courses",
+    icon: <SchoolIcon />,
+  },
+  {
+    id: "leftbar-listItem-4",
+    listName: "Bookmarks",
+    icon: <BookmarksIcon />,
+  },
+];
 function Chat() {
   return (
     <StyledEngineProvider injectFirst>
@@ -26,24 +58,35 @@ function Chat() {
           item
           xs={2}
           style={{
-            height: "100vh",
-            position: "sticky",
-            top: 0,
+            // height: "100vh",
+            // position: "sticky",
+            // top: 0,
             paddingTop: 100,
           }}
         >
-          <Leftbar></Leftbar>
+          <Leftbar>
+            <List>
+              {listItems.map((listItem) => (
+                <ListItem key={listItem.id} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{listItem.icon}</ListItemIcon>
+                    <ListItemText primary={listItem.listName} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Leftbar>
         </Grid>
-        <Grid item xs={7} style={{ paddingTop: 120 }}>
+        <Grid item xs={9} style={{ paddingTop: 120 }}>
           <Content></Content>
         </Grid>
         <Grid
           item
           xs={3}
           style={{
-            height: "100vh",
-            position: "sticky",
-            top: 0,
+            // height: "100vh",
+            // position: "sticky",
+            // top: 0,
             paddingTop: 100,
           }}
         >

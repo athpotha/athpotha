@@ -11,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Avatar, Badge, Chip, createTheme, ThemeProvider } from "@mui/material";
+import { Avatar, Badge, Button, Chip, createTheme, ThemeProvider } from "@mui/material";
 
 import HouseIcon from "@mui/icons-material/House";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -20,7 +20,7 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MainTab from "./MainTab";
 import { Link } from "react-router-dom";
 import ModalOpenButton from "./ModalOpenButton";
-import ModalTabs from "../insight/ModalTabs";
+import ModalTabs from "./ModalTabs";
 import SearchProfiles from "./SearchProfiles";
 
 const drawerWidth = 240;
@@ -194,12 +194,17 @@ export default function MainHeader(props) {
             <ModalOpenButton
               modalName="addQuestion-post-modal"
               isTabHave={true}
-              title="Add Question"
-              borderRadius={10}
-              variant="contained"
+              tabValue={0}
               modalStyle={addQuestionModalStyle}
               header={<ModalTabs tabs={addQuestionModalTabs} />}
-            />
+            >
+              <Button
+                variant="contained"
+                style={{ borderRadius: 10, textTransform: "none" }}
+              >
+                Add Question
+              </Button>
+            </ModalOpenButton>
           </Toolbar>
         </AppBar>
         <Box component="nav">

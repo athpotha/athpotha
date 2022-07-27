@@ -25,11 +25,12 @@ import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrow
 import ForumIcon from "@mui/icons-material/Forum";
 
 import Comment from "./Comment";
-import RoundedInputField from "../../RoundedInputField";
-import BeforeDisplay from "../../BeforeDisplay";
+import RoundedInputField from "../../../RoundedInputField";
+import BeforeDisplay from "../../../BeforeDisplay";
 import BasicMenu from "./BasicMenu";
 import { useDispatch, useSelector } from "react-redux";
 import SimpleSnackbar from "./SimpleSnackbar";
+import HomeCardMenu from "./HomeCardMenu";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -187,7 +188,7 @@ export default function HomeCard(props) {
               // aria-expanded={expanded}
               // aria-label="show more"
               >
-                <BasicMenu menuId={props.homeCardId} />
+                <HomeCardMenu menuId={props.homeCardId} />
               </ExpandMore>
             </CardActions>
 

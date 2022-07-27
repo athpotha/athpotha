@@ -11,7 +11,7 @@ import ReportIcon from "@mui/icons-material/Report";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 import { useDispatch, useSelector } from "react-redux";
-import { bookmarkActions } from "../../../../store/bookmark-slice";
+import { bookmarkActions } from "../../../../../store/bookmark-slice";
 BasicMenu.propTypes = {
   button: PropTypes.element,
 };

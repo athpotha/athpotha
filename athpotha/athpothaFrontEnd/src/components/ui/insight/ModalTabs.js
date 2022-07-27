@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useSelector, useDispatch } from "react-redux";
-import { modalActions } from "../../../store";
+import { modalActions } from "../../../store/modal-slice";
 
 export default function ModalTabs(props) {
   const [value, setValue] = useState(0);
@@ -18,7 +18,7 @@ export default function ModalTabs(props) {
   const tabs = props.tabs;
   const tabWidth = 100 / tabs.length;
   return (
-    <Tabs value={value} onChange={handleChange}>
+    <Tabs value={tabValue} onChange={handleChange}>
       {tabs.map((tab) => (
         <Tab
           key={tab.id}
