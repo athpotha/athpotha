@@ -92,9 +92,12 @@ function CoverSection(props) {
                   </Grid>
                   <Grid item xs={2}>
                     <Button
-                      // style={{ marginTop: "90px"}}
+                      
+                      style={{ "margin-left": "20px","margin-top":"6px"}}
                       variant="text"
-                      startIcon={<BorderColorIcon />}
+                      startIcon={<BorderColorIcon /> 
+                      
+                      }
                     >
                       Edit Info
                     </Button>
