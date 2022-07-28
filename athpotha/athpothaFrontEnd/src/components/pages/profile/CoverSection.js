@@ -1,25 +1,31 @@
 import { Grid, StyledEngineProvider } from "@mui/material";
 import React from "react";
 import { Box, Container } from "@mui/system";
-import {useNavigate} from 'react-router-dom';
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
-import Avatar from '@mui/material/Avatar';
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import { Link } from "react-router-dom";
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 function CoverSection(props) {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const products = ["1"];
 
-    const products = ['1'];
-
-    const handleProfileClick = (event, param) => {
-        navigate('/profile')
-    };
-    const fileInput = React.useRef();
+  const handleProfileClick = (event, param) => {
+    navigate("/profile");
+  };
+  const fileInput = React.useRef();
   return (
     <StyledEngineProvider injectFirst>
       <div sx={{ maxWidth: "100%" }}>
@@ -43,7 +49,6 @@ function CoverSection(props) {
                   <div
                     style={{ position: "absolute", top: "20px", right: "16px" }}
                   >
-                    
                     {/* Upload phot button on cover */}
                     <Button
                       variant="contained"
@@ -72,18 +77,29 @@ function CoverSection(props) {
                       }
                     />
                     <Link to="/profile"></Link>
-                    <Button sx={{}} variant="text" startIcon={<BorderColorIcon /> }>
- Edit Info
-</Button>
                   </div>
-
                 </div>
-                <div style={{ marginTop: "90px", marginLeft: "16px" }}>
-                <Box sx={{ fontWeight: 'bold' }}>Melaka Pathiranagama</Box>
-                  <Box sx={{ fontSize: "10pt" }}>O/L Qualified</Box>
+                <Grid container>
+                  <Grid item xs={10}>
+                    <div style={{ marginTop: "90px", marginLeft: "16px", paddingBottom: "20px" }}>
+                      <Box sx={{ fontWeight: "bold" }}>
+                        Melaka Pathiranagama
+                      </Box>
+                      <Box sx={{ fontSize: "10pt" }}>O/L Qualified</Box>
 
-                  {/* <Box sx={{mt:3,fontSize:'10pt'}}>1,100 followers</Box> */}
-                </div>
+                      {/* <Box sx={{mt:3,fontSize:'10pt'}}>1,100 followers</Box> */}
+                    </div>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Button
+                      // style={{ marginTop: "90px"}}
+                      variant="text"
+                      startIcon={<BorderColorIcon />}
+                    >
+                      Edit Info
+                    </Button>
+                  </Grid>
+                </Grid>
               </Card>
             </Box>
           ))}
