@@ -15,8 +15,10 @@ import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Modal } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import TextField from "@mui/material/TextField";
 
-import DeleteIcon from "@mui/icons-material/Delete";
 function CoverSection(props) {
   const navigate = useNavigate();
 
@@ -26,6 +28,25 @@ function CoverSection(props) {
     navigate("/profile");
   };
   const fileInput = React.useRef();
+
+  // ------------- Model -----------
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 200,
+    bgcolor: "background.paper",
+    borderRadius: "7px",
+    boxShadow: 35,
+    p: 5,
+    width: "58%",
+  
+  };
+  const [openOne, setOpenOne] = React.useState(false);
+  const handleOpenOne = () => setOpenOne(true);
+  const handleCloseOne = () => setOpenOne(false);
+  // ----------------------------------
   return (
     <StyledEngineProvider injectFirst>
       <div sx={{ maxWidth: "100%" }}>
@@ -64,7 +85,7 @@ function CoverSection(props) {
                       style={{ display: "none" }}
                     />
                   </div>
-
+                  {/* ----------------------------- White section ------------------------------- */}
                   <div
                     style={{ position: "absolute", top: "130px", left: "16px" }}
                   >
@@ -78,10 +99,109 @@ function CoverSection(props) {
                     />
                     <Link to="/profile"></Link>
                   </div>
+
+                  {/* --------------------------------- Model Start ----------------------------- */}
+                  {/* <Modal open={openOne}>
+                    <Box sx={style}>
+                      <IconButton
+                        aria-label="close"
+                        onClick={handleCloseOne}
+                        sx={{
+                          position: "absolute",
+                          right: 8,
+                          top: 8,
+                          color: (theme) => theme.palette.grey[500],
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                      <Box
+                        component="form"
+                        sx={{
+                          "& > :not(style)": { m: 1, width: "60ch" },
+                        }}  
+                        
+                        noValidate
+                        autoComplete="off"
+                      >
+                        <TextField
+                          id="First Name"
+                          label="First Name"
+                          variant="outlined"
+                          defaultValue="Melaka"
+                        />
+                        <TextField
+                          id="Last Name"
+                          label="Last Name"
+                          variant="outlined"
+                          defaultValue="Pathiranagama"
+                        />
+                        <TextField
+                          id="Bio"
+                          label="Bio"
+                          multiline
+                          rows={4}
+                          defaultValue="Default Value"
+                        />
+                      </Box>
+                    </Box>
+                  </Modal> */}
+
+                  <Modal open={openOne}>
+                    <Box sx={style}>
+                      <IconButton
+                        aria-label="close"
+                        onClick={handleCloseOne}
+                        sx={{
+                          position: "absolute",
+                          right: 8,
+                          top: 8,
+                          color: (theme) => theme.palette.grey[500],
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                      <Box
+                        sx={{ mt: "25px", height: "70vh", overflow: "auto" }}
+                      >
+                        {/* ---------------------content of the model start ------------------ */}
+                        <form style= {{maxWidth:"100%"}}>
+                          <TextField
+                            id="First Name"
+                            label="First Name"
+                            variant="outlined"
+                            defaultValue="Melaka"
+                            fullWidth
+                          />
+                          <TextField
+                            id="Last Name"
+                            label="Last Name"
+                            variant="outlined"
+                            defaultValue="Pathiranagama"
+                          />
+                          <TextField
+                            id="Bio"
+                            label="Bio"
+                            multiline
+                            rows={4}
+                            defaultValue="Default Value"
+                          />
+                          {/* ---------------------content of the model end ------------------ */}
+                        </form>
+                      </Box>
+                    </Box>
+                  </Modal>
+                  {/* -----------------------------------Model End ----------------------------------- */}
                 </div>
                 <Grid container>
                   <Grid item xs={10}>
-                    <div style={{ marginTop: "90px", marginLeft: "16px", paddingBottom: "20px" }}>
+                    <div
+                      style={{
+                        marginTop: "90px",
+                        marginLeft: "16px",
+                        paddingBottom: "20px",
+                      }}
+                    >
                       <Box sx={{ fontWeight: "bold" }}>
                         Melaka Pathiranagama
                       </Box>
@@ -92,12 +212,10 @@ function CoverSection(props) {
                   </Grid>
                   <Grid item xs={2}>
                     <Button
-                      
-                      style={{ "margin-left": "20px","margin-top":"6px"}}
+                      onClick={handleOpenOne}
+                      style={{ "margin-left": "20px", "margin-top": "6px" }}
                       variant="text"
-                      startIcon={<BorderColorIcon /> 
-                      
-                      }
+                      startIcon={<BorderColorIcon />}
                     >
                       Edit Info
                     </Button>
