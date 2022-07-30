@@ -41,7 +41,7 @@ function StudentLogin() {
             subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur
             adipiscing elit."
           />
-          <HomeTabButtons />
+          <HomeTabButtons userType="student" />
         </Stack>
       </Paper>
     </StyledEngineProvider>

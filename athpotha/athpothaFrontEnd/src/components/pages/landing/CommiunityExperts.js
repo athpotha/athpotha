@@ -202,7 +202,7 @@ function CommiunityExperts() {
             />
           </Grid>
           <Grid item alignSelf="center">
-            <HomeTabButtons />
+            <HomeTabButtons userType="commiunity" />
           </Grid>
         </Grid>
       </Grid>

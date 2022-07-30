@@ -151,7 +151,7 @@ function UniversityDegrees() {
           />
         </Grid>
         <Grid item alignSelf="center">
-          <HomeTabButtons />
+          <HomeTabButtons userType="university" />
         </Grid>
       </Grid>
     </Grid>

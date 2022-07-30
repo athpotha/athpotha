@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/pages/login/Login";
 import Test from "./components/pages/test/Test";
@@ -14,6 +14,8 @@ import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
 import MyNetwork from "./components/pages/my-network/MyNetwork";
+
+import { useSelector } from "react-redux";
 function App() {
   const theme = createTheme({
     palette: {
@@ -47,13 +49,18 @@ function App() {
       fontWeightBold: 700,
     },
   });
+  
+  const user_type = useSelector((state) => state.signupButton.selectedSignupButton);
+  const REGISTRATION_URL = "/registration/" + user_type;
+  console.log(user_type)
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/" element={<Home />} exact></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/registration" element={<Registration />}></Route>
+          {/* <Route path={REGISTRATION_URL} element={<Registration />}></Route> */}
+          <Route path="/registration/" element={<Registration />} exact />
           <Route path="/home" element={<Home />}></Route>
           <Route path="/main" element={<Main />}></Route>
           <Route path="/my-network" element={<MyNetwork />}></Route> 
