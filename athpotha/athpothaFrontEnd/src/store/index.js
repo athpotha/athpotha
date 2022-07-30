@@ -2,6 +2,8 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 import bookmarkSlice from "./bookmark-slice";
 import modalSlice from "./modal-slice";
 import upvoteDevoteSlice from "./upvoteDevote-slice";
+import registrationSlice from "./registration-slice";
+import SignupButtonSlice from "./signup-button-slice";
 
 const initialLandingState = { clickedButton: "" };
 const landingSlice = createSlice({
@@ -20,6 +22,8 @@ const store = configureStore({
     modal: modalSlice.reducer,
     landing: landingSlice.reducer,
     bookmarks: bookmarkSlice.reducer,
+    registration: registrationSlice.reducer,
+    signupButton: SignupButtonSlice.reducer
   },
 });
 
