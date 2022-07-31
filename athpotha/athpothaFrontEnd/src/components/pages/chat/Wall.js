@@ -71,13 +71,20 @@ function Wall(props) {
 
   const [msg, setMsg] = useState({});
 
-  const d = new Date();
-  const date = `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
-  
-  console.log(date)
+  useEffect(() => {
+    if (msg !== null) {
 
-  const obj = { fid: 10, tid: msg.id, message: msg.text, timestamp: date, displayName: "You" }
-  messages.push(obj)
+      const d = new Date();
+      const date = `${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
+
+      console.log(date)
+
+      const obj = { fid: 10, tid: msg.id, message: msg.text, timestamp: date, displayName: "You" }
+      messages.push(obj)
+      setMsg(null)
+    }
+  })
+
 
 
   const loginid = 10;
