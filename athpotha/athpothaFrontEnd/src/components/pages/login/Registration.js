@@ -1,16 +1,23 @@
 import { StyledEngineProvider } from "@mui/material";
 import React, { useState } from "react";
-import EnterEmail from "./EnterEmail";
+import { useSelector } from "react-redux";
+// import EnterEmail from "./EnterEmail";
 // import { useHistory } from "react-router";
 import classes from "./Login.module.css";
 // import PasswordEye from "./PasswordEye";
 
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
+import EmailSent from "./EmailSent";
+import UserTypeSelector from "./UserTypeSelector";
 
 function Registration() {
   const main = document.querySelector(`.${classes.mainDiv}`);
   const [toggleClicked, setToggleBtn] = useState(false);
+  const isEmailSent = useSelector((state) => state.registration.isEmailSent);
+  const selectedSignupButton = useSelector(
+    (state) => state.signupButton.selectedSignupButton
+  );
   // us
   if (toggleClicked === true) {
     main.classList.toggle(classes["sign-up-mode"]);
@@ -42,9 +49,27 @@ function Registration() {
         <div className={classes.box}>
           <div className={classes["inner-box"]}>
             <div className={classes["forms-wrap"]}>
-              <EnterEmail className="sign-in-form" onClick={() => setToggleBtn(true)} />
+              {isEmailSent ? (
+                <EmailSent
+                  className="sign-in-form"
+                  onClick={() => setToggleBtn(true)}
+                />
+              ) : selectedSignupButton === "" ? (
+                <UserTypeSelector
+                  className="sign-in-form"
+                  onClick={() => setToggleBtn(true)}
+                />
+              ) : (
+                <SignUpForm
+                  className="sign-in-form"
+                  onClick={() => setToggleBtn(true)}
+                />
+              )}
 
-              <SignInForm className="sign-up-form" onClick={() => setToggleBtn(true)} />
+              <SignInForm
+                className="sign-up-form"
+                onClick={() => setToggleBtn(true)}
+              />
             </div>
 
             <div className={classes.carousel}>

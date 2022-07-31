@@ -160,7 +160,7 @@ function TopRatedTutors() {
             />
           </Grid>
           <Grid item alignSelf="center">
-            <HomeTabButtons />
+            <HomeTabButtons userType="tutor" />
           </Grid>
         </Grid>
       </Grid>
