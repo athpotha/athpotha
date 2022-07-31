@@ -68,6 +68,7 @@ function App() {
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/test" element={<Test />}></Route>
+          <Route path="/uni-profile" element={<UniProfile/>}></Route> 
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>
