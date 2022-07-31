@@ -14,7 +14,7 @@ import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
 import MyNetwork from "./components/pages/my-network/MyNetwork";
-import UniProfile from "./components/pages/uni-profile/UniProfile";
+
 function App() {
   const theme = createTheme({
     palette: {
