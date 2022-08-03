@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/pages/login/Login";
 import Test from "./components/pages/test/Test";
@@ -14,9 +14,12 @@ import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
 import MyNetwork from "./components/pages/my-network/MyNetwork";
+import AuthContext from "./store/ath-context";
 
 import { useSelector } from "react-redux";
 function App() {
+  const authCtx = useContext(AuthContext);
+
   const theme = createTheme({
     palette: {
       primary: {

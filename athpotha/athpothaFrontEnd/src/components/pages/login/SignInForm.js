@@ -4,11 +4,13 @@ import Button from "@mui/material/Button";
 import InputField from "./InputField";
 import classes from "./Login.module.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
+import { authenticate, authFailure, authSuccess } from "../../../store/auth/authActions";
+import { userLogin } from "../../../api/authenticationService";
 
-function SignInForm(props) {
+function SignInForm({loading,error,...props}) {
   const dispatch = useDispatch();
-  const USER_REST_API_URL = "http://localhost:8080/user/login";
+  const USER_REST_API_URL = "api/v1/auth/login";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,8 +19,13 @@ function SignInForm(props) {
     axios.post(USER_REST_API_URL, {
       email: email,
       password: password,
+    }).then((response) => {
+      localStorage.setItem('token', response.data.token);
+      console.log(response.data.token);
     });
   };
+
+
   return (
     <form
       // action="index.html"
@@ -45,7 +52,7 @@ function SignInForm(props) {
               required
               fullWidth
               value={email}
-              onChange={(e) => setEmail(e.target)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             {/* <span className={classes.textFieldError}>hello</span> */}
           </div>
@@ -54,7 +61,7 @@ function SignInForm(props) {
               label="Password"
               id="standard-adornment-sign-in-password"
               value={password}
-              onChange={(e) => setPassword(e.target)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <Button

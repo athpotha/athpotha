@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.athpotha.carrierGuidanceSystem.model.User;
 import com.athpotha.carrierGuidanceSystem.repository.UserRepository;
 
-//@RestController
-//@RequestMapping("/student")
-//@CrossOrigin
 @RestController
 @RequestMapping("/user-login")
 @CrossOrigin
@@ -25,16 +22,15 @@ public class UserLoginController {
 	@PostMapping("/login")
 	public String userLogin(@RequestBody User user) {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//		userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
-		String hashedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+
 		User loginUser = userRepo.findByEmailIgnoreCase(user.getEmail());
-		if(loginUser != null) {
+		if(loginUser == null) {
 			return "EMAIL_WRONG";
 		}
 		if(loginUser.isEnabled() == false) {
 			return "NOT_VERIFIED";
 		}
-		if(hashedPassword != loginUser.getPassword()) {
+		if(bCryptPasswordEncoder.matches(user.getPassword(),loginUser.getPassword())) {
 			return "PASSWORD_WRONG";
 		}
 		return null;

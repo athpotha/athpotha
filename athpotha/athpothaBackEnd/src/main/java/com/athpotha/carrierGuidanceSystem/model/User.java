@@ -1,5 +1,6 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,9 +11,11 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class User {
+public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int user_id;
@@ -23,20 +26,62 @@ public class User {
 	private String email;
 	private String password;
 	private String profile_picture;
-	private boolean is_delete;
-	private boolean isEnabled;
+	private boolean userDeleted;
+	private boolean enabled;
+	private boolean verified;
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date created_at;
 	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.password;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return this.enabled;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return this.enabled;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return this.enabled;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return this.enabled;
+	}
+	
 	public User() {
 		
 	}
-
 	
-
 	public User(int user_id, String first_name, String last_name, String user_type, String email, String password,
-			String profile_picture, boolean is_delete, boolean isEnabled, Date created_at) {
+			String profile_picture, boolean userDeleted, boolean enabled, boolean verified, Date created_at) {
+		super();
 		this.user_id = user_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -44,12 +89,11 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.profile_picture = profile_picture;
-		this.is_delete = is_delete;
-		this.isEnabled = isEnabled;
+		this.userDeleted = userDeleted;
+		this.enabled = enabled;
+		this.verified = verified;
 		this.created_at = created_at;
 	}
-
-
 
 	public int getUser_id() {
 		return user_id;
@@ -75,20 +119,20 @@ public class User {
 		this.last_name = last_name;
 	}
 
+	public String getUser_type() {
+		return user_type;
+	}
+
+	public void setUser_type(String user_type) {
+		this.user_type = user_type;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getProfile_picture() {
@@ -99,20 +143,20 @@ public class User {
 		this.profile_picture = profile_picture;
 	}
 
-	public boolean isIs_delete() {
-		return is_delete;
+	public boolean isUserDeleted() {
+		return userDeleted;
 	}
 
-	public void setIs_delete(boolean is_delete) {
-		this.is_delete = is_delete;
+	public void setUserDeleted(boolean userDeleted) {
+		this.userDeleted = userDeleted;
 	}
 
-	public boolean isEnabled() {
-		return isEnabled;
+	public boolean isVerified() {
+		return verified;
 	}
 
-	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
+	public void setVerified(boolean verified) {
+		this.verified = verified;
 	}
 
 	public Date getCreated_at() {
@@ -122,23 +166,14 @@ public class User {
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
-	
-	public String getUser_type() {
-		return user_type;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public void setUser_type(String user_type) {
-		this.user_type = user_type;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
-
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", first_name=" + first_name + ", last_name=" + last_name + ", user_type="
-				+ user_type + ", email=" + email + ", password=" + password + ", profile_picture=" + profile_picture
-				+ ", is_delete=" + is_delete + ", isEnabled=" + isEnabled + ", created_at=" + created_at + "]";
-	}
-
 	
 	
-
 }
