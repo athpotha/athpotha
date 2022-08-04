@@ -18,10 +18,11 @@ export const userRegistration = (authRequest) => {
 };
 export const fetchUserData = (authRequest) => {
   return axios({
-    method: "GET",
-    url: `api/v1/auth/userinfo`,
+    method: authRequest.method,
+    url: authRequest.url,
     headers: {
       Authorization: "Bearer " + getToken(),
     },
+    data: authRequest.data,
   });
 };

@@ -54,10 +54,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
 		http.authorizeRequests().antMatchers("/api/v1/auth/login").permitAll();
-//		http.authorizeRequests().antMatchers("/api/v1/auth/userinfo").permitAll();
-		http.authorizeRequests().antMatchers("/user/register").permitAll();
+		
+//		http.authorizeRequests().antMatchers("/api/v1/auth/userDetials").permitAll();
+//		http.authorizeRequests().antMatchers("/student/getAll").permitAll();
+//		http.authorizeRequests().antMatchers("/user/register").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated();
 //				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
 //		http.authorizeRequests().antMatchers("/api/v1/auth/userinfo").permitAll();
@@ -72,8 +74,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
 				UsernamePasswordAuthenticationFilter.class);
-//		http.csrf().disable().cors().and().headers().frameOptions().disable();
-		http.csrf().disable().cors();
+		http.csrf().disable().cors().and().headers().frameOptions().disable();
+//		http.csrf().disable().cors();
 	}
 
 }
