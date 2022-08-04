@@ -166,6 +166,8 @@ function CoverSection(props) {
                               rows={4}
                               defaultValue="Default Value"
                             />
+            <Button variant="contained">Save</Button>
+
                             {/* ---------------------content of the model end ------------------ */}
                           </form>
                         </Box>
@@ -251,10 +253,10 @@ function CoverSection(props) {
                         >
                           {/* ---------------------content of the model start ------------------ */}
 
-                          <form style={{ maxWidth: "100%" }}>
+                          <form style={{ maxWidth: "100%" }}>  {/*  FORM HERE ???? */}
                             
                   
-            <ChangePassword></ChangePassword>
+                            <ChangePassword></ChangePassword>
                             
                             {/* ---------------------content of the model end ------------------ */}
                           </form>
