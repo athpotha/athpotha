@@ -14,6 +14,7 @@ import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
 import MyNetwork from "./components/pages/my-network/MyNetwork";
+import UniProfile from "./components/pages/uni-profile/UniProfile";
 
 import { useSelector } from "react-redux";
 function App() {
@@ -68,6 +69,7 @@ function App() {
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/test" element={<Test />}></Route>
+          <Route path="/uni-profile" element={<UniProfile/>}></Route> 
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>
