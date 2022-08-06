@@ -1,24 +1,59 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import InputField from "./InputField";
 import classes from "./Login.module.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import AuthContext from "../../../store/ath-context";
+import { useNavigate } from "react-router-dom";
+import { fetchUserData } from "../../../api/authenticationService";
 
-function SignInForm(props) {
-  const dispatch = useDispatch();
-  const USER_REST_API_URL = "http://localhost:8080/user/login";
+function SignInForm({ loading, error, ...props }) {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const USER_REST_API_URL = "api/v1/auth/login";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    axios.post(USER_REST_API_URL, {
-      email: email,
-      password: password,
-    });
+    axios
+      .post(USER_REST_API_URL, {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        authCtx.login(response.data.token);
+        // const expirationTime = new Date(
+        //   new Date().getTime() +  10000
+        //   // new Date().getTime() + +data.expiresIn * 1000
+        // );
+        // fetchUserData().then((response) => console.log(response));
+      })
+      .then(() => {
+        fetchUserData({
+          method: "post",
+          url: "api/v1/auth/userinfo",
+          data: { email: email },
+        })
+          .then((response) => {
+            const name = `${response.data.firstName} ${response.data.lastName}`;
+            localStorage.setItem("USER_TYPE", response.data.userType);
+            localStorage.setItem("USER_NAME", name);
+            localStorage.setItem("USER_EMAIL", response.data.email);
+            const user_type = localStorage.getItem("USER_TYPE");
+            if (user_type !== "university" && user_type !== "admin") {
+              navigate("/main");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
   };
+
   return (
     <form
       // action="index.html"
@@ -45,7 +80,7 @@ function SignInForm(props) {
               required
               fullWidth
               value={email}
-              onChange={(e) => setEmail(e.target)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             {/* <span className={classes.textFieldError}>hello</span> */}
           </div>
@@ -54,7 +89,7 @@ function SignInForm(props) {
               label="Password"
               id="standard-adornment-sign-in-password"
               value={password}
-              onChange={(e) => setPassword(e.target)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <Button

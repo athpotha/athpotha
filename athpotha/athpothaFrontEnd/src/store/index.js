@@ -4,6 +4,7 @@ import modalSlice from "./modal-slice";
 import upvoteDevoteSlice from "./upvoteDevote-slice";
 import registrationSlice from "./registration-slice";
 import SignupButtonSlice from "./signup-button-slice";
+import authSlice from "./auth/auth-slice";
 
 const initialLandingState = { clickedButton: "" };
 const landingSlice = createSlice({
@@ -23,7 +24,8 @@ const store = configureStore({
     landing: landingSlice.reducer,
     bookmarks: bookmarkSlice.reducer,
     registration: registrationSlice.reducer,
-    signupButton: SignupButtonSlice.reducer
+    signupButton: SignupButtonSlice.reducer,
+    loginAuth: authSlice.reducer
   },
 });
 
