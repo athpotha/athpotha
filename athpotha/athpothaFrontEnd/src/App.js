@@ -15,6 +15,7 @@ import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
 import MyNetwork from "./components/pages/my-network/MyNetwork";
 import AuthContext from "./store/ath-context";
+import UniProfile from "./components/pages/uni-profile/UniProfile";
 
 import { useSelector } from "react-redux";
 function App() {
@@ -89,6 +90,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />}>
             {/* <Navigate to="/" /> */}
           </Route>
+          <Route path="/uni-profile" element={<UniProfile/>}></Route> 
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>

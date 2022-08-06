@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import { Box, Paper } from "@mui/material";
 import { MessageLeft, MessageRight } from "./Message";
@@ -57,7 +57,36 @@ const messages = [
 ];
 
 function Wall(props) {
+
   const id = props.selectContactdetails.value1;
+  const [active, setActive] = useState()
+  useEffect(() => {
+    if (id == 0) {
+      setActive("false")
+    } else {
+      setActive("true")
+    }
+  })
+
+
+  const [msg, setMsg] = useState({});
+
+  useEffect(() => {
+    if (msg !== null) {
+
+      const d = new Date();
+      const date = `${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
+
+      console.log(date)
+
+      const obj = { fid: 10, tid: msg.id, message: msg.text, timestamp: date, displayName: "You" }
+      messages.push(obj)
+      setMsg(null)
+    }
+  })
+
+
+
   const loginid = 10;
   const check = 0;
 
@@ -108,38 +137,10 @@ function Wall(props) {
             }
           })}
 
-          {/* <MessageLeft
-                        message="hello"
-                        timestamp="MM/DD 00:00"
-                        displayName="Ashani"
-                    />
-                    <MessageLeft
-                        message="Hey man wahts up?"
-                        timestamp="MM/DD 00:00"
-                        displayName="Ashani"
-                    />
-                    <MessageRight
-                        message="Hey, Iam Good! What about you ?"
-                        timestamp="MM/DD 00:00"
-                        displayName="you"
-                    />
-                    <MessageRight
-                        message="thank you"
-                        timestamp="MM/DD 00:00"
-                        displayName="you"
-                    />
-                    <MessageLeft
-                        message="Thank you"
-                        timestamp="MM/DD 00:00"
-                        displayName="Ashani"
-                    />
-                    <MessageLeft
-                        message="See you soon"
-                        timestamp="MM/DD 00:00"
-                        displayName="Ashani"
-                    /> */}
+
         </Box>
-        <TextInput></TextInput>
+        {active == "true" && <TextInput id={id} setMsg={setMsg}></TextInput>}
+
       </Box>
     </StyledEngineProvider>
   );
