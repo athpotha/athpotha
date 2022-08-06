@@ -23,26 +23,24 @@ public class AthpothaApplication {
 		SpringApplication.run(AthpothaApplication.class, args);
 	}
 	
-//	@PostConstruct
-//	protected void init() {
+	@PostConstruct
+	protected void init() {
 //		
-////		List<Authority> authorityList=new ArrayList<>();
-////		
-////		authorityList.add(createAuthority("USER","User role"));
-//		//authorityList.add(createAuthority("ADMIN","Admin role"));
+//		List<Authority> authorityList=new ArrayList<>();
 //		
-//		User user=new User();
-//		
-//		user.setFirst_name("kumud");
-//		user.setLast_name("Perera");
-//		user.setEmail("nethmalperera54@gmail.com");
-//		user.setPassword(passwordEncoder.encode("1234567"));
-//		user.setVerified(true);
-//		user.setEnabled(true);
-//		userRepository.save(user);
-//		user.setUserName("pardeep161");
-//		user.setFirstName("Pardeep");
-//		user.setLastName("K");
+//		authorityList.add(createAuthority("USER","User role"));
+		//authorityList.add(createAuthority("ADMIN","Admin role"));
+		
+		User user=new User();
+		
+		user.setFirst_name("Athpotha");
+		user.setLast_name("Admin");
+		user.setUser_type("admin");
+		user.setEmail("athpothaAdmin121@gmail.com");
+		user.setPassword(passwordEncoder.encode("1234567"));
+		user.setVerified(true);
+		user.setEnabled(true);
+		userRepository.save(user);
 //		
 //		user.setPassword(passwordEncoder.encode("pardeep@123"));
 //		user.setEnabled(true);
@@ -52,5 +50,5 @@ public class AthpothaApplication {
 		
 		
 		
-//	}
+	}
 }
