@@ -1,6 +1,6 @@
 import "./App.css";
-import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/pages/login/Login";
 import Test from "./components/pages/test/Test";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -14,6 +14,7 @@ import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
 import Chat from "./components/pages/chat/Chat";
 import MyNetwork from "./components/pages/my-network/MyNetwork";
+import AuthContext from "./store/ath-context";
 import UniProfile from "./components/pages/uni-profile/UniProfile";
 
 import { useSelector } from "react-redux";
@@ -36,11 +37,11 @@ function App() {
       background: {
         light: "#F2F8FC",
         main: "#E6F2FA",
-        dark: lightBlue['A100'],
+        dark: lightBlue["A100"],
         contrastText: "#000",
         paper: "#fff",
-        default: "#fff"
-      }
+        default: "#fff",
+      },
     },
     typography: {
       fontFamily: "Poppins",
@@ -50,25 +51,45 @@ function App() {
       fontWeightBold: 700,
     },
   });
-  
-  const user_type = useSelector((state) => state.signupButton.selectedSignupButton);
-  const REGISTRATION_URL = "/registration/" + user_type;
-  console.log(user_type)
+
+  // const user_type = useSelector(
+  //   (state) => state.signupButton.selectedSignupButton
+  // );
+  // const REGISTRATION_URL = "/registration/" + user_type;
+  // console.log(user_type);
+  // localStorage.setItem("USER_TYPE", response.data.userType);
+  // localStorage.setItem("USER_NAME", name);
+  // localStorage.setItem("USER_EMAIL", response.data.email);
+  const authCtx = useContext(AuthContext);
+  const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/" element={<Home />} exact></Route>
           <Route path="/login" element={<Login />}></Route>
-          {/* <Route path={REGISTRATION_URL} element={<Registration />}></Route> */}
           <Route path="/registration/" element={<Registration />} exact />
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/main" element={<Main />}></Route>
-          <Route path="/my-network" element={<MyNetwork />}></Route> 
-          <Route path="/notifications" element={<Notifications />}></Route>
-          <Route path="/chat" element={<Chat />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          {authCtx.isLoggedIn && userType !== "university" && userType !== "admin" && (
+            <Route path="/main" element={<Main />}></Route>
+          )}
+          {authCtx.isLoggedIn && (
+            <Route path="/my-network" element={<MyNetwork />}></Route>
+          )}
+          {authCtx.isLoggedIn && (
+            <Route path="/notifications" element={<Notifications />}></Route>
+          )}
+          {authCtx.isLoggedIn && (
+            <Route path="/chat" element={<Chat />}></Route>
+          )}
+          {authCtx.isLoggedIn && (
+            <Route path="/profile" element={<Profile />}></Route>
+          )}
+
           <Route path="/test" element={<Test />}></Route>
+          <Route path="*" element={<Navigate to="/" />}>
+            {/* <Navigate to="/" /> */}
+          </Route>
           <Route path="/uni-profile" element={<UniProfile/>}></Route> 
         </Routes>
       </ThemeProvider>

@@ -13,6 +13,7 @@ import {
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
+import ProfileMenu from "./ProfileMenu";
 
 export default function MainTab(props) {
   const [value, setValue] = useState(props.value);
@@ -84,7 +85,7 @@ export default function MainTab(props) {
           <Tab
             sx={{ minWidth: 0 }}
             value={4}
-            icon={<Avatar src="/images/tutors/tutor-1.jpg" />}
+            icon={<ProfileMenu />}
             //   label="Chat"
             component={Link}
             to={"/profile"}
