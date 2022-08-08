@@ -1,4 +1,4 @@
-import { Grid, StyledEngineProvider } from "@mui/material";
+import { Grid, MenuItem, StyledEngineProvider } from "@mui/material";
 import React from "react";
 import { Box } from '@mui/system';
 import { Avatar, Button, Divider, ButtonBase } from "@mui/material";
@@ -68,7 +68,7 @@ function NavRow() {
             }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="About" {...a11yProps(0)} />
-                    <Tab label="Home" {...a11yProps(1)} />
+                    <Tab label="Degree Programms" {...a11yProps(1)} />
                     <Tab label="Posts" {...a11yProps(2)} />
                 </Tabs>
                 <Divider></Divider>

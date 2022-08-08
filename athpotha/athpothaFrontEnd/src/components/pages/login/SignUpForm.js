@@ -14,7 +14,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import axios from "axios";
 function SignUpForm(props) {
   const dispatch = useDispatch();
-  const USER_REST_API_URL = "http://localhost:8080/user/register";
+  const USER_REST_API_URL = "user/register";
 
   const [first_name, setFrist_name] = useState("");
   const [last_name, setLast_name] = useState("");

@@ -2,10 +2,12 @@ package com.athpotha.carrierGuidanceSystem.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,21 +35,16 @@ public class UserRegistrationController {
 	@Autowired
 	private EmailService emailService;
 
-//	@RequestMapping(value = "/register", method = RequestMethod.GET)
-//	public ModelAndView displayRegistration(ModelAndView modelAndView, User userEntity) {
-//		modelAndView.addObject("userEntity", userEntity);
-//		modelAndView.setViewName("register");
-//		return modelAndView;
-//	}
-
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerUser(ModelAndView modelAndView, @RequestBody User userEntity) {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
+		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		User existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
 		System.out.println(userEntity);
 		if (existingUser != null) {
-			if (existingUser.isEnabled() == true) {
+			if (existingUser.isVerified() == true) {
 				return "USER_ALREADY_REGISTERED";
 			} else {
 				userRepository.deleteById(userEntity.getUser_id());
@@ -71,12 +68,8 @@ public class UserRegistrationController {
 				modelAndView.addObject("email", userEntity.getEmail());
 
 				return "REGISTRATION_SUCCESS";
-//				modelAndView.setViewName("successfulRegisteration");
 			}
 
-//			System.out.println("null");
-//			modelAndView.addObject("message", "This email already exists!");
-//			modelAndView.setViewName("error");
 		} else {
 
 			userRepository.save(userEntity);
@@ -109,7 +102,7 @@ public class UserRegistrationController {
 
 		if (token != null) {
 			User user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
-			user.setEnabled(true);
+			user.setVerified(true);
 			userRepository.save(user);
 			modelAndView.setViewName("accountVerified");
 		} else {
