@@ -18,6 +18,7 @@ import AuthContext from "./store/ath-context";
 import UniProfile from "./components/pages/uni-profile/UniProfile";
 
 import { useSelector } from "react-redux";
+import Admin from "./components/pages/actors/admin/Admin";
 function App() {
   const theme = createTheme({
     palette: {
@@ -90,7 +91,9 @@ function App() {
           <Route path="*" element={<Navigate to="/" />}>
             {/* <Navigate to="/" /> */}
           </Route>
-          <Route path="/uni-profile" element={<UniProfile/>}></Route> 
+          <Route path="/uni-profile" element={<UniProfile />}></Route>
+          {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
+          <Route path="/admin" element={<Admin />}></Route>
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>

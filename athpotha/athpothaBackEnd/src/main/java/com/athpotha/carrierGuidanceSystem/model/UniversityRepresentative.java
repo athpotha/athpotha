@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Student extends User {
-	private StudentType studentType;
+public class UniversityRepresentative extends User {
+	private String faculty;
+	private String university;
 }
