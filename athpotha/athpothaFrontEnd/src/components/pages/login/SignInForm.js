@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import InputField from "./InputField";
 import classes from "./Login.module.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 import AuthContext from "../../../store/ath-context";
 import { useNavigate } from "react-router-dom";
 import { fetchUserData } from "../../../api/authenticationService";
@@ -26,11 +25,6 @@ function SignInForm({ loading, error, ...props }) {
       })
       .then((response) => {
         authCtx.login(response.data.token);
-        // const expirationTime = new Date(
-        //   new Date().getTime() +  10000
-        //   // new Date().getTime() + +data.expiresIn * 1000
-        // );
-        // fetchUserData().then((response) => console.log(response));
       })
       .then(() => {
         fetchUserData({
@@ -46,6 +40,10 @@ function SignInForm({ loading, error, ...props }) {
             const user_type = localStorage.getItem("USER_TYPE");
             if (user_type !== "university" && user_type !== "admin") {
               navigate("/main");
+            } else if(user_type === "admin") {
+              navigate("/admin");
+            } else if(user_type === "university") {
+              navigate("/university");
             }
           })
           .catch((error) => {

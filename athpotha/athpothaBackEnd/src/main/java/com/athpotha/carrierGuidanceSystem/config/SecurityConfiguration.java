@@ -33,9 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.inMemoryAuthentication().withUser("Pardeep").password(passwordEncoder().encode("test@123"))
-				.authorities("USER", "ADMIN");
+//
+//		auth.inMemoryAuthentication().withUser("Pardeep").password(passwordEncoder().encode("test@123"))
+//				.authorities("USER", "ADMIN");
 
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 
@@ -56,6 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
 		http.authorizeRequests().antMatchers("/api/v1/auth/login").permitAll();
+		http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
 		
 //		http.authorizeRequests().antMatchers("/api/v1/auth/userDetials").permitAll();
 //		http.authorizeRequests().antMatchers("/student/getAll").permitAll();

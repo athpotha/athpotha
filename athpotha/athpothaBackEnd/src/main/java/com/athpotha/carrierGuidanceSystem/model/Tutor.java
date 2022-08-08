@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Student extends User {
-	private StudentType studentType;
+public class Tutor extends User  {
+	private String description;
 }
