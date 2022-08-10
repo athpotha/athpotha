@@ -21,10 +21,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {

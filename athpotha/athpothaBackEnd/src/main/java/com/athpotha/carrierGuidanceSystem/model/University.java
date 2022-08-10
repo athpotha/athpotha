@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class UniversityRepresentative extends User {
+public class University extends User {
 	private String faculty;
 	private String university;
 }
