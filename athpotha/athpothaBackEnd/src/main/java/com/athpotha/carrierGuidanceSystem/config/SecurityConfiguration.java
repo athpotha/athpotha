@@ -55,8 +55,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
-		http.authorizeRequests().antMatchers("/user/register").permitAll();
-		http.authorizeRequests().antMatchers("/user/confirm-account").permitAll();
+		http.authorizeRequests().antMatchers("/api/v1/user/**").permitAll();
+//		http.authorizeRequests().antMatchers("/api/v1/user/check-email").permitAll();
+//		http.authorizeRequests().antMatchers("/user/confirm-account").permitAll();
 //		confirm-account
 		http.authorizeRequests().antMatchers("/api/v1/auth/login").permitAll();
 		http.authorizeRequests().antMatchers("/h2-console/**").permitAll();

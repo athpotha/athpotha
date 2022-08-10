@@ -11,44 +11,11 @@ import CenteredBox from "../../ui/CenteredBox";
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-import axios from "axios";
+import useInput from "../../../hooks/use-input";
+
+import { checkEmail, userRegistration } from "../../../api/authenticationService";
 function SignUpForm(props) {
   const dispatch = useDispatch();
-  const USER_REST_API_URL = "user/register";
-
-  const [first_name, setFrist_name] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm_password, setConfirm_password] = useState("");
-  const user_type = useSelector(
-    (state) => state.signupButton.selectedSignupButton
-  );
-  const enteredEmail = useSelector((state) => state.registration.enteredEmail);
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    // console.log(first_name, last_name, email, password, confirm_password);
-    dispatch(
-      registrationActions.setIsEmailSent({
-        email: email,
-        emailSent: true,
-      })
-    );
-    axios
-      .post(USER_REST_API_URL, {
-        first_name: first_name,
-        last_name: last_name,
-        user_type: user_type,
-        email: email,
-        password: password,
-        profile_picture: "images/Profile/default_profile.jpg",
-      })
-      .then((response) => {
-        console.log(response);
-      });
-  };
-
 
   const backButtonClicked = () => {
     dispatch(signupButtonActions.setBeforeClickBackButton(user_type));
@@ -58,14 +25,186 @@ function SignUpForm(props) {
   const forwardButtonClicked = () => {
     dispatch(registrationActions.setEmailSent(true));
   }
-  
+
+
+  //Helpers to validate Fname and Lname
+  const hasNumber = (string) => {
+    return /\d/.test(string);
+  }
+
+  const hasSpecialChars = (string) => {
+    let pattern = /[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    if (string.match(pattern)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  //-------------------
+
+  //First Name Validate
+  const {
+    value: fname,
+    isValid: fnameIsValid,
+    hasError: fnameHasError,
+    error: fnameError,
+    valueChangeHandler: fnameChangeHandler,
+    inputBlurHandler: fnameBlurHandler,
+  } = useInput((value) => {
+    if (value.trim() === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" };
+    } else if (hasNumber(value.trim())) {
+      return { inputIsValid: false, error: "Can't contained numbers !" };
+    } else if (hasSpecialChars(value.trim())) {
+      return { inputIsValid: false, error: "Can't contained special chars !" };
+    } else {
+      return { inputIsValid: true, error: "" };
+    }
+  })
+
+  //Last Name Validate
+  const {
+    value: lname,
+    isValid: lnameIsValid,
+    hasError: lnameHasError,
+    error: lnameError,
+    valueChangeHandler: lnameChangeHandler,
+    inputBlurHandler: lnameBlurHandler,
+  } = useInput((value) => {
+    if (value.trim() === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" };
+    } else if (hasNumber(value.trim())) {
+      return { inputIsValid: false, error: "Can't contained numbers !" };
+    } else if (hasSpecialChars(value.trim())) {
+      return { inputIsValid: false, error: "Can't contained special chars !" };
+    } else {
+      return { inputIsValid: true, error: "" };
+    }
+  })
+
+  //Helper For Email validataion
+  const emailValidation = (email) => {
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(pattern)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  //Email Validation
+  const [emailResponse, setEmailResponse] = useState("");
+  const {
+    value: email,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    error: emailError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+  } = useInput((value) => {
+
+    if (value.trim() === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" };
+    } else if (emailValidation(value.trim())) {
+      return { inputIsValid: false, error: "Email is not completed !" };
+    } else {
+      // return { inputIsValid: true, error: "" };
+      checkEmail(value.trim())
+        .then((response) => {
+          setEmailResponse(response.data)
+        });
+      if (emailResponse === "VERIFIED_USER") {
+        return { inputIsValid: false, error: "Already Registered email !" };
+      } else {
+        return { inputIsValid: true, error: "" };
+      }
+    }
+  })
+
+  //Helper for the password
+  function CheckPassword(string) {
+    let pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (!string.match(pattern)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  //Password Validation
+  const {
+    value: password,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    error: passwordError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+  } = useInput((value) => {
+    if (value.trim() === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" };
+    } else if (value.trim().length <= 8) {
+      return { inputIsValid: false, error: "Password is short !" };
+    } else if (CheckPassword(value.trim())) {
+      return { inputIsValid: false, error: "Password is not strong !" };
+    } else {
+      return { inputIsValid: true, error: "" };
+    }
+  })
+
+  //Confirm Password Validation
+  const {
+    value: confirmPassword,
+    isValid: confirmPasswordIsValid,
+    hasError: confirmPasswordHasError,
+    error: confirmPasswordError,
+    valueChangeHandler: confirmPasswordChangeHandler,
+    inputBlurHandler: confirmPasswordBlurHandler,
+  } = useInput((value) => {
+    if (value.trim() === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" };
+    } else if (password !== value.trim()) {
+      return { inputIsValid: false, error: "Password not match !" };
+    } else {
+      return { inputIsValid: true, error: "" };
+    }
+  })
+
+  let formIsValid = false;
+  if (fnameIsValid && lnameIsValid && emailIsValid && passwordIsValid && confirmPasswordIsValid) {
+    formIsValid = true;
+  }
+
+  // console.log(formIsValid);
+  const user_type = useSelector(
+    (state) => state.signupButton.selectedSignupButton
+  );
+  const enteredEmail = useSelector((state) => state.registration.enteredEmail);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (!fnameIsValid && !lnameIsValid && !emailIsValid && !passwordIsValid && !confirmPasswordIsValid) {
+      return;
+    }
+    dispatch(
+      registrationActions.setIsEmailSent({
+        email: email,
+        emailSent: true,
+      })
+    );
+
+    console.log(fname, lname, user_type, email, password);
+    userRegistration({
+      first_name: fname,
+      last_name: lname,
+      user_type: user_type,
+      email: email,
+      password: password,
+      profile_picture: "images/Profile/default_profile.jpg",
+    })
+  };
   return (
     <form
-      // action="index.html"
-      // autoComplete="off"
       className={classes[props.className]}
       onSubmit={submitHandler}
-      // method="POST"
+      noValidate
     >
       <Grid container>
         <Grid item xs={6}>
@@ -99,14 +238,17 @@ function SignUpForm(props) {
 
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item xs={6}>
               <TextField
                 label="First Name"
                 name="first_name"
                 variant="standard"
-                value={first_name}
-                onChange={(e) => setFrist_name(e.target.value)}
+                value={fname}
+                onChange={fnameChangeHandler}
+                onBlur={fnameBlurHandler}
+                error={fnameHasError}
+                helperText={fnameHasError ? fnameError : ""}
                 required
                 type="text"
               />
@@ -116,9 +258,13 @@ function SignUpForm(props) {
                 label="Last Name"
                 name="last_name"
                 variant="standard"
-                value={last_name}
-                onChange={(e) => setLast_name(e.target.value)}
+                value={lname}
+                onChange={lnameChangeHandler}
+                onBlur={lnameBlurHandler}
+                error={lnameHasError}
+                helperText={lnameHasError ? lnameError : ""}
                 required
+                type="text"
               />
             </Grid>
           </Grid>
@@ -130,7 +276,10 @@ function SignUpForm(props) {
             name="email"
             variant="standard"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={emailChangeHandler}
+            onBlur={emailBlurHandler}
+            error={emailHasError}
+            helperText={emailHasError ? emailError : ""}
             required
             fullWidth
           />
@@ -141,7 +290,10 @@ function SignUpForm(props) {
             id="standard-adornment-sign-up-password"
             name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
+            error={passwordHasError}
+            helperText={passwordHasError ? passwordError : ""}
           />
         </div>
         <div className={classes["input-wrap"]}>
@@ -149,8 +301,11 @@ function SignUpForm(props) {
             label="Confirm Password"
             name="confirm_password"
             id="standard-adornment-sign-up-confirm-password"
-            value={confirm_password}
-            onChange={(e) => setConfirm_password(e.target.value)}
+            value={confirmPassword}
+            onChange={confirmPasswordChangeHandler}
+            onBlur={confirmPasswordBlurHandler}
+            error={confirmPasswordHasError}
+            helperText={confirmPasswordHasError ? confirmPasswordError : ""}
           />
         </div>
         <p className={classes.text}>
@@ -161,6 +316,7 @@ function SignUpForm(props) {
           type="submit"
           className={classes["sign-btn"]}
           variant="contained"
+          disabled={!formIsValid}
         >
           Sign Up
         </Button>

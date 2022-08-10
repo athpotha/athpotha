@@ -33,7 +33,7 @@ import com.athpotha.carrierGuidanceSystem.repository.UserRepository;
 import com.athpotha.carrierGuidanceSystem.service.EmailService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 @CrossOrigin
 public class UserRegistrationController {
 	@Autowired
@@ -53,7 +53,7 @@ public class UserRegistrationController {
 
 	@Autowired
 	private AdminRepository adminRepository;
-	
+
 	@Autowired
 	private CommiunityRepository commiunityRepository;
 
@@ -63,19 +63,35 @@ public class UserRegistrationController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@PostMapping("/register")
+	@PostMapping("/check-email")
+	public String userLogin(@RequestBody User user) {
+
+		System.out.println(user.getEmail());
+		User loginUser = userRepository.findByEmailIgnoreCase(user.getEmail());
+		if (loginUser == null) {
+			return "EMAIL_OK";
+		}
+		if (loginUser.isVerified() == false) {
+			return "NOT_VERIFIED";
+		}
+		if (loginUser.isVerified() == true) {
+			return "VERIFIED_USER";
+		}
+//		if (bCryptPasswordEncoder.matches(user.getPassword(), loginUser.getPassword())) {
+//			return "PASSWORD_WRONG";
+//		}
+		return null;
+	}
+
+	@PostMapping("/registration")
 	public String registerUser(ModelAndView modelAndView, @RequestBody User userEntity) {
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		User existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
 		if (existingUser != null) {
-			if (existingUser.isVerified() == true) {
-				return "USER_ALREADY_REGISTERED";
-			} else {
-				userRepository.deleteById(userEntity.getUser_id());
-				userRegitrationMethod(userEntity);
-				modelAndView.addObject("email", userEntity.getEmail());
-				return "REGISTRATION_SUCCESS";
-			}
+			userRepository.deleteById(userEntity.getUser_id());
+			userRegitrationMethod(userEntity);
+			modelAndView.addObject("email", userEntity.getEmail());
+			return "REGISTRATION_SUCCESS";
 
 		} else {
 			userRegitrationMethod(userEntity);
@@ -93,6 +109,8 @@ public class UserRegistrationController {
 			student.setFirst_name(userEntity.getFirst_name());
 			student.setLast_name(userEntity.getLast_name());
 			student.setEmail(userEntity.getEmail());
+			student.setUser_type(userEntity.getUser_type());
+			student.setPassword(userEntity.getPassword());
 			student.setProfile_picture(userEntity.getProfile_picture());
 			studentRepository.save(student);
 			break;
@@ -101,6 +119,8 @@ public class UserRegistrationController {
 			admin.setFirst_name(userEntity.getFirst_name());
 			admin.setLast_name(userEntity.getLast_name());
 			admin.setEmail(userEntity.getEmail());
+			admin.setUser_type(userEntity.getUser_type());
+			admin.setPassword(userEntity.getPassword());
 			admin.setProfile_picture(userEntity.getProfile_picture());
 			adminRepository.save(admin);
 			break;
@@ -109,6 +129,8 @@ public class UserRegistrationController {
 			university.setFirst_name(userEntity.getFirst_name());
 			university.setLast_name(userEntity.getLast_name());
 			university.setEmail(userEntity.getEmail());
+			university.setUser_type(userEntity.getUser_type());
+			university.setPassword(userEntity.getPassword());
 			university.setProfile_picture(userEntity.getProfile_picture());
 			universityRepository.save(university);
 			break;
@@ -117,6 +139,8 @@ public class UserRegistrationController {
 			tutor.setFirst_name(userEntity.getFirst_name());
 			tutor.setLast_name(userEntity.getLast_name());
 			tutor.setEmail(userEntity.getEmail());
+			tutor.setUser_type(userEntity.getUser_type());
+			tutor.setPassword(userEntity.getPassword());
 			tutor.setProfile_picture(userEntity.getProfile_picture());
 			tutorRepository.save(tutor);
 			break;
@@ -125,6 +149,8 @@ public class UserRegistrationController {
 			commiunity.setFirst_name(userEntity.getFirst_name());
 			commiunity.setLast_name(userEntity.getLast_name());
 			commiunity.setEmail(userEntity.getEmail());
+			commiunity.setUser_type(userEntity.getUser_type());
+			commiunity.setPassword(userEntity.getPassword());
 			commiunity.setProfile_picture(userEntity.getProfile_picture());
 			commiunityRepository.save(commiunity);
 			break;
@@ -180,5 +206,5 @@ public class UserRegistrationController {
 		emailService.sendEmail(mailMessage);
 		return "REGISTRATION_SUCCESS";
 	}
-	
+
 }
