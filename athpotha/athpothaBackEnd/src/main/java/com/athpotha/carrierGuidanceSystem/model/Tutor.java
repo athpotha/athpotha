@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Entity
 public class Tutor extends User  {
 	private String description;

@@ -11,10 +11,14 @@ export const userLogin = (authRequest) => {
   });
 };
 
+export const checkEmail = (authRequest) => {
+  return axios.post("api/v1/user/check-email", {
+    email: authRequest
+  })
+}
+
 export const userRegistration = (authRequest) => {
-  return axios.post("api/v1/auth/login", {
-    authRequest,
-  });
+  return axios.post("api/v1/user/registration", authRequest);
 };
 export const fetchUserData = (authRequest) => {
   return axios({
