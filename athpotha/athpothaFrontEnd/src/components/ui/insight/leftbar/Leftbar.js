@@ -17,11 +17,11 @@ function Leftbar(props) {
             <ListItemButton>
               <ListItemAvatar sx={{ mr: 1 }}>
                 <Avatar
-                  src="/images/tutors/tutor-1.jpg"
+                  src={localStorage.getItem("PROFILE_PIC")}
                   sx={{ width: 56, height: 56 }}
                 />
               </ListItemAvatar>
-              <ListItemText primary="Kumud Perera" secondary="O/L Qualified" />
+              <ListItemText primary={localStorage.getItem("USER_NAME")} secondary={localStorage.getItem("STUDENT_TYPE")} />
             </ListItemButton>
           </ListItem>
         </Grid>

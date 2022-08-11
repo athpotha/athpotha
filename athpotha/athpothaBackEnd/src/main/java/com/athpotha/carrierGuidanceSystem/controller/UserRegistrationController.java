@@ -168,7 +168,7 @@ public class UserRegistrationController {
 		mailMessage.setSubject("Complete Registration!");
 		mailMessage.setFrom("godfatherperera12@gmail.com");
 		mailMessage.setText("To confirm your account, please click here : "
-				+ "http://localhost:8080/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
+				+ "http://localhost:8080/api/v1/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
 
 		emailService.sendEmail(mailMessage);
 	}
@@ -177,9 +177,11 @@ public class UserRegistrationController {
 	public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
 		ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
+		System.out.println("confirmation okay");
 		if (token != null) {
 			User user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
 			user.setVerified(true);
+			user.setEnabled(true);
 			userRepository.save(user);
 			modelAndView.setViewName("accountVerified");
 		} else {
@@ -201,7 +203,7 @@ public class UserRegistrationController {
 		mailMessage.setSubject("Complete Registration!");
 		mailMessage.setFrom("godfatherperera12@gmail.com");
 		mailMessage.setText("To confirm your account, please click here : "
-				+ "http://localhost:8080/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
+				+ "http://localhost:8080/api/v1/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
 
 		emailService.sendEmail(mailMessage);
 		return "REGISTRATION_SUCCESS";
