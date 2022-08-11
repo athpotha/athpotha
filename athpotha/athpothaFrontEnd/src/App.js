@@ -53,14 +53,6 @@ function App() {
     },
   });
 
-  // const user_type = useSelector(
-  //   (state) => state.signupButton.selectedSignupButton
-  // );
-  // const REGISTRATION_URL = "/registration/" + user_type;
-  // console.log(user_type);
-  // localStorage.setItem("USER_TYPE", response.data.userType);
-  // localStorage.setItem("USER_NAME", name);
-  // localStorage.setItem("USER_EMAIL", response.data.email);
   const authCtx = useContext(AuthContext);
   const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
   return (

@@ -32,7 +32,7 @@ public class AthpothaApplication {
 //		admin.setLast_name("Admin");
 //		admin.setUser_type(UserType.admin);
 //		admin.setEmail("athpothaAdmin121@gmail.com");
-//		admin.setPassword(passwordEncoder.encode("1234567"));
+//		admin.setPassword(passwordEncoder.encode("Athpotha@123"));
 //		admin.setVerified(true);
 //		admin.setEnabled(true);
 //		adminRepository.save(admin);

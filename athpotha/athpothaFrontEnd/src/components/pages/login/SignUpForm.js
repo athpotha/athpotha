@@ -190,7 +190,7 @@ function SignUpForm(props) {
       })
     );
 
-    console.log(fname, lname, user_type, email, password);
+    // console.log(fname, lname, user_type, email, password);
     userRegistration({
       first_name: fname,
       last_name: lname,

@@ -18,6 +18,7 @@ public class UserInfo {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String profilePicture;
 	private UserType userType;
 	
 //	private Object roles;
