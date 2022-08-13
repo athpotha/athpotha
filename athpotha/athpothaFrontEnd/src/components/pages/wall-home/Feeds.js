@@ -153,7 +153,7 @@ function Feeds() {
           <div>
             <Grid container sx={{ mb: 2 }}>
               <Grid item xs={1}>
-                <Avatar src="/images/tutors/tutor-1.jpg" />
+                <Avatar src={localStorage.getItem("PROFILE_PIC")} />
               </Grid>
               <Grid item xs={11}>
                 <ModalOpenButton

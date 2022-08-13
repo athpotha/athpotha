@@ -4,14 +4,15 @@ let logoutTimer;
 
 const AuthContext = React.createContext({
   token: '',
-  isLoggedIn: true,
-  login: (token) => {},
-  logout: () => {},
+  isLoggedIn: false,
+  login: (token) => { },
+  userInfo: (user) => { },
+  logout: () => { },
 });
 
 
 const retrieveStoredToken = () => {
-  const storedToken = localStorage.getItem('token');
+  const storedToken = localStorage.getItem('USER_KEY');
   return {
     token: storedToken,
   };
@@ -19,7 +20,7 @@ const retrieveStoredToken = () => {
 
 export const AuthContextProvider = (props) => {
   const tokenData = retrieveStoredToken();
-  
+
   let initialToken;
   if (tokenData) {
     initialToken = tokenData.token;
@@ -31,28 +32,48 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = useCallback(() => {
     setToken(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem('USER_KEY');
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);
     }
   }, []);
 
-  const loginHandler = (token, expirationTime) => {
+  const loginHandler = (token) => {
     setToken(token);
-    localStorage.setItem('token', token);
+    localStorage.setItem('USER_KEY', token);
+    return true;
   };
 
-  useEffect(() => {
-    if (tokenData) {
-      console.log(tokenData.duration);
+  const userInfoHandler = (user) => {
+    localStorage.setItem("USER_TYPE", user.user_type);
+    localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);
+    localStorage.setItem("FIRST_NAME", user.first_name);
+    localStorage.setItem("LAST_NAME", user.last_name);
+    localStorage.setItem("USER_EMAIL", user.email);
+    localStorage.setItem("PROFILE_PIC", user.profile_picture);
+    if(user.user_type === "student") {
+      localStorage.setItem("STUDENT_TYPE", user.student_type);
+    } else if(user.user_type === 'tutor') {
+
+    } else if(user.user_type === 'university') {
+
+    } else if(user.user_type === 'commiunity') {
+
     }
-  }, [tokenData, logoutHandler]);
+  }
+
+  // useEffect(() => {
+  //   if (tokenData) {
+  //     console.log(tokenData.duration);
+  //   }
+  // }, [tokenData, logoutHandler]);
 
   const contextValue = {
     token: token,
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
+    userInfo: userInfoHandler,
     logout: logoutHandler,
   };
 

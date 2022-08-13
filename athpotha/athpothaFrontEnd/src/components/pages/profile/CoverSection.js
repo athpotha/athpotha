@@ -42,12 +42,12 @@ function CoverSection(props) {
     boxShadow: 35,
     p: 5,
     width: "58%",
-  
+
   };
- 
-  
+
+
   // ------------- Model -----------
-  
+
   const [openOne, setOpenOne] = React.useState(false);
   const handleOpenOne = () => setOpenOne(true);
   const handleCloseOne = () => setOpenOne(false);
@@ -56,8 +56,13 @@ function CoverSection(props) {
   const handleOpenTwo = () => setOpenTwo(true);
   const handleCloseTwo = () => setOpenTwo(false);
 
+  let subText = ""
+  switch(localStorage.getItem("USER_TYPE")) {
+    case "student":
+      subText = localStorage.getItem("STUDENT_TYPE");
+      break;
+  }
 
-  
   // ----------------------------------
   return (
     <StyledEngineProvider injectFirst>
@@ -103,7 +108,7 @@ function CoverSection(props) {
                   >
                     <Avatar
                       alt="Remy Sharp"
-                      src="images/tutors/tutor-1.jpg"
+                      src={localStorage.getItem("PROFILE_PIC")}
                       sx={{ width: 150, height: 150, cursor: "pointer" }}
                       onClick={(event) =>
                         handleProfileClick(event, "myprofile")
@@ -113,7 +118,7 @@ function CoverSection(props) {
                   </div>
 
                   {/* --------------------------------- Model Start ----------------------------- */}
-                  
+
 
                   <Grid>
                     <Modal open={openOne}>
@@ -149,7 +154,7 @@ function CoverSection(props) {
                               id="First Name"
                               label="First Name"
                               variant="outlined"
-                              defaultValue="Melaka"
+                              defaultValue={localStorage.getItem("FIRST_NAME")}
                               fullWidth
                             />
 
@@ -157,7 +162,7 @@ function CoverSection(props) {
                               id="Last Name"
                               label="Last Name"
                               variant="outlined"
-                              defaultValue="Pathiranagama"
+                              defaultValue={localStorage.getItem("LAST_NAME")}
                             />
                             <TextField
                               id="Bio"
@@ -166,7 +171,7 @@ function CoverSection(props) {
                               rows={4}
                               defaultValue="Default Value"
                             />
-            <Button variant="contained">Save</Button>
+                            <Button variant="contained">Save</Button>
 
                             {/* ---------------------content of the model end ------------------ */}
                           </form>
@@ -186,9 +191,9 @@ function CoverSection(props) {
                       }}
                     >
                       <Box sx={{ fontWeight: "bold" }}>
-                        Melaka Pathiranagama
+                        {localStorage.getItem("USER_NAME")}
                       </Box>
-                      <Box sx={{ fontSize: "10pt" }}>O/L Qualified</Box>
+                      <Box sx={{ fontSize: "10pt" }}>{subText}</Box>
                       <Box sx={{ fontSize: "10pt" }}>
                         I am an O/L qualified student and currently reading for
                         GCE A/L's.{" "}
@@ -221,55 +226,55 @@ function CoverSection(props) {
             </Box>
           ))}
         </Box>
-        
+
 
         {/* <---------------- Settings Pop Up ---------------------> */}
         <Grid>
-                    <Modal open={openTwo}>
-                      <Box sx={style}>
-                        <Grid>
-                          <Typography
-                            variant="h5"
-                            component="h2"
-                            color="#1e88e5"
-                          >
-                            Settings
-                          </Typography>
-                        </Grid>
-                        <IconButton
-                          aria-label="close"
-                          onClick={handleCloseTwo}
-                          sx={{
-                            position: "absolute",
-                            right: 8,
-                            top: 8,
-                            color: (theme) => theme.palette.grey[500],
-                          }}
-                        >
-                          <CloseIcon />
-                        </IconButton>
-                        <Box
-                          sx={{ mt: "2px", height: "100%", overflow: "auto" }}
-                        >
-                          {/* ---------------------content of the model start ------------------ */}
+          <Modal open={openTwo}>
+            <Box sx={style}>
+              <Grid>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  color="#1e88e5"
+                >
+                  Settings
+                </Typography>
+              </Grid>
+              <IconButton
+                aria-label="close"
+                onClick={handleCloseTwo}
+                sx={{
+                  position: "absolute",
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500],
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+              <Box
+                sx={{ mt: "2px", height: "100%", overflow: "auto" }}
+              >
+                {/* ---------------------content of the model start ------------------ */}
 
-                          <form style={{ maxWidth: "100%" }}>  {/*  FORM HERE ???? */}
-                            
-                  
-                            <ChangePassword></ChangePassword>
-                            
-                            {/* ---------------------content of the model end ------------------ */}
-                          </form>
-                        </Box>
-                      </Box>
-                    </Modal>
-                  </Grid>
+                <form style={{ maxWidth: "100%" }}>  {/*  FORM HERE ???? */}
+
+
+                  <ChangePassword></ChangePassword>
+
+                  {/* ---------------------content of the model end ------------------ */}
+                </form>
+              </Box>
+            </Box>
+          </Modal>
+        </Grid>
       </div>
-      
-{/* -------------------------------------- settings Pop up End   ------------------------------- */}
-     
-            
-           
+
+      {/* -------------------------------------- settings Pop up End   ------------------------------- */}
+
+
+
 
     </StyledEngineProvider>
 
