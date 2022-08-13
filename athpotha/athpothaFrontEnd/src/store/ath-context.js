@@ -47,11 +47,13 @@ export const AuthContextProvider = (props) => {
 
   const userInfoHandler = (user) => {
     localStorage.setItem("USER_TYPE", user.user_type);
+    localStorage.setItem("USER_ID", user.user_id);
     localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);
     localStorage.setItem("FIRST_NAME", user.first_name);
     localStorage.setItem("LAST_NAME", user.last_name);
     localStorage.setItem("USER_EMAIL", user.email);
     localStorage.setItem("PROFILE_PIC", user.profile_picture);
+    localStorage.setItem("COVER_PIC", user.cover_picture)
     if(user.user_type === "student") {
       localStorage.setItem("STUDENT_TYPE", user.student_type);
     } else if(user.user_type === 'tutor') {

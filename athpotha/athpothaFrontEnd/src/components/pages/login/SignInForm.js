@@ -101,7 +101,7 @@ function SignInForm({ loading, error, ...props }) {
     });
 
     const tokenData = await tokenResponse.data;
-    // console.log(tokenData);
+    console.log(tokenData);
     authCtx.login(tokenData.token);
 
     const userInfoResponse = await fetchUserData({

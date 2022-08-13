@@ -93,34 +93,31 @@ const commentDetatils = [
 export default function HomeCard(props) {
   const [expanded, setExpanded] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    setIsLoading(true);
-    setIsLoading(false);
-  }, []);
+  // const [isLoading, setIsLoading] = useState(false);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   setIsLoading(false);
+  // }, []);
 
-  if (isLoading) {
-    return (
-      <Grid item xs={12} sx={{ mb: 5 }}>
-        <BeforeDisplay width="100%" height={450} />
-      </Grid>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Grid item xs={12} sx={{ mb: 5 }}>
+  //       <BeforeDisplay width="100%" height={450} />
+  //     </Grid>
+  //   );
+  // }
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    console.log("In home card");
-  };
   const bookmarkPosts = useSelector((state) => state.bookmarks.bookmarkedPosts);
+
   var isBookmarkAdded = null;
   var isBookmarkRemoved = null;
   const bookmarkIndex = bookmarkPosts.findIndex(
     (bookmark) => bookmark.id === props.homeCardId
   );
+  
   if (bookmarkIndex !== -1) {
     isBookmarkAdded = bookmarkPosts[bookmarkIndex].isBookmarkAdded;
     isBookmarkRemoved = bookmarkPosts[bookmarkIndex].isBookmarkRemoved;
@@ -132,7 +129,7 @@ export default function HomeCard(props) {
         item
         xs={12}
         // style={{ backgroundColor: "#e91e63" }}
-        sx={{ bgcolor: "background", p: 1, pl: 0, mb: 2, borderRadius: 2 }}
+        sx={{ bgcolor: "background", mb: 3, borderRadius: 2 }}
       >
         <div>
           <Card sx={{ width: "100%", pb: 2 }}>
