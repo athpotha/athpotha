@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Addquestion from "./Addquestion";
 import Addpost from "./Addpost";
 import PropTypes from "prop-types";
+import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 
 // import modalActions
 
@@ -32,6 +33,7 @@ export default function BasicModal(props) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={props.modalStyle}>
+
         <Grid container>
           <Grid item xs={11}>
             {props.isTabHave && props.header}
