@@ -1,18 +1,28 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
+import java.util.List;
+
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "student")
 public class Student extends User {
 	private StudentType studentType;
 

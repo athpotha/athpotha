@@ -1,6 +1,9 @@
-import { Button, Grid, StyledEngineProvider, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Button, Grid, StyledEngineProvider, Typography } from "@mui/material";
+import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
+import React, { useCallback, useEffect, useState } from "react";
 import { fetchUserData } from "../../../api/authenticationService";
+import BeforeDisplay from "../../ui/BeforeDisplay";
+import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
 import CoverSection from "./CoverSection";
 // import NotiPanel from "./NotiPanel";
@@ -117,49 +120,8 @@ function Content() {
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
-  let onlinePost = {};
-  let postDetails = [];
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   fetchUserData({
-  //     method: "post",
-  //     url: "api/v1/post/get-own-posts",
-  //     data: {
-  //       userId: localStorage.getItem("USER_ID"),
-  //       email: localStorage.getItem("USER_EMAIL"),
-  //     }
-  //   }).then((response) => {
-  //     const posts = response.data;
-  //     console.log(posts);
 
-  //     posts.map((post) => {
-  //       onlinePost = {
-  //         id: post.postId,
-  //         personName: `${post.student.first_name} ${post.student.last_name}`,
-  //         postDate: post.addedTime,
-  //         postContent: post.title,
-  //         postedImage: post.image,
-  //         personImage: post.student.profile_picture,
-  //         userImage: post.student.profile_picture,
-  //         noOfPostUpvotes: post.upVotes,
-  //         noOfComments: post.numberOfComments,
-  //       };
-  //       postDetails.push(onlinePost);
-  //     })
-  //   })
-  //   setIsLoading(false);
-  // }, [])
-
-  // if (isLoading) {
-  //   return <h2>Lodaing ...</h2>;
-  // }
-  // console.log(postDetails);
-  
-  useEffect(() => {
-    fetchMyPostsHandler();
-  }, [])
-  
-  const fetchMyPostsHandler = async () => {
+  const fetchMyPostsHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null)
     try {
@@ -173,12 +135,14 @@ function Content() {
       });
       console.log(response.status === 200);
       const posts = await response.data;
+      const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const transformedPosts = posts.map((post) => {
-        // onlinePost = 
+        let d = new Date(post.addedTime);
+        let addedDate = `${month[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
         return {
           id: post.postId,
           personName: `${post.student.first_name} ${post.student.last_name}`,
-          postDate: post.addedTime,
+          postDate: addedDate,
           postContent: post.title,
           postedImage: post.image,
           personImage: post.student.profile_picture,
@@ -189,22 +153,41 @@ function Content() {
       })
       setPosts(transformedPosts);
       console.log(transformedPosts);
-    }catch (error) {
+    } catch (error) {
       setError(error.message);
     }
     setIsLoading(false);
+  }, [])
+
+  useEffect(() => {
+    fetchMyPostsHandler();
+  }, [])
+
+  let content = <p>Found no posts</p>
+
+  if(posts.length > 0) {
+    content = posts.map((post) => (
+      <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
+    ))
+  }
+  if(isLoading) {
+    content = posts.map((post) => (
+      <BeforeDisplay />
+    ))
   }
   return (
     <StyledEngineProvider injectFirst>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          {/* ------------  Cover Section of the profile ---------*/}
           <CoverSection></CoverSection>
-          {!isLoading && posts.map((post) => (
-            <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
-          ))}
-          {!isLoading && posts.length === 0 && <p>Found no posts</p>}
-          {isLoading && <p>Loading ...</p>}
+        </Grid>
+        <Grid item xs={12}
+        >
+          <FeedsStart />
+        </Grid>
+        <Grid item xs={12}>
+          <h2>Your posts</h2>
+          {content}
         </Grid>
       </Grid>
     </StyledEngineProvider>

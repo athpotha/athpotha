@@ -19,7 +19,7 @@ function ModalOpenButton(props) {
   return (
     <>
       <div onClick={handleOpen}>{props.children}</div>
-      <SimpleSnackbar message="Post added Sucess" />
+      {/* <SimpleSnackbar message="Post added Sucess" /> */}
       <BasicModal
         modalName={props.modalName}
         isTabHave={props.isTabHave}

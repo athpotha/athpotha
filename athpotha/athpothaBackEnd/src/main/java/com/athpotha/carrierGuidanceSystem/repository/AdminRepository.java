@@ -10,6 +10,6 @@ import com.athpotha.carrierGuidanceSystem.model.User;
 
 
 @Repository()
-public interface AdminRepository extends JpaRepository<User, Long> {
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 	Admin findByEmailIgnoreCase(String email);
 }

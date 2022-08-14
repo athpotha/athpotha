@@ -109,7 +109,6 @@ public class AuthenticationController {
 			return ResponseEntity.ok(commiunity);
 		}
 		return null;
-
 	}
 
 }

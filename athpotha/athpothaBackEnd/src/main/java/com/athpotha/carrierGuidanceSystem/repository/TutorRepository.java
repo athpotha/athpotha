@@ -8,6 +8,6 @@ import com.athpotha.carrierGuidanceSystem.model.University;
 import com.athpotha.carrierGuidanceSystem.model.User;
 
 @Repository
-public interface TutorRepository extends JpaRepository<User, Long> {
+public interface TutorRepository extends JpaRepository<Tutor, Long> {
 	Tutor findByEmailIgnoreCase(String email);
 }
