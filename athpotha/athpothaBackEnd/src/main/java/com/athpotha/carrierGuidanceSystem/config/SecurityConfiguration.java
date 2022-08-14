@@ -33,9 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.inMemoryAuthentication().withUser("Pardeep").password(passwordEncoder().encode("test@123"))
-				.authorities("USER", "ADMIN");
+//
+//		auth.inMemoryAuthentication().withUser("Pardeep").password(passwordEncoder().encode("test@123"))
+//				.authorities("USER", "ADMIN");
 
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 
@@ -52,30 +52,47 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
+//		http.authorizeRequests().antMatchers("/api/v1/user/**").permitAll();
+////		http.authorizeRequests().antMatchers("/api/v1/user/check-email").permitAll();
+////		http.authorizeRequests().antMatchers("/api/v1/user/confirm-account").permitAll();
+////		confirm-account
+//		http.authorizeRequests().antMatchers("/api/v1/auth/login").permitAll();
+////		http.authorizeRequests().antMatchers("/api/v1/auth/userinfo").permitAll();
+////		http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
+//		
+////		http.authorizeRequests().antMatchers("/api/v1/auth/userDetials").permitAll();
+////		http.authorizeRequests().antMatchers("/student/getAll").permitAll();
+////		http.authorizeRequests().antMatchers("/user/register").permitAll();
+//		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated();
+////				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
+////		http.authorizeRequests().antMatchers("/api/v1/auth/userinfo").permitAll();
+////		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated();
+////		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
+////				.authenticationEntryPoint(authenticationEntryPoint).and()
+////				.authorizeRequests((request) -> request.antMatchers("/api/v1/auth/login").permitAll()
+////						.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
+////				.addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
+////						UsernamePasswordAuthenticationFilter.class);
+////
+//
+//		http.addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
+//				UsernamePasswordAuthenticationFilter.class);
+//		http.csrf().disable().cors().and().headers().frameOptions().disable();
+////		http.csrf().disable().cors();
+//	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
-		http.authorizeRequests().antMatchers("/api/v1/auth/login").permitAll();
-		
-//		http.authorizeRequests().antMatchers("/api/v1/auth/userDetials").permitAll();
-//		http.authorizeRequests().antMatchers("/student/getAll").permitAll();
-//		http.authorizeRequests().antMatchers("/user/register").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated();
-//				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
-//		http.authorizeRequests().antMatchers("/api/v1/auth/userinfo").permitAll();
-//		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated();
-//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
-//				.authenticationEntryPoint(authenticationEntryPoint).and()
-//				.authorizeRequests((request) -> request.antMatchers("/api/v1/auth/login").permitAll()
-//						.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
-//				.addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
-//						UsernamePasswordAuthenticationFilter.class);
-//
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
+				.authenticationEntryPoint(authenticationEntryPoint).and()
+				.authorizeRequests((request) -> request.antMatchers("/api/v1/user/**", "/api/v1/auth/login").permitAll()
+						.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated())
+				.addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
+						UsernamePasswordAuthenticationFilter.class);
 
-		http.addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),
-				UsernamePasswordAuthenticationFilter.class);
 		http.csrf().disable().cors().and().headers().frameOptions().disable();
-//		http.csrf().disable().cors();
 	}
-
 }

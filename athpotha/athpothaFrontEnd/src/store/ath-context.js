@@ -5,40 +5,22 @@ let logoutTimer;
 const AuthContext = React.createContext({
   token: '',
   isLoggedIn: false,
-  login: (token) => {},
-  logout: () => {},
+  login: (token) => { },
+  userInfo: (user) => { },
+  logout: () => { },
 });
 
-// const calculateRemainingTime = (expirationTime) => {
-//   const currentTime = new Date().getTime();
-//   const adjExpirationTime = new Date(expirationTime).getTime();
-
-//   const remainingDuration = adjExpirationTime - currentTime;
-
-//   return remainingDuration;
-// };
 
 const retrieveStoredToken = () => {
-  const storedToken = localStorage.getItem('token');
-//   const storedExpirationDate = localStorage.getItem('expirationTime');
-
-//   const remainingTime = calculateRemainingTime(storedExpirationDate);
-
-//   if (remainingTime <= 3600) {
-//     localStorage.removeItem('token');
-//     // localStorage.removeItem('expirationTime');
-//     return null;
-//   }
-
+  const storedToken = localStorage.getItem('USER_KEY');
   return {
     token: storedToken,
-    // duration: remainingTime,
   };
 };
 
 export const AuthContextProvider = (props) => {
   const tokenData = retrieveStoredToken();
-  
+
   let initialToken;
   if (tokenData) {
     initialToken = tokenData.token;
@@ -50,35 +32,50 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = useCallback(() => {
     setToken(null);
-    localStorage.removeItem('token');
-    // localStorage.removeItem('expirationTime');
+    localStorage.removeItem('USER_KEY');
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);
     }
   }, []);
 
-  const loginHandler = (token, expirationTime) => {
+  const loginHandler = (token) => {
     setToken(token);
-    localStorage.setItem('token', token);
-    // localStorage.setItem('expirationTime', expirationTime);
-
-    // const remainingTime = calculateRemainingTime(expirationTime);
-
-    // logoutTimer = setTimeout(logoutHandler, remainingTime);
+    localStorage.setItem('USER_KEY', token);
+    return true;
   };
 
-  useEffect(() => {
-    if (tokenData) {
-      console.log(tokenData.duration);
-    //   logoutTimer = setTimeout(logoutHandler, tokenData.duration);
+  const userInfoHandler = (user) => {
+    localStorage.setItem("USER_TYPE", user.user_type);
+    localStorage.setItem("USER_ID", user.user_id);
+    localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);
+    localStorage.setItem("FIRST_NAME", user.first_name);
+    localStorage.setItem("LAST_NAME", user.last_name);
+    localStorage.setItem("USER_EMAIL", user.email);
+    localStorage.setItem("PROFILE_PIC", user.profile_picture);
+    localStorage.setItem("COVER_PIC", user.cover_picture)
+    if(user.user_type === "student") {
+      localStorage.setItem("STUDENT_TYPE", user.student_type);
+    } else if(user.user_type === 'tutor') {
+
+    } else if(user.user_type === 'university') {
+
+    } else if(user.user_type === 'commiunity') {
+
     }
-  }, [tokenData, logoutHandler]);
+  }
+
+  // useEffect(() => {
+  //   if (tokenData) {
+  //     console.log(tokenData.duration);
+  //   }
+  // }, [tokenData, logoutHandler]);
 
   const contextValue = {
     token: token,
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
+    userInfo: userInfoHandler,
     logout: logoutHandler,
   };
 

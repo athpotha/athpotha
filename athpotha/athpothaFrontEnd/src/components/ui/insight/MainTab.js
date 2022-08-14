@@ -25,7 +25,6 @@ export default function MainTab(props) {
   // console.log(value);
   if (props.value === null) {
     setValue(false);
-    console.log("hello");
   }
 
   const theme = createTheme({
@@ -52,7 +51,6 @@ export default function MainTab(props) {
             icon={<HomeIcon />}
             component={Link}
             to={"/main"}
-            //   label="Home"
           />
           <Tab
             sx={{ minWidth: 0 }}

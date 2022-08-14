@@ -18,7 +18,7 @@ export default function ProfileMenu() {
   const handleLogout = () => {
     setAnchorEl(null);
     navigate('/login');
-    // authCtx.logout();
+    authCtx.logout();
   };
 
   const handleClose = () => {
@@ -26,7 +26,7 @@ export default function ProfileMenu() {
   };
   return (
     <div>
-      <Avatar onClick={handleClick} src="/images/tutors/tutor-1.jpg" />
+      <Avatar onClick={handleClick} src={localStorage.getItem("PROFILE_PIC")} />
       {/* <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}

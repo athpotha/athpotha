@@ -1,8 +1,6 @@
 import { Avatar, Chip, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
 import CenteredBox from "../../ui/CenteredBox";
@@ -11,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import ModalOpenButton from "../../ui/insight/ModalOpenButton";
 import ModalTabs from "../../ui/insight/ModalTabs";
+import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 
 const postDetails = [
   {
@@ -147,83 +146,10 @@ function Feeds() {
         <Grid
           item
           xs={12}
-          style={{ backgroundColor: "#FFF" }}
-          sx={{ bgcolor: "background", p: 2, mb: 2, borderRadius: 2 }}
+          sx={{mb: 2}}
         >
-          <div>
-            <Grid container sx={{ mb: 2 }}>
-              <Grid item xs={1}>
-                <Avatar src="/images/tutors/tutor-1.jpg" />
-              </Grid>
-              <Grid item xs={11}>
-                <ModalOpenButton
-                  modalName="addQuestion-post-modal"
-                  isTabHave={true}
-                  tabValue={0}
-                  modalStyle={addQuestionModalStyle}
-                  header={<ModalTabs tabs={addQuestionModalTabs} />}
-                >
-                  <Chip
-                    label="Are you in a problem? Share with us"
-                    //   component="a"
-                    //   href="#basic-chip"
-                    variant="outlined"
-                    clickable
-                    sx={{ width: "90%", textAlign: "left" }}
-                  />
-                </ModalOpenButton>
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={4}>
-                <CenteredBox align="center">
-                  <ModalOpenButton
-                    modalName="addQuestion-post-modal"
-                    isTabHave={true}
-                    tabValue={0}
-                    modalStyle={addQuestionModalStyle}
-                    header={<ModalTabs tabs={addQuestionModalTabs} />}
-                  >
-                    <Chip
-                      variant="outlined"
-                      clickable
-                      icon={<QuestionMarkIcon />}
-                      label="Ask Question"
-                      // onClick={}
-                    />
-                  </ModalOpenButton>
-                </CenteredBox>
-              </Grid>
-              <Grid item xs={4}>
-                <CenteredBox align="center">
-                  <Chip
-                    variant="outlined"
-                    clickable
-                    icon={<ModeEditIcon />}
-                    label="Answer"
-                  />
-                </CenteredBox>
-              </Grid>
-              <Grid item xs={4} alignSelf="right">
-                <CenteredBox align="center">
-                  <ModalOpenButton
-                    modalName="addQuestion-post-modal"
-                    isTabHave={true}
-                    tabValue={1}
-                    modalStyle={addQuestionModalStyle}
-                    header={<ModalTabs tabs={addQuestionModalTabs} />}
-                  >
-                    <Chip
-                      variant="outlined"
-                      clickable
-                      icon={<MarkAsUnreadIcon />}
-                      label="Post"
-                    />
-                  </ModalOpenButton>
-                </CenteredBox>
-              </Grid>
-            </Grid>
-          </div>
+          <FeedsStart />
+
         </Grid>
 
         {postDetails.map((post) => (

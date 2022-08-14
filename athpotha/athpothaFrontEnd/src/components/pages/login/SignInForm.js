@@ -4,10 +4,10 @@ import Button from "@mui/material/Button";
 import InputField from "./InputField";
 import classes from "./Login.module.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 import AuthContext from "../../../store/ath-context";
 import { useNavigate } from "react-router-dom";
-import { fetchUserData } from "../../../api/authenticationService";
+import { checkEmail, fetchUserData, userLogin } from "../../../api/authenticationService";
+import useInput from "../../../hooks/use-input";
 
 function SignInForm({ loading, error, ...props }) {
   const authCtx = useContext(AuthContext);
@@ -15,43 +15,114 @@ function SignInForm({ loading, error, ...props }) {
 
   const USER_REST_API_URL = "api/v1/auth/login";
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const submitHandler = (e) => {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  //Helper For Email validataion
+  const emailValidation = (email) => {
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(pattern)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  //Email Validation
+  const [emailResponse, setEmailResponse] = useState("");
+  const {
+    value: email,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    error: emailError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+  } = useInput((value) => {
+
+    if (value.trim() === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" };
+    } else if (emailValidation(value.trim())) {
+      return { inputIsValid: false, error: "Email is not completed !" };
+    } else {
+      return { inputIsValid: true, error: "" };
+      // checkEmail(value.trim())
+      //   .then((response) => {
+      //     setEmailResponse(response.data)
+      //   });
+      // if (emailResponse === "VERIFIED_USER") {
+      //   return { inputIsValid: true, error: "" };
+      // } else {
+      //   return { inputIsValid: false, error: "Not Registered Email !" };
+      // }
+    }
+  })
+
+  //Helper for the password
+  function CheckPassword(string) {
+    let pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (!string.match(pattern)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  //Password Validation
+  const {
+    value: password,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    error: passwordError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+  } = useInput((value) => {
+    if (value.trim() === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" };
+    }
+    // else if (value.trim().length <= 8) {
+    //   return { inputIsValid: false, error: "Password is short !" };
+    // } else if (CheckPassword(value.trim())) {
+    //   return { inputIsValid: false, error: "Password is not strong !" };
+    // } 
+    else {
+      return { inputIsValid: true, error: "" };
+    }
+  })
+
+  let formIsValid = false;
+  if (emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
+  const submitHandler = async (e) => {
     e.preventDefault();
-    axios
-      .post(USER_REST_API_URL, {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        authCtx.login(response.data.token);
-        // const expirationTime = new Date(
-        //   new Date().getTime() +  10000
-        //   // new Date().getTime() + +data.expiresIn * 1000
-        // );
-        // fetchUserData().then((response) => console.log(response));
-      })
-      .then(() => {
-        fetchUserData({
-          method: "post",
-          url: "api/v1/auth/userinfo",
-          data: { email: email },
-        })
-          .then((response) => {
-            const name = `${response.data.firstName} ${response.data.lastName}`;
-            localStorage.setItem("USER_TYPE", response.data.userType);
-            localStorage.setItem("USER_NAME", name);
-            localStorage.setItem("USER_EMAIL", response.data.email);
-            const user_type = localStorage.getItem("USER_TYPE");
-            if (user_type !== "university" && user_type !== "admin") {
-              navigate("/main");
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+    if (!emailIsValid && !passwordIsValid) {
+      return;
+    }
+    const tokenResponse = await userLogin({
+      email: email,
+      password: password
+    });
+
+    const tokenData = await tokenResponse.data;
+    console.log(tokenData);
+    authCtx.login(tokenData.token);
+
+    const userInfoResponse = await fetchUserData({
+      method: "post",
+      url: "api/v1/auth/userinfo",
+      data: { email: email }
+    });
+
+    const userInfo = await userInfoResponse.data;
+    console.log(userInfo);
+    authCtx.userInfo(userInfo);
+
+    const user_type = localStorage.getItem("USER_TYPE");
+    if (user_type !== "university" && user_type !== "admin") {
+      navigate("/main");
+    } else if (user_type === "admin") {
+      navigate("/admin");
+    } else if (user_type === "university") {
+      navigate("/university");
+    }
+
   };
 
   return (
@@ -74,28 +145,36 @@ function SignInForm({ loading, error, ...props }) {
         <div style={{ marginTop: "20px" }}>
           <div className={classes["input-wrap"]}>
             <TextField
-              label="Email"
               type="email"
+              label="Email"
+              name="email"
               variant="standard"
+              value={email}
+              onChange={emailChangeHandler}
+              onBlur={emailBlurHandler}
+              error={emailHasError}
+              helperText={emailHasError ? emailError : ""}
               required
               fullWidth
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
             />
-            {/* <span className={classes.textFieldError}>hello</span> */}
           </div>
           <div className={classes["input-wrap"]}>
             <InputField
               label="Password"
               id="standard-adornment-sign-in-password"
+              name="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={passwordChangeHandler}
+              onBlur={passwordBlurHandler}
+              error={passwordHasError}
+              helperText={passwordHasError ? passwordError : ""}
             />
           </div>
           <Button
             type="submit"
             className={classes["sign-btn"]}
             variant="contained"
+            disabled={!formIsValid}
           >
             Sign In
           </Button>

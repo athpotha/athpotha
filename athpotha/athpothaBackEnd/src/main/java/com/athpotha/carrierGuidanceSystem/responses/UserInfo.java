@@ -1,5 +1,7 @@
 package com.athpotha.carrierGuidanceSystem.responses;
 
+import com.athpotha.carrierGuidanceSystem.model.UserType;
+
 import lombok.Data;
 import lombok.Getter;
 
@@ -16,7 +18,8 @@ public class UserInfo {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String userType;
+	private String profilePicture;
+	private UserType userType;
 	
 //	private Object roles;
 

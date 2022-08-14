@@ -18,6 +18,7 @@ import AuthContext from "./store/ath-context";
 import UniProfile from "./components/pages/uni-profile/UniProfile";
 
 import { useSelector } from "react-redux";
+import Admin from "./components/pages/actors/admin/Admin";
 function App() {
   const theme = createTheme({
     palette: {
@@ -52,14 +53,6 @@ function App() {
     },
   });
 
-  // const user_type = useSelector(
-  //   (state) => state.signupButton.selectedSignupButton
-  // );
-  // const REGISTRATION_URL = "/registration/" + user_type;
-  // console.log(user_type);
-  // localStorage.setItem("USER_TYPE", response.data.userType);
-  // localStorage.setItem("USER_NAME", name);
-  // localStorage.setItem("USER_EMAIL", response.data.email);
   const authCtx = useContext(AuthContext);
   const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
   return (
@@ -90,7 +83,9 @@ function App() {
           <Route path="*" element={<Navigate to="/" />}>
             {/* <Navigate to="/" /> */}
           </Route>
-          <Route path="/uni-profile" element={<UniProfile/>}></Route> 
+          <Route path="/uni-profile" element={<UniProfile />}></Route>
+          {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
+          <Route path="/admin" element={<Admin />}></Route>
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>
