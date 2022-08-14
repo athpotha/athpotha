@@ -3,12 +3,9 @@ package com.athpotha.carrierGuidanceSystem.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.athpotha.carrierGuidanceSystem.model.Student;
-
+import com.athpotha.carrierGuidanceSystem.model.Post;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long>{
-	Student findByEmailIgnoreCase(String email);
+public interface PostRepository extends JpaRepository<Post, Long> {
+	
 }
-
-

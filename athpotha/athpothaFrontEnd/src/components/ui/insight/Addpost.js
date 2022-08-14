@@ -61,7 +61,6 @@ function Addpost(props) {
   }
   return (
     <div style={{ marginTop: "20px" }}>
-      <SimpleSnackbar message="Post added Sucess" />
       {/* {postSuccess && <SimpleSnackbar message="Post added Sucess" />} */}
       <Grid container>
         <Grid item xs={12}>

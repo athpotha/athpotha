@@ -159,12 +159,13 @@ export default function HomeCard(props) {
                 {props.postItem.postContent}
               </Typography>
             </CardContent>
-            <CardMedia
+            {props.postItem.postedImage && <CardMedia
               component="img"
               height="460"
               image={props.postItem.postedImage}
-              alt="Paella dish"
-            />
+              // alt="Paella dish"
+            />}
+            
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
                 <KeyboardDoubleArrowUpIcon />
