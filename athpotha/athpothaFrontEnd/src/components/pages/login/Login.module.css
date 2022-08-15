@@ -53,7 +53,7 @@ input {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   transition: 0.8s ease-in-out;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -64,7 +64,7 @@ input {
 }
 
 .forms-wrap::-webkit-scrollbar-thumb {
-  background-color: #0aa1dd;;
+  background-color: #0aa1dd;
   border: 2px solid #285e89;
   border-radius: 5px;
 }
@@ -144,7 +144,7 @@ form.sign-up-form {
   /* position: relative; */
   /* height: 37px; */
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1.3rem;
 }
 
 .textFieldError {
@@ -366,8 +366,17 @@ label.active {
     position: revert;
     width: 100%;
     height: auto;
+    overflow-y: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-
+  .forms-wrap::-webkit-scrollbar {
+    display: none;
+  }
+  .forms-wrap {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   form {
     max-width: revert;
     padding: 1.5rem 2.5rem 2rem;

@@ -6,7 +6,7 @@ function ProfileImage(props) {
     <ListItem disablePadding>
       <ListItemAvatar sx={props.changeStyle} style={{cursor: "pointer"}}>
         <Avatar
-          src={props.userProfileImage}
+          src={localStorage.getItem("PROFILE_PIC")}
           sx={{ width: props.sizeInUnits, height: props.sizeInUnits }}
           size={props.size}
         />

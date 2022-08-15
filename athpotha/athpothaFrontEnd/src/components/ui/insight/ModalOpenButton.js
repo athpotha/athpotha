@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import BasicModal from "./BasicModal";
 import { modalActions } from "../../../store/modal-slice";
 import { useDispatch } from "react-redux";
+import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 
 function ModalOpenButton(props) {
   const [open, setOpen] = useState(false);
@@ -18,6 +19,7 @@ function ModalOpenButton(props) {
   return (
     <>
       <div onClick={handleOpen}>{props.children}</div>
+      {/* <SimpleSnackbar message="Post added Sucess" /> */}
       <BasicModal
         modalName={props.modalName}
         isTabHave={props.isTabHave}

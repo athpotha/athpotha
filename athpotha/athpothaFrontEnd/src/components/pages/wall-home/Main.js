@@ -1,6 +1,11 @@
 import {
   StyledEngineProvider,
   Grid,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  List,
 } from "@mui/material";
 import React from "react";
 import MainHeader from "../../ui/insight/MainHeader";
@@ -47,7 +52,7 @@ const listItems = [
 function Main() {
   return (
     <StyledEngineProvider injectFirst>
-      {/* <MainHeader value={0} /> */}
+      <MainHeader value={0} />
       <Grid
         container
         spacing={2}
@@ -70,7 +75,7 @@ function Main() {
             paddingTop: 100,
           }}
         >
-          {/* <Leftbar>
+          <Leftbar>
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
@@ -81,7 +86,7 @@ function Main() {
                 </ListItem>
               ))}
             </List>
-          </Leftbar> */}
+          </Leftbar>
         </Grid>
         <Grid item xs={7} style={{ paddingTop: 120 }}>
           <Feeds></Feeds>
@@ -96,13 +101,13 @@ function Main() {
             paddingTop: 100,
           }}
         >
-          {/* <Rightbar show="">
+          <Rightbar show="">
             <Grid item xs={12}>
               <List>
                 <NewContacts />
               </List>
             </Grid>
-          </Rightbar> */}
+          </Rightbar>
         </Grid>
       </Grid>
     </StyledEngineProvider>

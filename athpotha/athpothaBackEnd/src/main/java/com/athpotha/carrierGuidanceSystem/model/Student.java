@@ -1,35 +1,37 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
+import java.util.List;
+
+import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-public class Student {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String name;
-	private String address;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+@Table(name = "student")
+public class Student extends User {
+	private StudentType studentType;
 
+	public Student(String first_name, String last_name, UserType user_type, String email, String password,
+			String profile_picture, boolean userDeleted, boolean enabled, boolean verified, Date created_at,
+			StudentType studentType) {
+		super(first_name, last_name, user_type, email, password, profile_picture, userDeleted, enabled, verified,
+				created_at);
+		this.studentType = studentType;
+	}
+	
 }

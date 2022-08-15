@@ -55,7 +55,6 @@ export default function NotiPanel() {
       {DUMMY_NOTIFICATIONS.map((notification) => (
         <React.Fragment>
           <ListItem
-            // alignItems="flex-start"
             id={notification.id}
             key={notification.id}
             disablePadding
