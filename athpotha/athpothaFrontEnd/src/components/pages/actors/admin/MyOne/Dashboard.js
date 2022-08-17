@@ -20,7 +20,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import InboxIcon from '@mui/icons-material/Inbox';
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import NotificationMenu from './NotificationMenu';
-import Content from './Content';
 // import { mainListItems, secondaryListItems } from './listItems';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
@@ -180,10 +179,6 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Grid Content sx={{p:3}}>
-          <Content></Content>
-          </Grid>
-          
         </Box>
       </Box>
     </ThemeProvider>
