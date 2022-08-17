@@ -131,6 +131,7 @@ function SignInForm({ loading, error, ...props }) {
       // autoComplete="off"
       className={classes[props.className]}
       onSubmit={submitHandler}
+      noValidate
     >
       <div className={classes.logo}>
         <img src="/images/athpotha_v3.png" alt="අත්පොත" />

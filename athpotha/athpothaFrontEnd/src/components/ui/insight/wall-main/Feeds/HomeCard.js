@@ -155,7 +155,7 @@ export default function HomeCard(props) {
               }
             />
             <CardContent>
-              <Typography variant="body" color="text.secondary">
+              <Typography variant="body" color="text">
                 {props.postItem.postContent}
               </Typography>
             </CardContent>

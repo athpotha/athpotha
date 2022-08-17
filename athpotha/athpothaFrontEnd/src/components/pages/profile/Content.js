@@ -135,24 +135,25 @@ function Content() {
       });
       console.log(response.status === 200);
       const posts = await response.data;
+      console.log(posts)
       const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const transformedPosts = posts.map((post) => {
         let d = new Date(post.addedTime);
         let addedDate = `${month[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
         return {
           id: post.postId,
-          personName: `${post.student.first_name} ${post.student.last_name}`,
+          personName: `${post.user.first_name} ${post.user.last_name}`,
           postDate: addedDate,
-          postContent: post.title,
+          postContent: post.type === "post" ? post.title : post.question,
           postedImage: post.image,
-          personImage: post.student.profile_picture,
-          userImage: post.student.profile_picture,
+          personImage: post.user.profile_picture,
+          userImage: post.user.profile_picture,
           noOfPostUpvotes: post.upVotes,
           noOfComments: post.numberOfComments,
         };
       })
       setPosts(transformedPosts);
-      console.log(transformedPosts);
+      // console.log(transformedPosts);
     } catch (error) {
       setError(error.message);
     }
@@ -171,9 +172,7 @@ function Content() {
     ))
   }
   if(isLoading) {
-    content = posts.map((post) => (
-      <BeforeDisplay />
-    ))
+    content = <BeforeDisplay />;
   }
   return (
     <StyledEngineProvider injectFirst>
@@ -187,7 +186,11 @@ function Content() {
         </Grid>
         <Grid item xs={12}>
           <h2>Your posts</h2>
-          {content}
+          {!isLoading && posts.map((post) => (
+            <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
+          ))}
+          {!isLoading && posts.length === 0 && <p>Found no posts</p>}
+          {isLoading && <p>Loading ...</p>}
         </Grid>
       </Grid>
     </StyledEngineProvider>
