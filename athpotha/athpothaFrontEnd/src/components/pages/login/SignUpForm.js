@@ -197,7 +197,7 @@ function SignUpForm(props) {
       user_type: user_type,
       email: email,
       password: password,
-      profile_picture: "images/Profile/default_profile.jpg",
+      // profile_picture: "images/Profile/default_profile.jpg",
     })
   };
   return (

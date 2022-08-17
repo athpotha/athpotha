@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,7 +32,15 @@ import lombok.ToString;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(
+			name = "student_sequence",
+			sequenceName = "student_sequence",
+			allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "student_sequence"
+	)
 	private Long user_id;
 	private String first_name;
 	private String last_name;
@@ -40,7 +49,8 @@ public class User implements UserDetails {
 	@Column(unique = true)
 	private String email;
 	private String password;
-	private String profile_picture;
+	private String profile_picture = "images/profile/default_profile.jpg";
+	private String cover_picture = "images/profile/cover.jpg";
 	private boolean userDeleted;
 	private boolean enabled;
 	private boolean verified;
@@ -96,4 +106,13 @@ public class User implements UserDetails {
 		this.verified = verified;
 		this.created_at = created_at;
 	}
+
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", first_name=" + first_name + ", last_name=" + last_name + ", user_type="
+				+ user_type + ", email=" + email + ", password=" + password + ", profile_picture=" + profile_picture
+				+ ", cover_picture=" + cover_picture + ", userDeleted=" + userDeleted + ", enabled=" + enabled
+				+ ", verified=" + verified + ", created_at=" + created_at + "]";
+	}
+	
 }
