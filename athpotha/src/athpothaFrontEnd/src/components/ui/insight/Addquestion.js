@@ -8,6 +8,7 @@ import ProfileImage from "./ProfileImage";
 
 function Addquestion(props) {
   const [postSuccess, setPostSuccess] = useState(true);
+  // const [postData, setPostData] = useState(new FormData());
   const navigate = useNavigate();
   const {
     value: content,
@@ -34,19 +35,23 @@ function Addquestion(props) {
       return;
     }
     console.log(localStorage.getItem("USER_ID"))
+    const postData = new FormData();
+    postData.append("email", localStorage.getItem("USER_EMAIL"));
+    postData.append("type", "question");
+    postData.append("content", content);
     fetchUserData({
       url: "api/v1/post/add-post",
       method: "post",
-      data: {
-        type: "question",
-        title: content,
-        email: localStorage.getItem("USER_EMAIL"),
-      }
+      data: postData
     }).then((response) => {
       if(response.status === 200) {
         contentReset();
         setPostSuccess(true);
-        navigate("/profile");
+        if(window.location.pathname === "/profile") {
+          window.location.reload();
+        } else {
+          navigate("/profile");
+        }
       }
     })
   }

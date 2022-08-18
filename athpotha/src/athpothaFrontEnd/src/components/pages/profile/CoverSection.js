@@ -20,15 +20,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import SettingsIcon from '@mui/icons-material/Settings';
 import ChangePassword from "./ChangePassword"
+import styled from "@emotion/styled";
+import ModalOpenButton from "../../ui/insight/ModalOpenButton";
+import CenteredBox from "../../ui/CenteredBox";
+import ChangeProfilePic from "./ChangeProfilePic";
 
 function CoverSection(props) {
-  const navigate = useNavigate();
-
-  const products = ["1"];
-
-  const handleProfileClick = (event, param) => {
-    navigate("/profile");
-  };
 
   const fileInput = React.useRef();
   const style = {
@@ -76,18 +73,13 @@ function CoverSection(props) {
                 <CardMedia
                   component="img"
                   height="200"
-                  // width
                   image={localStorage.getItem("COVER_PIC")}
-                  // alt="green iguana"
                 />
 
                 <div
                   style={{ position: "absolute", top: "20px", right: "16px" }}
                 >
-                  {/* Upload phot button on cover */}
                   <IconButton
-                    // variant="contained"
-                    // color="primary"
                     onClick={() => fileInput.current.click()}
                   >
                     <PhotoCamera />
@@ -100,19 +92,8 @@ function CoverSection(props) {
                   />
                 </div>
                 {/* ----------------------------- White section ------------------------------- */}
-                <div
-                  style={{ position: "absolute", top: "130px", left: "16px" }}
-                >
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={localStorage.getItem("PROFILE_PIC")}
-                    sx={{ width: 150, height: 150, cursor: "pointer" }}
-                    onClick={(event) =>
-                      handleProfileClick(event, "myprofile")
-                    }
-                  />
-                  <Link to="/profile"></Link>
-                </div>
+                <ChangeProfilePic />
+
 
                 {/* --------------------------------- Model Start ----------------------------- */}
 

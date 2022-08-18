@@ -12,6 +12,7 @@ import ProfileImage from "./ProfileImage";
 import CollectionsIcon from "@mui/icons-material/Collections";
 
 import useInput from "../../../hooks/use-input";
+import UseImageInput from "../../../hooks/use-imageInput";
 import { fetchUserData } from "../../../api/authenticationService";
 import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 import { useNavigate } from "react-router-dom";
@@ -19,51 +20,18 @@ import { useNavigate } from "react-router-dom";
 function Addpost(props) {
   const [postSuccess, setPostSuccess] = useState(true);
   const navigate = useNavigate();
-  const fileInput = useRef();
-  const [imagePreview, setImagePreview] = useState(null);
+  // const fileInput = useRef();
+  // const [imagePreview, setImagePreview] = useState(null);
   const [imageData, setImageData] = useState(null);
   const [postData, setPostData] = useState(new FormData());
-  // const [imageName, setImageName] = useState("");
 
   // const handleUploadClick = event => {
-  //   console.log("image uploader clicked");
-  //   var file = event.target.files[0];
-
-  //   // file.mv(`images/posts/${file.name}`)
-  //   console.log(file)
-  //   const reader = new FileReader();
-  //   var url = reader.readAsDataURL(file);
-  //   console.log(url);
-  //   console.log(fileInput);
-
-  //   // reader.onload = (event) => {
-
-  //   // }
-  //   // reader.onloadend = function(e) {
-  //   //   this.setState({
-  //   //     selectedFile: [reader.result]
-  //   //   });
-  //   // }.bind(this);
-  //   // console.log(url); // Would see a path?
-
-  //   // this.setState({
-  //   //   mainState: "uploaded",
-  //   //   selectedFile: event.target.files[0],
-  //   //   imageUploaded: 1
-  //   // });
+  //   let file = event.target.files[0];
+  //   setImageData(file);
+  //   const imageData = new FormData();
+  //   imageData.append('imageFile', file);
+  //   setImagePreview(URL.createObjectURL(file));
   // };
-  const handleUploadClick = event => {
-    let file = event.target.files[0];
-    setImageData(file);
-    const imageData = new FormData();
-    imageData.append('imageFile', file);
-    setImagePreview(URL.createObjectURL(file));
-  };
-
-  const uploadImageWithAdditionalData = () => {
-    // imageData.append('imageName', imageName);
-    // dispatch(uploadImage(imageData));
-  };
 
   const {
     value: content,
@@ -81,19 +49,26 @@ function Addpost(props) {
     }
   })
 
+  const {
+    handleUploadClick: handleUploadHandler,
+    imagePreview: postImagePreview,
+    fileInput: postImageInput,
+    imageData: postImageData
+  } = UseImageInput(() => {})
+
   let formIsValid = false;
-  if (contentIsValid || imageData) {
+  if (contentIsValid) {
     formIsValid = true;
   }
   const postSubmitHandler = () => {
     if (!contentIsValid) {
       return;
     }
-    postData.append('imageFile', imageData);
+    postData.append('imageFile', postImageData);
     postData.append('type', "post");
     postData.append('content', content);
     postData.append('email', localStorage.getItem('USER_EMAIL'));
-    
+
     console.log(localStorage.getItem("USER_ID"))
     fetchUserData({
       url: "api/v1/post/add-post",
@@ -103,8 +78,15 @@ function Addpost(props) {
       if (response.status === 200) {
         contentReset();
         setPostSuccess(true);
-        navigate("/profile");
+        console.log(window.location.pathname);
+        if (window.location.pathname === "/profile") {
+          window.location.reload();
+        } else {
+          navigate("/profile");
+        }
       }
+    }).catch((error) => {
+      alert(error);
     })
   }
   return (
@@ -130,8 +112,8 @@ function Addpost(props) {
               <CardMedia
                 component="img"
                 image={
-                  imagePreview !== null ?
-                    imagePreview :
+                  postImagePreview !== null ?
+                    postImagePreview :
                     ""}
               />
             </div>
@@ -142,24 +124,19 @@ function Addpost(props) {
             <Grid container>
               <Grid item xs={10}>
                 <CenteredBox align="left">
-                  {/* <IconButton component="label"> */}
                   <IconButton
-                    onClick={() => fileInput.current.click()}
+                    onClick={() => postImageInput.current.click()}
                   >
                     <CollectionsIcon />
                   </IconButton>
                   <input
                     accept="image/*"
-                    // className={classes.input}
-                    // id="contained-button-file"
-                    ref={fileInput}
+                    ref={postImageInput}
                     multiple
                     type="file"
-                    onChange={handleUploadClick}
+                    onChange={handleUploadHandler}
                     style={{ display: "none" }}
                   />
-                  {/* <CollectionsIcon /> */}
-                  {/* </IconButton> */}
                 </CenteredBox>
               </Grid>
               <Grid item xs={2}>
@@ -170,7 +147,7 @@ function Addpost(props) {
                     onClick={postSubmitHandler}
                     disabled={!formIsValid}
                   >
-                    Post
+                    Add Post
                   </Button>
                 </CenteredBox>
               </Grid>

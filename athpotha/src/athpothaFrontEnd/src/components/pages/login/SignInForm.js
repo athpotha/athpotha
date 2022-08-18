@@ -8,6 +8,7 @@ import AuthContext from "../../../store/ath-context";
 import { useNavigate } from "react-router-dom";
 import { checkEmail, fetchUserData, userLogin } from "../../../api/authenticationService";
 import useInput from "../../../hooks/use-input";
+import Swal from "sweetalert2";
 
 function SignInForm({ loading, error, ...props }) {
   const authCtx = useContext(AuthContext);
@@ -42,16 +43,16 @@ function SignInForm({ loading, error, ...props }) {
     } else if (emailValidation(value.trim())) {
       return { inputIsValid: false, error: "Email is not completed !" };
     } else {
-      return { inputIsValid: true, error: "" };
-      // checkEmail(value.trim())
-      //   .then((response) => {
-      //     setEmailResponse(response.data)
-      //   });
-      // if (emailResponse === "VERIFIED_USER") {
-      //   return { inputIsValid: true, error: "" };
-      // } else {
-      //   return { inputIsValid: false, error: "Not Registered Email !" };
-      // }
+      // return { inputIsValid: true, error: "" };
+      checkEmail(value.trim())
+        .then((response) => {
+          setEmailResponse(response.data)
+        });
+      if (emailResponse === "VERIFIED_USER") {
+        return { inputIsValid: true, error: "" };
+      } else {
+        return { inputIsValid: false, error: "Not Registered Email !" };
+      }
     }
   })
 
@@ -95,34 +96,39 @@ function SignInForm({ loading, error, ...props }) {
     if (!emailIsValid && !passwordIsValid) {
       return;
     }
-    const tokenResponse = await userLogin({
-      email: email,
-      password: password
-    });
+    try {
+      const tokenResponse = await userLogin({
+        email: email,
+        password: password
+      });
 
-    const tokenData = await tokenResponse.data;
-    console.log(tokenData);
-    authCtx.login(tokenData.token);
+      const tokenData = await tokenResponse.data;
+      authCtx.login(tokenData.token);
 
-    const userInfoResponse = await fetchUserData({
-      method: "post",
-      url: "api/v1/auth/userinfo",
-      data: { email: email }
-    });
+      const userInfoResponse = await fetchUserData({
+        method: "post",
+        url: "api/v1/auth/userinfo",
+        data: { email: email }
+      });
 
-    const userInfo = await userInfoResponse.data;
-    console.log(userInfo);
-    authCtx.userInfo(userInfo);
+      const userInfo = await userInfoResponse.data;
+      authCtx.userInfo(userInfo);
 
-    const user_type = localStorage.getItem("USER_TYPE");
-    if (user_type !== "university" && user_type !== "admin") {
-      navigate("/main");
-    } else if (user_type === "admin") {
-      navigate("/admin");
-    } else if (user_type === "university") {
-      navigate("/university");
+      const user_type = localStorage.getItem("USER_TYPE");
+      if (user_type !== "university" && user_type !== "admin") {
+        navigate("/main");
+      } else if (user_type === "admin") {
+        navigate("/admin");
+      } else if (user_type === "university") {
+        navigate("/university");
+      }
+    }catch {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Password is Wrong!',
+      })
     }
-
   };
 
   return (

@@ -15,6 +15,7 @@ import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 // const tabs = [];
 BasicModal.propTypes = {
   header: PropTypes.element,
+  elements: PropTypes.element
 };
 
 export default function BasicModal(props) {
@@ -60,7 +61,7 @@ export default function BasicModal(props) {
               ""
             )
           ) : (
-            props.children
+            props.elements
           )}
         </div>
       </Box>
