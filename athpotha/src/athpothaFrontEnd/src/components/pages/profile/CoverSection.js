@@ -85,13 +85,13 @@ function CoverSection(props) {
                   style={{ position: "absolute", top: "20px", right: "16px" }}
                 >
                   {/* Upload phot button on cover */}
-                  <Button
-                    variant="contained"
-                    color="primary"
+                  <IconButton
+                    // variant="contained"
+                    // color="primary"
                     onClick={() => fileInput.current.click()}
                   >
                     <PhotoCamera />
-                  </Button>
+                  </IconButton>
 
                   <input
                     ref={fileInput}

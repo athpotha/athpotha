@@ -1,5 +1,7 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,4 +11,5 @@ public class AddPost {
 	private String title;
 	private String email;
 	private OnlinePostType type;
+	private MultipartFile image;
 }

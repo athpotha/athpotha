@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.athpotha.carrierGuidanceSystem.model.OnlinePost;
 import com.athpotha.carrierGuidanceSystem.model.Student;
+import com.athpotha.carrierGuidanceSystem.model.User;
 
 @Repository
 public interface OnlinePostRepository extends JpaRepository<OnlinePost, Long> {
 
-	List<OnlinePost> findAllByStudent(Student student);
+	List<OnlinePost> findAllByUserOrderByPostIdDesc(User user);
 }

@@ -1,10 +1,11 @@
 import {
   Button,
+  CardMedia,
   Grid,
   IconButton,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import CenteredBox from "../CenteredBox";
 import ProfileImage from "./ProfileImage";
 
@@ -18,6 +19,52 @@ import { useNavigate } from "react-router-dom";
 function Addpost(props) {
   const [postSuccess, setPostSuccess] = useState(true);
   const navigate = useNavigate();
+  const fileInput = useRef();
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageData, setImageData] = useState(null);
+  const [postData, setPostData] = useState(new FormData());
+  // const [imageName, setImageName] = useState("");
+
+  // const handleUploadClick = event => {
+  //   console.log("image uploader clicked");
+  //   var file = event.target.files[0];
+
+  //   // file.mv(`images/posts/${file.name}`)
+  //   console.log(file)
+  //   const reader = new FileReader();
+  //   var url = reader.readAsDataURL(file);
+  //   console.log(url);
+  //   console.log(fileInput);
+
+  //   // reader.onload = (event) => {
+
+  //   // }
+  //   // reader.onloadend = function(e) {
+  //   //   this.setState({
+  //   //     selectedFile: [reader.result]
+  //   //   });
+  //   // }.bind(this);
+  //   // console.log(url); // Would see a path?
+
+  //   // this.setState({
+  //   //   mainState: "uploaded",
+  //   //   selectedFile: event.target.files[0],
+  //   //   imageUploaded: 1
+  //   // });
+  // };
+  const handleUploadClick = event => {
+    let file = event.target.files[0];
+    setImageData(file);
+    const imageData = new FormData();
+    imageData.append('imageFile', file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const uploadImageWithAdditionalData = () => {
+    // imageData.append('imageName', imageName);
+    // dispatch(uploadImage(imageData));
+  };
+
   const {
     value: content,
     isValid: contentIsValid,
@@ -25,7 +72,7 @@ function Addpost(props) {
     error: contentError,
     valueChangeHandler: contentChangeHandler,
     inputBlurHandler: contentBlurHandler,
-    reset:contentReset
+    reset: contentReset
   } = useInput((value) => {
     if (value.trim() === "") {
       return { inputIsValid: false, error: "Can't be Empty !" };
@@ -33,26 +80,27 @@ function Addpost(props) {
       return { inputIsValid: true, error: "" };
     }
   })
-  
+
   let formIsValid = false;
-  if(contentIsValid) {
+  if (contentIsValid || imageData) {
     formIsValid = true;
   }
   const postSubmitHandler = () => {
-    if(!contentIsValid) {
+    if (!contentIsValid) {
       return;
     }
+    postData.append('imageFile', imageData);
+    postData.append('type', "post");
+    postData.append('content', content);
+    postData.append('email', localStorage.getItem('USER_EMAIL'));
+    
     console.log(localStorage.getItem("USER_ID"))
     fetchUserData({
       url: "api/v1/post/add-post",
       method: "post",
-      data: {
-        type: "post",
-        title: content,
-        email: localStorage.getItem("USER_EMAIL"),
-      }
+      data: postData
     }).then((response) => {
-      if(response.status === 200) {
+      if (response.status === 200) {
         contentReset();
         setPostSuccess(true);
         navigate("/profile");
@@ -79,11 +127,13 @@ function Addpost(props) {
                 value={content}
                 fullWidth
               />
-              {/* <CardMedia
+              <CardMedia
                 component="img"
-                // image="/images/tutors/tutor-1.jpg"
-                alt="green iguana"
-              /> */}
+                image={
+                  imagePreview !== null ?
+                    imagePreview :
+                    ""}
+              />
             </div>
           </div>
         </Grid>
@@ -92,9 +142,24 @@ function Addpost(props) {
             <Grid container>
               <Grid item xs={10}>
                 <CenteredBox align="left">
-                  <IconButton onClick={() => console.log("hello")}>
+                  {/* <IconButton component="label"> */}
+                  <IconButton
+                    onClick={() => fileInput.current.click()}
+                  >
                     <CollectionsIcon />
                   </IconButton>
+                  <input
+                    accept="image/*"
+                    // className={classes.input}
+                    // id="contained-button-file"
+                    ref={fileInput}
+                    multiple
+                    type="file"
+                    onChange={handleUploadClick}
+                    style={{ display: "none" }}
+                  />
+                  {/* <CollectionsIcon /> */}
+                  {/* </IconButton> */}
                 </CenteredBox>
               </Grid>
               <Grid item xs={2}>

@@ -56,7 +56,7 @@ public class OnlinePost {
 			name = "user_id",
 			referencedColumnName = "user_id"
 	)
-	private Student student;
+	private User user;
 	
 	
 	public OnlinePost(OnlinePostType type, Long upVotes, Long downVotes, Date addedTime) {
