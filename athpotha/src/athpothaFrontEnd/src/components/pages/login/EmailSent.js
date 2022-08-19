@@ -13,7 +13,7 @@ import { signupButtonActions } from "../../../store/signup-button-slice";
 import { registrationActions } from "../../../store/registration-slice";
 
 
-function EnterEmail(props) {
+function EmailSent(props) {
   const EMAIL_RESEND_URL = "http://localhost:8080/user/email-resend";
   const email = useSelector((state) => state.registration.enteredEmail);
   const emailResend = () => {
@@ -86,4 +86,4 @@ function EnterEmail(props) {
   );
 }
 
-export default EnterEmail;
+export default EmailSent;
