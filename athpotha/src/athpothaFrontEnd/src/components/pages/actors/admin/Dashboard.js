@@ -152,7 +152,7 @@ function DashboardContent() {
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Inbox" />
+                <ListItemText primary="Dashboard" />
               </ListItemButton>
             </ListItem>
             <Divider sx={{ my: 1 }} />
@@ -181,7 +181,8 @@ function DashboardContent() {
         >
           <Toolbar />
           <Grid Content sx={{p:3}}>
-          <Content></Content>
+          {/* ------------------  content of the dashboard ------------d*/}
+          <Content></Content>   
           </Grid>
           
         </Box>
