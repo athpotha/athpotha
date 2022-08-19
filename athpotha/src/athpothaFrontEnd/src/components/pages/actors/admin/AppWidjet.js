@@ -30,7 +30,7 @@ AppWidgetSummary.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function AppWidgetSummary({ title, total, icon, color = 'info', sx, ...other }) {
+export default function AppWidgetSummary({bgColor, title, total, icon, color = 'info', sx, ...other }) {
   return (
     <Card
       
@@ -41,7 +41,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'info', s
         borderRadius:3,
         color: (theme) => theme.palette[color].darker,
         // bgcolor: (theme) => theme.palette[color].lighter,
-        bgcolor:color,
+        bgcolor:bgColor,
         ...sx,
       }}
       {...other}
