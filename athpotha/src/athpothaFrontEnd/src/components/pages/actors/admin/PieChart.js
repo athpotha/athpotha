@@ -32,14 +32,9 @@ const data = [
     pv: 3908,
     fill: '#a4de6c',
   },
+  
   {
-    name: '50+',
-    uv: 2.63,
-    pv: 4800,
-    fill: '#d0ed57',
-  },
-  {
-    name: 'unknow',
+    name: 'University Rep',
     uv: 6.67,
     pv: 4800,
     fill: '#ffc658',
