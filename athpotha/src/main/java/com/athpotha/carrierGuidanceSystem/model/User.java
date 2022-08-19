@@ -2,17 +2,9 @@ package com.athpotha.carrierGuidanceSystem.model;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -114,5 +106,28 @@ public class User implements UserDetails {
 				+ ", cover_picture=" + cover_picture + ", userDeleted=" + userDeleted + ", enabled=" + enabled
 				+ ", verified=" + verified + ", created_at=" + created_at + "]";
 	}
-	
+
+	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "pk_user_id",referencedColumnName = "user_id")
+	private List<Follower> followers;
+
+	@OneToMany(targetEntity = Following.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "pk_user_id",referencedColumnName = "user_id")
+	private List<Following> followings;
+
+	public List<Follower> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<Follower> followers) {
+		this.followers = followers;
+	}
+
+	public List<Following> getFollowings() {
+		return followings;
+	}
+
+	public void setFollowings(List<Following> followings) {
+		this.followings = followings;
+	}
 }
