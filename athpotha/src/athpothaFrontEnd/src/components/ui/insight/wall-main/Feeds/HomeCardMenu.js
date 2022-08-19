@@ -11,6 +11,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 import { useDispatch, useSelector } from "react-redux";
 import { bookmarkActions } from "../../../../../store/bookmark-slice";
+import { ListItemIcon, Typography } from "@mui/material";
 HomeCardMenu.propTypes = {
   button: PropTypes.element,
 };
@@ -36,7 +37,7 @@ export default function HomeCardMenu(props) {
 
   const handleBookmarkAdded = () => {
     setAnchorEl(null);
-   
+
     dispatch(bookmarkActions.addPostToBookmarks({ id: props.menuId }));
   };
   return (
@@ -59,20 +60,32 @@ export default function HomeCardMenu(props) {
       >
         <MenuItem onClick={handleBookmarkAdded}>
           {showBookmark ? (
-            <div>
-              <BookmarkIcon /> Remove Bookmark
-            </div>
+            <React.Fragment>
+              <ListItemIcon>
+                <BookmarkIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Remove Bookmark</Typography>
+            </React.Fragment>
           ) : (
-            <div>
-              <BookmarkBorderIcon /> Bookmark
-            </div>
+            <React.Fragment>
+              <ListItemIcon>
+                <BookmarkBorderIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Bookmark</Typography>
+            </React.Fragment>
           )}
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <KeyboardDoubleArrowDownOutlinedIcon /> Downvote
+          <ListItemIcon>
+            <KeyboardDoubleArrowDownOutlinedIcon />
+          </ListItemIcon>
+          <Typography variant="inherit">Downvote</Typography>
         </MenuItem>
-        <MenuItem style={{ color: "#ff0000" }} onClick={handleClose}>
-          <ReportIcon /> Report
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon style={{ color: "#ff0000" }}>
+            <ReportIcon />
+          </ListItemIcon>
+          <Typography style={{ color: "#ff0000" }} variant="inherit">Report</Typography>
         </MenuItem>
       </Menu>
     </div>
