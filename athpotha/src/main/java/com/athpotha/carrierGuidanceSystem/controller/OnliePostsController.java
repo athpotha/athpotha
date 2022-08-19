@@ -1,6 +1,7 @@
 package com.athpotha.carrierGuidanceSystem.controller;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,6 +34,7 @@ import com.athpotha.carrierGuidanceSystem.repository.PostRepository;
 import com.athpotha.carrierGuidanceSystem.repository.QuestionRepository;
 import com.athpotha.carrierGuidanceSystem.repository.StudentRepository;
 import com.athpotha.carrierGuidanceSystem.repository.UserRepository;
+import com.athpotha.carrierGuidanceSystem.service.FileUploadService;
 
 @RestController
 @RequestMapping("api/v1/post")
@@ -53,48 +55,46 @@ public class OnliePostsController {
 	@Autowired
 	private OnlinePostRepository onlinePostRepo;
 
-	private static String imageDirectory = "./";
+	@Autowired
+	private FileUploadService fileUploadService;
+
+	private static String imageDirectory = System.getProperty("user.dir") + "/src/athpothaFrontEnd/public/images/posts";
 
 	@PostMapping("/add-post")
-	public ResponseEntity<?> addPost(@RequestParam("imageFile") MultipartFile file, @RequestParam("email") String email,
-			@RequestParam("type") String type, @RequestParam("content") String content) {
+	public ResponseEntity<?> addPost(@RequestParam(name = "imageFile", required = false) MultipartFile file,
+			@RequestParam("email") String email, @RequestParam("type") OnlinePostType type,
+			@RequestParam("content") String title) throws IllegalStateException, IOException {
 		User user = userRepo.findByEmailIgnoreCase(email);
-		File tempDirectory = new File(System.getProperty("java.io.tmpdir"));
-		System.out.println(tempDirectory);
-//		makeDirectoryIfNotExist(imageDirectory);
-//		Path fileNamePath = Paths.get(imageDirectory,file.getOriginalFilename());
-//		System.out.println(file.getOriginalFilename());
-//
-//		try {
-//            Files.write(fileNamePath, file.getBytes());
-//            return new ResponseEntity<>(HttpStatus.CREATED);
-//        } catch (IOException ex) {
-//            return new ResponseEntity<>("Image is not uploaded", HttpStatus.BAD_REQUEST);
-//        }
-//		if(post.getType() == OnlinePostType.post) {
-//			Post newPost = new Post();
-//			newPost.setUser(user);
-//			newPost.setTitle(post.getTitle());
-//			newPost.setType(post.getType());
-//			postRepo.save(newPost);
-//		} else if(post.getType() == OnlinePostType.question) {
-//			System.out.println("hello");
-//			Question newQuestion = new Question();
-//			newQuestion.setUser(user);
-//			newQuestion.setQuestion(post.getTitle());
-//			newQuestion.setType(post.getType());
-//			questionRepo.save(newQuestion);
-//		}
+
+		if (type == OnlinePostType.post) {
+
+			Post newPost = new Post();
+			if (file != null) {
+				OnlinePost topPost = onlinePostRepo.findTopByOrderByPostIdDesc();
+
+				String newImageName = "post-" + String.valueOf(topPost.getPostId() + 1);
+				fileUploadService.makeDirectoryIfNotExist(imageDirectory);
+				String imageExtention = fileUploadService.generateFile(file, newImageName, imageDirectory);
+
+				String filePath = "/images/posts/" + newImageName + "." + imageExtention;
+
+				newPost.setImage(filePath);
+			}
+
+			newPost.setUser(user);
+			newPost.setTitle(title);
+			newPost.setType(type);
+			postRepo.save(newPost);
+		} else if (type == OnlinePostType.question) {
+			Question newQuestion = new Question();
+			newQuestion.setUser(user);
+			newQuestion.setQuestion(title);
+			newQuestion.setType(type);
+			questionRepo.save(newQuestion);
+		}
 
 		return null;
 	}
-	
-	private void makeDirectoryIfNotExist(String imageDirectory) {
-        File directory = new File(imageDirectory);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-    }
 
 	@PostMapping("/get-own-posts")
 	public List<OnlinePost> getOwnPosts(@RequestBody UserInfo userInfo) {
