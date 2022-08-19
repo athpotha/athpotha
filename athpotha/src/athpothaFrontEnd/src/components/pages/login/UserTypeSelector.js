@@ -34,10 +34,10 @@ function UserTypeSelector(props) {
     dispatch(signupButtonActions.setClickedSignupButton("tutor"));
   };
 
-  const universitySignupClicked = () => {
-    dispatch(signupButtonActions.setSelectedSignupButton("university"));
-    dispatch(signupButtonActions.setClickedSignupButton("university"));
-  };
+  // const universitySignupClicked = () => {
+  //   dispatch(signupButtonActions.setSelectedSignupButton("university"));
+  //   dispatch(signupButtonActions.setClickedSignupButton("university"));
+  // };
 
   const commiunitySignupClicked = () => {
     dispatch(signupButtonActions.setSelectedSignupButton("commiunity"));
@@ -108,7 +108,7 @@ function UserTypeSelector(props) {
         >
           Sign Up As a Tutor
         </Button>
-        <Button
+        {/* <Button
           sx={{
             height: "50px",
             borderRadius: "10px",
@@ -123,7 +123,7 @@ function UserTypeSelector(props) {
           endIcon={clickedSignupButton === "university" ? <SendOutlinedIcon /> : ""}
         >
           Sign Up As an University
-        </Button>
+        </Button> */}
         <Button
           sx={{
             height: "50px",

@@ -26,19 +26,17 @@ export const fetchUserData = (authRequest) => {
         'Authorization': "Bearer " + getToken(),
       }
     })
-  } else {
+  } else if(authRequest.method === "put") {
+    return axios.put(authRequest.url, authRequest.data, {
+      headers: {
+        'Authorization': "Bearer " + getToken(),
+      }
+    })
+  } else if(authRequest.method === "get") {
     return axios.get(authRequest.url, authRequest.data, {
       headers: {
         'Authorization': "Bearer " + getToken(),
       }
     })
   }
-  // return axios({
-  //   method: authRequest.method,
-  //   url: authRequest.url,
-  //   headers: {
-  //     'Authorization': "Bearer " + getToken(),
-  //   },
-  //   data: authRequest.data,
-  // });
 };
