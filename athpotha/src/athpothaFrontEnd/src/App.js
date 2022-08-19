@@ -19,6 +19,7 @@ import UniProfile from "./components/pages/uni-profile/UniProfile";
 
 import { useSelector } from "react-redux";
 import Admin from "./components/pages/actors/admin/Admin";
+import Categories from "./components/pages/wall-home/Categories";
 function App() {
   const theme = createTheme({
     palette: {
@@ -86,6 +87,7 @@ function App() {
           <Route path="/uni-profile" element={<UniProfile />}></Route>
           {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
           <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/categories" element={<Categories />}></Route>
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>
