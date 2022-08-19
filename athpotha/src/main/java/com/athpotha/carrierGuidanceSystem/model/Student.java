@@ -4,13 +4,7 @@ import java.util.List;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +18,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "student")
 public class Student extends User {
+	@Enumerated(value = EnumType.STRING)
 	private StudentType studentType;
 
 	public Student(String first_name, String last_name, UserType user_type, String email, String password,
