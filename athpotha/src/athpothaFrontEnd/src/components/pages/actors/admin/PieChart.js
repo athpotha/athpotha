@@ -64,7 +64,7 @@ export default class Example extends PureComponent {
           />
           <Legend iconSize={10} layout="vertical" verticalAlign="middle" wrapperStyle={style} />
         </RadialBarChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> 
     );
   }
 }
