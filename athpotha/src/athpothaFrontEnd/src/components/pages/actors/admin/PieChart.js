@@ -54,7 +54,7 @@ export default class Example extends PureComponent {
   render() {
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <RadialBarChart cx="50%" cy="50%" innerRadius="10%" outerRadius="80%" barSize={10} data={data}>
+        <RadialBarChart cx="37%" cy="50%" innerRadius="10%" outerRadius="80%" barSize={10} data={data}>
           <RadialBar
             minAngle={15}
             label={{ position: 'insideStart', fill: '#fff' }}
@@ -68,3 +68,4 @@ export default class Example extends PureComponent {
     );
   }
 }
+
