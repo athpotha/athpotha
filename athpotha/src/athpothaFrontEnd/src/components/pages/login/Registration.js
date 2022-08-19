@@ -10,37 +10,20 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import EmailSent from "./EmailSent";
 import UserTypeSelector from "./UserTypeSelector";
+import Carousel from "./Carousel";
+import EnterEmail from "./EnterEmail";
 
 function Registration() {
-  const main = document.querySelector(`.${classes.mainDiv}`);
+  const main = document.getElementsByClassName(classes.mainDiv);
   const [toggleClicked, setToggleBtn] = useState(false);
   const isEmailSent = useSelector((state) => state.registration.isEmailSent);
   const selectedSignupButton = useSelector(
     (state) => state.signupButton.selectedSignupButton
   );
-  // us
+
   if (toggleClicked === true) {
-    main.classList.toggle(classes["sign-up-mode"]);
+    main[0].classList.toggle(classes["sign-up-mode"]);
     setToggleBtn(false);
-  }
-
-  function moveSlider(e) {
-    let index = e.target.dataset.value;
-    let images = document.querySelectorAll(`.${classes.image}`);
-    let bullets = document.querySelectorAll(`.${classes.bullets} span`);
-
-    let imageNumber = "img-" + index;
-    let currentImage = document.querySelector(`.${classes[imageNumber]}`);
-    images.forEach((img) => {
-      img.classList.remove(classes.show);
-    });
-    currentImage.classList.add(classes.show);
-
-    let textSlider = document.querySelector(`.${classes["text-group"]}`);
-    textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
-
-    bullets.forEach((bull) => bull.classList.remove(classes.active));
-    e.target.classList.add(classes.active);
   }
 
   return (
@@ -59,6 +42,11 @@ function Registration() {
                   className="sign-in-form"
                   onClick={() => setToggleBtn(true)}
                 />
+              ) : selectedSignupButton === "university" ? (
+                <EnterEmail
+                  className="sign-in-form"
+                  onClick={() => setToggleBtn(true)}
+                />
               ) : (
                 <SignUpForm
                   className="sign-in-form"
@@ -72,45 +60,7 @@ function Registration() {
               />
             </div>
 
-            <div className={classes.carousel}>
-              <div className={classes["images-wrapper"]}>
-                <img
-                  src="/images/image1.png"
-                  className={`${classes.image} ${classes["img-1"]} ${classes.show}`}
-                  alt=""
-                />
-                <img
-                  src="/images/image2.png"
-                  className={`${classes.image} ${classes["img-2"]}`}
-                  alt=""
-                />
-                <img
-                  src="/images/image3.png"
-                  className={`${classes.image} ${classes["img-3"]}`}
-                  alt=""
-                />
-              </div>
-
-              <div className={classes["text-slider"]}>
-                <div className={classes["text-wrap"]}>
-                  <div className={classes["text-group"]}>
-                    <h2>Create your own courses</h2>
-                    <h2>Customize as you like</h2>
-                    <h2>Invite students to your className</h2>
-                  </div>
-                </div>
-
-                <div className={classes.bullets}>
-                  <span
-                    className={classes.active}
-                    data-value="1"
-                    onClick={moveSlider}
-                  ></span>
-                  <span data-value="2" onClick={moveSlider}></span>
-                  <span data-value="3" onClick={moveSlider}></span>
-                </div>
-              </div>
-            </div>
+            <Carousel />
           </div>
         </div>
       </main>

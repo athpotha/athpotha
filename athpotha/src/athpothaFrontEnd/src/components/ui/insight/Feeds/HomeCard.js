@@ -31,6 +31,7 @@ import BasicMenu from "./BasicMenu";
 import { useDispatch, useSelector } from "react-redux";
 import SimpleSnackbar from "./SimpleSnackbar";
 import HomeCardMenu from "./HomeCardMenu";
+import { Link } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -145,10 +146,12 @@ export default function HomeCard(props) {
                       src={props.postItem.personImage}
                     />
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={props.postItem.personName}
-                    secondary={props.postItem.postDate}
-                  />
+                  <Link>
+                    <ListItemText
+                      primary={props.postItem.personName}
+                      secondary={props.postItem.postDate}
+                    />
+                  </Link>
                 </ListItem>
               }
               action={
