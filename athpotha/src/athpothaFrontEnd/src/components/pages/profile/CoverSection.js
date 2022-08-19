@@ -21,13 +21,9 @@ import TextField from "@mui/material/TextField";
 import SettingsIcon from '@mui/icons-material/Settings';
 import ChangePassword from "./ChangePassword"
 import styled from "@emotion/styled";
-import ModalOpenButton from "../../ui/insight/ModalOpenButton";
-import CenteredBox from "../../ui/CenteredBox";
-import ChangeProfilePic from "./ChangeProfilePic";
+import ChangeImage from "./ChangeImage";
 
 function CoverSection(props) {
-
-  const fileInput = React.useRef();
   const style = {
     position: "absolute",
     top: "50%",
@@ -60,6 +56,16 @@ function CoverSection(props) {
       break;
   }
 
+  const ProfileAvatar = styled(Avatar)({
+    opacity: 1,
+    "&:hover": {
+      opacity: 0.6
+    },
+    width: 150,
+    height: 150,
+    // cursor: "pointer"
+    // maxWidth: 330,
+  });
   // ----------------------------------
   return (
     <StyledEngineProvider injectFirst>
@@ -79,20 +85,23 @@ function CoverSection(props) {
                 <div
                   style={{ position: "absolute", top: "20px", right: "16px" }}
                 >
-                  <IconButton
-                    onClick={() => fileInput.current.click()}
-                  >
-                    <PhotoCamera />
-                  </IconButton>
+                  <ChangeImage tabValue={1}>
+                    <IconButton>
+                      <PhotoCamera />
+                    </IconButton>
+                  </ChangeImage>
 
-                  <input
-                    ref={fileInput}
-                    type="file"
-                    style={{ display: "none" }}
-                  />
                 </div>
                 {/* ----------------------------- White section ------------------------------- */}
-                <ChangeProfilePic />
+                <ChangeImage tabValue={0}>
+                  <IconButton
+                    style={{ position: "absolute", top: "130px", left: "16px" }}
+                  >
+                    <ProfileAvatar
+                      src={localStorage.getItem("PROFILE_PIC")}
+                    />
+                  </IconButton>
+                </ChangeImage>
 
 
                 {/* --------------------------------- Model Start ----------------------------- */}

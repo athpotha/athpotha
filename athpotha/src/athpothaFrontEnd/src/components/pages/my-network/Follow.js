@@ -32,18 +32,13 @@ const StyledRating = styled(Rating)({
         navigate('/profile')
     };
 
+
     const [active, setActive] = useState(props.value)
     console.log(active)
-    if (active == 1 || active == 3 || active == 5 || active == 7) {
-        products.push(selectproducts[0])
-        products.push(selectproducts[1])
-        products.push(selectproducts[2])
-        products.push(selectproducts[3])
-        products.push(selectproducts[4])
-        products.push(selectproducts[5])
+    if (active === 1 || active === 3 || active === 5 || active === 7) {
+        
     } else if (active == 0 || active == 2 || active == 4 || active == 6) {
-        for (var i of selectproducts)
-            products.push(selectproducts[i])
+        
     }
 
     return (
@@ -94,25 +89,22 @@ export const FollowTeacher = (props) => {
 
     const navigate = useNavigate();
 
-    const selectproducts = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    const products = []
+    const products = props.tutors
+
     const handleProfileClick = (event, param) => {
         navigate('/profile')
     };
 
+    console.log(products[0])
+    
     const [active, setActive] = useState(props.value)
     console.log(active)
-    if (active == 1 || active == 3 || active == 5 || active == 7) {
-        products.push(selectproducts[0])
-        products.push(selectproducts[1])
-        products.push(selectproducts[2])
-        products.push(selectproducts[3])
-        products.push(selectproducts[4])
-        products.push(selectproducts[5])
-    } else if (active == 0 || active == 2 || active == 4 || active == 6) {
-        for (var i of selectproducts)
-            products.push(selectproducts[i])
+    if (active === 1 || active === 3 || active === 5 || active === 7) {
+        //products.push(productslist[1])
+    } else if (active === 0 || active === 2 || active === 4 || active === 6) {
+        //productslist = products
     }
+
 
     return (
         <StyledEngineProvider injectFirst>
@@ -122,8 +114,8 @@ export const FollowTeacher = (props) => {
                     gap: 2,
                     gridTemplateColumns: 'repeat(3, 1fr)',
                 }}>
-                    {products.map(product => (
-                        <Box sx={{ p: 1, m: 1, }}>
+                    {products.map(({user_id,first_name, last_name,subject}) => (
+                        <Box sx={{ p: 1, m: 1, }} key={user_id}>
                             <Card sx={{ maxWidth: 320 }}>
                                 <div style={{ position: 'relative' }}>
                                     <CardMedia
@@ -139,8 +131,8 @@ export const FollowTeacher = (props) => {
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '35px', marginLeft: '16px' }}>
-                                    <Box>Mohomad Perera</Box>
-                                    <Box sx={{ fontSize: '10pt' , mb:"20px"}}>Physics Tutor</Box>
+                                    <Box>{first_name + " "}{last_name}</Box>
+                                    <Box sx={{ fontSize: '10pt' , mb:"20px"}}>{subject}</Box>
                                     <CenteredBox >
                                         <Stack direction="row" spacing={1}>
                                             <StyledRating
