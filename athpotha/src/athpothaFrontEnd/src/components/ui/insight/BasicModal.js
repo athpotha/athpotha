@@ -9,13 +9,17 @@ import Addquestion from "./Addquestion";
 import Addpost from "./Addpost";
 import PropTypes from "prop-types";
 import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
+import ChangeProfile from "./profile/ChangeProfile";
+import ChangeCover from "./profile/ChangeCover";
 
 // import modalActions
 
 // const tabs = [];
 BasicModal.propTypes = {
   header: PropTypes.element,
-  elements: PropTypes.element
+  elements: PropTypes.element,
+  changeCover: PropTypes.element,
+  changeProfile: PropTypes.element
 };
 
 export default function BasicModal(props) {
@@ -51,12 +55,26 @@ export default function BasicModal(props) {
           {props.isTabHave ? (
             props.modalName === "addQuestion-post-modal" ? (
               tabValue === 0 ? (
-                <Addquestion />
+                <Addquestion close={props.onClose} />
               ) : (
                 <Addpost />
               )
             ) : props.modalName === "search-modal" ? (
               props.children
+            ) : props.modalName === "changeProfile-cover-modal" ? (
+              tabValue === 0 ? (
+                <ChangeProfile
+                  close={props.onClose}
+                  imageType="PROFILE_PIC"
+                  image={localStorage.getItem("PROFILE_PIC")}
+                />
+              ) : (
+                <ChangeProfile
+                  close={props.onClose}
+                  imageType="COVER_PIC"
+                  image={localStorage.getItem("COVER_PIC")}
+                />
+              )
             ) : (
               ""
             )
