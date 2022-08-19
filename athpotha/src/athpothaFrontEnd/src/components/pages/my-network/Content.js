@@ -9,6 +9,7 @@ import { Button, Modal } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { FollowStudent, FollowTeacher, FollowUniversity } from "./Follow";
+import { fetchUserData } from "../../../api/authenticationService";
 
 const style = {
   position: 'absolute',
@@ -75,6 +76,32 @@ function Content() {
   const handleOpenFour = () => setOpenFour(true);
   const handleCloseFour = () => setOpenFour(false);
 
+
+  const [tutor, setTutor] = React.useState([])
+
+  // React.useEffect(() => {
+  //   fetch("http://localhost:8080/network/getTutors")
+  //     .then(res => res.json())
+  //     .then((result) => {
+  //       setTutor(result)
+  //     }
+  //     )
+  // }, [])
+
+  const user_id = localStorage.getItem("USER_ID")
+  
+  React.useEffect(() => {
+    fetchUserData({
+      url: "network/getTutors",
+      method: "post",
+      data:{user_id: user_id}
+    }).then((response) => {
+      setTutor(response.data)
+  })
+  
+  },[])
+  
+
   return (
     <StyledEngineProvider injectFirst>
       {/* <Container> */}
@@ -103,15 +130,17 @@ function Content() {
                     >
                       <CloseIcon />
                     </IconButton>
-                    <Box sx={{mt:"25px",
+                    <Box sx={{
+                      mt: "25px",
                       height: "70vh",
                       overflow: "auto",
                     }}>
-                      <FollowUniversity value={0}></FollowUniversity>
+                      {/* <FollowUniversity value={0} tutors={tutor}></FollowUniversity> */}
                     </Box>
                   </Box>
                 </Modal>
-              </div><FollowUniversity value={1}></FollowUniversity>
+              </div>
+              {/* <FollowUniversity value={1} tutors={tutor}></FollowUniversity> */}
             </Item>
 
             <Item>
@@ -132,15 +161,17 @@ function Content() {
                     >
                       <CloseIcon />
                     </IconButton>
-                    <Box sx={{mt:"25px",
+                    <Box sx={{
+                      mt: "25px",
                       height: "70vh",
                       overflow: "auto",
                     }}>
-                      <FollowStudent value={2}></FollowStudent>
+                      {/* <FollowStudent value={2} tutors={tutor}></FollowStudent> */}
                     </Box>
                   </Box>
                 </Modal>
-              </div><FollowStudent value={3}></FollowStudent>
+              </div>
+              {/* <FollowStudent value={3} tutors={tutor}></FollowStudent> */}
             </Item>
 
             <Item>
@@ -161,15 +192,17 @@ function Content() {
                     >
                       <CloseIcon />
                     </IconButton>
-                    <Box sx={{mt:"25px",
+                    <Box sx={{
+                      mt: "25px",
                       height: "70vh",
                       overflow: "auto",
                     }}>
-                      <FollowTeacher value={4}></FollowTeacher>
+                      <FollowTeacher value={4} tutors={tutor}></FollowTeacher>
                     </Box>
                   </Box>
                 </Modal>
-              </div><FollowTeacher value={5}></FollowTeacher>
+              </div>
+              <FollowTeacher value={5} tutors={tutor}></FollowTeacher>
             </Item>
 
             <Item>
@@ -190,15 +223,17 @@ function Content() {
                     >
                       <CloseIcon />
                     </IconButton>
-                    <Box sx={{mt:"25px",
+                    <Box sx={{
+                      mt: "25px",
                       height: "70vh",
                       overflow: "auto",
                     }}>
-                      <FollowStudent value={6}></FollowStudent>
+                      {/* <FollowStudent value={6} tutors={tutor}></FollowStudent> */}
                     </Box>
                   </Box>
                 </Modal>
-              </div><FollowStudent value={7}></FollowStudent>
+              </div>
+              {/* <FollowStudent value={7} tutors={tutor}></FollowStudent> */}
             </Item>
           </Box>
         </div>
