@@ -97,6 +97,9 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const universityReg=()=>{
+    console.log("d");
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -171,7 +174,7 @@ function DashboardContent() {
             </ListItem>
             <Divider sx={{ my: 1 }} />
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={universityReg}>
                 <ListItemIcon>
                   <HowToRegIcon />
                 </ListItemIcon>
