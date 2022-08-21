@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Avatar } from "@mui/material";
+import { Avatar, ListItemIcon, Typography } from "@mui/material";
 import AuthContext from "../../../store/ath-context";
 import { useNavigate } from "react-router-dom";
+
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function ProfileMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -27,27 +29,18 @@ export default function ProfileMenu() {
   return (
     <div>
       <Avatar onClick={handleClick} src={localStorage.getItem("PROFILE_PIC")} />
-      {/* <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        Dashboard
-      </Button> */}
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
       >
-        {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem> */}
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <Typography variant="h6" >Logout</Typography>
+          </MenuItem>
       </Menu>
     </div>
   );

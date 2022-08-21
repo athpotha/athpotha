@@ -1,6 +1,7 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { fetchUserData } from "../../../api/authenticationService";
 import useInput from "../../../hooks/use-input";
 import CenteredBox from "../CenteredBox";
@@ -17,7 +18,7 @@ function Addquestion(props) {
     error: contentError,
     valueChangeHandler: contentChangeHandler,
     inputBlurHandler: contentBlurHandler,
-    reset:contentReset
+    reset: contentReset
   } = useInput((value) => {
     if (value.trim() === "") {
       return { inputIsValid: false, error: "Can't be Empty !" };
@@ -25,16 +26,15 @@ function Addquestion(props) {
       return { inputIsValid: true, error: "" };
     }
   })
-  
+
   let formIsValid = false;
-  if(contentIsValid) {
+  if (contentIsValid) {
     formIsValid = true;
   }
   const questionSubmitHandler = () => {
-    if(!contentIsValid) {
+    if (!contentIsValid) {
       return;
     }
-    console.log(localStorage.getItem("USER_ID"))
     const postData = new FormData();
     postData.append("email", localStorage.getItem("USER_EMAIL"));
     postData.append("type", "question");
@@ -44,14 +44,21 @@ function Addquestion(props) {
       method: "post",
       data: postData
     }).then((response) => {
-      if(response.status === 200) {
+      if (response.status === 200) {
         contentReset();
         setPostSuccess(true);
-        if(window.location.pathname === "/profile") {
-          window.location.reload();
-        } else {
-          navigate("/profile");
-        }
+        props.close();
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated!',
+          text: 'Question Added!',
+        }).then(() => {
+          if (window.location.pathname === "/profile") {
+            window.location.reload();
+          } else {
+            navigate("/profile");
+          }
+        })
       }
     })
   }
