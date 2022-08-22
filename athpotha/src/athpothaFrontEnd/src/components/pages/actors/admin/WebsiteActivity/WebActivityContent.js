@@ -2,9 +2,12 @@ import { Grade } from "@mui/icons-material";
 import { Button, Grid } from "@mui/material";
 import React from "react";
 import CenteredBox from "../../../../ui/CenteredBox";
-import BarChart from './BarCHart'
+import VisitsChart from './VisitsChart'
 import PreviewIcon from '@mui/icons-material/Preview';
+import UsersChart from './UsersChart';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import IncomeBarChart from './IncomeBarChart';
+import ReportBarChart from './ReportBarChart';
 
 function WebsiteActivityContent(props) {
   return (
@@ -23,10 +26,19 @@ function WebsiteActivityContent(props) {
       </Grid>
 
       <Grid xs={6} bgcolor="white" sx={{mt:3}}>
-        <BarChart></BarChart>
+        <VisitsChart></VisitsChart>
       </Grid>
       <Grid xs={6} bgcolor="white" sx={{mt:3}}>
-        <BarChart></BarChart>
+        <UsersChart></UsersChart>
+      </Grid>
+
+
+      {/* ----------------------second bar charts section -------------------- */}
+      <Grid xs={6} bgcolor="white" sx={{mt:3}}>
+        <IncomeBarChart></IncomeBarChart>
+      </Grid>
+      <Grid xs={6} bgcolor="white" sx={{mt:3}}>
+        <ReportBarChart></ReportBarChart>
       </Grid>
     </Grid>
   );
