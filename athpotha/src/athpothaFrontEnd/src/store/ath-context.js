@@ -27,6 +27,7 @@ export const AuthContextProvider = (props) => {
   }
 
   const [token, setToken] = useState(initialToken);
+  const [hasLogged, setHasLogged] = useState(false);
 
   const userIsLoggedIn = !!token;
 
@@ -45,6 +46,10 @@ export const AuthContextProvider = (props) => {
     return true;
   };
 
+  const hasLoggedHandler = (isLogged) => {
+    setHasLogged(isLogged);
+  }
+
   const userInfoHandler = (user) => {
     localStorage.setItem("USER_TYPE", user.user_type);
     localStorage.setItem("USER_ID", user.user_id);
@@ -53,7 +58,7 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("LAST_NAME", user.last_name);
     localStorage.setItem("USER_EMAIL", user.email);
     localStorage.setItem("PROFILE_PIC", user.profile_picture);
-    localStorage.setItem("COVER_PIC", user.cover_picture)
+    localStorage.setItem("COVER_PIC", user.cover_picture);
     if(user.user_type === "student") {
       localStorage.setItem("STUDENT_TYPE", user.student_type);
     } else if(user.user_type === 'tutor') {
@@ -77,6 +82,8 @@ export const AuthContextProvider = (props) => {
     login: loginHandler,
     userInfo: userInfoHandler,
     logout: logoutHandler,
+    userHasLogged: hasLoggedHandler,
+    hasLogged: hasLogged
   };
 
   return (
