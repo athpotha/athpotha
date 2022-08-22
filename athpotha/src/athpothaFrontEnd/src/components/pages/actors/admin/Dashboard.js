@@ -26,6 +26,9 @@ import ReportIcon from '@mui/icons-material/Report';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LanguageIcon from '@mui/icons-material/Language';
 import Content from './Content';
+import PropTypes from 'prop-types'
+import { useNavigate } from "react-router-dom";
+
 // import { mainListItems, secondaryListItems } from './listItems';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
@@ -92,12 +95,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+Dashboard.propTypes = {
+  content: PropTypes.element,
+}
+
+
+export default function Dashboard(props) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  let navigate = useNavigate();
+  const mangeUserHandler = (event) => {
+    navigate("/admin/manage-users");
+  }
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -161,7 +173,7 @@ function DashboardContent() {
               </ListItemButton>
             </ListItem>
             <Divider sx={{ my: 1 }} />
-            <ListItem disablePadding>
+            <ListItem disablePadding onClick={mangeUserHandler}>
               <ListItemButton>
                 <ListItemIcon>
                   <ManageAccountsIcon />
@@ -200,7 +212,7 @@ function DashboardContent() {
             </ListItem>
             <Divider sx={{ my: 1 }} />
 
-            
+
           </List>
         </Drawer>
         <Box
@@ -216,17 +228,12 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Grid Content sx={{p:3}}>
-          {/* ------------------  content of the dashboard ------------d*/}
-          <Content></Content>   
+          <Grid Content sx={{ p: 3 }}>
+            {props.content}
           </Grid>
-          
+
         </Box>
       </Box>
-    </ThemeProvider>
+    </ThemeProvider >
   );
-}
-
-export default function Dashboard() {
-  return <DashboardContent />;
 }
