@@ -4,30 +4,8 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import SelectedCategory from './CategorySelection';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { educationCategoryActions } from '../../../store/educationCategory-slice';
-
-
-let imageButton = styled(ButtonBase)(({ theme }) => ({
-    position: 'relative',
-    height: 200,
-    [theme.breakpoints.down('sm')]: {
-        width: '100% !important', // Overrides inline-style
-        height: 100,
-    },
-    '&:hover, &.Mui-focusVisible': {
-        zIndex: 1,
-        '& .MuiImageBackdrop-root': {
-            opacity: 0.15,
-        },
-        // '& .MuiImageMarked-root': {
-        //     opacity: 0,
-        // },
-        '& .MuiTypography-root': {
-            border: '4px solid currentColor',
-        },
-    },
-}));
 
 const ImageSrc = styled('span')({
     position: 'absolute',
@@ -74,13 +52,32 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 
 export default function Category(props) {
+
+    let imageButton = styled(ButtonBase)(({ theme }) => ({
+        position: 'relative',
+        height: 200,
+        [theme.breakpoints.down('sm')]: {
+            width: '100% !important', // Overrides inline-style
+            height: 100,
+        },
+        '&:hover, &.Mui-focusVisible': {
+            zIndex: 1,
+            '& .MuiImageBackdrop-root': {
+                opacity: 0.15,
+            },
+            // '& .MuiImageMarked-root': {
+            //     opacity: 0,
+            // },
+            '& .MuiTypography-root': {
+                border: '4px solid currentColor',
+            },
+        },
+    }));
     const dispatch = useDispatch();
     const [ImageButton, setImageButton] = React.useState(imageButton);
     const [isSelected, setIsSelected] = React.useState(false);
-    const [category, setCategory] = React.useState("");
 
     const clickedButton = () => {
-        console.log(props.image.title);
         if (!isSelected) {
             imageButton = styled(ButtonBase)(({ theme }) => ({
                 position: 'relative',
@@ -101,7 +98,6 @@ export default function Category(props) {
                 },
             }));
             setIsSelected(true);
-            setCategory(props.image.title);
             setImageButton(imageButton);
             // props.onSetSelectedCategories();
         } else {
@@ -126,15 +122,17 @@ export default function Category(props) {
                 },
             }));
             setIsSelected(false);
-            setCategory("");
             setImageButton(imageButton);
         }
         dispatch(educationCategoryActions.addCategory(props.image.title));
-        if(props.image.title === "O/L Qualified") {
+        if (props.image.title === "O/L Qualified") {
             dispatch(educationCategoryActions.setBackButton(1));
         }
         // dispatch(educationCategoryActions.setSelectedStudentType(props.image.title));
     }
+
+    const studentType = useSelector((state) => state.educationCategory.selectedStudentType);
+    console.log(studentType);
     return (
         <Box sx={{ minWidth: 300, width: '100%', mb: 2 }}>
             <ImageButton
