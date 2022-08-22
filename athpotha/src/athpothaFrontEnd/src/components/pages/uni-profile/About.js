@@ -65,9 +65,9 @@ function About() {
                     {contentTwo}
                 </Typography>
 
-                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                {/* <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <Button onClick={handleOpen}>Update About</Button>
-                </Box>
+                </Box> */}
 
                 <Modal open={open} >
                     <Box sx={stylebox1}>
