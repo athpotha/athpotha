@@ -4,8 +4,10 @@ import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import BeforeDisplay from "../../ui/BeforeDisplay";
-import ProfileCard from "../../ui/insight/profile/ProfileCard";
+import BeforeDisplay from "../../../../ui/BeforeDisplay";
+import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
+// import BeforeDisplay from "../../ui/BeforeDisplay";
+// import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -41,7 +43,7 @@ function a11yProps(index) {
 }
 
 
-function FeedsSection(props) {
+function TutorFeedSection(props) {
 
     const [value, setValue] = React.useState(0);
 
@@ -49,42 +51,30 @@ function FeedsSection(props) {
         setValue(newValue);
     };
     let posts = <Typography>Found no posts</Typography>
-    let questions = <Typography>Found no Questions</Typography>
 
     if (props.posts.length > 0) {
         posts = props.posts.map((post) => (
             post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
         ))
-
-        questions = props.posts.map((post) => (
-            post.postType == "question" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
-        ))
     }
     if (props.isLoading) {
         posts = <BeforeDisplay />;
-        questions = <BeforeDisplay />;
     }
 
     if (posts[0] === "") {
         posts = <Typography>Found no posts</Typography>
-    } else if (questions[0] === "") {
-        questions = <Typography>Found no Questions</Typography>
     }
     return (
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
                 <Tab label="Posts" {...a11yProps(0)} />
-                <Tab label="Questions" {...a11yProps(1)} />
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
                 {posts}
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                {questions}
-            </TabPanel>
         </React.Fragment>
     );
 }
 
-export default FeedsSection;
+export default TutorFeedSection;

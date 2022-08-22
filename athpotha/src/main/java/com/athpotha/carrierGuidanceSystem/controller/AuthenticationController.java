@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.athpotha.carrierGuidanceSystem.config.JWTTokenHelper;
 import com.athpotha.carrierGuidanceSystem.model.Admin;
-import com.athpotha.carrierGuidanceSystem.model.Commiunity;
+import com.athpotha.carrierGuidanceSystem.model.Community;
 import com.athpotha.carrierGuidanceSystem.model.Student;
 import com.athpotha.carrierGuidanceSystem.model.Tutor;
 import com.athpotha.carrierGuidanceSystem.model.University;
@@ -105,8 +105,8 @@ public class AuthenticationController {
 			Admin admin = adminRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			return ResponseEntity.ok(admin);
 //			break;
-		case commiunity:
-			Commiunity commiunity = commiunityRepository.findByEmailIgnoreCase(userEntity.getUsername());
+		case community:
+			Community commiunity = commiunityRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			return ResponseEntity.ok(commiunity);
 		}
 		return null;
@@ -133,8 +133,8 @@ public class AuthenticationController {
 			Admin admin = adminRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			admin.setHasLogged(true);
 			break;
-		case commiunity:
-			Commiunity commiunity = commiunityRepository.findByEmailIgnoreCase(userEntity.getUsername());
+		case community:
+			Community commiunity = commiunityRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			commiunity.setHasLogged(true);
 			break;
 		}
