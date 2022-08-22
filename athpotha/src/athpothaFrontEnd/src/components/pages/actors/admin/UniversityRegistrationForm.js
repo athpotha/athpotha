@@ -146,7 +146,7 @@ function UniversityRegistrationForm() {
             }
           />
         </FormControl>
-        <Button variant="contained">Contained</Button>
+        <Button variant="contained">Submit</Button>
       </form>
     </Box>
   );
