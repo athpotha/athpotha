@@ -101,13 +101,19 @@ export default function Categories() {
                 width: '90%',
             },
             {
-                id: 'buttonImage-3',
+                id: 'buttonImage-4',
                 url: '/images/main-wall/main-wall-1.jpg',
                 title: 'Bio medicine',
                 width: '90%',
             },
             {
-                id: 'buttonImage-3',
+                id: 'buttonImage-5',
+                url: '/images/main-wall/main-wall-1.jpg',
+                title: 'Bio medical',
+                width: '90%',
+            },
+            {
+                id: 'buttonImage-6',
                 url: '/images/main-wall/main-wall-1.jpg',
                 title: 'Bio medical',
                 width: '90%',
@@ -168,7 +174,7 @@ export default function Categories() {
     }
     return (
         <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+            {/* <Button onClick={handleOpen}>Open modal</Button> */}
             <Modal
                 open={open}
                 // onClose={handleClose}
@@ -185,12 +191,12 @@ export default function Categories() {
                             }
                         </Grid>
                         <Grid item xs={6}>
-                            {backBtn === 0 && <CenteredBox align="right">
+                            {/* {backBtn === 0 && <CenteredBox align="right">
                                 <IconButton onClick={forwardButtonClicked} color="primary">
                                     <NavigateNextIcon />
                                 </IconButton>
                             </CenteredBox>
-                            }
+                            } */}
                         </Grid>
                     </Grid>
                     {localStorage.getItem("USER_TYPE") === "student" && studentType === undefined && <StudentTypeSlector />}
