@@ -23,6 +23,7 @@ import Categories from "./components/pages/wall-home/Categories";
 import ManageUser from "./components/pages/actors/admin/manageUsers/ManageUser";
 import UniversityRegistration from "./components/pages/actors/admin/UniversityRegistration";
 import CoursePage from "./components/pages/course-page/CoursePage";
+import ViewProfile from "./components/pages/view-profile/ViewProfile";
 function App() {
   const theme = createTheme({
     palette: {
@@ -92,9 +93,12 @@ function App() {
           {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/admin/manage-users" element={<ManageUser />}></Route>
-          <Route path="/universityregistration" element={<UniversityRegistration />}></Route>
+          <Route path="/admin/university-registration" element={<UniversityRegistration />}></Route>
           <Route path="/categories" element={<Categories />}></Route>
           <Route path="/course-page" element={<CoursePage />}></Route>
+          <Route path="/user/view-user" element={<ViewProfile />}></Route>
+          <Route path="/university/view-user" element={<ViewProfile />}></Route>
+          <Route path="/community/view-user" element={<ViewProfile />}></Route>
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>

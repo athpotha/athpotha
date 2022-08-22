@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import ModalOpenButton from "./ModalOpenButton";
 import ModalTabs from "./ModalTabs";
 import SearchProfiles from "./SearchProfiles";
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 const drawerWidth = 240;
 
@@ -159,6 +160,8 @@ export default function MainHeader(props) {
     { id: "addQuestionModalTab-1", label: "Add Question", value: 0 },
     { id: "addQuestionModalTab-2", label: "Add Post", value: 1 },
   ];
+
+  const userType = localStorage.getItem("USER_TYPE");
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
@@ -190,6 +193,9 @@ export default function MainHeader(props) {
             >
               <MainTab value={tabValue} />
             </Box>
+            <IconButton sx={{color: "#FFDE2E"}}>
+              <WorkspacePremiumIcon />
+            </IconButton>
             <SearchProfiles />
             <ModalOpenButton
               modalName="addQuestion-post-modal"
@@ -202,7 +208,7 @@ export default function MainHeader(props) {
                 variant="contained"
                 style={{ borderRadius: 10, textTransform: "none" }}
               >
-                Add Question
+                {userType === "student" ?  "Add Question": "Add Post"}
               </Button>
             </ModalOpenButton>
           </Toolbar>

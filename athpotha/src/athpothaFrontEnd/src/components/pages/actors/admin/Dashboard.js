@@ -106,7 +106,7 @@ export default function Dashboard(props) {
     setOpen(!open);
   };
   const universityReg=()=>{
-    console.log("d");
+    navigate("/admin/university-registration");
   }
 
   let navigate = useNavigate();

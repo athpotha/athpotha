@@ -4,8 +4,9 @@ import { fetchUserData } from "../../../api/authenticationService";
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
+import CommunityFeedsSection from "../actors/community/view-profile/CommunityFeedsSection";
 import TutorFeedSection from "../actors/tutor/profile/TutorFeedSection";
-import UniversityFeedSection from "../actors/university/profile/UniversityFeedSection";
+import UniversityFeedSection from "../actors/university/view-profile/UniversityFeedSection";
 
 import CoverSection from "./CoverSection";
 import FeedsSection from "./FeedsSection";
@@ -71,30 +72,28 @@ function Content() {
   if (isLoading) {
     content = <BeforeDisplay />;
   }
-  const userType = localStorage.getItem("USER_TYPE");
+
+  var parts = window.location.pathname.split( '/' );
+  const viewingUserType = parts[1];
   return (
-    <StyledEngineProvider injectFirst>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <CoverSection></CoverSection>
-        </Grid>
-        <Grid item xs={12}
-        >
-          <FeedsStart />
-        </Grid>
-        <Grid item xs={12}>
-          {/* {(userType === "student" || userType === "community") &&
-            <FeedsSection posts={posts} isLoading={isLoading} />
-          }
-          {userType === "university" &&
-            <UniversityFeedSection posts={posts} isLoading={isLoading} />
-          }
-          {userType === "tutor" && 
-          <TutorFeedSection posts={posts} isLoading={isLoading} />} */}
-          <UniversityFeedSection posts={posts} isLoading={isLoading} />
-        </Grid>
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <CoverSection></CoverSection>
       </Grid>
-    </StyledEngineProvider>
+      <Grid item xs={12}>
+        {(viewingUserType === "student" || viewingUserType === "community" || viewingUserType === "user") &&
+          <FeedsSection posts={posts} isLoading={isLoading} />
+        }
+        {viewingUserType === "community"  &&
+          <CommunityFeedsSection posts={posts} isLoading={isLoading} />
+        }
+        {viewingUserType === "university" &&
+          <UniversityFeedSection posts={posts} isLoading={isLoading} />
+        }
+        {viewingUserType === "tutor" &&
+          <TutorFeedSection posts={posts} isLoading={isLoading} />}
+      </Grid>
+    </Grid>
   );
 }
 
