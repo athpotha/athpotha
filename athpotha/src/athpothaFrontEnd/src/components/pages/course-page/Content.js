@@ -3,6 +3,7 @@ import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import CourseViewCard from "./CourseViewCard";
+import { fetchUserData } from "../../../api/authenticationService";
 
 function Item(props) {
     const { sx, ...other } = props;
@@ -40,12 +41,28 @@ Item.propTypes = {
 const notiCount = 7; // no of new notifications
 
 function Content() {
+
+    const [university, setUniversity] = React.useState([])
+    const user_id = localStorage.getItem("USER_ID")
+
+    React.useEffect(() => {
+        fetchUserData({
+            url: "/university/courses",
+            method: "post",
+            data: { user_id: user_id }
+        }).then((response) => {
+            setUniversity(response.data)
+        })
+    }, [])
+
+    console.log(university)
+
     return (
         <StyledEngineProvider injectFirst>
 
             <Item>
                 <div style={{ height: 'auto', display: 'flex', justifyContent: 'space-around', p: 1, m: 1, alignItems: 'center' }}>
-                    <CourseViewCard></CourseViewCard>
+                    <CourseViewCard uni={university}></CourseViewCard>
                 </div>
             </Item>
 

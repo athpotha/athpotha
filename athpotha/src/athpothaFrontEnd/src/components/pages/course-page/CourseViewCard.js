@@ -21,14 +21,14 @@ const StyledRating = styled(Rating)({
     },
   });
 
-function CourseViewCard() {
+function CourseViewCard(props) {
 
     const navigate = useNavigate();
     const navigateuniprofile = () => {
         navigate('/uni-profile');
       };
 
-    const products = ['1', '2', '3', '4', '5', '6'];
+    const products = props.uni;
 
 
     return (
@@ -39,8 +39,8 @@ function CourseViewCard() {
                     gap: 3,
                     gridTemplateColumns: 'repeat(3, 1fr)',
                 }}>
-                    {products.map(product => (
-                        <Box sx={{ p: 1, m: 1, }} >
+                    {products.map(({user_id,faculty, university}) => (
+                        <Box sx={{ p: 1, m: 1, }} key={user_id}>
                             <Card sx={{ maxWidth: 330, p:2 }}>
                                 <div style={{ position: 'relative' }}>
                                     <CardMedia
@@ -54,7 +54,8 @@ function CourseViewCard() {
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '35px', marginLeft: '16px' }}>
-                                    <Box sx={{ mb: "30px" }}>UCSSC</Box>
+                                    <Box sx={{ mb: "px" }}>{university}</Box>
+                                    <Box sx={{ mb: "30px" }}>{faculty}</Box>
                                     <CenteredBox >
                                         <Stack direction="row" spacing={1}>
                                             <StyledRating
