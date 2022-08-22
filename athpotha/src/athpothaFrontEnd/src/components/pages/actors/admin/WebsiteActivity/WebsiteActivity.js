@@ -1,10 +1,13 @@
 import React from 'react'
 // import Content from './Content'
 import Dashboard from '../Dashboard'
-
+import WebActivityContent from './WebActivityContent'
 function WebsiteActivity() {
   return (
-    <Dashboard ></Dashboard>
+    
+    <React.Fragment>
+            <Dashboard content={<WebActivityContent/>} />
+        </React.Fragment>
   )
 }
 
