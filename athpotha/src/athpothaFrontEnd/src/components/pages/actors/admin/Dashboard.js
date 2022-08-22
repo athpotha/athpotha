@@ -113,6 +113,9 @@ export default function Dashboard(props) {
   const mangeUserHandler = (event) => {
     navigate("/admin/manage-users");
   }
+  const manageDashboard=()=>{
+    navigate("/admin")
+  }
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -167,7 +170,7 @@ export default function Dashboard(props) {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <ListItem disablePadding>
+            <ListItem disablePadding onClick={manageDashboard}>
               <ListItemButton>
                 <ListItemIcon>
                   <DashboardIcon />
