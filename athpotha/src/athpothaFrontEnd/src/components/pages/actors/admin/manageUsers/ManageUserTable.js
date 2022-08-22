@@ -75,6 +75,8 @@ export default function CustomizedTables() {
             <MenuItem value={10}>Student</MenuItem>
             <MenuItem value={20}>Teacher</MenuItem>
             <MenuItem value={30}>University Representative</MenuItem>
+            <MenuItem value={40}>Stakeholders</MenuItem>
+
           </Select>
         </FormControl>
       </Box>
