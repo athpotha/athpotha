@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import { styled, alpha } from '@mui/material/styles';
-import { Box, Divider, IconButton } from "@mui/material";
+import { Box, Divider, IconButton, Modal } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Fab from '@mui/material/Fab';
@@ -11,6 +11,20 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import ChatIcon from '@mui/icons-material/Chat';
+import CloseIcon from '@mui/icons-material/Close';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    borderRadius: '7px',
+    boxShadow: 35,
+    p: 4,
+    width: "30%",
+};
 
 const messages = [
     {
@@ -118,15 +132,23 @@ function ContactList(props) {
     const [active, setActive] = useState(-1);
     const selectItem = (id, name) => {
         setActive(id)
-        { props.setSelectContactdetails((obj)=>({...obj,value1:id,value2:name})) }
-}
+        { props.setSelectContactdetails((obj) => ({ ...obj, value1: id, value2: name })) }
+    }
+
+    const getNewContact = (id) => {
+        alert(id)
+    }
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
         <StyledEngineProvider injectFirst>
             <Box sx={{ height: "50px", borderBottom: '1px solid', borderColor: 'grey.300', p: 1.5, display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ fontWeight: '500', fontSize: '12pt' }}>Messaging</div>
                 <div>
-                    <IconButton size="small" color="inherit">
+                    <IconButton size="small" color="inherit" onClick={handleOpen}>
                         <ChatIcon sx={{ color: "grey.600" }}></ChatIcon>
                     </IconButton>
                 </div>
@@ -164,6 +186,46 @@ function ContactList(props) {
                     ))}
                 </List>
             </Box>
+
+            <Modal open={open} >
+                <Box sx={style}>
+                    <IconButton
+                        aria-label="close"
+                        onClick={handleClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                    <Box sx={{
+                        mt: "25px",
+                        height: "70vh",
+                        overflow: "auto",
+                    }}>
+                        <List>
+                            <ListItem button key={1} onClick={() => getNewContact(1)}>
+                                <ListItemAvatar>
+                                    <Avatar alt="Profile Picture" src="images/tutors/tutor-2.png" />
+                                </ListItemAvatar>
+                                <ListItemText primary="Nimsara Methmal" secondary="student" />
+                            </ListItem>
+                            <Divider/>
+                            <ListItem button key={2} >
+                                <ListItemAvatar>
+                                    <Avatar alt="Profile Picture" src="images/tutors/tutor-2.png" />
+                                </ListItemAvatar>
+                                <ListItemText primary="Rihana Nazir" secondary="community" />
+                            </ListItem>
+                            <Divider></Divider>
+                        </List>
+
+                    </Box>
+                </Box>
+            </Modal>
         </StyledEngineProvider >
     );
 }
