@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import Admin from "./components/pages/actors/admin/Admin";
 import Categories from "./components/pages/wall-home/Categories";
 import ManageUser from "./components/pages/actors/admin/manageUsers/ManageUser";
+import UniversityRegistration from "./components/pages/actors/admin/UniversityRegistration";
 import CoursePage from "./components/pages/course-page/CoursePage";
 function App() {
   const theme = createTheme({
@@ -91,6 +92,7 @@ function App() {
           {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/admin/manage-users" element={<ManageUser />}></Route>
+          <Route path="/universityregistration" element={<UniversityRegistration />}></Route>
           <Route path="/categories" element={<Categories />}></Route>
           <Route path="/course-page" element={<CoursePage />}></Route>
         </Routes>

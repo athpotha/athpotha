@@ -49,6 +49,7 @@ public class User implements UserDetails {
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date created_at;
+	private boolean hasLogged = false;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
