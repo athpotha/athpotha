@@ -19,6 +19,8 @@ import UniProfile from "./components/pages/uni-profile/UniProfile";
 
 import { useSelector } from "react-redux";
 import Admin from "./components/pages/actors/admin/Admin";
+import Categories from "./components/pages/wall-home/Categories";
+import ManageUser from "./components/pages/actors/admin/manageUsers/ManageUser";
 function App() {
   const theme = createTheme({
     palette: {
@@ -55,6 +57,7 @@ function App() {
 
   const authCtx = useContext(AuthContext);
   const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
+  localStorage.setItem("USER_TYPE", "student");
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
@@ -86,6 +89,8 @@ function App() {
           <Route path="/uni-profile" element={<UniProfile />}></Route>
           {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
           <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/admin/manage-users" element={<ManageUser />}></Route>
+          <Route path="/categories" element={<Categories />}></Route>
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>
