@@ -24,14 +24,12 @@ import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import ForumIcon from "@mui/icons-material/Forum";
 
-import Comment from "./Comment";
-import RoundedInputField from "../../../RoundedInputField";
-import BeforeDisplay from "../../../BeforeDisplay";
-import BasicMenu from "./BasicMenu";
+import Comment from "../wall-main/Feeds/Comment";
+import RoundedInputField from "../../RoundedInputField";
 import { useDispatch, useSelector } from "react-redux";
-import SimpleSnackbar from "./SimpleSnackbar";
-import HomeCardMenu from "./HomeCardMenu";
-import { Link } from "react-router-dom";
+import SimpleSnackbar from "../wall-main/Feeds/SimpleSnackbar";
+import ProfileCardAction from "./ProfileCardAction";
+import ProfileCardMenu from "./ProfileCardMenu";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -90,38 +88,52 @@ const commentDetatils = [
     ],
   },
 ];
+const PostedPerson = styled(Avatar)({
+  opacity: 1,
+  "&:hover": {
+    opacity: 0.6
+  },
+  width: 56, 
+  height: 56, 
+  marginRight: 10,
+  cursor: "pointer"
+});
 
-export default function HomeCard(props) {
+const PostedImage = styled(CardMedia)({
+  cursor: "pointer",
+  "&:hover": {
+    opacity: 0.8
+  },
+  height:"460"
+})
+export default function ProfileCard(props) {
   const [expanded, setExpanded] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    setIsLoading(true);
-    setIsLoading(false);
-  }, []);
+  // const [isLoading, setIsLoading] = useState(false);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   setIsLoading(false);
+  // }, []);
 
-  if (isLoading) {
-    return (
-      <Grid item xs={12} sx={{ mb: 5 }}>
-        <BeforeDisplay width="100%" height={450} />
-      </Grid>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <Grid item xs={12} sx={{ mb: 5 }}>
+  //       <BeforeDisplay width="100%" height={450} />
+  //     </Grid>
+  //   );
+  // }
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    console.log("In home card");
-  };
   const bookmarkPosts = useSelector((state) => state.bookmarks.bookmarkedPosts);
+
   var isBookmarkAdded = null;
   var isBookmarkRemoved = null;
   const bookmarkIndex = bookmarkPosts.findIndex(
     (bookmark) => bookmark.id === props.homeCardId
   );
+  
   if (bookmarkIndex !== -1) {
     isBookmarkAdded = bookmarkPosts[bookmarkIndex].isBookmarkAdded;
     isBookmarkRemoved = bookmarkPosts[bookmarkIndex].isBookmarkRemoved;
@@ -133,44 +145,39 @@ export default function HomeCard(props) {
         item
         xs={12}
         // style={{ backgroundColor: "#e91e63" }}
-        sx={{ bgcolor: "background", p: 1, pl: 0, mb: 2, borderRadius: 2 }}
+        sx={{ bgcolor: "background", mb: 3, borderRadius: 2, p: 0 }}
       >
         <div>
           <Card sx={{ width: "100%", pb: 2 }}>
             <CardHeader
               avatar={
                 <ListItem style={{ cursor: "pointer", padding: 0 }}>
-                  <ListItemAvatar style={{ cursor: "pointer" }}>
-                    <Avatar
-                      sx={{ width: 56, height: 56, mr: 1 }}
+                  <ListItemAvatar>
+                    <PostedPerson
                       src={props.postItem.personImage}
                     />
                   </ListItemAvatar>
-                  <Link>
-                    <ListItemText
-                      primary={props.postItem.personName}
-                      secondary={props.postItem.postDate}
-                    />
-                  </Link>
+                  <ListItemText
+                    primary={props.postItem.personName}
+                    secondary={props.postItem.postDate}
+                  />
                 </ListItem>
               }
               action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
+                <ProfileCardAction />
               }
             />
             <CardContent>
-              <Typography variant="body" color="text.secondary">
+              <Typography variant="body" color="text">
                 {props.postItem.postContent}
               </Typography>
             </CardContent>
-            <CardMedia
+            {props.postItem.postedImage && <PostedImage
               component="img"
-              height="460"
               image={props.postItem.postedImage}
-              alt="Paella dish"
-            />
+              // alt="Paella dish"
+            />}
+            
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
                 <KeyboardDoubleArrowUpIcon />
@@ -185,13 +192,8 @@ export default function HomeCard(props) {
                   <Typography>{props.postItem.noOfComments}</Typography>
                 </IconButton>
               </Box>
-              <ExpandMore
-              // expand={expanded}
-              // onClick={handleExpandClick}
-              // aria-expanded={expanded}
-              // aria-label="show more"
-              >
-                <HomeCardMenu menuId={props.homeCardId} />
+              <ExpandMore>
+                <ProfileCardMenu menuId={props.homeCardId} />
               </ExpandMore>
             </CardActions>
 
