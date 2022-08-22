@@ -16,6 +16,7 @@ import Chat from "./components/pages/chat/Chat";
 import MyNetwork from "./components/pages/my-network/MyNetwork";
 import AuthContext from "./store/ath-context";
 import UniProfile from "./components/pages/uni-profile/UniProfile";
+import WebsiteActivity from './components/pages/actors/admin/WebsiteActivity/WebsiteActivity'
 
 import { useSelector } from "react-redux";
 import Admin from "./components/pages/actors/admin/Admin";
@@ -91,6 +92,9 @@ function App() {
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/admin/manage-users" element={<ManageUser />}></Route>
           <Route path="/categories" element={<Categories />}></Route>
+          <Route path="/admin/website-activity" element={<WebsiteActivity />}></Route>
+
+          
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>

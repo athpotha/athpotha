@@ -117,6 +117,10 @@ export default function Dashboard(props) {
   const manageDashboard=()=>{
     navigate("/admin")
   }
+  const webActivity =()=>{
+    navigate("/admin/website-activity")
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -208,7 +212,7 @@ export default function Dashboard(props) {
 
             <Divider sx={{ my: 1 }} />
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={webActivity}>
                 <ListItemIcon>
                   <LanguageIcon />
                 </ListItemIcon>
