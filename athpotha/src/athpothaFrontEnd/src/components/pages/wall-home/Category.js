@@ -125,7 +125,7 @@ export default function Category(props) {
             setImageButton(imageButton);
         }
         dispatch(educationCategoryActions.addCategory(props.image.title));
-        if (props.image.title === "O/L Qualified") {
+        if (props.image.title === "O/L Qualified" || props.image.title === "A/L Qualified" || props.image.title === "Undergraduate") {
             dispatch(educationCategoryActions.setBackButton(1));
         }
         // dispatch(educationCategoryActions.setSelectedStudentType(props.image.title));
