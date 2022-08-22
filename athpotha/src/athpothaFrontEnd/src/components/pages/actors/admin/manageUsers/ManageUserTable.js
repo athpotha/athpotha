@@ -8,7 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { create } from '@mui/material/styles/createTransitions';
-import { Button } from '@mui/material';
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormLabel } from '@mui/material';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,44 +38,80 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('Student','Kasun','Perera', 159, 6.0, 24, 4.0),
+  createData('Student','Nuwan','Janitha', 237, 9.0, 37, 4.3),
+  createData('Teacher','Kumara','Liyanage', 262, 16.0, 24, 6.0),
+  createData('Student','Nuwan','Janitha', 237, 9.0, 37, 4.3),
+  createData('Teacher','Kumara','Liyanage', 262, 16.0, 24, 6.0),
 ];
  const updateRow=()=>{
   console.log("ada");
 }
+
+
+
+
 export default function CustomizedTables() {
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Buttons</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              <StyledTableCell align="right"><Button onClick={updateRow()}>Update</Button><Button color="error">Delete</Button></StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Grid>  
+      <Grid container>
+      
+      <Grid item xs={12}>
+      <Box sx={{ maxWidth: 200 ,mb:3}}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Select User Type</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={age}
+            label="User_Type"
+            onChange={handleChange}
+          >
+            <MenuItem value={10}>Student</MenuItem>
+            <MenuItem value={20}>Teacher</MenuItem>
+            <MenuItem value={30}>University Representative</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      </Grid>
+      </Grid>
+
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="left">User Type</StyledTableCell>
+              <StyledTableCell align="left">First Name</StyledTableCell>
+              <StyledTableCell align="left">Last Name</StyledTableCell>
+              <StyledTableCell align="left">Qualification</StyledTableCell>
+              <StyledTableCell align="left">Bio</StyledTableCell>
+              <StyledTableCell align="left">Buttons</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <StyledTableRow key={row.name}>
+                <StyledTableCell component="th" scope="row">
+                  {row.name}
+                </StyledTableCell>
+                <StyledTableCell align="left">{row.calories}</StyledTableCell>
+                <StyledTableCell align="left">{row.fat}</StyledTableCell>
+                <StyledTableCell align="left">{row.carbs}</StyledTableCell>
+                <StyledTableCell align="left">{row.protein}</StyledTableCell>
+                <StyledTableCell align="left">
+                  <Button onClick={updateRow()}>Update</Button>
+                  <Button color="error">Delete</Button>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Grid>
   );
 }
