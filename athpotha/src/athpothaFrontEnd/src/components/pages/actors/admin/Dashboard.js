@@ -20,6 +20,11 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import InboxIcon from '@mui/icons-material/Inbox';
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import NotificationMenu from './NotificationMenu';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ReportIcon from '@mui/icons-material/Report';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import LanguageIcon from '@mui/icons-material/Language';
 import Content from './Content';
 // import { mainListItems, secondaryListItems } from './listItems';
 // import Chart from './Chart';
@@ -150,21 +155,52 @@ function DashboardContent() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon />
+                  <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Inbox" />
+                <ListItemText primary="Dashboard" />
               </ListItemButton>
             </ListItem>
             <Divider sx={{ my: 1 }} />
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon />
+                  <ManageAccountsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Inbox" />
+                <ListItemText primary="Manage Users" />
               </ListItemButton>
             </ListItem>
             <Divider sx={{ my: 1 }} />
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <HowToRegIcon />
+                </ListItemIcon>
+                <ListItemText primary="University Registration" />
+              </ListItemButton>
+            </ListItem>
+
+            <Divider sx={{ my: 1 }} />
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LanguageIcon />
+                </ListItemIcon>
+                <ListItemText primary="Website Activity" />
+              </ListItemButton>
+            </ListItem>
+
+            <Divider sx={{ my: 1 }} />
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ReportIcon />
+                </ListItemIcon>
+                <ListItemText primary="Reports" />
+              </ListItemButton>
+            </ListItem>
+            <Divider sx={{ my: 1 }} />
+
+            
           </List>
         </Drawer>
         <Box
@@ -181,7 +217,8 @@ function DashboardContent() {
         >
           <Toolbar />
           <Grid Content sx={{p:3}}>
-          <Content></Content>
+          {/* ------------------  content of the dashboard ------------d*/}
+          <Content></Content>   
           </Grid>
           
         </Box>

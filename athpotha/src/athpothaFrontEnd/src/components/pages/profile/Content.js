@@ -3,9 +3,11 @@ import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
 import React, { useCallback, useEffect, useState } from "react";
 import { fetchUserData } from "../../../api/authenticationService";
 import BeforeDisplay from "../../ui/BeforeDisplay";
+import ProfileCard from "../../ui/insight/profile/ProfileCard";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
 import CoverSection from "./CoverSection";
+import FeedsSection from "./FeedsSection";
 // import NotiPanel from "./NotiPanel";
 const notiCount = 7; // no of new notifications
 
@@ -37,6 +39,7 @@ function Content() {
           id: post.postId,
           personName: `${post.user.first_name} ${post.user.last_name}`,
           postDate: addedDate,
+          postType: post.type,
           postContent: post.type === "post" ? post.title : post.question,
           postedImage: post.image,
           personImage: post.user.profile_picture,
@@ -78,12 +81,13 @@ function Content() {
           <FeedsStart />
         </Grid>
         <Grid item xs={12}>
-          <h2>Your posts</h2>
+          <FeedsSection posts={posts} isLoading={isLoading} />
+          {/* <h2>Your posts</h2>
           {!isLoading && posts.map((post) => (
-            <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
+            <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
           ))}
           {!isLoading && posts.length === 0 && <p>Found no posts</p>}
-          {isLoading && <p>Loading ...</p>}
+          {isLoading && <p>Loading ...</p>} */}
         </Grid>
       </Grid>
     </StyledEngineProvider>

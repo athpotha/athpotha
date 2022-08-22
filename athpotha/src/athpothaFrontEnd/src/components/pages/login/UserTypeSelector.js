@@ -34,14 +34,14 @@ function UserTypeSelector(props) {
     dispatch(signupButtonActions.setClickedSignupButton("tutor"));
   };
 
-  // const universitySignupClicked = () => {
-  //   dispatch(signupButtonActions.setSelectedSignupButton("university"));
-  //   dispatch(signupButtonActions.setClickedSignupButton("university"));
-  // };
+  const universitySignupClicked = () => {
+    dispatch(signupButtonActions.setSelectedSignupButton("university"));
+    dispatch(signupButtonActions.setClickedSignupButton("university"));
+  };
 
-  const commiunitySignupClicked = () => {
-    dispatch(signupButtonActions.setSelectedSignupButton("commiunity"));
-    dispatch(signupButtonActions.setClickedSignupButton("commiunity"));
+  const communitySignupClicked = () => {
+    dispatch(signupButtonActions.setSelectedSignupButton("community"));
+    dispatch(signupButtonActions.setClickedSignupButton("community"));
   };
 
   const forwordButtonclicked = () => {
@@ -108,7 +108,7 @@ function UserTypeSelector(props) {
         >
           Sign Up As a Tutor
         </Button>
-        {/* <Button
+        <Button
           sx={{
             height: "50px",
             borderRadius: "10px",
@@ -123,7 +123,7 @@ function UserTypeSelector(props) {
           endIcon={clickedSignupButton === "university" ? <SendOutlinedIcon /> : ""}
         >
           Sign Up As an University
-        </Button> */}
+        </Button>
         <Button
           sx={{
             height: "50px",
@@ -133,12 +133,12 @@ function UserTypeSelector(props) {
           }}
           fullWidth
           variant={
-            clickedSignupButton === "commiunity" ? "contained" : "outlined"
+            clickedSignupButton === "community" ? "contained" : "outlined"
           }
-          onClick={commiunitySignupClicked}
-          endIcon={clickedSignupButton === "commiunity" ? <SendOutlinedIcon /> : ""}
+          onClick={communitySignupClicked}
+          endIcon={clickedSignupButton === "community" ? <SendOutlinedIcon /> : ""}
         >
-          Sign Up As a Commiunity
+          Sign Up As a community
         </Button>
       </div>
     </form>

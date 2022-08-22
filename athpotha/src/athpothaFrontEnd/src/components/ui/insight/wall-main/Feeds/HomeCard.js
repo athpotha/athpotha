@@ -31,6 +31,8 @@ import BasicMenu from "./BasicMenu";
 import { useDispatch, useSelector } from "react-redux";
 import SimpleSnackbar from "./SimpleSnackbar";
 import HomeCardMenu from "./HomeCardMenu";
+import HomeCardActions from "./HomeCardActions";
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -89,7 +91,24 @@ const commentDetatils = [
     ],
   },
 ];
+const PostedPerson = styled(Avatar)({
+  opacity: 1,
+  "&:hover": {
+    opacity: 0.6
+  },
+  width: 56, 
+  height: 56, 
+  marginRight: 10,
+  cursor: "pointer"
+});
 
+const PostedImage = styled(CardMedia)({
+  cursor: "pointer",
+  "&:hover": {
+    opacity: 0.8
+  },
+  height:"460"
+})
 export default function HomeCard(props) {
   const [expanded, setExpanded] = useState(false);
 
@@ -136,9 +155,8 @@ export default function HomeCard(props) {
             <CardHeader
               avatar={
                 <ListItem style={{ cursor: "pointer", padding: 0 }}>
-                  <ListItemAvatar style={{ cursor: "pointer" }}>
-                    <Avatar
-                      sx={{ width: 56, height: 56, mr: 1 }}
+                  <ListItemAvatar>
+                    <PostedPerson
                       src={props.postItem.personImage}
                     />
                   </ListItemAvatar>
@@ -149,9 +167,7 @@ export default function HomeCard(props) {
                 </ListItem>
               }
               action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
+                <HomeCardActions />
               }
             />
             <CardContent>
@@ -159,9 +175,8 @@ export default function HomeCard(props) {
                 {props.postItem.postContent}
               </Typography>
             </CardContent>
-            {props.postItem.postedImage && <CardMedia
+            {props.postItem.postedImage && <PostedImage
               component="img"
-              height="460"
               image={props.postItem.postedImage}
               // alt="Paella dish"
             />}
@@ -180,12 +195,7 @@ export default function HomeCard(props) {
                   <Typography>{props.postItem.noOfComments}</Typography>
                 </IconButton>
               </Box>
-              <ExpandMore
-              // expand={expanded}
-              // onClick={handleExpandClick}
-              // aria-expanded={expanded}
-              // aria-label="show more"
-              >
+              <ExpandMore>
                 <HomeCardMenu menuId={props.homeCardId} />
               </ExpandMore>
             </CardActions>
