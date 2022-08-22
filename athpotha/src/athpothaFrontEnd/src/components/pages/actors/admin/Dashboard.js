@@ -105,10 +105,16 @@ export default function Dashboard(props) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const universityReg=()=>{
+    console.log("d");
+  }
 
   let navigate = useNavigate();
   const mangeUserHandler = (event) => {
     navigate("/admin/manage-users");
+  }
+  const manageDashboard=()=>{
+    navigate("/admin")
   }
   return (
     <ThemeProvider theme={mdTheme}>
@@ -164,7 +170,7 @@ export default function Dashboard(props) {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <ListItem disablePadding>
+            <ListItem disablePadding onClick={manageDashboard}>
               <ListItemButton>
                 <ListItemIcon>
                   <DashboardIcon />
@@ -183,7 +189,7 @@ export default function Dashboard(props) {
             </ListItem>
             <Divider sx={{ my: 1 }} />
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={universityReg}>
                 <ListItemIcon>
                   <HowToRegIcon />
                 </ListItemIcon>
