@@ -157,9 +157,9 @@ function Home() {
 
                                             {replaceCommaLine(minirequirements).map(name =>
                                                 <Grid sx={{ ml: "20px" }}><CheckIcon sx={{ color: "green" }} /><span style={{ fontSize: "11pt" }}>{name}</span></Grid>)}
-                                            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
+                                            {/* <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
                                                 <Button onClick={handleOpenReq(minirequirements)}>Edit</Button>
-                                            </Box>
+                                            </Box> */}
                                         </Grid>
 
                                         <Modal open={openReq} >
@@ -205,9 +205,9 @@ function Home() {
                                             <Typography variant="body2" sx={{ ml: "20px" }}>
                                                 {details}
                                             </Typography>
-                                            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
+                                            {/* <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
                                                 <Button onClick={handleOpenDes(details)}>Edit</Button>
-                                            </Box>
+                                            </Box> */}
                                         </Grid>
 
                                         <Modal open={openDes} >
@@ -257,9 +257,9 @@ function Home() {
                                             </Typography>
                                             {replaceCommaLine(CareerOpportunities).map(name =>
                                                 <Grid sx={{ ml: "20px" }}><CheckIcon sx={{ color: "green" }} /><span style={{ fontSize: "11pt" }}>{name}</span></Grid>)}
-                                            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
+                                            {/* <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
                                                 <Button onClick={handleOpenOpp(CareerOpportunities)}>Edit</Button>
-                                            </Box>
+                                            </Box> */}
                                         </Grid>
 
                                         <Modal open={openOpp} >
