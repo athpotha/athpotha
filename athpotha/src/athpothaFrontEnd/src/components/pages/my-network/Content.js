@@ -8,7 +8,7 @@ import Invitation from "./Invitation";
 import { Button, Modal } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { FollowStudent, FollowTeacher, FollowUniversity } from "./Follow";
+import { FollowCommunity, FollowStudent, FollowTeacher, FollowUniversity } from "./Follow";
 import { fetchUserData } from "../../../api/authenticationService";
 
 const style = {
@@ -78,6 +78,9 @@ function Content() {
 
 
   const [tutor, setTutor] = React.useState([])
+  const [University, setUniversity] = React.useState([])
+  const [community, setCommunity] = React.useState([])
+  const [student, setStudent] = React.useState([])
 
   // React.useEffect(() => {
   //   fetch("http://localhost:8080/network/getTutors")
@@ -89,18 +92,43 @@ function Content() {
   // }, [])
 
   const user_id = localStorage.getItem("USER_ID")
-  
+
   React.useEffect(() => {
     fetchUserData({
       url: "network/getTutors",
       method: "post",
-      data:{user_id: user_id}
+      data: { user_id: user_id }
     }).then((response) => {
       setTutor(response.data)
-  })
-  
-  },[])
-  
+    })
+
+    fetchUserData({
+      url: "network/getUniversities",
+      method: "post",
+      data: { user_id: user_id }
+    }).then((response) => {
+      setUniversity(response.data)
+    })
+
+    fetchUserData({
+      url: "network/getCommunities",
+      method: "post",
+      data: { user_id: user_id }
+    }).then((response) => {
+      setCommunity(response.data)
+    })
+
+    fetchUserData({
+      url: "network/getStudents",
+      method: "post",
+      data: { user_id: user_id }
+    }).then((response) => {
+      setStudent(response.data)
+    })
+
+  }, [])
+
+  console.log(student)
 
   return (
     <StyledEngineProvider injectFirst>
@@ -135,12 +163,12 @@ function Content() {
                       height: "70vh",
                       overflow: "auto",
                     }}>
-                      {/* <FollowUniversity value={0} tutors={tutor}></FollowUniversity> */}
+                      <FollowUniversity value={0} Universities={University}></FollowUniversity>
                     </Box>
                   </Box>
                 </Modal>
               </div>
-              {/* <FollowUniversity value={1} tutors={tutor}></FollowUniversity> */}
+              <FollowUniversity value={1} Universities={University}></FollowUniversity>
             </Item>
 
             <Item>
@@ -166,12 +194,12 @@ function Content() {
                       height: "70vh",
                       overflow: "auto",
                     }}>
-                      {/* <FollowStudent value={2} tutors={tutor}></FollowStudent> */}
+                      <FollowCommunity value={2} communities={community}></FollowCommunity>
                     </Box>
                   </Box>
                 </Modal>
               </div>
-              {/* <FollowStudent value={3} tutors={tutor}></FollowStudent> */}
+              <FollowCommunity value={3} communities={community}></FollowCommunity>
             </Item>
 
             <Item>
@@ -228,12 +256,12 @@ function Content() {
                       height: "70vh",
                       overflow: "auto",
                     }}>
-                      {/* <FollowStudent value={6} tutors={tutor}></FollowStudent> */}
+                      <FollowStudent value={6} students={student}></FollowStudent>
                     </Box>
                   </Box>
                 </Modal>
               </div>
-              {/* <FollowStudent value={7} tutors={tutor}></FollowStudent> */}
+              <FollowStudent value={7} students={student}></FollowStudent>
             </Item>
           </Box>
         </div>
