@@ -6,7 +6,7 @@ import classes from "./Form.module.css";
 // import { registrationActions } from "../../../../store/registration-slice";
 // import { signupButtonActions } from "../../../store/signup-button-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { FormControl, FormHelperText, Grid, IconButton, InputLabel, MenuItem, Select } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import CenteredBox from "../../../ui/CenteredBox";
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -120,38 +120,6 @@ function UniversityRegistrationForm(props) {
     }
   })
 
-  //University Validation
-  const {
-    value: university,
-    isValid: universityIsValid,
-    hasError: universityHasError,
-    error: universityError,
-    valueChangeHandler: universityChangeHandler,
-    inputBlurHandler: universityBlurHandler,
-  } = useInput((value) => {
-    if (value === "") {
-      return { inputIsValid: false, error: "Can't be Empty !" }
-    } else {
-      return { inputIsValid: true, error: "" }
-    }
-  })
-
-  //Faculty Validation
-  const {
-    value: faculty,
-    isValid: facultyIsValid,
-    hasError: facultyHasError,
-    error: facultyError,
-    valueChangeHandler: facultyChangeHandler,
-    inputBlurHandler: facultyBlurHandler,
-  } = useInput((value) => {
-    if (value === "") {
-      return { inputIsValid: false, error: "Can't be Empty !" }
-    } else {
-      return { inputIsValid: true, error: "" }
-    }
-  })
-
   //Helper for the password
   function CheckPassword(string) {
     let pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
@@ -238,6 +206,24 @@ function UniversityRegistrationForm(props) {
       onSubmit={submitHandler}
       noValidate
     >
+      {/* <Grid container>
+        <Grid item xs={6}>
+          <IconButton onClick={backButtonClicked} color="primary">
+            <NavigateBeforeIcon />
+          </IconButton>
+        </Grid>
+        <Grid item xs={6}>
+          {(enteredEmail !== "") ? (
+            <CenteredBox align="right">
+              <IconButton onClick={forwardButtonClicked} color="primary">
+                <NavigateNextIcon />
+              </IconButton>
+            </CenteredBox>
+          ) : (
+            ""
+          )}
+        </Grid>
+      </Grid> */}
       <div className={classes.logo}>
         <img src="/images/athpotha_v3.png" alt="easyclassName" />
       </div>
@@ -281,59 +267,7 @@ function UniversityRegistrationForm(props) {
                 type="text"
               />
             </Grid>
-
           </Grid>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <FormControl variant="standard" sx={{ width: "100%" }} required error={universityHasError}>
-            <InputLabel id="university">University</InputLabel>
-            <Select
-              label="University"
-              value={university}
-              onChange={universityChangeHandler}
-              onBlur={universityBlurHandler}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={1}>University of Moratuwa</MenuItem>
-              <MenuItem value={2}>University of Colombo</MenuItem>
-              <MenuItem value={3}>University of Peradeniya</MenuItem>
-              <MenuItem value={4}>University of Kelaniya</MenuItem>
-              <MenuItem value={5}>University of Japura</MenuItem>
-              <MenuItem value={6}>University of Ruhuna</MenuItem>
-              <MenuItem value={7}>Sri Lanka Institute of Information Technology (SLIIT)</MenuItem>
-              <MenuItem value={8}>Informatics Information of Technology (IIT)</MenuItem>
-            </Select>
-            <FormHelperText>{universityHasError ? universityError : ""}</FormHelperText>
-          </FormControl>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <FormControl variant="standard" sx={{ width: "100%" }} required error={universityHasError}>
-            <InputLabel id="faculty">Faculty</InputLabel>
-            <Select
-              label="Faculty"
-              value={faculty}
-              onChange={facultyChangeHandler}
-              onBlur={facultyBlurHandler}
-              error={facultyHasError}
-              helperText={facultyHasError ? facultyError : ""}
-              required
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={1}>Engineering</MenuItem>
-              <MenuItem value={2}>Computer Science</MenuItem>
-              <MenuItem value={3}>Information Technology</MenuItem>
-              <MenuItem value={4}>Physical Science</MenuItem>
-              <MenuItem value={5}>Applied Sciences</MenuItem>
-              <MenuItem value={6}>Quantity Surveying</MenuItem>
-              <MenuItem value={7}>Computing and Information Systems</MenuItem>
-              <MenuItem value={8}>Town and Country Planning</MenuItem>
-            </Select>
-            <FormHelperText>{facultyHasError ? facultyError : ""}</FormHelperText>
-          </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
           <TextField
@@ -392,96 +326,3 @@ function UniversityRegistrationForm(props) {
 }
 
 export default UniversityRegistrationForm;
-
-// <Box style={{mt:"200px"}}>
-    //   <form>
-    //   <TextField id="firstname" label="First Name" variant="standard" />
-    //   <TextField id="lastname" label="Last Name" variant="standard" />
-    //   <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-    //     <InputLabel id="university">University</InputLabel>
-    //     <Select
-    //       labelId="university"
-    //       id="university-names"
-    //       value={universityname}
-    //       onChange={handleChangeUniversity}
-    //       label="University"
-    //     >
-    //       <MenuItem value={1}>University of Moratuwa</MenuItem>
-    //       <MenuItem value={2}>University of Colombo</MenuItem>
-    //       <MenuItem value={3}>University of Peradeniya</MenuItem>
-    //       <MenuItem value={4}>University of Kelaniya</MenuItem>
-    //       <MenuItem value={5}>University of Japura</MenuItem>
-    //       <MenuItem value={6}>University of Ruhuna</MenuItem>
-    //       <MenuItem value={7}>Sri Lanka Institute of Information Technology (SLIIT)</MenuItem>
-    //       <MenuItem value={8}>Informatics Information of Technology (IIT)</MenuItem>
-    //     </Select>
-    //   </FormControl>
-    //   <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-    //     <InputLabel id="faculty">Faculty</InputLabel>
-    //     <Select
-    //       labelId="faculty"
-    //       id="faculty-names"
-    //       value={facultyname}
-    //       onChange={handleChangeFaculty}
-    //       label="Faculty"
-    //     >
-    //       <MenuItem value={1}>Engineering</MenuItem>
-    //       <MenuItem value={2}>Computer Science</MenuItem>
-    //       <MenuItem value={3}>Information Technology</MenuItem>
-    //       <MenuItem value={4}>Physical Science</MenuItem>
-    //       <MenuItem value={5}>Applied Sciences</MenuItem>
-    //       <MenuItem value={6}>Quantity Surveying</MenuItem>
-    //       <MenuItem value={7}>Computing and Information Systems</MenuItem>
-    //       <MenuItem value={8}>Town and Country Planning</MenuItem>
-    //     </Select>
-    //   </FormControl>
-    //   <TextField
-    //       id="email"
-    //       label="Email"
-    //       type="email"
-    //     //   autoComplete="current-password"
-    //       variant="standard"
-    //     />
-    //     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-    //       <InputLabel htmlFor="password">Password</InputLabel>
-    //       <Input
-    //         id="password"
-    //         type={values.showPassword ? 'text' : 'password'}
-    //         // value={values.password}
-    //         onChange={handleChangePassword('password')}
-    //         endAdornment={
-    //           <InputAdornment position="end">
-    //             <IconButton
-    //               aria-label="toggle password visibility"
-    //               onClick={handleClickShowPassword}
-    //               onMouseDown={handleMouseDownPassword}
-    //             >
-    //               {values.showPassword ? <VisibilityOff /> : <Visibility />}
-    //             </IconButton>
-    //           </InputAdornment>
-    //         }
-    //       />
-    //     </FormControl>
-    //     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-    //       <InputLabel htmlFor="current-password">Password</InputLabel>
-    //       <Input
-    //         id="current-password"
-    //         type={values.showPassword ? 'text' : 'password'}
-    //         // value={values.password}
-    //         onChange={handleChangePassword('password')}
-    //         endAdornment={
-    //           <InputAdornment position="end">
-    //             <IconButton
-    //               aria-label="toggle password visibility"
-    //               onClick={handleClickShowPassword}
-    //               onMouseDown={handleMouseDownPassword}
-    //             >
-    //               {values.showPassword ? <VisibilityOff /> : <Visibility />}
-    //             </IconButton>
-    //           </InputAdornment>
-    //         }
-    //       />
-    //     </FormControl>
-    //     <Button variant="contained">Submit</Button>
-    //   </form>
-    // </Box>

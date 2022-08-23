@@ -11,6 +11,7 @@ import SignUpForm from "./SignUpForm";
 import EmailSent from "./EmailSent";
 import UserTypeSelector from "./UserTypeSelector";
 import Carousel from "./Carousel";
+import UniversityRegistrationForm from "./UniversityRegistrationForm";
 
 function Login() {
   const main = document.getElementsByClassName(classes.mainDiv);
@@ -38,6 +39,11 @@ function Login() {
                 />
               ) : selectedSignupButton === "" ? (
                 <UserTypeSelector
+                  className="sign-up-form"
+                  onClick={() => setToggleBtn(true)}
+                />
+              ) : selectedSignupButton === "university" ? (
+                <UniversityRegistrationForm
                   className="sign-up-form"
                   onClick={() => setToggleBtn(true)}
                 />
