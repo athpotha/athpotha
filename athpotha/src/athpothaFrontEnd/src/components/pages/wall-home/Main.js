@@ -1,3 +1,4 @@
+import React from "react";
 import {
   StyledEngineProvider,
   Grid,
@@ -7,47 +8,15 @@ import {
   ListItemText,
   List,
 } from "@mui/material";
-import React from "react";
+
 import MainHeader from "../../ui/insight/MainHeader";
 import Feeds from "./Feeds";
 import Leftbar from "../../ui/insight/leftbar/Leftbar";
 import Rightbar from "../../ui/insight/rightbar/Rightbar";
-
 import NewContacts from "../../ui/insight/rightbar/NewContacts";
+import { leftbarItem } from "../../../services/ListItemService";
 
-
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import CellTowerIcon from '@mui/icons-material/CellTower';
-import CastForEducationIcon from '@mui/icons-material/CastForEducation';
-import SchoolIcon from '@mui/icons-material/School';
-const listItems = [
-  {
-    id: "leftbar-listItem-1",
-    listName: "Connections",
-    icon: <PeopleAltIcon />,
-  },
-  {
-    id: "leftbar-listItem-3",
-    listName: "Commiunity Experts",
-    icon: <CellTowerIcon />,
-  },
-  {
-    id: "leftbar-listItem-2",
-    listName: "Teachers",
-    icon: <CastForEducationIcon />,
-  },
-  {
-    id: "leftbar-listItem-5",
-    listName: "Courses",
-    icon: <SchoolIcon />,
-  },
-  {
-    id: "leftbar-listItem-4",
-    listName: "Bookmarks",
-    icon: <BookmarksIcon />,
-  },
-];
+const listItems = leftbarItem();
 
 function Main() {
   return (

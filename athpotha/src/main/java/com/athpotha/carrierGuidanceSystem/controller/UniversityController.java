@@ -20,5 +20,5 @@ public class UniversityController {
     public List<University> getAllUniversities(@RequestBody User user){
         return universityRepository.findAll();
     }
-    
+
 }

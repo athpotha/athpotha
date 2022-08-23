@@ -118,7 +118,7 @@ function UniversityDegrees() {
           heading="Private & Government Universities"
           subtitleColor="secondary.contrastText"
           subtitleVariant="h5"
-          subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
+          subtitle="Our affiliated universities provide the best guidance in choosing the wisest path for higher education"
         />
       </Grid>
       <Grid item xs={12}>
@@ -147,7 +147,7 @@ function UniversityDegrees() {
             heading="Be an Athpotha University Representative"
             subtitleColor="secondary.contrastText"
             subtitleVariant="h6"
-            subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
+            subtitle="Get started as a university representative to enhance the future paths of many"
           />
         </Grid>
         <Grid item alignSelf="center">
