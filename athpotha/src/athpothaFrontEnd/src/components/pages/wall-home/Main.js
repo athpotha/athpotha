@@ -15,10 +15,12 @@ import Leftbar from "../../ui/insight/leftbar/Leftbar";
 import Rightbar from "../../ui/insight/rightbar/Rightbar";
 import NewContacts from "../../ui/insight/rightbar/NewContacts";
 import { leftbarItem } from "../../../services/ListItemService";
+import { useNavigate } from "react-router-dom";
 
 const listItems = leftbarItem();
 
 function Main() {
+  const navigate = useNavigate();
   return (
     <StyledEngineProvider injectFirst>
       <MainHeader value={0} />
@@ -48,7 +50,7 @@ function Main() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton>
+                  <ListItemButton  onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>

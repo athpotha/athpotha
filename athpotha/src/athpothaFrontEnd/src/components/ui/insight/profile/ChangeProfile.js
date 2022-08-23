@@ -40,10 +40,12 @@ function ChangeProfile(props) {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <CardMedia component="img"
-                    image={profileImagePreview === null ? props.image : profileImagePreview}
-                    sx={{ pr: "30px", mb: "30px" }}
-                />
+                <div style={{ height: "400px", overflowY: "auto" }}>
+                    <CardMedia component="img"
+                        image={profileImagePreview === null ? props.image : profileImagePreview}
+                        sx={{ pr: "30px", mb: "30px"}}
+                    />
+                </div>
             </Grid>
             <Grid item xs={12}>
                 <div style={{ marginRight: "30px" }}>

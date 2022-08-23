@@ -12,7 +12,7 @@ import { leftbarItem } from "../../../services/ListItemService";
 
 const listItems = leftbarItem();
 function Chat() {
-  
+
   const userType = localStorage.getItem("USER_TYPE");
   const navigate = useNavigate();
   return (
@@ -44,7 +44,7 @@ function Chat() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton onClick={() => {navigate(listItem.link)}}>
+                  <ListItemButton onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>
