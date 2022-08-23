@@ -17,7 +17,7 @@ const postDetails = [
     personName: "Ashani Imalsha",
     postDate: "Jan 9, 2014",
     postContent:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+      "After A/L? Interested In Java?",
     postedImage:
       "https://lh3.googleusercontent.com/p/AF1QipOXTTCcP39K4RwL4vducZ0nnc7TyNj7omePLCny=w1080-h608-p-no-v0",
     personImage:

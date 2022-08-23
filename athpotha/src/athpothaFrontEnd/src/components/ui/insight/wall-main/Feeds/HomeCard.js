@@ -131,29 +131,17 @@ export default function HomeCard(props) {
           haveReplies: false,
           replies: [{}],
         },
-
-        {
-          id: "comment-reply-2-2",
-          avatarImage: "/images/tutors/tutor-1.jpg",
-          commentOwnerName: "Rahal Jayasundara",
-          commentContent:
-            "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-          upvotes: 126,
-          haveReplies: true,
-          replies: [
-            {
-              id: "comment-reply-reply-2-1",
-              avatarImage: props.postItem.personImage,
-              commentOwnerName: props.postItem.personName,
-              commentContent:
-                "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-              upvotes: 125,
-              haveReplies: false,
-              replies: [{}],
-            },
-          ],
-        },
       ],
+    },
+    {
+      id: "comment-3",
+      avatarImage:
+        "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      commentOwnerName: "Sirimal Rajapaksha",
+      commentContent:
+        "Great job Janaka",
+      upvotes: 123,
+      haveReplies: false,
     },
   ];
   // const [isLoading, setIsLoading] = useState(false);
