@@ -22,6 +22,7 @@ function getLabelText(value) {
 }
 
 export default function HoverRating() {
+
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
 

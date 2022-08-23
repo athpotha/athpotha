@@ -1,16 +1,31 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { create } from '@mui/material/styles/createTransitions';
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
-import { FormLabel } from '@mui/material';
-
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { create } from "@mui/material/styles/createTransitions";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { FormLabel } from "@mui/material";
+import {
+  blue,
+  blueGrey,
+  green,
+  orange,
+  red,
+  yellow,
+} from "@mui/material/colors";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -23,43 +38,71 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
 
 function createData(name, calories, fat, carbs, protein) {
-
   return { name, calories, fat, carbs, protein };
 }
 
 const rows = [
-  createData('Student','Kasun','Perera', 159, 6.0, 24, 4.0),
-  createData('Student','Nuwan','Janitha', 237, 9.0, 37, 4.3),
-  createData('Teacher','Kumara','Liyanage', 262, 16.0, 24, 6.0),
-  createData('Student','Nuwan','Janitha', 237, 9.0, 37, 4.3),
-  createData('Teacher','Kumara','Liyanage', 262, 16.0, 24, 6.0),
+  createData("Student", "Kasun", "Perera", 159),
+  createData("Student", "Nuwan", "Janitha", 237),
+  createData("Teacher", "Kumara", "Liyanage", 262),
+  createData("Student", "Nuwan", "Janitha", 237),
+  createData("Teacher", "Kumara", "Liyanage", 26),
 ];
- const updateRow=()=>{
-  console.log("ada");
-}
+const updateRow = () => {
+  console.log("user reports");
+};
 
+const ColorButton1 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(blue[600]),
+  backgroundColor: blue[600],
+  "&:hover": {
+    backgroundColor: blue[700],
+  },
+}));
 
+const ColorButton2 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(green[600]),
+  backgroundColor: green[600],
+  "&:hover": {
+    backgroundColor: green[700],
+  },
+}));
 
+const ColorButton3 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(red[600]),
+  backgroundColor: red[600],
+  "&:hover": {
+    backgroundColor: red[700],
+  },
+}));
+
+const ColorButton4 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(blueGrey[600]),
+  backgroundColor: orange[600],
+  "&:hover": {
+    backgroundColor: orange[700],
+  },
+}));
 
 export default function CustomizedTables() {
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
   return (
-    <Grid>  
-      <Grid container>
+    <Grid>
+      {/* <Grid container>
       
       <Grid item xs={12}>
       <Box sx={{ maxWidth: 200 ,mb:3}}>
@@ -81,18 +124,16 @@ export default function CustomizedTables() {
         </FormControl>
       </Box>
       </Grid>
-      </Grid>
+      </Grid> */}
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">User Type</StyledTableCell>
-              <StyledTableCell align="left">First Name</StyledTableCell>
-              <StyledTableCell align="left">Last Name</StyledTableCell>
-              <StyledTableCell align="left">Qualification</StyledTableCell>
-              <StyledTableCell align="left">Bio</StyledTableCell>
-              <StyledTableCell align="left">Buttons</StyledTableCell>
+              <StyledTableCell align="left">Reporter Id</StyledTableCell>
+              <StyledTableCell align="left">Reportee Id</StyledTableCell>
+              <StyledTableCell align="left">Date</StyledTableCell>
+              <StyledTableCell align="left">Reason</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -106,8 +147,24 @@ export default function CustomizedTables() {
                 <StyledTableCell align="left">{row.carbs}</StyledTableCell>
                 <StyledTableCell align="left">{row.protein}</StyledTableCell>
                 <StyledTableCell align="left">
-                  <Button onClick={updateRow()}>Update</Button>
-                  <Button color="error">Delete</Button>
+                  <Grid container spacing={5}>
+                    <Grid item>
+                      <ColorButton1 variant="contained">View User</ColorButton1>
+                    </Grid>
+                    <Grid item>
+                      <ColorButton2 variant="contained">Reports</ColorButton2>
+                    </Grid>
+                    <Grid item>
+                      <ColorButton3 variant="contained">Block</ColorButton3>
+                    </Grid>
+                    <Grid item>
+                      <ColorButton4 variant="contained">Warn</ColorButton4>
+                    </Grid>
+                  </Grid>
+                  {/* <Button onClick={updateRow()} style={{color: "#0073e6"}}>View User</Button> */}
+                  {/* <Button style={{color: "#009900"}}>Reports</Button>
+                  <Button style={{color: "#ff0000"}}>Block</Button>
+                  <Button style={{color: "#ff9900"}}>Warn</Button> */}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

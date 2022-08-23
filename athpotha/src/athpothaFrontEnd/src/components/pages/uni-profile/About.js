@@ -70,7 +70,7 @@ function About() {
                 </Typography>
                 <Grid container>
                     <Grid item xs={12}><HalfRating /></Grid>
-                    <Grid item xs={12}><HoverRating /></Grid>
+                    {/* <Grid item xs={12}><HoverRating /></Grid> */}
                 </Grid>
 
                 {/* <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
