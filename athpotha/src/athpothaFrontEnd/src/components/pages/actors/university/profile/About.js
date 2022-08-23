@@ -4,8 +4,6 @@ import React from "react";
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import HalfRating from "./HalfRating";
-import HoverRating from "./HoverRating";
 
 const style = {
     fontWeight: "normal",
@@ -54,8 +52,6 @@ function About() {
         e.preventDefault()
     }
 
-    const [value, setValue] = React.useState(2);
-
     return (
         <StyledEngineProvider injectFirst>
 
@@ -68,14 +64,10 @@ function About() {
                 <Typography variant="body2" gutterBottom textAlign="justify" sx={style}>
                     {contentTwo}
                 </Typography>
-                <Grid container>
-                    <Grid item xs={12}><HalfRating /></Grid>
-                    <Grid item xs={12}><HoverRating /></Grid>
-                </Grid>
 
-                {/* <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <Button onClick={handleOpen}>Update About</Button>
-                </Box> */}
+                </Box>
 
                 <Modal open={open} >
                     <Box sx={stylebox1}>

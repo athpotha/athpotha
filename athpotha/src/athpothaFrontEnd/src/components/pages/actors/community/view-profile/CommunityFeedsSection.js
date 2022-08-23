@@ -4,8 +4,8 @@ import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import BeforeDisplay from "../../ui/BeforeDisplay";
-import ProfileCard from "../../ui/insight/profile/ProfileCard";
+import BeforeDisplay from "../../../../ui/BeforeDisplay";
+import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -41,7 +41,7 @@ function a11yProps(index) {
 }
 
 
-function FeedsSection(props) {
+function CommunityFeedsSection(props) {
 
     const [value, setValue] = React.useState(0);
 
@@ -87,4 +87,4 @@ function FeedsSection(props) {
     );
 }
 
-export default FeedsSection;
+export default CommunityFeedsSection;

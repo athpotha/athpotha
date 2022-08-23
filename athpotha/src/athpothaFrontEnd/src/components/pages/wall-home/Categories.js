@@ -101,13 +101,19 @@ export default function Categories() {
                 width: '90%',
             },
             {
-                id: 'buttonImage-3',
+                id: 'buttonImage-4',
                 url: '/images/main-wall/main-wall-1.jpg',
                 title: 'Bio medicine',
                 width: '90%',
             },
             {
-                id: 'buttonImage-3',
+                id: 'buttonImage-5',
+                url: '/images/main-wall/main-wall-1.jpg',
+                title: 'Bio medical',
+                width: '90%',
+            },
+            {
+                id: 'buttonImage-6',
                 url: '/images/main-wall/main-wall-1.jpg',
                 title: 'Bio medical',
                 width: '90%',
@@ -118,7 +124,7 @@ export default function Categories() {
             {
                 id: 'buttonImage-1',
                 url: '/images/main-wall/main-wall-1.jpg',
-                title: '',
+                title: 'Physics',
                 width: '90%',
             },
             {
@@ -133,11 +139,25 @@ export default function Categories() {
                 title: 'Chemistry',
                 width: '90%',
             },
+            {
+                id: 'buttonImage-4',
+                url: '/images/main-wall/main-wall-1.jpg',
+                title: 'Physics',
+                width: '90%',
+            },
+            {
+                id: 'buttonImage-5',
+                url: '/images/main-wall/main-wall-1.jpg',
+                title: 'Data Science',
+                width: '90%',
+            },
+            {
+                id: 'buttonImage-6',
+                url: '/images/main-wall/main-wall-1.jpg',
+                title: 'Chemistry',
+                width: '90%',
+            },
         ];
-    }
-
-    const setCategories = (category) => {
-        categories.push(category);
     }
 
     console.log(selectedCategories);
@@ -146,10 +166,7 @@ export default function Categories() {
 
     const backButtonClicked = () => {
         dispatch(educationCategoryActions.setBackButton(0));
-        studentType = undefined;
-        // dispatch(educationCategoryActions.addCategory(studentType));
-        // dispatch(signupButtonActions.setBeforeClickBackButton(user_type));
-        // dispatch(signupButtonActions.setSelectedSignupButton(""));
+        dispatch(educationCategoryActions.addCategory(studentType));
     }
 
     const forwardButtonClicked = () => {
@@ -157,7 +174,7 @@ export default function Categories() {
     }
     return (
         <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+            {/* <Button onClick={handleOpen}>Open modal</Button> */}
             <Modal
                 open={open}
                 // onClose={handleClose}
@@ -167,11 +184,6 @@ export default function Categories() {
                 <Box sx={style}>
                     <Grid container>
                         <Grid item xs={6}>
-                            {/* {localStorage.getItem("USER_TYPE") === "student" && studentType !== undefined &&
-                                <IconButton onClick={backButtonClicked} color="primary">
-                                    <NavigateBeforeIcon />
-                                </IconButton>
-                            } */}
                             {backBtn === 1 &&
                                 <IconButton onClick={backButtonClicked} color="primary">
                                     <NavigateBeforeIcon />
@@ -179,19 +191,21 @@ export default function Categories() {
                             }
                         </Grid>
                         <Grid item xs={6}>
-                            {backBtn === 0 && <CenteredBox align="right">
+                            {/* {backBtn === 0 && <CenteredBox align="right">
                                 <IconButton onClick={forwardButtonClicked} color="primary">
                                     <NavigateNextIcon />
                                 </IconButton>
                             </CenteredBox>
-                            }
+                            } */}
                         </Grid>
                     </Grid>
                     {localStorage.getItem("USER_TYPE") === "student" && studentType === undefined && <StudentTypeSlector />}
                     {localStorage.getItem("USER_TYPE") === "student" && studentType === "O/L Qualified" && <CategorySelection images={images} />}
+                    {localStorage.getItem("USER_TYPE") === "student" && studentType === "A/L Qualified" && <CategorySelection images={images} />}
+                    {localStorage.getItem("USER_TYPE") === "student" && studentType === "Undergraduate" && <CategorySelection images={images} />}
                     <Grid container>
-                        {/* <Grid item xs={11}></Grid> */}
                         <Grid item xs={12}>
+                            {localStorage.getItem("USER_TYPE") !== "student" || studentType !== undefined && 
                             <CenteredBox align="right">
                                 <Button
                                     variant="contained"
@@ -200,6 +214,7 @@ export default function Categories() {
                                     Select
                                 </Button>
                             </CenteredBox>
+                            }
                         </Grid>
                     </Grid>
                 </Box>

@@ -115,14 +115,29 @@ function SignInForm({ loading, error, ...props }) {
       authCtx.userInfo(userInfo);
 
       const user_type = localStorage.getItem("USER_TYPE");
-      if (user_type !== "university" && user_type !== "admin") {
-        navigate("/main");
-      } else if (user_type === "admin") {
-        navigate("/admin");
-      } else if (user_type === "university") {
-        navigate("/university");
+      console.log(userInfo);
+      // if (!userInfo.hasLogged) {
+      //   navigate("/categories");
+      // } else {
+      //   if (user_type !== "university" && user_type !== "admin") {
+      //     navigate("/main");
+      //   } else if (user_type === "admin") {
+      //     navigate("/admin");
+      //   } else if (user_type === "university") {
+      //     navigate("/university");
+      //   }
+      // }
+      if (!userInfo.hasLogged) {
+        if (user_type !== "university" && user_type !== "admin") {
+          navigate("/main");
+        } else if (user_type === "admin") {
+          navigate("/admin");
+        } else if (user_type === "university") {
+          navigate("/university");
+        }
       }
-    }catch {
+
+    } catch {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
