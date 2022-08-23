@@ -13,11 +13,11 @@ import NotificationMenu from "./NotificationMenu";
 const DUMMY_NOTIFICATIONS = [
   {
     id: "notification-0",
-    senderName: "Roneki Manamperi",
+    senderName: "Melaka Pathiranagama",
     senderProfileImage: "/static/images/avatar/1.jpg",
     whenItCame: "1d",
     primaryContent: "Brunch this weekend?",
-    secondaryContent: "I'll be in your neighborhood doing errands this…",
+    secondaryContent: "I'll be in your neighborhood doing errands this lorem lorem lorem lore neighborhood doing errands this lorem lorem lorem loremm lorem",
     isNotificationRead: false
   },
   {
