@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { FollowCommunity, FollowStudent, FollowTeacher, FollowUniversity } from "./Follow";
 import { fetchUserData } from "../../../api/authenticationService";
+import { ConnectionStudent } from "./Connection";
 
 const style = {
   position: 'absolute',
@@ -263,6 +264,38 @@ function Content() {
               </div>
               <FollowStudent value={7} students={student}></FollowStudent>
             </Item>
+
+            <Item>
+              <div style={{ height: '40px', display: 'flex', justifyContent: 'space-between', p: 1, m: 1, alignItems: 'center' }}>
+                <div>More sugession for you</div>
+                <div><Button onClick={handleOpenFour}>See all</Button></div>
+                <Modal open={openFour} >
+                  <Box sx={style}>
+                    <IconButton
+                      aria-label="close"
+                      onClick={handleCloseFour}
+                      sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                      }}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                    <Box sx={{
+                      mt: "25px",
+                      height: "70vh",
+                      overflow: "auto",
+                    }}>
+                      <ConnectionStudent value={8} students={student}></ConnectionStudent>
+                    </Box>
+                  </Box>
+                </Modal>
+              </div>
+              <ConnectionStudent value={9} students={student}></ConnectionStudent>
+            </Item>
+            
           </Box>
         </div>
       </Typography>

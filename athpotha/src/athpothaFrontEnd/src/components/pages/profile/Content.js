@@ -1,11 +1,12 @@
-import { Box, Button, Grid, StyledEngineProvider, Typography } from "@mui/material";
-import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
+import { Grid, StyledEngineProvider, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { fetchUserData } from "../../../api/authenticationService";
 import BeforeDisplay from "../../ui/BeforeDisplay";
-import ProfileCard from "../../ui/insight/profile/ProfileCard";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
+import TutorFeedSection from "../actors/tutor/profile/TutorFeedSection";
+import UniversityFeedSection from "../actors/university/profile/UniversityFeedSection";
+
 import CoverSection from "./CoverSection";
 import FeedsSection from "./FeedsSection";
 // import NotiPanel from "./NotiPanel";
@@ -62,14 +63,15 @@ function Content() {
 
   let content = <p>Found no posts</p>
 
-  if(posts.length > 0) {
+  if (posts.length > 0) {
     content = posts.map((post) => (
       <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
     ))
   }
-  if(isLoading) {
+  if (isLoading) {
     content = <BeforeDisplay />;
   }
+  const userType = localStorage.getItem("USER_TYPE");
   return (
     <StyledEngineProvider injectFirst>
       <Grid container spacing={3}>
@@ -81,13 +83,15 @@ function Content() {
           <FeedsStart />
         </Grid>
         <Grid item xs={12}>
-          <FeedsSection posts={posts} isLoading={isLoading} />
-          {/* <h2>Your posts</h2>
-          {!isLoading && posts.map((post) => (
-            <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
-          ))}
-          {!isLoading && posts.length === 0 && <p>Found no posts</p>}
-          {isLoading && <p>Loading ...</p>} */}
+          {/* {(userType === "student" || userType === "community") &&
+            <FeedsSection posts={posts} isLoading={isLoading} />
+          }
+          {userType === "university" &&
+            <UniversityFeedSection posts={posts} isLoading={isLoading} />
+          }
+          {userType === "tutor" && 
+          <TutorFeedSection posts={posts} isLoading={isLoading} />} */}
+          <UniversityFeedSection posts={posts} isLoading={isLoading} />
         </Grid>
       </Grid>
     </StyledEngineProvider>

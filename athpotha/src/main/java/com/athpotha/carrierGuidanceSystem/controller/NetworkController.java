@@ -49,8 +49,8 @@ public class NetworkController {
     }
 
     @PostMapping("getCommunities")
-    public List<Commiunity> getCommunities(@RequestBody User user){
-        List<Commiunity> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUser_id(),UserType.commiunity);
+    public List<Community> getCommunities(@RequestBody User user){
+        List<Community> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUser_id(),UserType.community);
         return commiunitiesa;
     }
 

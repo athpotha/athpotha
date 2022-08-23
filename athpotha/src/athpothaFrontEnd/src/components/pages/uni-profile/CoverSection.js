@@ -50,13 +50,13 @@ function CoverSection(props) {
                     style={{ position: "absolute", top: "20px", right: "16px" }}
                   >
                     {/* Upload phot button on cover */}
-                    <Button
+                    {/* <Button
                       variant="contained"
                       color="primary"
                       onClick={() => fileInput.current.click()}
                     >
                       <PhotoCamera />
-                    </Button>
+                    </Button> */}
 
                     <input
                       ref={fileInput}
@@ -91,13 +91,13 @@ function CoverSection(props) {
                     </div>
                   </Grid>
                   <Grid item xs={2}>
-                    <Button
+                    {/* <Button
                       // style={{ marginTop: "90px"}}
                       variant="text"
                       startIcon={<BorderColorIcon />}
                     >
                       Edit Info
-                    </Button>
+                    </Button> */}
                   </Grid>
                 </Grid>
               </Card>

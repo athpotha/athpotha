@@ -49,6 +49,7 @@ public class User implements UserDetails {
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date created_at;
+	private boolean hasLogged = false;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -97,14 +98,6 @@ public class User implements UserDetails {
 		this.enabled = enabled;
 		this.verified = verified;
 		this.created_at = created_at;
-	}
-
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", first_name=" + first_name + ", last_name=" + last_name + ", user_type="
-				+ user_type + ", email=" + email + ", password=" + password + ", profile_picture=" + profile_picture
-				+ ", cover_picture=" + cover_picture + ", userDeleted=" + userDeleted + ", enabled=" + enabled
-				+ ", verified=" + verified + ", created_at=" + created_at + "]";
 	}
 
 	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)

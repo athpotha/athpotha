@@ -14,13 +14,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.athpotha.carrierGuidanceSystem.config.JWTTokenHelper;
 import com.athpotha.carrierGuidanceSystem.model.Admin;
-import com.athpotha.carrierGuidanceSystem.model.Commiunity;
+import com.athpotha.carrierGuidanceSystem.model.Community;
 import com.athpotha.carrierGuidanceSystem.model.Student;
 import com.athpotha.carrierGuidanceSystem.model.Tutor;
 import com.athpotha.carrierGuidanceSystem.model.University;
@@ -104,11 +105,39 @@ public class AuthenticationController {
 			Admin admin = adminRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			return ResponseEntity.ok(admin);
 //			break;
-		case commiunity:
-			Commiunity commiunity = commiunityRepository.findByEmailIgnoreCase(userEntity.getUsername());
+		case community:
+			Community commiunity = commiunityRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			return ResponseEntity.ok(commiunity);
 		}
 		return null;
+	}
+	
+	@PutMapping("/set-login")
+	public void setHasLogin(@RequestBody User user) {
+		User userEntity = (User) userDetailsService.loadUserByUsername(user.getUsername());
+
+		switch (userEntity.getUser_type()) {
+		case student:
+			Student student = studentRepository.findByEmailIgnoreCase(userEntity.getUsername());
+			student.setHasLogged(true);
+			break;
+		case tutor:
+			Tutor tutor = tutorRepository.findByEmailIgnoreCase(userEntity.getUsername());
+			tutor.setHasLogged(true);
+			break;
+		case university:
+			University university = universityRepository.findByEmailIgnoreCase(userEntity.getUsername());
+			university.setHasLogged(true);
+			break;
+		case admin:
+			Admin admin = adminRepository.findByEmailIgnoreCase(userEntity.getUsername());
+			admin.setHasLogged(true);
+			break;
+		case community:
+			Community commiunity = commiunityRepository.findByEmailIgnoreCase(userEntity.getUsername());
+			commiunity.setHasLogged(true);
+			break;
+		}
 	}
 
 }
