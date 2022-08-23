@@ -22,13 +22,14 @@ import Content from "./Content";
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate } from "react-router-dom";
 
-const listItems = leftbarItem();
 
 function CoursePage() {
   const navigate = useNavigate();
+  const listItems = leftbarItem();
+
   return (
     <StyledEngineProvider injectFirst>
-      <MainHeader />
+      <MainHeader value={0} />
       <Grid
         container
         spacing={2}
@@ -55,7 +56,7 @@ function CoursePage() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton  onClick={() => { navigate(listItem.link) }}>
+                  <ListItemButton onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>

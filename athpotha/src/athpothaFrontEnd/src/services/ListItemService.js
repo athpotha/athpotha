@@ -7,38 +7,38 @@ import SchoolIcon from "@mui/icons-material/School";
 export const leftbarItem = () => {
     const userType = localStorage.getItem("USER_TYPE");
     console.log(userType);
-
-    let listItems = [
-        {
-            id: "leftbar-listItem-1",
-            listName: "Connections",
-            icon: <PeopleAltIcon />,
-        },
-        {
-            id: "leftbar-listItem-3",
-            listName: "Commiunity Experts",
-            icon: <CellTowerIcon />,
-        },
-        {
-            id: "leftbar-listItem-2",
-            listName: "Teachers",
-            icon: <CastForEducationIcon />,
-        },
-        {
-            id: "leftbar-listItem-5",
-            listName: "Courses",
-            icon: <SchoolIcon />,
-            link: "/course-page"
-        },
-        {
-            id: "leftbar-listItem-4",
-            listName: "Bookmarks",
-            icon: <BookmarksIcon />,
-        },
-    ];
-
-    if (userType === "university") {
-        listItems = [
+    if (userType === "student") {
+        let listItems = [
+            {
+                id: "leftbar-listItem-1",
+                listName: "Connections",
+                icon: <PeopleAltIcon />,
+            },
+            {
+                id: "leftbar-listItem-3",
+                listName: "Commiunity Experts",
+                icon: <CellTowerIcon />,
+            },
+            {
+                id: "leftbar-listItem-2",
+                listName: "Teachers",
+                icon: <CastForEducationIcon />,
+            },
+            {
+                id: "leftbar-listItem-5",
+                listName: "Courses",
+                icon: <SchoolIcon />,
+                link: "/course-page"
+            },
+            {
+                id: "leftbar-listItem-4",
+                listName: "Bookmarks",
+                icon: <BookmarksIcon />,
+            },
+        ];
+        return listItems;
+    } else if (userType === "university") {
+        let listItems = [
             {
                 id: "leftbar-listItem-1",
                 listName: "Connections",
@@ -50,8 +50,9 @@ export const leftbarItem = () => {
                 icon: <BookmarksIcon />,
             },
         ];
-    } else if (userType === "Tutor" && userType === "community") {
-        listItems = [
+        return listItems;
+    } else {
+        let listItems = [
             {
                 id: "leftbar-listItem-1",
                 listName: "Connections",
@@ -68,10 +69,6 @@ export const leftbarItem = () => {
                 icon: <BookmarksIcon />,
             },
         ];
+        return listItems;
     }
-    return listItems;
-}
-
-const getLeftbarItem = async () => {
-
 }
