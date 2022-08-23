@@ -128,7 +128,7 @@ function TopRatedTutors() {
             heading="Top Rated Tutors"
             subtitleColor="secondary.contrastText"
             subtitleVariant="h5"
-            subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
+            subtitle="Introducing our boundlessly experienced professional tutors in education"
           />
         </Grid>
         <Grid item xs={12}>
@@ -156,7 +156,7 @@ function TopRatedTutors() {
               heading="Are You a Tutor? Get Yourself Registerd"
               subtitleColor="secondary.contrastText"
               subtitleVariant="h6"
-              subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
+              subtitle="Get started as a tutor in AthPotha to get the exposure you require"
             />
           </Grid>
           <Grid item alignSelf="center">
