@@ -18,7 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import InboxIcon from '@mui/icons-material/Inbox';
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Button, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import NotificationMenu from './NotificationMenu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -28,6 +28,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import Content from './Content';
 import PropTypes from 'prop-types'
 import { useNavigate } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // import { mainListItems, secondaryListItems } from './listItems';
 // import Chart from './Chart';
@@ -40,7 +41,7 @@ function Copyright(props) {
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{''}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -116,6 +117,14 @@ export default function Dashboard(props) {
   const manageDashboard=()=>{
     navigate("/admin")
   }
+  const webActivity =()=>{
+    navigate("/admin/website-activity")
+  }
+
+  const userReports = (event) => {
+    navigate("/admin/user-reports");
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -151,8 +160,16 @@ export default function Dashboard(props) {
               <Badge badgeContent={4} color="secondary">
                 {/* <NotificationsIcon /> */}
                 <NotificationMenu />
+                
               </Badge>
             </IconButton>
+
+            <Button color="inherit">
+                
+            <LogoutIcon fontSize="large" sx={{pl:1}}></LogoutIcon>
+              
+            </Button>
+
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -199,7 +216,7 @@ export default function Dashboard(props) {
 
             <Divider sx={{ my: 1 }} />
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={webActivity}>
                 <ListItemIcon>
                   <LanguageIcon />
                 </ListItemIcon>
@@ -208,7 +225,7 @@ export default function Dashboard(props) {
             </ListItem>
 
             <Divider sx={{ my: 1 }} />
-            <ListItem disablePadding>
+            <ListItem disablePadding onClick={userReports}>
               <ListItemButton>
                 <ListItemIcon>
                   <ReportIcon />

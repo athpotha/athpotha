@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import InputField from "../../login/InputField";
-import classes from "./Form.module.css";
-// import { registrationActions } from "../../../../store/registration-slice";
-// import { signupButtonActions } from "../../../store/signup-button-slice";
+import InputField from "./InputField";
+import classes from "./Login.module.css";
+import { registrationActions } from "../../../store/registration-slice";
+import { signupButtonActions } from "../../../store/signup-button-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControl, FormHelperText, Grid, IconButton, InputLabel, MenuItem, Select } from "@mui/material";
-import CenteredBox from "../../../ui/CenteredBox";
+import CenteredBox from "../../ui/CenteredBox";
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-import useInput from "../../../../hooks/use-input";
+import useInput from "../../../hooks/use-input";
 
-import { checkEmail, userRegistration } from "../../../../api/authenticationService";
+import { checkEmail, universityRegistration } from "../../../api/authenticationService";
 function UniversityRegistrationForm(props) {
   const dispatch = useDispatch();
 
-  // const backButtonClicked = () => {
-  //   dispatch(signupButtonActions.setBeforeClickBackButton(user_type));
-  //   dispatch(signupButtonActions.setSelectedSignupButton(""));
-  // }
+  const backButtonClicked = () => {
+    dispatch(signupButtonActions.setBeforeClickBackButton(user_type));
+    dispatch(signupButtonActions.setSelectedSignupButton(""));
+  }
 
-  // const forwardButtonClicked = () => {
-  //   dispatch(registrationActions.setEmailSent(true));
-  // }
+  const forwardButtonClicked = () => {
+    dispatch(registrationActions.setEmailSent(true));
+  }
 
 
   //Helpers to validate Fname and Lname
@@ -200,7 +200,7 @@ function UniversityRegistrationForm(props) {
   })
 
   let formIsValid = false;
-  if (fnameIsValid && lnameIsValid && emailIsValid && passwordIsValid && confirmPasswordIsValid) {
+  if (fnameIsValid && lnameIsValid && emailIsValid && passwordIsValid && confirmPasswordIsValid && universityIsValid && facultyIsValid) {
     formIsValid = true;
   }
 
@@ -212,24 +212,24 @@ function UniversityRegistrationForm(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!fnameIsValid && !lnameIsValid && !emailIsValid && !passwordIsValid && !confirmPasswordIsValid) {
+    if (!fnameIsValid && !lnameIsValid && !emailIsValid && !passwordIsValid && !confirmPasswordIsValid && !universityIsValid && !facultyIsValid) {
       return;
     }
-    // dispatch(
-    //   registrationActions.setIsEmailSent({
-    //     email: email,
-    //     emailSent: true,
-    //   })
-    // );
+    dispatch(
+      registrationActions.setIsEmailSent({
+        email: email,
+        emailSent: true,
+      })
+    );
 
-    // console.log(fname, lname, user_type, email, password);
-    userRegistration({
+    universityRegistration({
       first_name: fname,
       last_name: lname,
       user_type: user_type,
       email: email,
+      university: university,
+      faculty: faculty,
       password: password,
-      // profile_picture: "images/Profile/default_profile.jpg",
     })
   };
   return (
@@ -238,16 +238,34 @@ function UniversityRegistrationForm(props) {
       onSubmit={submitHandler}
       noValidate
     >
+      <Grid container>
+        <Grid item xs={6}>
+          <IconButton onClick={backButtonClicked} color="primary">
+            <NavigateBeforeIcon />
+          </IconButton>
+        </Grid>
+        <Grid item xs={6}>
+          {(enteredEmail !== "") ? (
+            <CenteredBox align="right">
+              <IconButton onClick={forwardButtonClicked} color="primary">
+                <NavigateNextIcon />
+              </IconButton>
+            </CenteredBox>
+          ) : (
+            ""
+          )}
+        </Grid>
+      </Grid>
       <div className={classes.logo}>
         <img src="/images/athpotha_v3.png" alt="easyclassName" />
       </div>
 
       <div className={classes.heading}>
-        <h2>University Registration</h2>
-        {/* <h6>Already have a student account? </h6> */}
-        {/* <span className={classes.toggle} onClick={props.onClick}>
+        <h2>Sign Up As {user_type}</h2>
+        <h6>Already have a student account? </h6>
+        <span className={classes.toggle} onClick={props.onClick}>
           Sign in
-        </span> */}
+        </span>
       </div>
 
       <div className={classes["actual-form"]}>
@@ -309,7 +327,7 @@ function UniversityRegistrationForm(props) {
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
-          <FormControl variant="standard" sx={{ width: "100%" }} required error={universityHasError}>
+          <FormControl variant="standard" sx={{ width: "100%" }} required error={facultyHasError}>
             <InputLabel id="faculty">Faculty</InputLabel>
             <Select
               label="Faculty"
@@ -318,7 +336,6 @@ function UniversityRegistrationForm(props) {
               onBlur={facultyBlurHandler}
               error={facultyHasError}
               helperText={facultyHasError ? facultyError : ""}
-              required
             >
               <MenuItem value="">
                 <em>None</em>
@@ -392,96 +409,3 @@ function UniversityRegistrationForm(props) {
 }
 
 export default UniversityRegistrationForm;
-
-// <Box style={{mt:"200px"}}>
-    //   <form>
-    //   <TextField id="firstname" label="First Name" variant="standard" />
-    //   <TextField id="lastname" label="Last Name" variant="standard" />
-    //   <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-    //     <InputLabel id="university">University</InputLabel>
-    //     <Select
-    //       labelId="university"
-    //       id="university-names"
-    //       value={universityname}
-    //       onChange={handleChangeUniversity}
-    //       label="University"
-    //     >
-    //       <MenuItem value={1}>University of Moratuwa</MenuItem>
-    //       <MenuItem value={2}>University of Colombo</MenuItem>
-    //       <MenuItem value={3}>University of Peradeniya</MenuItem>
-    //       <MenuItem value={4}>University of Kelaniya</MenuItem>
-    //       <MenuItem value={5}>University of Japura</MenuItem>
-    //       <MenuItem value={6}>University of Ruhuna</MenuItem>
-    //       <MenuItem value={7}>Sri Lanka Institute of Information Technology (SLIIT)</MenuItem>
-    //       <MenuItem value={8}>Informatics Information of Technology (IIT)</MenuItem>
-    //     </Select>
-    //   </FormControl>
-    //   <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-    //     <InputLabel id="faculty">Faculty</InputLabel>
-    //     <Select
-    //       labelId="faculty"
-    //       id="faculty-names"
-    //       value={facultyname}
-    //       onChange={handleChangeFaculty}
-    //       label="Faculty"
-    //     >
-    //       <MenuItem value={1}>Engineering</MenuItem>
-    //       <MenuItem value={2}>Computer Science</MenuItem>
-    //       <MenuItem value={3}>Information Technology</MenuItem>
-    //       <MenuItem value={4}>Physical Science</MenuItem>
-    //       <MenuItem value={5}>Applied Sciences</MenuItem>
-    //       <MenuItem value={6}>Quantity Surveying</MenuItem>
-    //       <MenuItem value={7}>Computing and Information Systems</MenuItem>
-    //       <MenuItem value={8}>Town and Country Planning</MenuItem>
-    //     </Select>
-    //   </FormControl>
-    //   <TextField
-    //       id="email"
-    //       label="Email"
-    //       type="email"
-    //     //   autoComplete="current-password"
-    //       variant="standard"
-    //     />
-    //     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-    //       <InputLabel htmlFor="password">Password</InputLabel>
-    //       <Input
-    //         id="password"
-    //         type={values.showPassword ? 'text' : 'password'}
-    //         // value={values.password}
-    //         onChange={handleChangePassword('password')}
-    //         endAdornment={
-    //           <InputAdornment position="end">
-    //             <IconButton
-    //               aria-label="toggle password visibility"
-    //               onClick={handleClickShowPassword}
-    //               onMouseDown={handleMouseDownPassword}
-    //             >
-    //               {values.showPassword ? <VisibilityOff /> : <Visibility />}
-    //             </IconButton>
-    //           </InputAdornment>
-    //         }
-    //       />
-    //     </FormControl>
-    //     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-    //       <InputLabel htmlFor="current-password">Password</InputLabel>
-    //       <Input
-    //         id="current-password"
-    //         type={values.showPassword ? 'text' : 'password'}
-    //         // value={values.password}
-    //         onChange={handleChangePassword('password')}
-    //         endAdornment={
-    //           <InputAdornment position="end">
-    //             <IconButton
-    //               aria-label="toggle password visibility"
-    //               onClick={handleClickShowPassword}
-    //               onMouseDown={handleMouseDownPassword}
-    //             >
-    //               {values.showPassword ? <VisibilityOff /> : <Visibility />}
-    //             </IconButton>
-    //           </InputAdornment>
-    //         }
-    //       />
-    //     </FormControl>
-    //     <Button variant="contained">Submit</Button>
-    //   </form>
-    // </Box>

@@ -58,7 +58,7 @@ export default function BasicModal(props) {
               tabValue === 0 ? (
                 <Addquestion close={props.onClose} />
               ) : (
-                <Addpost />
+                <Addpost close={props.onClose} />
               )
             ) : props.modalName === "search-modal" ? (
               props.children
@@ -70,7 +70,7 @@ export default function BasicModal(props) {
                   image={localStorage.getItem("PROFILE_PIC")}
                 />
               ) : (
-                <ChangeProfile
+                <ChangeCover
                   close={props.onClose}
                   imageType="COVER_PIC"
                   image={localStorage.getItem("COVER_PIC")}

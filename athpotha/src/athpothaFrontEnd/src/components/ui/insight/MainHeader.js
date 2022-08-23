@@ -162,6 +162,7 @@ export default function MainHeader(props) {
   ];
 
   const userType = localStorage.getItem("USER_TYPE");
+  console.log(userType);
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
@@ -193,9 +194,11 @@ export default function MainHeader(props) {
             >
               <MainTab value={tabValue} />
             </Box>
-            <IconButton sx={{color: "#FFDE2E"}}>
-              <WorkspacePremiumIcon />
-            </IconButton>
+            {userType === "student" &&
+              <IconButton sx={{ color: "#FFDE2E" }}>
+                <WorkspacePremiumIcon />
+              </IconButton>
+            }
             <SearchProfiles />
             <ModalOpenButton
               modalName="addQuestion-post-modal"
@@ -208,7 +211,7 @@ export default function MainHeader(props) {
                 variant="contained"
                 style={{ borderRadius: 10, textTransform: "none" }}
               >
-                {userType === "student" ?  "Add Question": "Add Post"}
+                {userType === "student" ? "Add Question" : "Add Post"}
               </Button>
             </ModalOpenButton>
           </Toolbar>
