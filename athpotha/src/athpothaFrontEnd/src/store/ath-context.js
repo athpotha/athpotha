@@ -51,6 +51,7 @@ export const AuthContextProvider = (props) => {
   }
 
   const userInfoHandler = (user) => {
+    console.log(user.user_type);
     localStorage.setItem("USER_TYPE", user.user_type);
     localStorage.setItem("USER_ID", user.user_id);
     localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);

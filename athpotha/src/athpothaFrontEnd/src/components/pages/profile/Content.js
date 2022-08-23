@@ -83,15 +83,14 @@ function Content() {
           <FeedsStart />
         </Grid>
         <Grid item xs={12}>
-          {/* {(userType === "student" || userType === "community") &&
+          {(userType === "student" || userType === "community") &&
             <FeedsSection posts={posts} isLoading={isLoading} />
           }
           {userType === "university" &&
             <UniversityFeedSection posts={posts} isLoading={isLoading} />
           }
-          {userType === "tutor" && 
-          <TutorFeedSection posts={posts} isLoading={isLoading} />} */}
-          <UniversityFeedSection posts={posts} isLoading={isLoading} />
+          {userType === "tutor" &&
+            <TutorFeedSection posts={posts} isLoading={isLoading} />}
         </Grid>
       </Grid>
     </StyledEngineProvider>

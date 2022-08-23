@@ -9,7 +9,7 @@ const style = {
     fontWeight: "normal",
     color: "grey.600",
     mb: 2,
-    width: 650,
+    // width: 650,
 };
 
 const textfield = {

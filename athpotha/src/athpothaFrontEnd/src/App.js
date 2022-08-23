@@ -60,7 +60,7 @@ function App() {
 
   const authCtx = useContext(AuthContext);
   const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
-  localStorage.setItem("USER_TYPE", "student");
+  // localStorage.setItem("USER_TYPE", "student");
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
