@@ -34,6 +34,14 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = useCallback(() => {
     setToken(null);
     localStorage.removeItem('USER_KEY');
+    localStorage.removeItem("USER_TYPE");
+    localStorage.removeItem("USER_ID");
+    localStorage.removeItem("USER_NAME");
+    localStorage.removeItem("FIRST_NAME");
+    localStorage.removeItem("LAST_NAME");
+    localStorage.removeItem("USER_EMAIL");
+    localStorage.removeItem("PROFILE_PIC");
+    localStorage.removeItem("COVER_PIC");
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);
