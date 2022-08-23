@@ -121,6 +121,10 @@ export default function Dashboard(props) {
     navigate("/admin/website-activity")
   }
 
+  const userReports = (event) => {
+    navigate("/admin/user-reports");
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -221,7 +225,7 @@ export default function Dashboard(props) {
             </ListItem>
 
             <Divider sx={{ my: 1 }} />
-            <ListItem disablePadding>
+            <ListItem disablePadding onClick={userReports}>
               <ListItemButton>
                 <ListItemIcon>
                   <ReportIcon />

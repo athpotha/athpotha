@@ -15,6 +15,10 @@ export const userRegistration = (authRequest) => {
   return axios.post("api/v1/user/registration", authRequest);
 };
 
+export const universityRegistration = (authRequest) => {
+  return axios.post("api/v1/user/university-registration", authRequest);
+};
+
 export const userLogin = (authRequest) => {
   return axios.post("api/v1/auth/login", authRequest);
 };

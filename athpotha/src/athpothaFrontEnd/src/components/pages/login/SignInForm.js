@@ -133,7 +133,7 @@ function SignInForm({ loading, error, ...props }) {
         } else if (user_type === "admin") {
           navigate("/admin");
         } else if (user_type === "university") {
-          navigate("/university");
+          navigate("/profile");
         }
       }
 
