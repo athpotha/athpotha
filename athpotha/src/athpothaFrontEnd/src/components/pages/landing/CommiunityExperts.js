@@ -161,7 +161,7 @@ function CommiunityExperts() {
             heading="Commiunity Experts"
             subtitleColor="secondary.contrastText"
             subtitleVariant="h5"
-            subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
+            subtitle="Athpotha  envisions to deliver long lasting guidance for the high schoolers by creating a network of interrelated personnels"
           />
         </Grid>
         <Grid item xs={12}>
@@ -198,7 +198,7 @@ function CommiunityExperts() {
               heading="Want to be a Part of AthPotha Commiunity?"
               subtitleColor="secondary.contrastText"
               subtitleVariant="h6"
-              subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur adipiscing elit"
+              subtitle="Join our community to offer your support to deliver the best career guidance for the high schoolers"
             />
           </Grid>
           <Grid item alignSelf="center">
