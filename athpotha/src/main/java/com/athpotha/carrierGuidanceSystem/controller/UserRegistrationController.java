@@ -172,6 +172,20 @@ public class UserRegistrationController {
 
 		emailService.sendEmail(mailMessage);
 	}
+	
+	@PostMapping("/university-registration")
+	public String registerUniversity(ModelAndView modelAndView, @RequestBody University userEntity) {
+		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+		User existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
+		if (existingUser != null) {
+			return null;
+
+		} else {
+			universityRepository.save(userEntity);
+			return "NOTIFICATION_SEND";
+		}
+	}
+	
 
 	@RequestMapping(value = "/confirm-account", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
