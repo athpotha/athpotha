@@ -16,6 +16,7 @@ import UseImageInput from "../../../hooks/use-imageInput";
 import { fetchUserData } from "../../../api/authenticationService";
 import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Addpost(props) {
   const [postSuccess, setPostSuccess] = useState(true);
@@ -78,12 +79,18 @@ function Addpost(props) {
       if (response.status === 200) {
         contentReset();
         setPostSuccess(true);
-        console.log(window.location.pathname);
-        if (window.location.pathname === "/profile") {
-          window.location.reload();
-        } else {
-          navigate("/profile");
-        }
+        props.close();
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated!',
+          text: 'Post Added!',
+        }).then(() => {
+          if (window.location.pathname === "/profile") {
+            window.location.reload();
+          } else {
+            navigate("/profile");
+          }
+        })
       }
     }).catch((error) => {
       alert(error);

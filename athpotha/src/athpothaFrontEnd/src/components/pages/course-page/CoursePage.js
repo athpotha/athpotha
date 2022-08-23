@@ -20,13 +20,15 @@ import SchoolIcon from "@mui/icons-material/School";
 import Content from "./Content";
 
 import { leftbarItem } from "../../../services/ListItemService";
+import { useNavigate } from "react-router-dom";
 
 const listItems = leftbarItem();
 
 function CoursePage() {
+  const navigate = useNavigate();
   return (
     <StyledEngineProvider injectFirst>
-      <MainHeader value={4} />
+      <MainHeader />
       <Grid
         container
         spacing={2}
@@ -53,7 +55,7 @@ function CoursePage() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton>
+                  <ListItemButton  onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>

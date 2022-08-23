@@ -26,7 +26,7 @@ const listItems = leftbarItem();
 function UniProfile() {
   return (
     <StyledEngineProvider injectFirst>
-      <MainHeader value={4} />
+      <MainHeader />
       <Grid
         container
         spacing={2}
