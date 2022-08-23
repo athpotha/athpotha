@@ -23,6 +23,7 @@ import Admin from "./components/pages/actors/admin/Admin";
 import Categories from "./components/pages/wall-home/Categories";
 import ManageUser from "./components/pages/actors/admin/manageUsers/ManageUser";
 import UniversityRegistration from "./components/pages/actors/admin/UniversityRegistration";
+import UserReport from "./components/pages/actors/admin/userReportings/UserReport";
 import CoursePage from "./components/pages/course-page/CoursePage";
 import ViewProfile from "./components/pages/view-profile/ViewProfile";
 function App() {
@@ -97,6 +98,7 @@ function App() {
           <Route path="/admin/university-registration" element={<UniversityRegistration />}></Route>
           <Route path="/categories" element={<Categories />}></Route>
           <Route path="/admin/website-activity" element={<WebsiteActivity />}></Route>
+          <Route path="/admin/user-reports" element={<UserReport />}></Route>
           <Route path="/course-page" element={<CoursePage />}></Route>
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
           <Route path="/university/view-user" element={<ViewProfile />}></Route>
