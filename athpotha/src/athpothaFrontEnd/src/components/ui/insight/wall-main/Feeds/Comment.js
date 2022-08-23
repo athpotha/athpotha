@@ -45,7 +45,7 @@ function Comment(props) {
                   <Typography
                     sx={{ display: "inline" }}
                     component="span"
-                    variant="body2"
+                    variant="subtitle1"
                     color="text"
                   >
                     {props.commentItem.commentContent}
