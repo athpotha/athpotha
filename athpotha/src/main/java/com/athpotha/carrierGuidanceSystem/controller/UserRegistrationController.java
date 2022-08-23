@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athpotha.carrierGuidanceSystem.model.Admin;
-import com.athpotha.carrierGuidanceSystem.model.Commiunity;
+import com.athpotha.carrierGuidanceSystem.model.Community;
 import com.athpotha.carrierGuidanceSystem.model.ConfirmationToken;
 import com.athpotha.carrierGuidanceSystem.model.Student;
 import com.athpotha.carrierGuidanceSystem.model.Tutor;
@@ -144,8 +144,8 @@ public class UserRegistrationController {
 			tutor.setProfile_picture(userEntity.getProfile_picture());
 			tutorRepository.save(tutor);
 			break;
-		case commiunity:
-			Commiunity commiunity = new Commiunity();
+		case community:
+			Community commiunity = new Community();
 			commiunity.setFirst_name(userEntity.getFirst_name());
 			commiunity.setLast_name(userEntity.getLast_name());
 			commiunity.setEmail(userEntity.getEmail());

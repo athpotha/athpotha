@@ -4,8 +4,10 @@ import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import BeforeDisplay from "../../ui/BeforeDisplay";
-import ProfileCard from "../../ui/insight/profile/ProfileCard";
+import BeforeDisplay from "../../../../ui/BeforeDisplay";
+import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
+import Home from "./Home";
+import About from "./About";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -41,7 +43,7 @@ function a11yProps(index) {
 }
 
 
-function FeedsSection(props) {
+function StudentFeedSection(props) {
 
     const [value, setValue] = React.useState(0);
 
@@ -49,42 +51,40 @@ function FeedsSection(props) {
         setValue(newValue);
     };
     let posts = <Typography>Found no posts</Typography>
-    let questions = <Typography>Found no Questions</Typography>
 
     if (props.posts.length > 0) {
         posts = props.posts.map((post) => (
             post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
         ))
-
-        questions = props.posts.map((post) => (
-            post.postType == "question" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
-        ))
     }
     if (props.isLoading) {
         posts = <BeforeDisplay />;
-        questions = <BeforeDisplay />;
     }
 
     if (posts[0] === "") {
         posts = <Typography>Found no posts</Typography>
-    } else if (questions[0] === "") {
-        questions = <Typography>Found no Questions</Typography>
     }
     return (
-        <React.Fragment>
-            <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
-                <Tab label="Posts" {...a11yProps(0)} />
-                <Tab label="Questions" {...a11yProps(1)} />
+        <StyledEngineProvider injectFirst>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tab label="About" {...a11yProps(0)} />
+                <Tab label="Degree Programms" {...a11yProps(1)} />
+                <Tab label="Posts" {...a11yProps(2)} />
             </Tabs>
             <Divider></Divider>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={value} index={0} style={{ backgroundColor: "#FFF", padding: "20px" }}>
+                <About></About>
+            </TabPanel>
+
+            <TabPanel value={value} index={1} style={{ backgroundColor: "#FFF", padding: "20px" }}>
+                <Home></Home>
+            </TabPanel>
+
+            <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF" }}>
                 {posts}
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                {questions}
-            </TabPanel>
-        </React.Fragment>
+        </StyledEngineProvider>
     );
 }
 
-export default FeedsSection;
+export default StudentFeedSection;
