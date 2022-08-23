@@ -38,8 +38,7 @@ function StudentLogin() {
             heading="Enhance Your Future With AthPotha"
             subtitleColor="primary.contrastText"
             subtitleVariant="h5"
-            subtitle="Lorem ipsum dolor sit amet consectetur adipiscing elit. consectetur
-            adipiscing elit."
+            subtitle="Join Sri Lanka's #1 platform for career guidance exclusively designed for the high schoolers"
           />
           <HomeTabButtons userType="student" />
         </Stack>

@@ -11,35 +11,14 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import CellTowerIcon from "@mui/icons-material/CellTower";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import SchoolIcon from "@mui/icons-material/School";
-const listItems = [
-  {
-    id: "leftbar-listItem-1",
-    listName: "Connections",
-    icon: <PeopleAltIcon />,
-  },
-  {
-    id: "leftbar-listItem-3",
-    listName: "Commiunity Experts",
-    icon: <CellTowerIcon />,
-  },
-  {
-    id: "leftbar-listItem-2",
-    listName: "Teachers",
-    icon: <CastForEducationIcon />,
-  },
-  {
-    id: "leftbar-listItem-5",
-    listName: "Courses",
-    icon: <SchoolIcon />,
-  },
-  {
-    id: "leftbar-listItem-4",
-    listName: "Bookmarks",
-    icon: <BookmarksIcon />,
-  },
-];
+
+import { leftbarItem } from "../../../services/ListItemService";
+import { useNavigate } from "react-router-dom";
+
+const listItems = leftbarItem();
 
 function MyNetwork() {
+  const navigate = useNavigate();
   return (
     <StyledEngineProvider injectFirst>
       <MainHeader value={1} />
@@ -69,7 +48,7 @@ function MyNetwork() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton>
+                  <ListItemButton  onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>

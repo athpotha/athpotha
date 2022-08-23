@@ -10,6 +10,11 @@ import Paper from '@mui/material/Paper';
 import { create } from '@mui/material/styles/createTransitions';
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import { FormLabel } from '@mui/material';
+import {
+  blue,
+  green,
+  red,
+} from "@mui/material/colors";
 
 
 
@@ -30,6 +35,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+  },
+}));
+
+const ColorButton1 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(green[600]),
+  backgroundColor: green[600],
+  "&:hover": {
+    backgroundColor: green[700],
+  },
+}));
+
+const ColorButton2 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(red[600]),
+  backgroundColor: red[600],
+  "&:hover": {
+    backgroundColor: red[700],
   },
 }));
 
@@ -93,7 +114,8 @@ export default function CustomizedTables() {
               <StyledTableCell align="left">Last Name</StyledTableCell>
               <StyledTableCell align="left">Qualification</StyledTableCell>
               <StyledTableCell align="left">Bio</StyledTableCell>
-              <StyledTableCell align="left">Buttons</StyledTableCell>
+              <StyledTableCell align="left">Actions</StyledTableCell>
+              {/* <StyledTableCell align="left">Buttons</StyledTableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,8 +129,14 @@ export default function CustomizedTables() {
                 <StyledTableCell align="left">{row.carbs}</StyledTableCell>
                 <StyledTableCell align="left">{row.protein}</StyledTableCell>
                 <StyledTableCell align="left">
-                  <Button onClick={updateRow()}>Update</Button>
-                  <Button color="error">Delete</Button>
+                <Grid container spacing={5}>
+                  <Grid item>
+                      <ColorButton1 variant="contained">Update</ColorButton1>
+                    </Grid>
+                    <Grid item>
+                      <ColorButton2 variant="contained">Delete</ColorButton2>
+                    </Grid>
+                    </Grid>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

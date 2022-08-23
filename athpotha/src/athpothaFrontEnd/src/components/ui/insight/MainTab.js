@@ -35,60 +35,116 @@ export default function MainTab(props) {
     },
   });
 
+  const userType = localStorage.getItem("USER_TYPE");
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          textColor="primary"
-          indicatorColor="primary"
-          sx={{ color: "#0F6096" }}
-        >
-          <Tab
-            sx={{ minWidth: 0 }}
-            value={0}
-            icon={<HomeIcon />}
-            component={Link}
-            to={"/main"}
-          />
-          <Tab
-            sx={{ minWidth: 0 }}
-            value={1}
-            icon={<PeopleAltIcon />}
-            component={Link}
-            to={"/my-network"}
+        {userType === "student" &&
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            textColor="primary"
+            indicatorColor="primary"
+            sx={{ color: "#0F6096" }}
+          >
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={0}
+              icon={<HomeIcon />}
+              component={Link}
+              to={"/main"}
+            />
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={1}
+              icon={<PeopleAltIcon />}
+              component={Link}
+              to={"/my-network"}
             //   label="Connections"
-          />
-          <Tab
-            sx={{ minWidth: 0 }}
-            value={2}
-            icon={
-              <Badge badgeContent={4} color="primary">
-                <NotificationsIcon />
-              </Badge>
-            }
-            component={Link}
-            to={"/notifications"}
+            />
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={2}
+              icon={
+                <Badge badgeContent={4} color="primary">
+                  <NotificationsIcon />
+                </Badge>
+              }
+              component={Link}
+              to={"/notifications"}
             // label="Notifications"
-          />
-          <Tab
-            sx={{ minWidth: 0 }}
-            value={3}
-            icon={<ChatBubbleIcon />}
-            component={Link}
-            to={"/chat"}
+            />
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={3}
+              icon={<ChatBubbleIcon />}
+              component={Link}
+              to={"/chat"}
             //   label="Chat"
-          />
-          <Tab
-            sx={{ minWidth: 0 }}
-            value={4}
-            icon={<ProfileMenu />}
+            />
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={4}
+              icon={<ProfileMenu />}
+              //   label="Chat"
+              component={Link}
+              to={"/profile"}
+            />
+          </Tabs>
+        }
+        {userType === "university" &&
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            textColor="primary"
+            indicatorColor="primary"
+            sx={{ color: "#0F6096" }}
+          >
+            {/* <Tab
+              sx={{ minWidth: 0 }}
+              value={0}
+              icon={<HomeIcon />}
+              component={Link}
+              to={"/main"}
+            />
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={1}
+              icon={<PeopleAltIcon />}
+              component={Link}
+              to={"/my-network"}
+            //   label="Connections"
+            /> */}
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={0}
+              icon={<ProfileMenu />}
+              //   label="Chat"
+              component={Link}
+              to={"/profile"}
+            />
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={1}
+              icon={
+                <Badge badgeContent={4} color="primary">
+                  <NotificationsIcon />
+                </Badge>
+              }
+              component={Link}
+              to={"/notifications"}
+            // label="Notifications"
+            />
+            <Tab
+              sx={{ minWidth: 0 }}
+              value={2 }
+              icon={<ChatBubbleIcon />}
+              component={Link}
+              to={"/chat"}
             //   label="Chat"
-            component={Link}
-            to={"/profile"}
-          />
-        </Tabs>
+            />
+          </Tabs>
+        }
       </ThemeProvider>
     </StyledEngineProvider>
   );

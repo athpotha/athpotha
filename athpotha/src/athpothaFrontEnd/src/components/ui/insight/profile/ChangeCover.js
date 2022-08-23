@@ -1,10 +1,11 @@
 import { Button, CardMedia, Grid } from '@mui/material'
 import React from 'react'
+import Swal from 'sweetalert2'
 import { fetchUserData } from '../../../../api/authenticationService'
 import UseImageInput from '../../../../hooks/use-imageInput'
 import CenteredBox from '../../CenteredBox'
 
-function ChangeCover() {
+function ChangeCover(props) {
     const {
         handleUploadClick: handleUploadHandler,
         imagePreview: profileImagePreview,
@@ -15,23 +16,36 @@ function ChangeCover() {
         const imageData = new FormData();
         imageData.append("imageFile", profileImageData);
         imageData.append("email", localStorage.getItem("USER_EMAIL"));
+        imageData.append("imageType", props.imageType);
         fetchUserData({
             url: "api/v1/logged-user/change-profileImage",
             method: "put",
             data: imageData
         }).then((response) => {
-            localStorage.setItem("COVER_PIC", response.data);
-            window.location.reload();
+            if (props.imageType === "PROFILE_PIC") {
+                localStorage.setItem("PROFILE_PIC", response.data);
+            } else {
+                localStorage.setItem("COVER_PIC", response.data);
+            }
+            props.close();
+            Swal.fire({
+                icon: 'success',
+                title: 'Updated!',
+                text: 'Profile Image Changed!',
+            }).then(() => {
+                window.location.reload();
+            })
         })
     }
     return (
         <Grid container>
             <Grid item xs={12}>
-                <CardMedia component="img"
-                    // height="600px"
-                    image={profileImagePreview === null ? localStorage.getItem("COVER_PIC") : profileImagePreview}
-                    sx={{ pr: "30px", mb: "30px" }}
-                />
+                <div style={{ height: "400px", overflowY: "auto" }}>
+                    <CardMedia component="img"
+                        image={profileImagePreview === null ? props.image : profileImagePreview}
+                        sx={{ pr: "30px", mb: "30px" }}
+                    />
+                </div>
             </Grid>
             <Grid item xs={12}>
                 <div style={{ marginRight: "30px" }}>
