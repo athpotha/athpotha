@@ -22,13 +22,14 @@ import SchoolIcon from "@mui/icons-material/School";
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate } from "react-router-dom";
 
-const listItems = leftbarItem();
 
 function ViewProfile() {
   const navigate = useNavigate();
+  const listItems = leftbarItem();
+
   return (
     <React.Fragment>
-      <MainHeader />
+      <MainHeader value={0} />
       <Grid
         container
         spacing={2}
@@ -55,7 +56,7 @@ function ViewProfile() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton  onClick={() => { navigate(listItem.link) }}>
+                  <ListItemButton onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>
