@@ -13,7 +13,7 @@ function NewContacts() {
         </ListItemAvatar>
         <ListItemText
           primary={
-            <Typography component="div">Kumud Perera</Typography>
+            <Typography component="div">Rahal Jayasundara</Typography>
           }
           // secondary="O/L Qualified"
           secondary={

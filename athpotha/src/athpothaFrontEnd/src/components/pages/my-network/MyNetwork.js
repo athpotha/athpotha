@@ -15,10 +15,11 @@ import SchoolIcon from "@mui/icons-material/School";
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate } from "react-router-dom";
 
-const listItems = leftbarItem();
 
 function MyNetwork() {
   const navigate = useNavigate();
+  const listItems = leftbarItem();
+
   return (
     <StyledEngineProvider injectFirst>
       <MainHeader value={1} />
@@ -48,7 +49,7 @@ function MyNetwork() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton  onClick={() => { navigate(listItem.link) }}>
+                  <ListItemButton onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>
