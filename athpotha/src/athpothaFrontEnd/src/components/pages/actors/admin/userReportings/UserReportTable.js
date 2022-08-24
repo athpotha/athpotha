@@ -52,11 +52,11 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("Student", "Kasun", "Perera", 159),
-  createData("Student", "Nuwan", "Janitha", 237),
-  createData("Teacher", "Kumara", "Liyanage", 262),
-  createData("Student", "Nuwan", "Janitha", 237),
-  createData("Teacher", "Kumara", "Liyanage", 26),
+  createData("1", "2", "2022-01-5", "Fake Account"),
+  createData("5", "8", "2022-01-6", "Malicious COntent"),
+  createData("10", "3", "2022-01-7", "Malicious COntent"),
+  createData("5", "7", "2022-01-8", "Malicious COntent"),
+  createData("9", "11", "2022-01-9", "Fake Account"),
 ];
 const updateRow = () => {
   console.log("user reports");
@@ -127,13 +127,15 @@ export default function CustomizedTables() {
       </Grid> */}
 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth:700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell align="left">Reporter Id</StyledTableCell>
               <StyledTableCell align="left">Reportee Id</StyledTableCell>
               <StyledTableCell align="left">Date</StyledTableCell>
               <StyledTableCell align="left">Reason</StyledTableCell>
+              <StyledTableCell align="left"></StyledTableCell>
+              <StyledTableCell align="center">Actions</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -147,7 +149,7 @@ export default function CustomizedTables() {
                 <StyledTableCell align="left">{row.carbs}</StyledTableCell>
                 <StyledTableCell align="left">{row.protein}</StyledTableCell>
                 <StyledTableCell align="left">
-                  <Grid container spacing={5}>
+                  <Grid container spacing={3}>
                     <Grid item>
                       <ColorButton1 variant="contained">View User</ColorButton1>
                     </Grid>
@@ -161,10 +163,6 @@ export default function CustomizedTables() {
                       <ColorButton4 variant="contained">Warn</ColorButton4>
                     </Grid>
                   </Grid>
-                  {/* <Button onClick={updateRow()} style={{color: "#0073e6"}}>View User</Button> */}
-                  {/* <Button style={{color: "#009900"}}>Reports</Button>
-                  <Button style={{color: "#ff0000"}}>Block</Button>
-                  <Button style={{color: "#ff9900"}}>Warn</Button> */}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

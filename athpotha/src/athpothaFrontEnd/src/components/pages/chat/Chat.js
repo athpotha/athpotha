@@ -10,11 +10,11 @@ import { useNavigate } from "react-router-dom";
 
 import { leftbarItem } from "../../../services/ListItemService";
 
-const listItems = leftbarItem();
 function Chat() {
 
   const userType = localStorage.getItem("USER_TYPE");
   const navigate = useNavigate();
+  const listItems = leftbarItem();
   return (
     <StyledEngineProvider injectFirst>
       <MainHeader value={userType === "university" ? 2 : 3} />
