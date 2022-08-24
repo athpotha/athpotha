@@ -14,14 +14,14 @@ import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 const postDetails = [
   {
     id: "post-1",
-    personName: "Kumud perera",
+    personName: "Ashani Imalsha",
     postDate: "Jan 9, 2014",
     postContent:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+      "After A/L? Interested In Java?",
     postedImage:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://lh3.googleusercontent.com/p/AF1QipOXTTCcP39K4RwL4vducZ0nnc7TyNj7omePLCny=w1080-h608-p-no-v0",
     personImage:
-      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     userImage: "/images/tutors/tutor-1.jpg",
     noOfPostUpvotes: 123,
     noOfComments: 23,
@@ -29,14 +29,13 @@ const postDetails = [
 
   {
     id: "post-2",
-    personName: "Kumud perera",
+    personName: "Roneki Manamperi",
     postDate: "Jan 9, 2014",
     postContent:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
     postedImage:
       "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    personImage:
-      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    personImage: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     userImage: "/images/tutors/tutor-1.jpg",
     noOfPostUpvotes: 123,
     noOfComments: 23,
@@ -44,14 +43,14 @@ const postDetails = [
 
   {
     id: "post-3",
-    personName: "Kumud perera",
+    personName: "Pavani Mandira",
     postDate: "Jan 9, 2014",
     postContent:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
     postedImage:
       "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     personImage:
-      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1599842057874-37393e9342df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     userImage: "/images/tutors/tutor-1.jpg",
     noOfPostUpvotes: 123,
     noOfComments: 23,
@@ -59,14 +58,14 @@ const postDetails = [
 
   {
     id: "post-4",
-    personName: "Kumud perera",
+    personName: "Melaka Pathiranagama",
     postDate: "Jan 9, 2014",
     postContent:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
     postedImage:
       "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     personImage:
-      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     userImage: "/images/tutors/tutor-1.jpg",
     noOfPostUpvotes: 123,
     noOfComments: 23,
@@ -74,29 +73,14 @@ const postDetails = [
 
   {
     id: "post-5",
-    personName: "Kumud perera",
+    personName: "Minura Ratnayake",
     postDate: "Jan 9, 2014",
     postContent:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
     postedImage:
       "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     personImage:
-      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    userImage: "/images/tutors/tutor-1.jpg",
-    noOfPostUpvotes: 123,
-    noOfComments: 23,
-  },
-
-  {
-    id: "post-6",
-    personName: "Kumud perera",
-    postDate: "Jan 9, 2014",
-    postContent:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    postedImage:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    personImage:
-      "https://images.unsplash.com/photo-1519456264917-42d0aa2e0625?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1508852951744-beab078a4b2b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     userImage: "/images/tutors/tutor-1.jpg",
     noOfPostUpvotes: 123,
     noOfComments: 23,
@@ -146,7 +130,7 @@ function Feeds() {
         <Grid
           item
           xs={12}
-          sx={{mb: 2}}
+          sx={{ mb: 2 }}
         >
           <FeedsStart />
 

@@ -153,7 +153,7 @@ function TopRatedTutors() {
               spacing={1}
               headingColor="secondary.contrastText"
               headingVariant="h4"
-              heading="Are You a Tutor? Get Yourself Registerd"
+              heading="Are You a Tutor? Get Yourself Registered"
               subtitleColor="secondary.contrastText"
               subtitleVariant="h6"
               subtitle="Get started as a tutor in AthPotha to get the exposure you require"

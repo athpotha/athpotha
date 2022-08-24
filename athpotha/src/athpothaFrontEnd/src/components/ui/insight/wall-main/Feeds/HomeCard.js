@@ -45,59 +45,13 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const commentDetatils = [
-  {
-    id: "comment-1",
-    avatarImage:
-      "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-    commentOwnerName: "Melaka Pathiranagama",
-    commentContent:
-      "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-    upvotes: 123,
-    haveReplies: true,
-    replies: [
-      {
-        id: "comment-reply-1",
-        avatarImage: "/images/tutors/tutor-1.jpg",
-        commentOwnerName: "Kumud Perera",
-        commentContent:
-          "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-        upvotes: 125,
-        haveReplies: false,
-        replies: [{}],
-      },
-
-      {
-        id: "comment-reply-2",
-        avatarImage: "/images/tutors/tutor-1.jpg",
-        commentOwnerName: "Kumud Perera",
-        commentContent:
-          "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-        upvotes: 126,
-        haveReplies: true,
-        replies: [
-          {
-            id: "comment-reply-reply-1",
-            avatarImage: "/images/tutors/tutor-1.jpg",
-            commentOwnerName: "Kumud Perera",
-            commentContent:
-              "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-            upvotes: 125,
-            haveReplies: false,
-            replies: [{}],
-          },
-        ],
-      },
-    ],
-  },
-];
 const PostedPerson = styled(Avatar)({
   opacity: 1,
   "&:hover": {
     opacity: 0.6
   },
-  width: 56, 
-  height: 56, 
+  width: 56,
+  height: 56,
   marginRight: 10,
   cursor: "pointer"
 });
@@ -107,11 +61,89 @@ const PostedImage = styled(CardMedia)({
   "&:hover": {
     opacity: 0.8
   },
-  height:"460"
+  height: "460"
 })
 export default function HomeCard(props) {
   const [expanded, setExpanded] = useState(false);
 
+  const commentDetatils = [
+    {
+      id: "comment-1",
+      avatarImage:
+        "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      commentOwnerName: "Melaka Pathiranagama",
+      commentContent:
+        "How much is the price?",
+      upvotes: 123,
+      haveReplies: true,
+      replies: [
+        {
+          id: "comment-reply-1",
+          avatarImage: "https://images.unsplash.com/photo-1507438222021-237ff73669b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80",
+          commentOwnerName: "Kumud Perera",
+          commentContent:
+            "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
+          upvotes: 125,
+          haveReplies: false,
+          replies: [{}],
+        },
+
+        {
+          id: "comment-reply-2",
+          avatarImage: "/images/tutors/tutor-1.jpg",
+          commentOwnerName: "Rahal Jayasundara",
+          commentContent:
+            "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
+          upvotes: 126,
+          haveReplies: true,
+          replies: [
+            {
+              id: "comment-reply-reply-1",
+              avatarImage: props.postItem.personImage,
+              commentOwnerName: props.postItem.personName,
+              commentContent:
+                "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
+              upvotes: 125,
+              haveReplies: false,
+              replies: [{}],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "comment-2",
+      avatarImage:
+        "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      commentOwnerName: "Ranga madura",
+      commentContent:
+        "Is this available in Matara?",
+      upvotes: 123,
+      haveReplies: true,
+      replies: [
+        {
+          id: "comment-reply-2-1",
+          avatarImage: "https://images.unsplash.com/photo-1507438222021-237ff73669b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80",
+          commentOwnerName: "Kumud Perera",
+          commentContent:
+            "8th  September at Susipwan Nugegoda",
+          upvotes: 125,
+          haveReplies: false,
+          replies: [{}],
+        },
+      ],
+    },
+    {
+      id: "comment-3",
+      avatarImage:
+        "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      commentOwnerName: "Sirimal Rajapaksha",
+      commentContent:
+        "Great job Janaka",
+      upvotes: 123,
+      haveReplies: false,
+    },
+  ];
   // const [isLoading, setIsLoading] = useState(false);
   // useEffect(() => {
   //   setIsLoading(true);
@@ -136,7 +168,7 @@ export default function HomeCard(props) {
   const bookmarkIndex = bookmarkPosts.findIndex(
     (bookmark) => bookmark.id === props.homeCardId
   );
-  
+
   if (bookmarkIndex !== -1) {
     isBookmarkAdded = bookmarkPosts[bookmarkIndex].isBookmarkAdded;
     isBookmarkRemoved = bookmarkPosts[bookmarkIndex].isBookmarkRemoved;
@@ -178,9 +210,9 @@ export default function HomeCard(props) {
             {props.postItem.postedImage && <PostedImage
               component="img"
               image={props.postItem.postedImage}
-              // alt="Paella dish"
+            // alt="Paella dish"
             />}
-            
+
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
                 <KeyboardDoubleArrowUpIcon />
@@ -205,7 +237,7 @@ export default function HomeCard(props) {
                 <Grid item xs={1}>
                   <Avatar
                     sx={{ width: 56, height: 56 }}
-                    src={props.postItem.userImage}
+                    src={props.postItem.personImage}
                   />
                 </Grid>
                 <Grid item xs={7} style={{ mr: 2 }}>
