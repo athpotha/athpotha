@@ -205,6 +205,12 @@ function Home() {
                                             <Typography variant="body2" sx={{ ml: "20px" }}>
                                                 {details}
                                             </Typography>
+                                            <Typography sx={{ml:2,mt:1,color:"#00712F"}}>Last three years Z-score</Typography>
+                                            <Box sx={{display: 'flex',flexDirection: 'row',p: 1,m: 1,}}>
+                                                <Box sx={{pr:5}}>2019 A/L - <span>1.5001</span></Box>
+                                                <Box sx={{pr:5}}>2020 A/L - <span>1.4998</span></Box>
+                                                <Box sx={{pr:5}}>2021 A/L - <span>1.5100</span></Box>
+                                            </Box>
                                             {/* <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
                                                 <Button onClick={handleOpenDes(details)}>Edit</Button>
                                             </Box> */}
