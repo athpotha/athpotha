@@ -52,11 +52,11 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("Student", "Kasun", "Perera", 159),
-  createData("Student", "Nuwan", "Janitha", 237),
-  createData("Teacher", "Kumara", "Liyanage", 262),
-  createData("Student", "Nuwan", "Janitha", 237),
-  createData("Teacher", "Kumara", "Liyanage", 26),
+  createData("1", "2", "2022-01-5", "Fake Account"),
+  createData("5", "8", "2022-01-6", "Malicious COntent"),
+  createData("10", "3", "2022-01-7", "Malicious COntent"),
+  createData("5", "7", "2022-01-8", "Malicious COntent"),
+  createData("9", "11", "2022-01-9", "Fake Account"),
 ];
 const updateRow = () => {
   console.log("user reports");

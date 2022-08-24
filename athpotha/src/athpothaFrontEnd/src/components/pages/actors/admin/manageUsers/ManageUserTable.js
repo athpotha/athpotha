@@ -1,21 +1,25 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { create } from '@mui/material/styles/createTransitions';
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
-import { FormLabel } from '@mui/material';
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { create } from "@mui/material/styles/createTransitions";
 import {
-  blue,
-  green,
-  red,
-} from "@mui/material/colors";
-
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { FormLabel } from "@mui/material";
+import { blue, green, red } from "@mui/material/colors";
+import CenteredBox from "../../../../ui/CenteredBox";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -29,11 +33,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
@@ -55,54 +59,50 @@ const ColorButton2 = styled(Button)(({ theme }) => ({
 }));
 
 function createData(name, calories, fat, carbs, protein) {
-
   return { name, calories, fat, carbs, protein };
 }
 
 const rows = [
-  createData('Student','Kasun','Perera', 159, 6.0, 24, 4.0),
-  createData('Student','Nuwan','Janitha', 237, 9.0, 37, 4.3),
-  createData('Teacher','Kumara','Liyanage', 262, 16.0, 24, 6.0),
-  createData('Student','Nuwan','Janitha', 237, 9.0, 37, 4.3),
-  createData('Teacher','Kumara','Liyanage', 262, 16.0, 24, 6.0),
+  createData("Student", "Kasun", "Perera", "Done IJSE", "Undergraduate at UCSC", 24, 4.0),
+  createData("Student", "Nuwan", "Janitha", "Done CIMA"," Student at Leeds", 37, 4.3),
+  createData("Teacher", "Kumara", "Liyanage", "Done AAT", "Teacher at Leeds", 24, 6.0),
+  createData("Student", "Nuwan", "Janitha", "OL Qualified", "Undergraduate at UCSC", 37, 4.3),
+  createData("Teacher", "Kumara", "Liyanage", "Business Management", "Teacher at Leeds", 24, 6.0),
 ];
- const updateRow=()=>{
+const updateRow = () => {
   console.log("ada");
-}
-
-
-
+};
 
 export default function CustomizedTables() {
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
   return (
-    <Grid>  
+    <Grid>
       <Grid container>
-      
-      <Grid item xs={12}>
-      <Box sx={{ maxWidth: 200 ,mb:3}}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Select User Type</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="User_Type"
-            onChange={handleChange}
-          >
-            <MenuItem value={10}>Student</MenuItem>
-            <MenuItem value={20}>Teacher</MenuItem>
-            <MenuItem value={30}>University Representative</MenuItem>
-            <MenuItem value={40}>Stakeholders</MenuItem>
-
-          </Select>
-        </FormControl>
-      </Box>
-      </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ maxWidth: 200, mb: 3 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Select User Type
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={age}
+                label="User_Type"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Student</MenuItem>
+                <MenuItem value={20}>Teacher</MenuItem>
+                <MenuItem value={30}>University Representative</MenuItem>
+                <MenuItem value={40}>Stakeholders</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </Grid>
       </Grid>
 
       <TableContainer component={Paper}>
@@ -114,7 +114,9 @@ export default function CustomizedTables() {
               <StyledTableCell align="left">Last Name</StyledTableCell>
               <StyledTableCell align="left">Qualification</StyledTableCell>
               <StyledTableCell align="left">Bio</StyledTableCell>
-              <StyledTableCell align="left">Actions</StyledTableCell>
+              <StyledTableCell align="left">
+                <CenteredBox align="center">Actions</CenteredBox>
+              </StyledTableCell>
               {/* <StyledTableCell align="left">Buttons</StyledTableCell> */}
             </TableRow>
           </TableHead>
@@ -129,14 +131,14 @@ export default function CustomizedTables() {
                 <StyledTableCell align="left">{row.carbs}</StyledTableCell>
                 <StyledTableCell align="left">{row.protein}</StyledTableCell>
                 <StyledTableCell align="left">
-                <Grid container spacing={5}>
-                  <Grid item>
-                      <ColorButton1 variant="contained">Update</ColorButton1>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <CenteredBox align="center"><ColorButton1 variant="contained">Update</ColorButton1></CenteredBox>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={6}>
                       <ColorButton2 variant="contained">Delete</ColorButton2>
                     </Grid>
-                    </Grid>
+                  </Grid>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
