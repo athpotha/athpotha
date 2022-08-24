@@ -22,12 +22,13 @@ import SchoolIcon from "@mui/icons-material/School";
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate } from "react-router-dom";
 
-const listItems = leftbarItem();
 
 function Profile() {
   console.log(localStorage.getItem("PROFILE_PIC"))
   const userType = localStorage.getItem("USER_TYPE");
   const navigate = useNavigate();
+  const listItems = leftbarItem();
+
   return (
     <StyledEngineProvider injectFirst>
       <MainHeader value={userType === "university" ? 0 : 4} />
@@ -57,7 +58,7 @@ function Profile() {
             <List>
               {listItems.map((listItem) => (
                 <ListItem key={listItem.id} disablePadding>
-                  <ListItemButton  onClick={() => { navigate(listItem.link) }}>
+                  <ListItemButton onClick={() => { navigate(listItem.link) }}>
                     <ListItemIcon>{listItem.icon}</ListItemIcon>
                     <ListItemText primary={listItem.listName} />
                   </ListItemButton>

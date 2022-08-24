@@ -39,7 +39,7 @@ export default function MainTab(props) {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        {userType === "student" &&
+        {(userType === "student" || userType === "tutor" || userType === "community") &&
           <Tabs
             value={value}
             onChange={handleChange}

@@ -21,12 +21,13 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import { leftbarItem } from "../../../services/ListItemService";
 
-const listItems = leftbarItem();
 
 function UniProfile() {
+  const listItems = leftbarItem();
+
   return (
     <StyledEngineProvider injectFirst>
-      <MainHeader />
+      <MainHeader value={0} />
       <Grid
         container
         spacing={2}
