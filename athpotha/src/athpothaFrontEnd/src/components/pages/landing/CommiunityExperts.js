@@ -158,7 +158,7 @@ function CommiunityExperts() {
             spacing={1}
             headingColor="primary.darker"
             headingVariant="h3"
-            heading="Commiunity Experts"
+            heading="Community Experts"
             subtitleColor="secondary.contrastText"
             subtitleVariant="h5"
             subtitle="Athpotha  envisions to deliver long lasting guidance for the high schoolers by creating a network of interrelated personnels"
@@ -195,14 +195,14 @@ function CommiunityExperts() {
               spacing={1}
               headingColor="secondary.contrastText"
               headingVariant="h4"
-              heading="Want to be a Part of AthPotha Commiunity?"
+              heading="Want to be a Part of AthPotha Community?"
               subtitleColor="secondary.contrastText"
               subtitleVariant="h6"
               subtitle="Join our community to offer your support to deliver the best career guidance for the high schoolers"
             />
           </Grid>
           <Grid item alignSelf="center">
-            <HomeTabButtons userType="commiunity" />
+            <HomeTabButtons userType="community" />
           </Grid>
         </Grid>
       </Grid>
