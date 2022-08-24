@@ -16,7 +16,7 @@ export const leftbarItem = () => {
             },
             {
                 id: "leftbar-listItem-3",
-                listName: "Commiunity Experts",
+                listName: "Community Experts",
                 icon: <CellTowerIcon />,
             },
             {
@@ -60,7 +60,7 @@ export const leftbarItem = () => {
             },
             {
                 id: "leftbar-listItem-3",
-                listName: "Commiunity Experts",
+                listName: "Community Experts",
                 icon: <CellTowerIcon />,
             },
             {
