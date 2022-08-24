@@ -68,8 +68,8 @@ public class AthpothaApplication {
 			adminRepository.save(admin);
 		}
 		if(!isExistingUser("athpothaStudent121@gmail.com")) {
-			student.setFirst_name("Athpotha");
-			student.setLast_name("Student");
+			student.setFirst_name("Hiruni");
+			student.setLast_name("Maleesha");
 			student.setUser_type(UserType.student);
 			student.setEmail("athpothaStudent121@gmail.com");
 			student.setPassword(passwordEncoder.encode("Athpotha@123"));
@@ -78,8 +78,8 @@ public class AthpothaApplication {
 			studentRepository.save(student);
 		}
 		if(!isExistingUser("athpothaCommunity121@gmail.com")) {
-			community.setFirst_name("Athpotha");
-			community.setLast_name("Commiunity");
+			community.setFirst_name("Dilsha");
+			community.setLast_name("Navodi");
 			community.setUser_type(UserType.community);
 			community.setEmail("athpothaCommunity121@gmail.com");
 			community.setPassword(passwordEncoder.encode("Athpotha@123"));
@@ -88,8 +88,8 @@ public class AthpothaApplication {
 			commiunityRepository.save(community);
 		}
 		if(!isExistingUser("athpothaTutor121@gmail.com")) {
-			tutor.setFirst_name("Athpotha");
-			tutor.setLast_name("Tutor");
+			tutor.setFirst_name("Maduni");
+			tutor.setLast_name("Tharushi");
 			tutor.setUser_type(UserType.tutor);
 			tutor.setEmail("athpothaTutor121@gmail.com");
 			tutor.setPassword(passwordEncoder.encode("Athpotha@123"));
@@ -98,8 +98,8 @@ public class AthpothaApplication {
 			tutorRepository.save(tutor);
 		}
 		if(!isExistingUser("athpothaUniversity121@gmail.com")) {
-			university.setFirst_name("Athpotha");
-			university.setLast_name("University");
+			university.setFirst_name("University");
+			university.setLast_name("Of Colombo");
 			university.setUser_type(UserType.university);
 			university.setEmail("athpothaUniversity121@gmail.com");
 			university.setPassword(passwordEncoder.encode("Athpotha@123"));
