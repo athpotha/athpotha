@@ -53,11 +53,11 @@ function FeedsSection(props) {
 
     if (props.posts.length > 0) {
         posts = props.posts.map((post) => (
-            post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
+            post.postType == "post" && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
         ))
 
         questions = props.posts.map((post) => (
-            post.postType == "question" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
+            post.postType == "question" && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
         ))
     }
     if (props.isLoading) {
