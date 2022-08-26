@@ -116,27 +116,17 @@ function SignInForm({ loading, error, ...props }) {
 
       const user_type = localStorage.getItem("USER_TYPE");
       console.log(userInfo);
-      // if (!userInfo.hasLogged) {
-      //   navigate("/categories");
-      // } else {
-      //   if (user_type !== "university" && user_type !== "admin") {
-      //     navigate("/main");
-      //   } else if (user_type === "admin") {
-      //     navigate("/admin");
-      //   } else if (user_type === "university") {
-      //     navigate("/university");
-      //   }
-      // }
       if (!userInfo.hasLogged) {
+        navigate("/categories");
+      } else {
         if (user_type !== "university" && user_type !== "admin") {
           navigate("/main");
         } else if (user_type === "admin") {
           navigate("/admin");
         } else if (user_type === "university") {
-          navigate("/profile");
+          navigate("/university");
         }
       }
-
     } catch {
       Swal.fire({
         icon: 'error',
