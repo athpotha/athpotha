@@ -62,6 +62,7 @@ function App() {
 
   const authCtx = useContext(AuthContext);
   const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
+  console.log(authCtx.hasLogged)
   // localStorage.setItem("USER_TYPE", "student");
   return (
     <StyledEngineProvider injectFirst>

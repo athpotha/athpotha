@@ -29,7 +29,7 @@ export const AuthContextProvider = (props) => {
   }
 
   const [token, setToken] = useState(initialToken);
-  const [hasLogged, setHasLogged] = useState(false);
+  const [hasLogged, setHasLogged] = useState(localStorage.getItem("HAS_LOGGED"));
 
   const userIsLoggedIn = !!token;
   const hasUserLoggedIn = hasLogged;
@@ -72,6 +72,7 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("USER_EMAIL", user.email);
     localStorage.setItem("PROFILE_PIC", user.profile_picture);
     localStorage.setItem("COVER_PIC", user.cover_picture);
+    localStorage.setItem("HAS_LOGGED", user.hasLogged);
     hasLoggedHandler(user.hasLogged);
     if(user.user_type === "student") {
       localStorage.setItem("STUDENT_TYPE", user.studentType);
