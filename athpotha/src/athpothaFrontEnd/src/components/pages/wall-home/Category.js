@@ -76,6 +76,8 @@ export default function Category(props) {
     const dispatch = useDispatch();
     const [ImageButton, setImageButton] = React.useState(imageButton);
     const [isSelected, setIsSelected] = React.useState(false);
+    let categories = useSelector((state) => state.educationCategory.categories);
+    const studentType = categories[0];
 
     const clickedButton = () => {
         if (!isSelected) {
@@ -124,20 +126,25 @@ export default function Category(props) {
             setIsSelected(false);
             setImageButton(imageButton);
         }
-        dispatch(educationCategoryActions.addCategory(props.image.title));
+
+        if(studentType) {
+            dispatch(educationCategoryActions.addCategory(props.image.id.replace("buttonImage-", "")));
+        } else {
+            dispatch(educationCategoryActions.addCategory(props.image.title));
+
+        }
         if (props.image.title === "O/L Qualified" || props.image.title === "A/L Qualified" || props.image.title === "Undergraduate") {
             dispatch(educationCategoryActions.setBackButton(1));
         }
         // dispatch(educationCategoryActions.setSelectedStudentType(props.image.title));
     }
 
-    const studentType = useSelector((state) => state.educationCategory.selectedStudentType);
-    console.log(studentType);
     return (
         <Box sx={{ minWidth: 300, width: '100%', mb: 2 }}>
             <ImageButton
                 focusRipple
-                key={props.image.title}
+                key={props.image.id}
+                id={props.image.id}
                 style={{
                     width: props.image.width,
                 }}
