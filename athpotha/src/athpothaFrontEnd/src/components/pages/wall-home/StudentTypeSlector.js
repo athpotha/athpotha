@@ -5,12 +5,6 @@ import Category from './Category'
 
 const images = [
     {
-        id: 'buttonImage-4',
-        url: '/images/main-wall/main-wall-1.jpg',
-        title: 'Regular',
-        width: '90%',
-    },
-    {
         id: 'buttonImage-1',
         url: '/images/main-wall/main-wall-1.jpg',
         title: 'OL_Qualified',
