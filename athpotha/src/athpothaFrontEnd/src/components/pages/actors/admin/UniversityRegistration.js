@@ -3,9 +3,11 @@ import Dashboard from './Dashboard'
 import UniversityRegistrationForm from './UniversityRegistrationForm'
 
 function UniversityRegistration() {
-  return (
-    <Dashboard content={<UniversityRegistrationForm />} />
-  )
+    return (
+        <React.Fragment>
+            <Dashboard content={<UniversityRegistrationForm/>} />
+        </React.Fragment>
+    )
 }
 
-export default UniversityRegistration
+export default UniversityRegistration;
