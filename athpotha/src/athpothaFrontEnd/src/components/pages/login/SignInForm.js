@@ -119,6 +119,7 @@ function SignInForm({ loading, error, ...props }) {
       if (!userInfo.hasLogged) {
         navigate("/categories");
       } else {
+        console.log(user_type)
         if (user_type !== "university" && user_type !== "admin") {
           navigate("/main");
         } else if (user_type === "admin") {

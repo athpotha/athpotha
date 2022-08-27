@@ -21,14 +21,14 @@ function CategorySelection() {
             const categories = await response.data;
             console.log(studentType);
             categories.map((category) => {
-                if (studentType == "O/L Qualified") {
+                if (studentType == "OL_Qualified") {
                     category.studentType === "OL_Qualified" && images.push({
                         id: `buttonImage-${category.categoryId}`,
                         url: category.image,
                         title: category.categoryName,
                         width: '90%',
                     });
-                } else if (studentType == "A/L Qualified") {
+                } else if (studentType == "AL_Qualified") {
                     category.studentType === "AL_Qualified" && images.push({
                         id: `buttonImage-${category.categoryId}`,
                         url: category.image,

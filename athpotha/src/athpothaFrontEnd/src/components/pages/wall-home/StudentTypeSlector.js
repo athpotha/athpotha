@@ -13,13 +13,13 @@ const images = [
     {
         id: 'buttonImage-1',
         url: '/images/main-wall/main-wall-1.jpg',
-        title: 'O/L Qualified',
+        title: 'OL_Qualified',
         width: '90%',
     },
     {
         id: 'buttonImage-2',
         url: '/images/main-wall/main-wall-1.jpg',
-        title: 'A/L Qualified',
+        title: 'AL_Qualified',
         width: '90%',
     },
     {

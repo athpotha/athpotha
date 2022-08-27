@@ -15,6 +15,10 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { educationCategoryActions } from '../../../store/educationCategory-slice';
 import { fetchUserData } from '../../../api/authenticationService';
+import Swal from 'sweetalert2';
+
+import { useNavigate } from "react-router-dom";
+import AuthContext from '../../../store/ath-context';
 
 let images = [
     {
@@ -37,30 +41,31 @@ let images = [
     },
 
 ];
+
 export default function Categories() {
 
     const [open, setOpen] = React.useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const navigate = useNavigate();
+    const authCtx = React.useContext(AuthContext);
 
     let categories = useSelector((state) => state.educationCategory.categories);
     const studentType = categories[0];
     const backBtn = useSelector((state) => state.educationCategory.backButton);
-
+    const user_type = localStorage.getItem("USER_TYPE");
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: (localStorage.getItem("USER_TYPE") === "student" && studentType === undefined) ? 1200 : 900,
+        width: (user_type === "student" && studentType === undefined) ? 1200 : 900,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
         p: 2,
         borderRadius: 2,
     };
-    console.log(studentType);
-
     const dispatch = useDispatch();
 
     const backButtonClicked = () => {
@@ -71,15 +76,36 @@ export default function Categories() {
     }
 
     const submitCategories = () => {
+        handleClose();
         console.log(categories);
+        let selectedCategories = [];
+        console.log(categories.length)
+        for (let i = 1; i < categories.length; i++) {
+            selectedCategories.push(categories[i])
+        }
         fetchUserData({
             url: "api/v1/category/add-categories",
             method: "put",
             data: {
-                categories: categories,
-                userType: localStorage.getItem("USER_TYPE"),
+                studentType: studentType,
+                categories: selectedCategories,
+                userType: user_type,
                 email: localStorage.getItem("USER_EMAIL")
             }
+        }).then((response) => {
+            console.log(response.data);
+            if (user_type === "student") {
+                console.log("This is student")
+                localStorage.setItem("STUDENT_TYPE", studentType);
+            }
+            authCtx.userHasLogged(true);
+            Swal.fire({
+                icon: 'success',
+                title: 'Updated!',
+                text: 'Post Added!',
+            }).then(() => {
+                navigate("/main")
+            })
         })
     }
 
@@ -110,12 +136,12 @@ export default function Categories() {
                             } */}
                         </Grid>
                     </Grid>
-                    {(localStorage.getItem("USER_TYPE") === "student" && studentType === undefined) ? <StudentTypeSlector /> : <CategorySelection />}
+                    {(user_type === "student" && studentType === undefined) ? <StudentTypeSlector /> : <CategorySelection />}
                     {/* {localStorage.getItem("USER_TYPE") === "student" && studentType === "A/L Qualified" && <CategorySelection />}
                     {localStorage.getItem("USER_TYPE") === "student" && studentType === "Undergraduate" && <CategorySelection />} */}
                     <Grid container>
                         <Grid item xs={12}>
-                            {localStorage.getItem("USER_TYPE") !== "student" || studentType !== undefined &&
+                            {user_type !== "student" || studentType !== undefined &&
                                 <CenteredBox align="right">
                                     <Button
                                         variant="contained"

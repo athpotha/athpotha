@@ -71,7 +71,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/registration/" element={<Registration />} exact />
           <Route path="/home" element={<Home />}></Route>
-          {authCtx.isLoggedIn && userType !== "university" && userType !== "admin" && (
+          {authCtx.isLoggedIn && authCtx.hasLogged && userType !== "university" && userType !== "admin" && (
             <Route path="/main" element={<Main />}></Route>
           )}
           {authCtx.isLoggedIn && (
