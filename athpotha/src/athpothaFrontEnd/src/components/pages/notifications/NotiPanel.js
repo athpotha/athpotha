@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Grid, IconButton, ListItemButton } from "@mui/material";
 import CenteredBox from "../../ui/CenteredBox";
 import NotificationMenu from "./NotificationMenu";
+
 
 const DUMMY_NOTIFICATIONS = [
   {
@@ -50,19 +51,28 @@ const DUMMY_NOTIFICATIONS = [
 ];
 
 export default function NotiPanel() {
+  const[notiDBData,setNotiDBData]=useState([]);
+  console.log(notiDBData);
+  useEffect(()=>{
+    fetch("localhost:8080/notification/getAllNotifications")
+    .then(res=>res.json())
+    .then((result)=>{
+      setNotiDBData(result);
+    })
+  },[])
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-      {DUMMY_NOTIFICATIONS.map((notification) => (
+      {notiDBData.map((notification) => (
         <React.Fragment>
           <ListItem
-            id={notification.id}
-            key={notification.id}
+            id={notification.notification_id}
+            key={notification.notification_id}
             disablePadding
             secondaryAction={
               <Grid container direction="column">
                 <Grid item>
                   <IconButton disabled>
-                    <Typography>{notification.whenItCame} ago</Typography>
+                    <Typography>{notification.receive_datetime} ago</Typography>
                   </IconButton>
                 </Grid>
                 <Grid item>
@@ -78,17 +88,17 @@ export default function NotiPanel() {
               disablePadding
               sx={{
                 height: 100,
-                backgroundColor: notification.isNotificationRead ? "#fff" : "#00000006",
+                backgroundColor: notification.read_Unread ? "#fff" : "#00000006",
               }}
             >
               <ListItemAvatar>
                 <Avatar
-                  alt={notification.senderName}
-                  src={notification.senderProfileImage}
+                  alt={notification.sender_id}
+                  // src={notification.senderProfileImage}
                 />
               </ListItemAvatar>
               <ListItemText
-                primary={notification.primaryContent}
+                primary={notification.message}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -97,9 +107,9 @@ export default function NotiPanel() {
                       variant="body2"
                       color="text.primary"
                     >
-                      {notification.senderName}
+                      {notification.sender_id}
                     </Typography>
-                    {` — ${notification.secondaryContent}`}
+                    {` — ${notification.receiver_Id}`}
                   </React.Fragment>
                 }
               />
