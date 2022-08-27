@@ -20,7 +20,20 @@ import lombok.ToString;
 public class Student extends User {
 	@Enumerated(value = EnumType.STRING)
 	private StudentType studentType;
-
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(
+//			name = "user_education_category",
+//			joinColumns = @JoinColumn(
+//					name = "category_id",
+//					referencedColumnName = "categoryId"
+//			),
+//			inverseJoinColumns = @JoinColumn(
+//					name = "user_id",
+//					referencedColumnName = "user_id"
+//			)
+//	)
+//	private List<Category> educationCategories;
+	
 	public Student(String first_name, String last_name, UserType user_type, String email, String password,
 			String profile_picture, boolean userDeleted, boolean enabled, boolean verified, Date created_at,
 			StudentType studentType) {

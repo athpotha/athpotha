@@ -62,6 +62,7 @@ function App() {
 
   const authCtx = useContext(AuthContext);
   const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
+  console.log(authCtx.hasLogged)
   // localStorage.setItem("USER_TYPE", "student");
   return (
     <StyledEngineProvider injectFirst>
@@ -71,7 +72,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/registration/" element={<Registration />} exact />
           <Route path="/home" element={<Home />}></Route>
-          {authCtx.isLoggedIn && userType !== "university" && userType !== "admin" && (
+          {authCtx.isLoggedIn && authCtx.hasLogged && userType !== "university" && userType !== "admin" && (
             <Route path="/main" element={<Main />}></Route>
           )}
           {authCtx.isLoggedIn && (

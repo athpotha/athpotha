@@ -61,16 +61,6 @@ function Content() {
     fetchMyPostsHandler();
   }, [])
 
-  let content = <p>Found no posts</p>
-
-  if (posts.length > 0) {
-    content = posts.map((post) => (
-      <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
-    ))
-  }
-  if (isLoading) {
-    content = <BeforeDisplay />;
-  }
   const userType = localStorage.getItem("USER_TYPE");
   return (
     <StyledEngineProvider injectFirst>

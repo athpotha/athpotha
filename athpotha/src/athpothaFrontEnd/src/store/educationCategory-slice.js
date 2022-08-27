@@ -19,8 +19,9 @@ const educationCategorySlice = createSlice({
       if (!existingCategory) {
         state.categories.push(newCategory);
       } else {
-        const index = state.categories.findIndex((category) => category === newCategory);
-        state.categories.splice(index);
+        const index = state.categories.indexOf(newCategory);
+        console.log(index);
+        state.categories.splice(index, 1);
       }
     },
     setBackButton(state, action) {

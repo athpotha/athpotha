@@ -2,6 +2,7 @@ package com.athpotha.carrierGuidanceSystem;
 
 import javax.annotation.PostConstruct;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
@@ -9,13 +10,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.athpotha.carrierGuidanceSystem.model.Admin;
+import com.athpotha.carrierGuidanceSystem.model.Category;
 import com.athpotha.carrierGuidanceSystem.model.Community;
 import com.athpotha.carrierGuidanceSystem.model.Student;
+import com.athpotha.carrierGuidanceSystem.model.StudentType;
 import com.athpotha.carrierGuidanceSystem.model.Tutor;
 import com.athpotha.carrierGuidanceSystem.model.University;
 import com.athpotha.carrierGuidanceSystem.model.User;
 import com.athpotha.carrierGuidanceSystem.model.UserType;
 import com.athpotha.carrierGuidanceSystem.repository.AdminRepository;
+import com.athpotha.carrierGuidanceSystem.repository.CategoryRepository;
 import com.athpotha.carrierGuidanceSystem.repository.CommiunityRepository;
 import com.athpotha.carrierGuidanceSystem.repository.StudentRepository;
 import com.athpotha.carrierGuidanceSystem.repository.TutorRepository;
@@ -44,6 +48,9 @@ public class AthpothaApplication {
 	
 	@Autowired
 	private UniversityRepository universityRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AthpothaApplication.class, args);
@@ -107,6 +114,22 @@ public class AthpothaApplication {
 			university.setEnabled(true);
 			universityRepository.save(university);
 		}
+		
+		//Add Category
+		categoryRepository.save(new Category("Maths", StudentType.Regular));
+		categoryRepository.save(new Category("Science", StudentType.Regular));
+		
+		categoryRepository.save(new Category("Combined Maths", StudentType.OL_Qualified));
+		categoryRepository.save(new Category("Chemisty", StudentType.OL_Qualified));
+		categoryRepository.save(new Category("Physics", StudentType.OL_Qualified));
+		
+		categoryRepository.save(new Category("Engineering", StudentType.AL_Qualified));
+		categoryRepository.save(new Category("Information Technology", StudentType.AL_Qualified));
+		categoryRepository.save(new Category("Science", StudentType.AL_Qualified));
+		
+		categoryRepository.save(new Category("Engineering", StudentType.Undergraduate));
+		categoryRepository.save(new Category("Software & Data Science", StudentType.Undergraduate));
+		categoryRepository.save(new Category("Scientist", StudentType.Undergraduate));
 	}
 	
 	private boolean isExistingUser(String email) {
@@ -118,4 +141,13 @@ public class AthpothaApplication {
 			return false;
 		}
 	}
+	
+//	private boolean isExitingCategory(String category) {
+//		Category existingCategory = categoryRepository.findByCategoryName(category);
+//		if(existingCategory != null) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 }

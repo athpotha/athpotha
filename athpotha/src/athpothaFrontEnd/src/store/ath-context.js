@@ -8,6 +8,8 @@ const AuthContext = React.createContext({
   login: (token) => { },
   userInfo: (user) => { },
   logout: () => { },
+  userHasLogged: (isLogged) => { },
+  hasLogged: false
 });
 
 
@@ -27,9 +29,10 @@ export const AuthContextProvider = (props) => {
   }
 
   const [token, setToken] = useState(initialToken);
-  const [hasLogged, setHasLogged] = useState(false);
+  const [hasLogged, setHasLogged] = useState(localStorage.getItem("HAS_LOGGED"));
 
   const userIsLoggedIn = !!token;
+  const hasUserLoggedIn = hasLogged;
 
   const logoutHandler = useCallback(() => {
     setToken(null);
@@ -46,6 +49,7 @@ export const AuthContextProvider = (props) => {
     if (logoutTimer) {
       clearTimeout(logoutTimer);
     }
+    window.location.reload();
   }, []);
 
   const loginHandler = (token) => {
@@ -59,7 +63,7 @@ export const AuthContextProvider = (props) => {
   }
 
   const userInfoHandler = (user) => {
-    console.log(user.user_type);
+    console.log(user);
     localStorage.setItem("USER_TYPE", user.user_type);
     localStorage.setItem("USER_ID", user.user_id);
     localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);
@@ -68,8 +72,10 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("USER_EMAIL", user.email);
     localStorage.setItem("PROFILE_PIC", user.profile_picture);
     localStorage.setItem("COVER_PIC", user.cover_picture);
+    localStorage.setItem("HAS_LOGGED", user.hasLogged);
+    hasLoggedHandler(user.hasLogged);
     if(user.user_type === "student") {
-      localStorage.setItem("STUDENT_TYPE", user.student_type);
+      localStorage.setItem("STUDENT_TYPE", user.studentType);
     } else if(user.user_type === 'tutor') {
 
     } else if(user.user_type === 'university') {
@@ -92,7 +98,7 @@ export const AuthContextProvider = (props) => {
     userInfo: userInfoHandler,
     logout: logoutHandler,
     userHasLogged: hasLoggedHandler,
-    hasLogged: hasLogged
+    hasLogged: hasUserLoggedIn
   };
 
   return (

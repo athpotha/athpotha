@@ -1,4 +1,4 @@
-import { Grid, StyledEngineProvider } from "@mui/material";
+import { ButtonGroup, Grid, StyledEngineProvider } from "@mui/material";
 import React from 'react';
 import { Box, Container } from "@mui/system";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,10 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import styled from "@emotion/styled";
 import ViewImage from "./ViewImage";
 
+
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CenteredBox from "../../ui/CenteredBox";
+import ViewProfileMenu from "./ViewProfileMenu";
 function CoverSection(props) {
   const style = {
     position: "absolute",
@@ -120,6 +124,31 @@ function CoverSection(props) {
                   </Box>
 
                 </div>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={6}>
+                <ButtonGroup sx={{ml: "16px"}}>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: 20, textTransform: "none" }}
+                  >
+                    Connect
+                  </Button>
+                  <Button
+                    style={{ borderRadius: 20, textTransform: "none" }}
+                  >
+                    Message
+                  </Button>
+                </ButtonGroup>
+              </Grid>
+              <Grid item xs={6}>
+                <CenteredBox align="right">
+                  <IconButton>
+                    <ViewProfileMenu />
+                  </IconButton>
+                </CenteredBox>
+
               </Grid>
             </Grid>
           </Card>
