@@ -9,7 +9,8 @@ import Typography from "@mui/material/Typography";
 import { Grid, IconButton, ListItemButton } from "@mui/material";
 import CenteredBox from "../../ui/CenteredBox";
 import NotificationMenu from "./NotificationMenu";
-
+import { fetchUserData } from "../../../api/authenticationService";
+import axios from "axios";
 
 const DUMMY_NOTIFICATIONS = [
   {
@@ -18,8 +19,9 @@ const DUMMY_NOTIFICATIONS = [
     senderProfileImage: "/static/images/avatar/1.jpg",
     whenItCame: "1d",
     primaryContent: "Brunch this weekend?",
-    secondaryContent: "I'll be in your neighborhood doing errands this lorem lorem lorem lore neighborhood doing errands this lorem lorem lorem loremm lorem",
-    isNotificationRead: false
+    secondaryContent:
+      "I'll be in your neighborhood doing errands this lorem lorem lorem lore neighborhood doing errands this lorem lorem lorem loremm lorem",
+    isNotificationRead: false,
   },
   {
     id: "notification-1",
@@ -28,7 +30,7 @@ const DUMMY_NOTIFICATIONS = [
     whenItCame: "1d",
     primaryContent: "Brunch this weekend?",
     secondaryContent: "I'll be in your neighborhood doing errands this…",
-    isNotificationRead: true
+    isNotificationRead: true,
   },
   {
     id: "notification-2",
@@ -37,7 +39,7 @@ const DUMMY_NOTIFICATIONS = [
     whenItCame: "1d",
     primaryContent: "Brunch this weekend?",
     secondaryContent: "I'll be in your neighborhood doing errands this…",
-    isNotificationRead: true
+    isNotificationRead: true,
   },
   {
     id: "notification-3",
@@ -46,20 +48,54 @@ const DUMMY_NOTIFICATIONS = [
     whenItCame: "1d",
     primaryContent: "Brunch this weekend?",
     secondaryContent: "I'll be in your neighborhood doing errands this…",
-    isNotificationRead: true
+    isNotificationRead: true,
   },
 ];
 
 export default function NotiPanel() {
-  const[notiDBData,setNotiDBData]=useState([]);
-  console.log(notiDBData);
-  useEffect(()=>{
-    fetch("localhost:8080/notification/getAllNotifications")
-    .then(res=>res.json())
-    .then((result)=>{
-      setNotiDBData(result);
-    })
-  },[])
+  const [notiDBData, setNotiDBData] = useState([]);
+  // const GET_ALL_NOTIFICATIONS_API_URL =
+  //   "localhost:8080/notification/getAllNotifications";
+  // console.log(notiDBData);
+  // useEffect(()=>{
+  //   // fetch("localhost:8080/notification/getAllNotifications")
+  //   // .then(res=>res.json())
+  //   // .then((result)=>{
+  //   //   setNotiDBData(result);
+  //   // })
+  //   fetchUserData({
+  //     url: "api/v1/notification/getAllNotifications",
+  //     method: "get",
+
+  // }).then(res=>res.json())
+  // .then((result)=>{
+  //   setNotiDBData(result);
+  // })
+  // },[])
+
+  fetchUserData({
+    url: "notification/getAllNotifications",
+    method: "post",
+  }).then((response) => {
+    // console.log(response.data)
+    setNotiDBData(response.data);
+  })
+  // .then(res=>res.json())
+  // .then((result)=>{
+  //   setNotiDBData(result);
+  // })
+
+  // useEffect(()=>{
+  //   axios.get(GET_ALL_NOTIFICATIONS_API_URL)
+  //   .then(res=>res.json())
+  //   .then((result)=>{
+  //     setNotiDBData(result);
+  //    })
+  //   ;
+
+  // })
+
+  
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }}>
       {notiDBData.map((notification) => (
@@ -88,7 +124,9 @@ export default function NotiPanel() {
               disablePadding
               sx={{
                 height: 100,
-                backgroundColor: notification.read_Unread ? "#fff" : "#00000006",
+                backgroundColor: notification.read_Unread
+                  ? "#fff"
+                  : "#00000006",
               }}
             >
               <ListItemAvatar>
