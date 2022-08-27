@@ -65,4 +65,12 @@ public class CategoryController {
 	public List<Category> getCategories() {
 		return categoryRepository.findAll();
 	}
+	
+	@PostMapping("/get-student-category")
+	public List<Category> getStudentCategory(@RequestBody User user) {
+		Student student = studentRepository.findByEmailIgnoreCase(user.getEmail());
+		
+//		return categoryRepository.findByStudentTypeByStudent(student);
+		return categoryRepository.findByStudents(student);
+	}
 }

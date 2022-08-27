@@ -10,5 +10,5 @@ import com.athpotha.carrierGuidanceSystem.model.StudentType;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	Category findByCategoryId(Long categoryId);
-//	List<Category> findByStudents(List<Student> students);
+	List<Category> findByStudents(Student student);
 }

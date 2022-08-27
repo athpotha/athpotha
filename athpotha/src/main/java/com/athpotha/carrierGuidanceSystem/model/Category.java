@@ -94,5 +94,9 @@ public class Category {
 		this.studentType = studentType;
 	}
 	
+	public List<Category> findStudentCategories() {
+		return null;
+	}
+	
 	
 }

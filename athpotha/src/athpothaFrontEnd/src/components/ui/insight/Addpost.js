@@ -97,12 +97,12 @@ function Addpost(props) {
     setIsLoading(true);
     try {
       const response = await fetchUserData({
-        // url: "api/v1/category/get-categories",
-        // method: "post",
+        url: "api/v1/category/get-categories",
+        method: "post",
       })
 
       const categories = await response.data;
-      
+
     } catch (error) {
     }
     setIsLoading(false);

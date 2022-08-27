@@ -116,6 +116,8 @@ public class AthpothaApplication {
 		}
 		
 		//Add Category
+//		categoryRepository.save(new Category("Maths", StudentType.Regular));
+//		categoryRepository.save(new Category("Science", StudentType.Regular));
 		
 //		categoryRepository.save(new Category("Combined Maths", StudentType.OL_Qualified));
 //		categoryRepository.save(new Category("Chemisty", StudentType.OL_Qualified));
@@ -128,7 +130,7 @@ public class AthpothaApplication {
 //		categoryRepository.save(new Category("Engineering", StudentType.Undergraduate));
 //		categoryRepository.save(new Category("Software & Data Science", StudentType.Undergraduate));
 //		categoryRepository.save(new Category("Scientist", StudentType.Undergraduate));
-//	}
+	}
 	
 	private boolean isExistingUser(String email) {
 

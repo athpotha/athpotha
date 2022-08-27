@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-const initialEducationCatetory = { selectedStudentType: "", categories: [], backButton: -1 }
+const initialEducationCatetory = { selectedStudentType: "", selectedSubject: "", categories: [], backButton: -1, }
 
 const educationCategorySlice = createSlice({
   name: "education-category",
@@ -9,6 +9,9 @@ const educationCategorySlice = createSlice({
   reducers: {
     setSelectedStudentType(state, action) {
       state.selectedStudentType = action.payload;
+    },
+    setSelectedSubject(state, action){
+      state.selectedSubject = action.payload;
     },
     addCategory(state, action) {
       const newCategory = action.payload;
