@@ -6,11 +6,12 @@ import { fetchUserData } from '../../../api/authenticationService';
 
 function CategorySelection() {
     let categories = useSelector((state) => state.educationCategory.categories);
-    const studentType = categories[0];
+    const studentType = useSelector((state) => state.educationCategory.selectedStudentType);
+    const subjectType = useSelector((state) => state.educationCategory.selectedSubject);
     const [isLoading, setIsLoading] = useState(false);
     const [images, setImages] = useState([]);
 
-    const fetchMyPostsHandler = async () => {
+    const fetchCategoryHandler = async () => {
         setIsLoading(true);
         try {
             const response = await fetchUserData({
@@ -50,7 +51,7 @@ function CategorySelection() {
     }
 
     useEffect(() => {
-        fetchMyPostsHandler();
+        fetchCategoryHandler();
     }, [])
     if(isLoading) {
         return <p>Loading...</p>

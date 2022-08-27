@@ -19,6 +19,7 @@ import Swal from 'sweetalert2';
 
 import { useNavigate } from "react-router-dom";
 import AuthContext from '../../../store/ath-context';
+import SubjectSelector from './SubjectSelector';
 
 let images = [
     {
@@ -51,7 +52,8 @@ export default function Categories() {
     const authCtx = React.useContext(AuthContext);
 
     let categories = useSelector((state) => state.educationCategory.categories);
-    const studentType = categories[0];
+    const studentType = useSelector((state) => state.educationCategory.selectedStudentType);
+    const subjectType = useSelector((state) => state.educationCategory.selectedSubject);
     const backBtn = useSelector((state) => state.educationCategory.backButton);
     const user_type = localStorage.getItem("USER_TYPE");
     const style = {
@@ -59,7 +61,7 @@ export default function Categories() {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: (user_type === "student" && studentType === undefined) ? 1200 : 900,
+        width: (subjectType === "") ? 1200 : 900,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
@@ -73,22 +75,21 @@ export default function Categories() {
         categories.map((category) => (
             dispatch(educationCategoryActions.addCategory(category))
         ))
+        if (studentType !== "") {
+            dispatch(educationCategoryActions.setSelectedStudentType(""));
+        } else if (subjectType !== "") {
+            dispatch(educationCategoryActions.setSelectedSubject(""));
+        }
     }
 
     const submitCategories = () => {
         handleClose();
-        console.log(categories);
-        let selectedCategories = [];
-        console.log(categories.length)
-        for (let i = 1; i < categories.length; i++) {
-            selectedCategories.push(categories[i])
-        }
         fetchUserData({
             url: "api/v1/category/add-categories",
             method: "put",
             data: {
                 studentType: studentType,
-                categories: selectedCategories,
+                categories: categories,
                 userType: user_type,
                 email: localStorage.getItem("USER_EMAIL")
             }
@@ -136,9 +137,7 @@ export default function Categories() {
                             } */}
                         </Grid>
                     </Grid>
-                    {(user_type === "student" && studentType === undefined) ? <StudentTypeSlector /> : <CategorySelection />}
-                    {/* {localStorage.getItem("USER_TYPE") === "student" && studentType === "A/L Qualified" && <CategorySelection />}
-                    {localStorage.getItem("USER_TYPE") === "student" && studentType === "Undergraduate" && <CategorySelection />} */}
+                    {subjectType === "" ? <SubjectSelector /> : studentType === "" ? <StudentTypeSlector /> : <CategorySelection />}
                     <Grid container>
                         <Grid item xs={12}>
                             {user_type !== "student" || studentType !== undefined &&

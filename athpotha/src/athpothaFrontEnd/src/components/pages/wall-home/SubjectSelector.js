@@ -7,28 +7,34 @@ const images = [
     {
         id: 'buttonImage-1',
         url: '/images/main-wall/main-wall-1.jpg',
-        title: 'OL_Qualified',
+        title: 'Physical Science',
         width: '90%',
     },
     {
         id: 'buttonImage-2',
         url: '/images/main-wall/main-wall-1.jpg',
-        title: 'AL_Qualified',
+        title: 'Bio Sicence',
         width: '90%',
     },
     {
         id: 'buttonImage-3',
         url: '/images/main-wall/main-wall-1.jpg',
-        title: 'Undergraduate',
+        title: 'Management',
+        width: '90%',
+    },
+    {
+        id: 'buttonImage-4',
+        url: '/images/main-wall/main-wall-1.jpg',
+        title: 'Art',
         width: '90%',
     },
 ];
 
-function StudentTypeSlector() {
+function SubjectSelector() {
     return (
         <Grid container>
             {images.map((image) => (
-                <Grid key={image.id} item xs={4}>
+                <Grid key={image.id} item xs={3}>
                     <Category image={image} />
                 </Grid>
             ))}
@@ -36,4 +42,4 @@ function StudentTypeSlector() {
     )
 }
 
-export default StudentTypeSlector
+export default SubjectSelector

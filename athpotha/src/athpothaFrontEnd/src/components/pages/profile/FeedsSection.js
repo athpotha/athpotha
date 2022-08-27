@@ -6,6 +6,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
+import MyCategories from "./MyCategories";
+import MyPosts from "./MyPosts";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -48,28 +50,7 @@ function FeedsSection(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    let posts = <Typography>Found no posts</Typography>
-    let questions = <Typography>Found no Questions</Typography>
 
-    if (props.posts.length > 0) {
-        posts = props.posts.map((post) => (
-            post.postType == "post" && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
-        ))
-
-        questions = props.posts.map((post) => (
-            post.postType == "question" && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
-        ))
-    }
-    if (props.isLoading) {
-        posts = <BeforeDisplay />;
-        questions = <BeforeDisplay />;
-    }
-
-    if (posts[0] === "") {
-        posts = <Typography>Found no posts</Typography>
-    } else if (questions[0] === "") {
-        questions = <Typography>Found no Questions</Typography>
-    }
     return (
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
@@ -79,13 +60,13 @@ function FeedsSection(props) {
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
-                {posts}
+                <MyPosts postType={"post"} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                {questions}
+                <MyPosts postType={"question"} />
             </TabPanel>
-            <TabPanel value={value} index={2}>
-                {questions}
+            <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF", padding: "20px" }}>
+                <MyCategories />
             </TabPanel>
         </React.Fragment>
     );

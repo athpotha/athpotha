@@ -1,11 +1,16 @@
 import {
   Button,
   CardMedia,
+  FormControl,
+  FormHelperText,
   Grid,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CenteredBox from "../CenteredBox";
 import ProfileImage from "./ProfileImage";
 
@@ -21,18 +26,9 @@ import Swal from "sweetalert2";
 function Addpost(props) {
   const [postSuccess, setPostSuccess] = useState(true);
   const navigate = useNavigate();
-  // const fileInput = useRef();
-  // const [imagePreview, setImagePreview] = useState(null);
   const [imageData, setImageData] = useState(null);
   const [postData, setPostData] = useState(new FormData());
-
-  // const handleUploadClick = event => {
-  //   let file = event.target.files[0];
-  //   setImageData(file);
-  //   const imageData = new FormData();
-  //   imageData.append('imageFile', file);
-  //   setImagePreview(URL.createObjectURL(file));
-  // };
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     value: content,
@@ -55,7 +51,7 @@ function Addpost(props) {
     imagePreview: postImagePreview,
     fileInput: postImageInput,
     imageData: postImageData
-  } = UseImageInput(() => {})
+  } = UseImageInput(() => { })
 
   let formIsValid = false;
   if (contentIsValid) {
@@ -96,6 +92,28 @@ function Addpost(props) {
       alert(error);
     })
   }
+
+  const fetchMyPostsHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetchUserData({
+        url: "api/v1/category/get-categories",
+        method: "post",
+      })
+
+      const categories = await response.data;
+
+    } catch (error) {
+    }
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchMyPostsHandler();
+  }, [])
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
   return (
     <div style={{ marginTop: "20px" }}>
       {/* {postSuccess && <SimpleSnackbar message="Post added Sucess" />} */}
@@ -116,6 +134,27 @@ function Addpost(props) {
                 value={content}
                 fullWidth
               />
+              <FormControl variant="standard" sx={{ width: "100%" }} required
+              // error={universityHasError}
+              >
+                <InputLabel id="university"
+                  placeholder="Say something..."
+
+                >Post Category</InputLabel>
+                <Select
+                  label="Post Category"
+                // value={university}
+                // onChange={universityChangeHandler}
+                // onBlur={universityBlurHandler}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {/* <MenuItem value={1}>University of Moratuwa</MenuItem> */}
+
+                </Select>
+                {/* <FormHelperText>{universityHasError ? universityError : ""}</FormHelperText> */}
+              </FormControl>
               <CardMedia
                 component="img"
                 image={
