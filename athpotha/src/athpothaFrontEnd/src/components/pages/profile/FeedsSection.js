@@ -65,7 +65,7 @@ function FeedsSection(props) {
             <TabPanel value={value} index={1}>
                 <MyPosts postType={"question"} />
             </TabPanel>
-            <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF", padding: "20px" }}>
+            <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF"}}>
                 <MyCategories />
             </TabPanel>
         </React.Fragment>

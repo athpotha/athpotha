@@ -15,11 +15,5 @@ import java.util.List;
 @Getter
 @Setter
 public class Tutor extends User  {
-
 	private String description;
-	private String Subject;
-	private String School;
-	private String qualification;
-
-
 }

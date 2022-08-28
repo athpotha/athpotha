@@ -79,7 +79,7 @@ export default function Category(props) {
     let categories = useSelector((state) => state.educationCategory.categories);
     const studentType = useSelector((state) => state.educationCategory.selectedStudentType);
     const subjectType = useSelector((state) => state.educationCategory.selectedSubject);
-
+    const user_type = localStorage.getItem("USER_TYPE");
     const clickedButton = () => {
         if (!isSelected) {
             imageButton = styled(ButtonBase)(({ theme }) => ({
@@ -129,14 +129,17 @@ export default function Category(props) {
         }
 
         if(subjectType === "") {
+            console.log("hello if")
             dispatch(educationCategoryActions.setSelectedSubject(props.image.title))
             dispatch(educationCategoryActions.setBackButton(1));
             // dispatch(educationCategoryActions.addCategory(props.image.id.replace("buttonImage-", "")));
-        } else if(studentType === "") {
+        } else if(studentType === "" && user_type === "student") {
+            console.log("hello else if")
             dispatch(educationCategoryActions.setSelectedStudentType(props.image.title))
             dispatch(educationCategoryActions.setBackButton(1));
             // dispatch(educationCategoryActions.addCategory(props.image.title));
         } else {
+            console.log("hello else")
             dispatch(educationCategoryActions.addCategory(props.image.id.replace("buttonImage-", "")));
         }
         if (props.image.title === "OL_Qualified" || props.image.title === "AL_Qualified" || props.image.title === "Undergraduate") {

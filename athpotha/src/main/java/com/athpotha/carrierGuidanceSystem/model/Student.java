@@ -20,6 +20,7 @@ import lombok.ToString;
 public class Student extends User {
 	@Enumerated(value = EnumType.STRING)
 	private StudentType studentType;
+	private String description;
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinTable(
 //			name = "user_education_category",

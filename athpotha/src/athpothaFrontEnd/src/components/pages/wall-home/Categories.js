@@ -84,30 +84,53 @@ export default function Categories() {
 
     const submitCategories = () => {
         handleClose();
-        fetchUserData({
-            url: "api/v1/category/add-categories",
-            method: "put",
-            data: {
-                studentType: studentType,
-                categories: categories,
-                userType: user_type,
-                email: localStorage.getItem("USER_EMAIL")
-            }
-        }).then((response) => {
-            console.log(response.data);
-            if (user_type === "student") {
-                console.log("This is student")
-                localStorage.setItem("STUDENT_TYPE", studentType);
-            }
-            authCtx.userHasLogged(true);
-            Swal.fire({
-                icon: 'success',
-                title: 'Updated!',
-                text: 'Post Added!',
-            }).then(() => {
-                navigate("/main")
+        if (user_type === "student") {
+            fetchUserData({
+                url: "api/v1/category/add-categories",
+                method: "put",
+                data: {
+                    studentType: studentType,
+                    categories: categories,
+                    userType: user_type,
+                    email: localStorage.getItem("USER_EMAIL")
+                }
+            }).then((response) => {
+                console.log(response.data);
+                if (user_type === "student") {
+                    console.log("This is student")
+                    localStorage.setItem("STUDENT_TYPE", studentType);
+                }
+                authCtx.userHasLogged(true);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Updated!',
+                    text: 'Post Added!',
+                }).then(() => {
+                    navigate("/main")
+                })
             })
-        })
+        } else {
+            fetchUserData({
+                url: "api/v1/category/add-categories",
+                method: "put",
+                data: {
+                    categories: categories,
+                    userType: user_type,
+                    email: localStorage.getItem("USER_EMAIL")
+                }
+            }).then((response) => {
+                console.log(response.data);
+                authCtx.userHasLogged(true);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Updated!',
+                    text: 'Post Added!',
+                }).then(() => {
+                    navigate("/main")
+                })
+            })
+        }
+
     }
 
     console.log(categories)
@@ -137,10 +160,23 @@ export default function Categories() {
                             } */}
                         </Grid>
                     </Grid>
-                    {subjectType === "" ? <SubjectSelector /> : studentType === "" ? <StudentTypeSlector /> : <CategorySelection />}
+                    {user_type === "student" && (subjectType === "" ? <SubjectSelector /> : studentType === "" ? <StudentTypeSlector /> : <CategorySelection />)}
+                    {user_type !== "student" && (subjectType === "" ? <SubjectSelector /> : <CategorySelection />)}
+
                     <Grid container>
                         <Grid item xs={12}>
-                            {user_type !== "student" || studentType !== undefined &&
+                            {(user_type === "student" && studentType !== "") &&
+                                <CenteredBox align="right">
+                                    <Button
+                                        variant="contained"
+                                        style={{ borderRadius: 20, textTransform: "none" }}
+                                        onClick={submitCategories}
+                                    >
+                                        Select
+                                    </Button>
+                                </CenteredBox>
+                            }
+                            {(user_type !== "student" && subjectType !== "") &&
                                 <CenteredBox align="right">
                                     <Button
                                         variant="contained"

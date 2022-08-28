@@ -202,7 +202,7 @@ function CoverSection(props) {
                 <Grid item xs={2}>
                   <Button
                     onClick={handleOpenOne}
-                    style={{ "margin-left": "20px", "margin-top": "6px" }}
+                    style={{ marginLeft: "20px", marginTop: "6px" }}
                     variant="text"
                     startIcon={<BorderColorIcon />}
                   >
@@ -210,7 +210,7 @@ function CoverSection(props) {
                   </Button>
                   <Button
                     onClick={handleOpenTwo}
-                    style={{ "margin-left": "20px", "margin-bottom": "2px" }}
+                    style={{ marginLeft: "20px", marginBottom: "2px" }}
                     variant="text"
                     startIcon={<SettingsIcon color="action" />}
                     sx={{ m: "90px" }}

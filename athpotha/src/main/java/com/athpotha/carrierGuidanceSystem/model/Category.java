@@ -1,5 +1,6 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.athpotha.carrierGuidanceSystem.controller.OnliePostsController;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -87,7 +91,7 @@ public class Category {
 					referencedColumnName = "user_id"
 			)
 	)
-	private List<Community> community;
+	private List<Community> communities;
 
 	public Category(String categoryName, StudentType studentType) {
 		this.categoryName = categoryName;
@@ -98,5 +102,15 @@ public class Category {
 		return null;
 	}
 	
+	@OneToMany(targetEntity = OnlinePost.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "category_id",referencedColumnName = "categoryId")
+	List<OnlinePost> posts;
 	
+	public void addPost(Post post) {
+		posts.add(post);
+	}
+	
+	public void addQuestion(Question question) {
+		posts.add(question);
+	}
 }
