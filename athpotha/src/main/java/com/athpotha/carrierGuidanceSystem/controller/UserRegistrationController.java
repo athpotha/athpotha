@@ -88,7 +88,7 @@ public class UserRegistrationController {
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		User existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
 		if (existingUser != null) {
-			userRepository.deleteById(userEntity.getUser_id());
+			userRepository.deleteById(userEntity.getUserId());
 			userRegitrationMethod(userEntity);
 			modelAndView.addObject("email", userEntity.getEmail());
 			return "REGISTRATION_SUCCESS";
@@ -103,55 +103,55 @@ public class UserRegistrationController {
 	}
 
 	private void userRegitrationMethod(User userEntity) {
-		switch (userEntity.getUser_type()) {
+		switch (userEntity.getUserType()) {
 		case student:
 			Student student = new Student();
-			student.setFirst_name(userEntity.getFirst_name());
-			student.setLast_name(userEntity.getLast_name());
+			student.setFirstName(userEntity.getFirstName());
+			student.setLastName(userEntity.getLastName());
 			student.setEmail(userEntity.getEmail());
-			student.setUser_type(userEntity.getUser_type());
+			student.setUserType(userEntity.getUserType());
 			student.setPassword(userEntity.getPassword());
-			student.setProfile_picture(userEntity.getProfile_picture());
+			student.setProfilePicture(userEntity.getProfilePicture());
 			studentRepository.save(student);
 			break;
 		case admin:
 			Admin admin = new Admin();
-			admin.setFirst_name(userEntity.getFirst_name());
-			admin.setLast_name(userEntity.getLast_name());
+			admin.setFirstName(userEntity.getFirstName());
+			admin.setLastName(userEntity.getLastName());
 			admin.setEmail(userEntity.getEmail());
-			admin.setUser_type(userEntity.getUser_type());
+			admin.setUserType(userEntity.getUserType());
 			admin.setPassword(userEntity.getPassword());
-			admin.setProfile_picture(userEntity.getProfile_picture());
+			admin.setProfilePicture(userEntity.getProfilePicture());
 			adminRepository.save(admin);
 			break;
 		case university:
 			University university = new University();
-			university.setFirst_name(userEntity.getFirst_name());
-			university.setLast_name(userEntity.getLast_name());
+			university.setFirstName(userEntity.getFirstName());
+			university.setLastName(userEntity.getLastName());
 			university.setEmail(userEntity.getEmail());
-			university.setUser_type(userEntity.getUser_type());
+			university.setUserType(userEntity.getUserType());
 			university.setPassword(userEntity.getPassword());
-			university.setProfile_picture(userEntity.getProfile_picture());
+			university.setProfilePicture(userEntity.getProfilePicture());
 			universityRepository.save(university);
 			break;
 		case tutor:
 			Tutor tutor = new Tutor();
-			tutor.setFirst_name(userEntity.getFirst_name());
-			tutor.setLast_name(userEntity.getLast_name());
+			tutor.setFirstName(userEntity.getFirstName());
+			tutor.setLastName(userEntity.getLastName());
 			tutor.setEmail(userEntity.getEmail());
-			tutor.setUser_type(userEntity.getUser_type());
+			tutor.setUserType(userEntity.getUserType());
 			tutor.setPassword(userEntity.getPassword());
-			tutor.setProfile_picture(userEntity.getProfile_picture());
+			tutor.setProfilePicture(userEntity.getProfilePicture());
 			tutorRepository.save(tutor);
 			break;
 		case community:
 			Community commiunity = new Community();
-			commiunity.setFirst_name(userEntity.getFirst_name());
-			commiunity.setLast_name(userEntity.getLast_name());
+			commiunity.setFirstName(userEntity.getFirstName());
+			commiunity.setLastName(userEntity.getLastName());
 			commiunity.setEmail(userEntity.getEmail());
-			commiunity.setUser_type(userEntity.getUser_type());
+			commiunity.setUserType(userEntity.getUserType());
 			commiunity.setPassword(userEntity.getPassword());
-			commiunity.setProfile_picture(userEntity.getProfile_picture());
+			commiunity.setProfilePicture(userEntity.getProfilePicture());
 			commiunityRepository.save(commiunity);
 			break;
 		}

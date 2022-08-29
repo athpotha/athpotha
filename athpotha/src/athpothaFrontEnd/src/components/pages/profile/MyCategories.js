@@ -86,7 +86,7 @@ function MyCategories() {
                 method: "post",
                 data: {
                     email: localStorage.getItem("USER_EMAIL"),
-                    user_type: user_type
+                    userType: user_type
                 }
             })
 

@@ -115,10 +115,11 @@ function Addpost(props) {
     setIsLoading(true);
     try {
       const response = await fetchUserData({
-        url: "api/v1/category/get-student-category",
+        url: "api/v1/category/get-my-category",
         method: "post",
         data: {
-          email: localStorage.getItem("USER_EMAIL")
+          email: localStorage.getItem("USER_EMAIL"),
+          userType: localStorage.getItem("USER_TYPE")
         }
       })
 

@@ -37,23 +37,23 @@ public class UserController {
 		User user = userRepo.findByEmailIgnoreCase(email);
 
 		fileUploadService.makeDirectoryIfNotExist(imageDirectory);
-		String newProfileImage = user.getFirst_name() + "-" + user.getLast_name() + "-" + imageType + "-" + String.valueOf(user.getUser_id());
+		String newProfileImage = user.getFirstName() + "-" + user.getLastName() + "-" + imageType + "-" + String.valueOf(user.getUserId());
 		String imageExtention = fileUploadService.generateFile(file, newProfileImage, imageDirectory);
 
 		String filePath = "/images/profile/" + newProfileImage + "." + imageExtention;
 
 		if(imageType == ImageType.PROFILE_PIC) {
-			user.setProfile_picture(filePath);
+			user.setProfilePicture(filePath);
 		} else if(imageType == ImageType.COVER_PIC) {
-			user.setCover_picture(filePath);
+			user.setCoverPicture(filePath);
 		}
 		userRepo.save(user);
 		
 		user = userRepo.findByEmailIgnoreCase(email);
 		if(imageType == ImageType.PROFILE_PIC) {
-			return ResponseEntity.ok(user.getProfile_picture());
+			return ResponseEntity.ok(user.getProfilePicture());
 		} else if(imageType == ImageType.COVER_PIC) {
-			return ResponseEntity.ok(user.getCover_picture());
+			return ResponseEntity.ok(user.getCoverPicture());
 		}
 		return null;
 	}
@@ -65,7 +65,6 @@ public class UserController {
 	
 	@PostMapping("/get-user")
 	public User getUser(@RequestBody User user) {
-//		return userRepo.findByUserId(user.getUser_id());
-		return null;
+		return userRepo.findByUserId(user.getUserId());
 	}
 }

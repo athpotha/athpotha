@@ -55,7 +55,7 @@ public class CategoryController {
 			categories.add(category);
 		}
 
-		if (user.getUser_type() == UserType.student) {
+		if (user.getUserType() == UserType.student) {
 			Student student = studentRepository.findByEmailIgnoreCase(categoryRequest.getEmail());
 			student.setStudentType(categoryRequest.getStudentType());
 			studentRepository.save(student);
@@ -65,7 +65,7 @@ public class CategoryController {
 			}
 			student.setHasLogged(true);
 			studentRepository.save(student);
-		} else if(user.getUser_type() == UserType.tutor) {
+		} else if(user.getUserType() == UserType.tutor) {
 			Tutor tutor = tutorRepository.findByEmailIgnoreCase(categoryRequest.getEmail());
 			for (Category category : categories) {
 				category.getTutors().add(tutor);
@@ -73,7 +73,7 @@ public class CategoryController {
 			}
 			tutor.setHasLogged(true);
 			tutorRepository.save(tutor);
-		} else if(user.getUser_type() == UserType.community) {
+		} else if(user.getUserType() == UserType.community) {
 			Community community = communityRepository.findByEmailIgnoreCase(categoryRequest.getEmail());
 			for (Category category : categories) {
 				category.getCommunities().add(community);
@@ -83,7 +83,7 @@ public class CategoryController {
 			communityRepository.save(community);
 		}
 
-		System.out.println(user.getUser_type());
+		System.out.println(user.getUserType());
 //		categoryRepository.save();
 		return ResponseEntity.ok("ADDED_SUCCESS");
 	}
@@ -98,14 +98,14 @@ public class CategoryController {
 		Student student = new Student();
 		Community community = new Community();
 		Tutor tutor = new Tutor();
-		System.out.println(user.getUser_type());
-		if(user.getUser_type() == UserType.student) {
+		System.out.println(user.getUserType());
+		if(user.getUserType() == UserType.student) {
 			student = studentRepository.findByEmailIgnoreCase(user.getEmail());
 			return categoryRepository.findByStudents(student);
-		} else if(user.getUser_type() == UserType.community) {
+		} else if(user.getUserType() == UserType.community) {
 			community = communityRepository.findByEmailIgnoreCase(user.getEmail());
 			return categoryRepository.findByCommunities(community);
-		} else if(user.getUser_type() == UserType.tutor) {
+		} else if(user.getUserType() == UserType.tutor) {
 			tutor = tutorRepository.findByEmailIgnoreCase(user.getEmail());
 			return categoryRepository.findByTutors(tutor);
 		}

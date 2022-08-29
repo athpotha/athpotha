@@ -28,7 +28,6 @@ function ModalOpenButton(props) {
         onClose={handleClose}
         header={props.header}
         elements={props.elements}
-        user={props.modalName === "viewProfile-cover-modal" && props.user}
       />
       {/* {props.children}
       </BasicModal> */}

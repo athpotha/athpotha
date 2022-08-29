@@ -26,6 +26,7 @@ import ViewImage from "./ViewImage";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CenteredBox from "../../ui/CenteredBox";
 import ViewProfileMenu from "./ViewProfileMenu";
+import ViewImageModal from "./ViewImageModal";
 function CoverSection(props) {
   const style = {
     position: "absolute",
@@ -81,29 +82,32 @@ function CoverSection(props) {
               <CardMedia
                 component="img"
                 height="200"
-                image={props.user.cover_picture}
+                image={props.user.coverPicture}
               />
 
               <div
                 style={{ position: "absolute", top: "20px", right: "16px" }}
               >
-                <ViewImage tabValue={1} user={props.user}>
+                <ViewImageModal tabValue={1} user={props.user}>
                   <IconButton>
                     <PhotoCamera />
                   </IconButton>
-                </ViewImage>
+                </ViewImageModal>
+                {/*  */}
 
               </div>
               {/* ----------------------------- White section ------------------------------- */}
-              <ViewImage tabValue={0}>
+              <ViewImageModal tabValue={0} user={props.user}>
+
                 <IconButton
                   style={{ position: "absolute", top: "130px", left: "16px" }}
                 >
                   <ProfileAvatar
-                    src={props.user.profile_picture}
+                    src={props.user.profilePicture}
                   />
                 </IconButton>
-              </ViewImage>
+              </ViewImageModal>
+
             </div>
             <Grid container>
               <Grid item xs={10}>
@@ -115,9 +119,9 @@ function CoverSection(props) {
                   }}
                 >
                   <Box sx={{ fontWeight: "bold" }}>
-                    {`${props.user.first_name} ${props.user.last_name}`}
+                    {`${props.user.firstName} ${props.user.lastName}`}
                   </Box>
-                  <Box sx={{ fontSize: "10pt" }}>{props.user.user_type === "student" && props.user.studentType}</Box>
+                  <Box sx={{ fontSize: "10pt" }}>{props.user.userType === "student" && props.user.studentType}</Box>
                   <Box sx={{ fontSize: "10pt" }}>
                     {props.user.description}
                   </Box>

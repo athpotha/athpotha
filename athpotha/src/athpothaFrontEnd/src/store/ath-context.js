@@ -64,14 +64,14 @@ export const AuthContextProvider = (props) => {
 
   const userInfoHandler = (user) => {
     console.log(user);
-    localStorage.setItem("USER_TYPE", user.user_type);
-    localStorage.setItem("USER_ID", user.user_id);
-    localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);
-    localStorage.setItem("FIRST_NAME", user.first_name);
-    localStorage.setItem("LAST_NAME", user.last_name);
+    localStorage.setItem("USER_TYPE", user.userType);
+    localStorage.setItem("USER_ID", user.userId);
+    localStorage.setItem("USER_NAME", `${user.firstName} ${user.lastName}`);
+    localStorage.setItem("FIRST_NAME", user.firstName);
+    localStorage.setItem("LAST_NAME", user.lastName);
     localStorage.setItem("USER_EMAIL", user.email);
-    localStorage.setItem("PROFILE_PIC", user.profile_picture);
-    localStorage.setItem("COVER_PIC", user.cover_picture);
+    localStorage.setItem("PROFILE_PIC", user.profilePicture);
+    localStorage.setItem("COVER_PIC", user.coverPicture);
     localStorage.setItem("HAS_LOGGED", user.hasLogged);
     hasLoggedHandler(user.hasLogged);
     if(user.user_type === "student") {

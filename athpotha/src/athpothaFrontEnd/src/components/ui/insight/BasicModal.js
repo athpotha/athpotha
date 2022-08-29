@@ -31,8 +31,6 @@ export default function BasicModal(props) {
 
   // }
   const tabValue = useSelector((state) => state.modal.modalTabValue);
-  console.log(props.user)
-
   return (
     <Modal
       open={props.open}
@@ -83,13 +81,13 @@ export default function BasicModal(props) {
                 <ViewPic
                   close={props.onClose}
                   imageType="PROFILE_PIC"
-                  user={props.user}
+                  image="/images/tutors/tutor-1.jpg"
                 />
               ) : (
                 <ViewPic
                   close={props.onClose}
                   imageType="COVER_PIC"
-                  user={props.user}
+                  image="/images/profile/cover.jpg"
                 />
               )
             ) : (

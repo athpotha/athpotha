@@ -30,6 +30,7 @@ function ViewProfile(props) {
   const { name } = useParams();
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState([]);
   console.log(name, userId);
 
 
@@ -37,18 +38,19 @@ function ViewProfile(props) {
     setIsLoading(true)
     try {
       const response = await fetchUserData({
-        url: "api/v1/logged-user/get-users",
+        url: "api/v1/logged-user/get-user",
         method: "post",
         data: {
-          user_id: userId
+          userId: userId
         }
       })
-      const users = await response.data;
-      console.log(users);
+      const user = await response.data;
+      console.log(user);
       // const transformedContent = await users.map((user) => (
           
       //   ))
       // setContent(transformedContent);
+      setUser(user);
     } catch (error) {
 
     }
@@ -108,7 +110,7 @@ function ViewProfile(props) {
         </Grid>
         <Grid item xs={7} style={{ paddingTop: 120 }}>
           {/* Middle Section comes here */}
-          <Content user={props.user}></Content>
+          <Content user={user}></Content>
         </Grid>
         <Grid
           item
