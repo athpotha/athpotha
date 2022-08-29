@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import MainHeader from "../../ui/insight/MainHeader";
 import {
@@ -20,13 +20,54 @@ import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import SchoolIcon from "@mui/icons-material/School";
 
 import { leftbarItem } from "../../../services/ListItemService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchUserData } from "../../../api/authenticationService";
 
 
-function ViewProfile() {
+function ViewProfile(props) {
   const navigate = useNavigate();
   const listItems = leftbarItem();
+  const { name } = useParams();
+  const { userId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(name, userId);
 
+
+  const fetchUsers = async () => {
+    setIsLoading(true)
+    try {
+      const response = await fetchUserData({
+        url: "api/v1/logged-user/get-users",
+        method: "post",
+        data: {
+          user_id: userId
+        }
+      })
+      const users = await response.data;
+      console.log(users);
+      // const transformedContent = await users.map((user) => (
+          
+      //   ))
+      // setContent(transformedContent);
+    } catch (error) {
+
+    }
+    setIsLoading(false);
+    // await content = users.
+    // .then((response) => {
+    //   console.log(response.data);
+    //   setUsers(response.data);
+    //   setIsLoading(false)
+    // })
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, [])
+
+  if (isLoading) {
+    return <p>Loading ....</p>
+  }
   return (
     <React.Fragment>
       <MainHeader value={0} />
@@ -67,7 +108,7 @@ function ViewProfile() {
         </Grid>
         <Grid item xs={7} style={{ paddingTop: 120 }}>
           {/* Middle Section comes here */}
-          <Content></Content>
+          <Content user={props.user}></Content>
         </Grid>
         <Grid
           item

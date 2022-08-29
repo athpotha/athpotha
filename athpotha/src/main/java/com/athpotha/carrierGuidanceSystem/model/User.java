@@ -41,8 +41,8 @@ public class User implements UserDetails {
 	@Column(unique = true)
 	private String email;
 	private String password;
-	private String profile_picture = "images/profile/default_profile.jpg";
-	private String cover_picture = "images/profile/cover.jpg";
+	private String profile_picture = "/images/profile/default_profile.jpg";
+	private String cover_picture = "/images/profile/cover.jpg";
 	private boolean userDeleted;
 	private boolean enabled;
 	private boolean verified;

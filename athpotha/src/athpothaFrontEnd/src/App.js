@@ -26,6 +26,7 @@ import UniversityRegistration from "./components/pages/actors/admin/UniversityRe
 import UserReport from "./components/pages/actors/admin/userReportings/UserReport";
 import CoursePage from "./components/pages/course-page/CoursePage";
 import ViewProfile from "./components/pages/view-profile/ViewProfile";
+import { fetchUserData } from "./api/authenticationService";
 function App() {
   const theme = createTheme({
     palette: {
@@ -62,8 +63,14 @@ function App() {
 
   const authCtx = useContext(AuthContext);
   const [userType, setUserType] = useState(localStorage.getItem("USER_TYPE"));
+  const [content, setContent] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   console.log(authCtx.hasLogged)
   // localStorage.setItem("USER_TYPE", "student");
+
+  // let users = [];
+  // let content = ""
+  
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
@@ -89,9 +96,6 @@ function App() {
           )}
 
           <Route path="/test" element={<Test />}></Route>
-          <Route path="*" element={<Navigate to="/" />}>
-            {/* <Navigate to="/" /> */}
-          </Route>
           <Route path="/uni-profile" element={<UniProfile />}></Route>
           {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
           <Route path="/admin" element={<Admin />}></Route>
@@ -100,10 +104,16 @@ function App() {
           <Route path="/categories" element={<Categories />}></Route>
           <Route path="/admin/website-activity" element={<WebsiteActivity />}></Route>
           <Route path="/admin/user-reports" element={<UserReport />}></Route>
-          <Route path="/course-page" element={<CoursePage />}></Route>
+          <Route path="/course-page" element={<CoursePage />} />
+          {/* {!isLoading && content} */}
+          {/* {users.map((user) => (
+            <Route key={`${user.first_name}-${user.last_name}-${user.user_id}`} path={`/${user.first_name}-${user.last_name}/${user.user_id}`} element={<ViewProfile user={user} />}></Route>
+          ))} */}
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
+          <Route path="/:name/:userId" element={<ViewProfile />}></Route>
           <Route path="/university/view-user" element={<ViewProfile />}></Route>
           <Route path="/community/view-user" element={<ViewProfile />}></Route>
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>

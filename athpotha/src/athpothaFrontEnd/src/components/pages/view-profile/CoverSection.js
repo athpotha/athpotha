@@ -81,13 +81,13 @@ function CoverSection(props) {
               <CardMedia
                 component="img"
                 height="200"
-                image="/images/profile/cover.jpg"
+                image={props.user.cover_picture}
               />
 
               <div
                 style={{ position: "absolute", top: "20px", right: "16px" }}
               >
-                <ViewImage tabValue={1}>
+                <ViewImage tabValue={1} user={props.user}>
                   <IconButton>
                     <PhotoCamera />
                   </IconButton>
@@ -100,7 +100,7 @@ function CoverSection(props) {
                   style={{ position: "absolute", top: "130px", left: "16px" }}
                 >
                   <ProfileAvatar
-                    src="/images/tutors/tutor-1.jpg"
+                    src={props.user.profile_picture}
                   />
                 </IconButton>
               </ViewImage>
@@ -115,12 +115,11 @@ function CoverSection(props) {
                   }}
                 >
                   <Box sx={{ fontWeight: "bold" }}>
-                    Kumud Perera
+                    {`${props.user.first_name} ${props.user.last_name}`}
                   </Box>
-                  <Box sx={{ fontSize: "10pt" }}>O/L Qualified</Box>
+                  <Box sx={{ fontSize: "10pt" }}>{props.user.user_type === "student" && props.user.studentType}</Box>
                   <Box sx={{ fontSize: "10pt" }}>
-                    I am an O/L qualified student and currently reading for
-                    GCE A/L's.{" "}
+                    {props.user.description}
                   </Box>
 
                 </div>
@@ -128,7 +127,7 @@ function CoverSection(props) {
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <ButtonGroup sx={{ml: "16px"}}>
+                <ButtonGroup sx={{ ml: "16px" }}>
                   <Button
                     variant="contained"
                     style={{ borderRadius: 20, textTransform: "none" }}
