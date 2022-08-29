@@ -52,8 +52,45 @@ const DUMMY_NOTIFICATIONS = [
   },
 ];
 
+
 export default function NotiPanel() {
-  const [notiDBData, setNotiDBData] = useState([]);
+  const [notiDBData, setNotiDBData] = React.useState([]);
+  const [readUnread, setReadUnread] = React.useState([]);
+
+  function notiClicked(id){
+    changeState();
+      // alert(`Hello, ${id}!`);
+      const data = {
+        url: `notification/markAsRead/${id}`,
+          method: "put",
+          data:{id:1}
+      }
+      console.log(data.url);
+      fetchUserData(data).then((response) => {
+        console.log(response.data);
+        setReadUnread(1);
+        
+        // setNotiDBData(response.data);
+      }).catch(e => {
+        console.log("CATCH---------");
+        console.log(e);
+      })
+      
+  }
+  //change the read_unread status of the notification
+  function changeState(){
+    // setReadUnread(0);
+    console.log("chnageState");
+
+    var  state=readUnread;
+    if(state){
+      setReadUnread(0);
+    }else{
+      setReadUnread(1);
+    }
+    // alert("ss")
+
+  }
   // const GET_ALL_NOTIFICATIONS_API_URL =
   //   "localhost:8080/notification/getAllNotifications";
   // console.log(notiDBData);
@@ -73,13 +110,30 @@ export default function NotiPanel() {
   // })
   // },[])
 
-  fetchUserData({
-    url: "notification/getAllNotifications",
-    method: "post",
-  }).then((response) => {
-    // console.log(response.data)
-    setNotiDBData(response.data);
-  })
+  
+    //  fetchUserData({
+    //   url: "notification/getAllNotifications",
+    //   method: "post",
+    //   data:{test:"sada"},
+    // }).then((response) => {
+    //   console.log(response.data);
+    //   // setNotiDBData(response.data);
+    //   notiDBData=response.data;
+      
+    // })
+
+  React.useEffect(() => {
+    fetchUserData({
+      url: "notification/getAllNotifications",
+        method: "post",
+        data:{test:"sada"}
+    }).then((response) => {
+      console.log(response.data);
+      
+      setNotiDBData(response.data);
+    })
+}, [readUnread])
+
   // .then(res=>res.json())
   // .then((result)=>{
   //   setNotiDBData(result);
@@ -100,7 +154,9 @@ export default function NotiPanel() {
     <List sx={{ width: "100%", bgcolor: "background.paper" }}>
       {notiDBData.map((notification) => (
         <React.Fragment>
-          <ListItem
+          <ListItem onClick={() => {
+        notiClicked(notification.notification_id);
+      }}
             id={notification.notification_id}
             key={notification.notification_id}
             disablePadding
@@ -132,11 +188,11 @@ export default function NotiPanel() {
               <ListItemAvatar>
                 <Avatar
                   alt={notification.sender_id}
-                  // src={notification.senderProfileImage}
+                  src={notification.senderProfileImage}
                 />
               </ListItemAvatar>
               <ListItemText
-                primary={notification.message}
+                primary={notification.notification_Type}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -145,7 +201,7 @@ export default function NotiPanel() {
                       variant="body2"
                       color="text.primary"
                     >
-                      {notification.sender_id}
+                      {notification.message}
                     </Typography>
                     {` — ${notification.receiver_Id}`}
                   </React.Fragment>
