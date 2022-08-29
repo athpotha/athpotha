@@ -29,6 +29,7 @@ function Addpost(props) {
   const [imageData, setImageData] = useState(null);
   const [postData, setPostData] = useState(new FormData());
   const [isLoading, setIsLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const {
     value: content,
@@ -46,6 +47,22 @@ function Addpost(props) {
     }
   })
 
+
+  const {
+    value: category,
+    isValid: categoryIsValid,
+    hasError: categoryHasError,
+    error: categoryError,
+    valueChangeHandler: categoryChangeHandler,
+    inputBlurHandler: categoryBlurHandler,
+  } = useInput((value) => {
+    if (value === "") {
+      return { inputIsValid: false, error: "Can't be Empty !" }
+    } else {
+      return { inputIsValid: true, error: "" }
+    }
+  })
+
   const {
     handleUploadClick: handleUploadHandler,
     imagePreview: postImagePreview,
@@ -53,20 +70,21 @@ function Addpost(props) {
     imageData: postImageData
   } = UseImageInput(() => { })
 
+
   let formIsValid = false;
-  if (contentIsValid) {
+  if (contentIsValid && categoryIsValid) {
     formIsValid = true;
   }
   const postSubmitHandler = () => {
-    if (!contentIsValid) {
+    if (!contentIsValid && !categoryIsValid) {
       return;
     }
     postData.append('imageFile', postImageData);
     postData.append('type', "post");
     postData.append('content', content);
+    postData.append('postCategory', category)
     postData.append('email', localStorage.getItem('USER_EMAIL'));
 
-    console.log(localStorage.getItem("USER_ID"))
     fetchUserData({
       url: "api/v1/post/add-post",
       method: "post",
@@ -97,11 +115,17 @@ function Addpost(props) {
     setIsLoading(true);
     try {
       const response = await fetchUserData({
-        url: "api/v1/category/get-categories",
+        url: "api/v1/category/get-my-category",
         method: "post",
+        data: {
+          email: localStorage.getItem("USER_EMAIL"),
+          userType: localStorage.getItem("USER_TYPE")
+        }
       })
 
       const categories = await response.data;
+      setCategories(categories);
+      console.log(categories);
 
     } catch (error) {
     }
@@ -111,9 +135,9 @@ function Addpost(props) {
   useEffect(() => {
     fetchMyPostsHandler();
   }, [])
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>
+  // }
   return (
     <div style={{ marginTop: "20px" }}>
       {/* {postSuccess && <SimpleSnackbar message="Post added Sucess" />} */}
@@ -135,25 +159,29 @@ function Addpost(props) {
                 fullWidth
               />
               <FormControl variant="standard" sx={{ width: "100%" }} required
-              // error={universityHasError}
+                error={categoryHasError}
               >
-                <InputLabel id="university"
+                <InputLabel id="category"
                   placeholder="Say something..."
 
                 >Post Category</InputLabel>
                 <Select
                   label="Post Category"
-                // value={university}
-                // onChange={universityChangeHandler}
-                // onBlur={universityBlurHandler}
+                  value={category}
+                  onChange={categoryChangeHandler}
+                  onBlur={categoryBlurHandler}
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {/* <MenuItem value={1}>University of Moratuwa</MenuItem> */}
+                  {isLoading && <p>Loading</p>}
+                  {categories.map((category) => (
+                    <MenuItem key={`${category.categoryName}-${category.categoryId}`} value={category.categoryId}>{category.categoryName}</MenuItem>
+                  ))}
+                  {/*  */}
 
                 </Select>
-                {/* <FormHelperText>{universityHasError ? universityError : ""}</FormHelperText> */}
+                <FormHelperText>{categoryHasError ? categoryError : ""}</FormHelperText>
               </FormControl>
               <CardMedia
                 component="img"

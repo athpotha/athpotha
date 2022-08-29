@@ -13,7 +13,7 @@ import FeedsSection from "./FeedsSection";
 // import NotiPanel from "./NotiPanel";
 const notiCount = 7; // no of new notifications
 
-function Content() {
+function Content(props) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -27,8 +27,8 @@ function Content() {
         method: "post",
         url: "api/v1/post/get-own-posts",
         data: {
-          userId: localStorage.getItem("USER_ID"),
-          email: localStorage.getItem("USER_EMAIL"),
+          userId: props.user.userId,
+          email: props.user.email,
         }
       });
       const posts = await response.data;
@@ -39,13 +39,13 @@ function Content() {
         let addedDate = `${month[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
         return {
           id: post.postId,
-          personName: `${post.user.first_name} ${post.user.last_name}`,
+          personName: `${post.user.firstName} ${post.user.lastName}`,
           postDate: addedDate,
           postType: post.type,
           postContent: post.type === "post" ? post.title : post.question,
           postedImage: post.image,
-          personImage: post.user.profile_picture,
-          userImage: post.user.profile_picture,
+          personImage: post.user.profilePicture,
+          userImage: post.user.profilePicture,
           noOfPostUpvotes: post.upVotes,
           noOfComments: post.numberOfComments,
         };
@@ -73,20 +73,20 @@ function Content() {
     content = <BeforeDisplay />;
   }
 
-  var parts = window.location.pathname.split( '/' );
-  const viewingUserType = parts[1];
+  // var parts = window.location.pathname.split( '/' );
+  const viewingUserType = props.user.userType;
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <CoverSection></CoverSection>
+        <CoverSection user={props.user}></CoverSection>
       </Grid>
       <Grid item xs={12}>
         {(viewingUserType === "student" || viewingUserType === "community" || viewingUserType === "user") &&
           <FeedsSection posts={posts} isLoading={isLoading} />
         }
-        {viewingUserType === "community"  &&
+        {/* {viewingUserType === "community"  &&
           <CommunityFeedsSection posts={posts} isLoading={isLoading} />
-        }
+        } */}
         {viewingUserType === "university" &&
           <UniversityFeedSection posts={posts} isLoading={isLoading} />
         }

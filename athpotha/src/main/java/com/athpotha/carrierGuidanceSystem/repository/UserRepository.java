@@ -9,4 +9,6 @@ import com.athpotha.carrierGuidanceSystem.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByEmailIgnoreCase(String email);
+	User findByUserId(Long userId);
+//	User findByFirst_name(String first_name);
 }

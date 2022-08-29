@@ -34,13 +34,13 @@ function MyPosts(props) {
                 let addedDate = `${month[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
                 return {
                     id: post.postId,
-                    personName: `${post.user.first_name} ${post.user.last_name}`,
+                    personName: `${post.user.firstName} ${post.user.lastName}`,
                     postDate: addedDate,
                     postType: post.type,
                     postContent: post.type === "post" ? post.title : post.question,
                     postedImage: post.image,
-                    personImage: post.user.profile_picture,
-                    userImage: post.user.profile_picture,
+                    personImage: post.user.profilePicture,
+                    userImage: post.user.profilePicture,
                     noOfPostUpvotes: post.upVotes,
                     noOfComments: post.numberOfComments,
                 };

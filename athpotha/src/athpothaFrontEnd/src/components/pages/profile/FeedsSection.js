@@ -56,7 +56,7 @@ function FeedsSection(props) {
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
                 <Tab label="Posts" {...a11yProps(0)} />
                 <Tab label="Questions" {...a11yProps(1)} />
-                <Tab label="Your Categories" {...a11yProps(2)} />
+                <Tab label="My Categories" {...a11yProps(2)} />
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
@@ -65,7 +65,7 @@ function FeedsSection(props) {
             <TabPanel value={value} index={1}>
                 <MyPosts postType={"question"} />
             </TabPanel>
-            <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF", padding: "20px" }}>
+            <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF"}}>
                 <MyCategories />
             </TabPanel>
         </React.Fragment>

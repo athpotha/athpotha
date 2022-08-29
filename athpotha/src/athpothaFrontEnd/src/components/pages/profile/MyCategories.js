@@ -21,6 +21,7 @@ const ImageSrc = styled('span')({
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
     height: 200,
+    cursor: "default",
     [theme.breakpoints.down('sm')]: {
         width: '100% !important', // Overrides inline-style
         height: 100,
@@ -71,24 +72,26 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 function MyCategories() {
 
-    let categories = useSelector((state) => state.educationCategory.categories);
     const studentType = useSelector((state) => state.educationCategory.selectedStudentType);
     const subjectType = useSelector((state) => state.educationCategory.selectedSubject);
     const [isLoading, setIsLoading] = useState(false);
     const [images, setImages] = useState([]);
+    const user_type = localStorage.getItem("USER_TYPE");
 
     const fetchCategoryHandler = async () => {
         setIsLoading(true);
         try {
             const response = await fetchUserData({
-                url: "api/v1/category/get-student-category",
+                url: "api/v1/category/get-my-category",
                 method: "post",
                 data: {
-                    email: localStorage.getItem("USER_EMAIL")
+                    email: localStorage.getItem("USER_EMAIL"),
+                    userType: user_type
                 }
             })
 
             const categories = await response.data;
+            console.log(categories);
             let selectedCategories = [];
             await categories.map((category) => {
                 selectedCategories.push({
@@ -111,11 +114,13 @@ function MyCategories() {
     if (isLoading) {
         return <p>Loading...</p>
     }
+
+    console.log(images);
     return (
         <React.Fragment>
             <Grid container>
                 {images.map((image) => (
-                    <Grid item>
+                    <Grid key={image.id} item xs={12/images.length}>
                         <Box sx={{ minWidth: 300, width: '100%', mb: 2 }}>
                             <ImageButton
                                 focusRipple

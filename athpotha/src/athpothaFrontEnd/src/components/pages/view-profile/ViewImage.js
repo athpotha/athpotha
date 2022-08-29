@@ -24,8 +24,8 @@ const profilePicModal = {
 
 function ViewImage(props) {
     const changeProfileModalTabs = [
-        { id: "addQuestionModalTab-1", label: "Change Profile", value: 0 },
-        { id: "addQuestionModalTab-2", label: "Change Cover", value: 1 },
+        { id: "addQuestionModalTab-1", label: "Profile", value: 0 },
+        { id: "addQuestionModalTab-2", label: "Cover", value: 1 },
     ];
     return (
         <ModalOpenButton
@@ -34,6 +34,7 @@ function ViewImage(props) {
             modalStyle={profilePicModal}
             tabValue={props.tabValue}
             header={<ModalTabs tabs={changeProfileModalTabs} />}
+            user={props.user}
         >
             {props.children}
         </ModalOpenButton>
