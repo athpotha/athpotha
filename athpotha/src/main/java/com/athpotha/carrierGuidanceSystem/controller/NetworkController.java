@@ -36,10 +36,15 @@ public class NetworkController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("getTutors")
-    public List<Tutor> getTutors(@RequestBody User user){
-        List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUserId(),UserType.tutor);
-        return tutorsa;
+    @PostMapping("getUser")
+    public List<User> getTutors(@RequestBody User userEntity){
+    	
+//        List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUserId(),UserType.tutor);
+//        return tutorsa;
+    	User user = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
+    	List<User> users = userRepository.findByFollowing(user);
+    	
+    	return users;
     }
 
     @PostMapping("getUniversities")
