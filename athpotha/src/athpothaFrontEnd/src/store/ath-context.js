@@ -74,14 +74,15 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("COVER_PIC", user.coverPicture);
     localStorage.setItem("HAS_LOGGED", user.hasLogged);
     hasLoggedHandler(user.hasLogged);
-    if(user.user_type === "student") {
+    if (user.userType === "student") {
       localStorage.setItem("STUDENT_TYPE", user.studentType);
-    } else if(user.user_type === 'tutor') {
-
-    } else if(user.user_type === 'university') {
-
-    } else if(user.user_type === 'commiunity') {
-
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'tutor') {
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'university') {
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'commiunity') {
+      localStorage.setItem("DESCRIPTION", user.description);
     }
   }
 

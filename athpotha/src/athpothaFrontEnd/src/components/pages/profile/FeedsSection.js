@@ -56,7 +56,7 @@ function FeedsSection(props) {
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
                 <Tab label="Posts" {...a11yProps(0)} />
                 <Tab label="Questions" {...a11yProps(1)} />
-                <Tab label="My Categories" {...a11yProps(2)} />
+                <Tab label="Categories" {...a11yProps(2)} />
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
