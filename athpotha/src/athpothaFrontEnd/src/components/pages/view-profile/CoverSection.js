@@ -80,7 +80,7 @@ function CoverSection(props) {
     formData.append("following_id", localStorage.getItem("USER_ID"))
     fetchUserData({
       url: "api/v1/follow/add-follow",
-      method: "post",
+      method: "put",
       data: formData
     }).then((response) => {
       console.log(response);

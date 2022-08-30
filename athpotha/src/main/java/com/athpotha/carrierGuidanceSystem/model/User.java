@@ -106,7 +106,11 @@ public class User implements UserDetails {
 					referencedColumnName = "userId"
 			)
 	)
-	private List<User> follow;
+	private List<User> following;
+	
+	public void addFollow(User user) {
+		following.add(user);
+	}
 	
 //	public void setFollowers(List<Follower> followers) {
 //		this.followers = followers;

@@ -117,17 +117,17 @@ public class AthpothaApplication {
 		
 		//Add Category
 		
-		categoryRepository.save(new Category("Combined Maths", StudentType.OL_Qualified));
-		categoryRepository.save(new Category("Chemisty", StudentType.OL_Qualified));
-		categoryRepository.save(new Category("Physics", StudentType.OL_Qualified));
-		
-		categoryRepository.save(new Category("Engineering", StudentType.AL_Qualified));
-		categoryRepository.save(new Category("Information Technology", StudentType.AL_Qualified));
-		categoryRepository.save(new Category("Science", StudentType.AL_Qualified));
-		
-		categoryRepository.save(new Category("Engineering", StudentType.Undergraduate));
-		categoryRepository.save(new Category("Software & Data Science", StudentType.Undergraduate));
-		categoryRepository.save(new Category("Scientist", StudentType.Undergraduate));
+//		categoryRepository.save(new Category("Combined Maths", StudentType.OL_Qualified));
+//		categoryRepository.save(new Category("Chemisty", StudentType.OL_Qualified));
+//		categoryRepository.save(new Category("Physics", StudentType.OL_Qualified));
+//		
+//		categoryRepository.save(new Category("Engineering", StudentType.AL_Qualified));
+//		categoryRepository.save(new Category("Information Technology", StudentType.AL_Qualified));
+//		categoryRepository.save(new Category("Science", StudentType.AL_Qualified));
+//		
+//		categoryRepository.save(new Category("Engineering", StudentType.Undergraduate));
+//		categoryRepository.save(new Category("Software & Data Science", StudentType.Undergraduate));
+//		categoryRepository.save(new Category("Scientist", StudentType.Undergraduate));
 	}
 	
 	private boolean isExistingUser(String email) {
