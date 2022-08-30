@@ -1,4 +1,5 @@
 package com.athpotha.carrierGuidanceSystem.requests;
 
-public class AddQuestionRequest {z
+public class AddQuestionRequest {
+
 }

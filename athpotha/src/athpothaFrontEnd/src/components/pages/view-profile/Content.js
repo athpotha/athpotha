@@ -22,14 +22,14 @@ function Content(props) {
         <CoverSection user={props.user}></CoverSection>
       </Grid>
       <Grid item xs={12}>
-        {(viewingUserType === "student" || viewingUserType === "community" || viewingUserType === "user") &&
+        {(viewingUserType !== "university") &&
           <FeedsSection user={props.user} />
         }
         {/* {viewingUserType === "community"  &&
           <CommunityFeedsSection posts={posts} isLoading={isLoading} />
         } */}
         {viewingUserType === "university" &&
-          <UniversityFeedSection />
+          <UniversityFeedSection user={props.user} />
         }
       </Grid>
     </Grid>

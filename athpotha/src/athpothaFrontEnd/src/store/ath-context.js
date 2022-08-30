@@ -76,6 +76,7 @@ export const AuthContextProvider = (props) => {
     hasLoggedHandler(user.hasLogged);
     if (user.userType === "student") {
       localStorage.setItem("STUDENT_TYPE", user.studentType);
+      localStorage.setItem("IS_PREMIUM", user.isPremium);
       localStorage.setItem("DESCRIPTION", user.description);
     } else if (user.user_type === 'tutor') {
       localStorage.setItem("DESCRIPTION", user.description);
