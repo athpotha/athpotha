@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification,Integer> {
+//    @Override
+//    <S extends Notification> S save(S entity);
 
 }
