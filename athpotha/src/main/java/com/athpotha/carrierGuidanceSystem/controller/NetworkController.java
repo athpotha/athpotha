@@ -41,28 +41,29 @@ public class NetworkController {
     	
 //        List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUserId(),UserType.tutor);
 //        return tutorsa;
-    	User user = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
-    	List<User> users = userRepository.findByFollowing(user);
+    	User user = userRepository.findByUserId(userEntity.getUserId());
+//    	List<User> users = userRepository.findByFollow(user);
     	
-    	return users;
+//    	return users;
+    	return null;
     }
 
-    @PostMapping("getUniversities")
-    public List<University> getUniversities(@RequestBody User user){
-        List<University> universities = universityRepository.findUniversitiesunFollowing(user.getUserId(),UserType.university);
-        return universities;
-    }
-
-    @PostMapping("getCommunities")
-    public List<Community> getCommunities(@RequestBody User user){
-        List<Community> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUserId(),UserType.community);
-        return commiunitiesa;
-    }
-
-    @PostMapping("getStudents")
-    public List<Student> getStudents(@RequestBody User user){
-        List<Student> studentsa  = studentRepository.findStudentssunFollowing(user.getUserId(),UserType.student);
-        return studentsa;
-    }
+//    @PostMapping("getUniversities")
+//    public List<University> getUniversities(@RequestBody User user){
+//        List<University> universities = universityRepository.findUniversitiesunFollowing(user.getUserId(),UserType.university);
+//        return universities;
+//    }
+//
+//    @PostMapping("getCommunities")
+//    public List<Community> getCommunities(@RequestBody User user){
+//        List<Community> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUserId(),UserType.community);
+//        return commiunitiesa;
+//    }
+//
+//    @PostMapping("getStudents")
+//    public List<Student> getStudents(@RequestBody User user){
+//        List<Student> studentsa  = studentRepository.findStudentssunFollowing(user.getUserId(),UserType.student);
+//        return studentsa;
+//    }
 
 }

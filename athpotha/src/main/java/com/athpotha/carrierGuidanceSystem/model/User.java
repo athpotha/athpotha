@@ -100,13 +100,17 @@ public class User implements UserDetails {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(
-			name = "follower",
+			name = "follow",
 			joinColumns = @JoinColumn(
 					name = "follower_id",
 					referencedColumnName = "userId"
 			)
 	)
 	private List<User> following;
+	
+	public void addFollow(User user) {
+		following.add(user);
+	}
 	
 //	public void setFollowers(List<Follower> followers) {
 //		this.followers = followers;
