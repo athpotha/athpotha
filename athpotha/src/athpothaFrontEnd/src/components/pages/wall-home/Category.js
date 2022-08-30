@@ -77,8 +77,9 @@ export default function Category(props) {
     const [ImageButton, setImageButton] = React.useState(imageButton);
     const [isSelected, setIsSelected] = React.useState(false);
     let categories = useSelector((state) => state.educationCategory.categories);
-    const studentType = categories[0];
-
+    const studentType = useSelector((state) => state.educationCategory.selectedStudentType);
+    const subjectType = useSelector((state) => state.educationCategory.selectedSubject);
+    const user_type = localStorage.getItem("USER_TYPE");
     const clickedButton = () => {
         if (!isSelected) {
             imageButton = styled(ButtonBase)(({ theme }) => ({
@@ -127,13 +128,21 @@ export default function Category(props) {
             setImageButton(imageButton);
         }
 
-        if(studentType) {
-            dispatch(educationCategoryActions.addCategory(props.image.id.replace("buttonImage-", "")));
+        if(subjectType === "") {
+            console.log("hello if")
+            dispatch(educationCategoryActions.setSelectedSubject(props.image.title))
+            dispatch(educationCategoryActions.setBackButton(1));
+            // dispatch(educationCategoryActions.addCategory(props.image.id.replace("buttonImage-", "")));
+        } else if(studentType === "" && user_type === "student") {
+            console.log("hello else if")
+            dispatch(educationCategoryActions.setSelectedStudentType(props.image.title))
+            dispatch(educationCategoryActions.setBackButton(1));
+            // dispatch(educationCategoryActions.addCategory(props.image.title));
         } else {
-            dispatch(educationCategoryActions.addCategory(props.image.title));
-
+            console.log("hello else")
+            dispatch(educationCategoryActions.addCategory(props.image.id.replace("buttonImage-", "")));
         }
-        if (props.image.title === "O/L Qualified" || props.image.title === "A/L Qualified" || props.image.title === "Undergraduate") {
+        if (props.image.title === "OL_Qualified" || props.image.title === "AL_Qualified" || props.image.title === "Undergraduate") {
             dispatch(educationCategoryActions.setBackButton(1));
         }
         // dispatch(educationCategoryActions.setSelectedStudentType(props.image.title));

@@ -26,6 +26,7 @@ import ViewImage from "./ViewImage";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CenteredBox from "../../ui/CenteredBox";
 import ViewProfileMenu from "./ViewProfileMenu";
+import ViewImageModal from "./ViewImageModal";
 function CoverSection(props) {
   const style = {
     position: "absolute",
@@ -81,29 +82,32 @@ function CoverSection(props) {
               <CardMedia
                 component="img"
                 height="200"
-                image="/images/profile/cover.jpg"
+                image={props.user.coverPicture}
               />
 
               <div
                 style={{ position: "absolute", top: "20px", right: "16px" }}
               >
-                <ViewImage tabValue={1}>
+                <ViewImageModal tabValue={1} user={props.user}>
                   <IconButton>
                     <PhotoCamera />
                   </IconButton>
-                </ViewImage>
+                </ViewImageModal>
+                {/*  */}
 
               </div>
               {/* ----------------------------- White section ------------------------------- */}
-              <ViewImage tabValue={0}>
+              <ViewImageModal tabValue={0} user={props.user}>
+
                 <IconButton
                   style={{ position: "absolute", top: "130px", left: "16px" }}
                 >
                   <ProfileAvatar
-                    src="/images/tutors/tutor-1.jpg"
+                    src={props.user.profilePicture}
                   />
                 </IconButton>
-              </ViewImage>
+              </ViewImageModal>
+
             </div>
             <Grid container>
               <Grid item xs={10}>
@@ -115,12 +119,11 @@ function CoverSection(props) {
                   }}
                 >
                   <Box sx={{ fontWeight: "bold" }}>
-                    Kumud Perera
+                    {`${props.user.firstName} ${props.user.lastName}`}
                   </Box>
-                  <Box sx={{ fontSize: "10pt" }}>O/L Qualified</Box>
+                  <Box sx={{ fontSize: "10pt" }}>{props.user.userType === "student" && props.user.studentType}</Box>
                   <Box sx={{ fontSize: "10pt" }}>
-                    I am an O/L qualified student and currently reading for
-                    GCE A/L's.{" "}
+                    {props.user.description}
                   </Box>
 
                 </div>
@@ -128,7 +131,7 @@ function CoverSection(props) {
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <ButtonGroup sx={{ml: "16px"}}>
+                <ButtonGroup sx={{ ml: "16px" }}>
                   <Button
                     variant="contained"
                     style={{ borderRadius: 20, textTransform: "none" }}

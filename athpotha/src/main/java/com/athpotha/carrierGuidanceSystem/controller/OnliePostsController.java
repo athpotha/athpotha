@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.athpotha.carrierGuidanceSystem.model.AddPost;
+import com.athpotha.carrierGuidanceSystem.model.Category;
 import com.athpotha.carrierGuidanceSystem.model.OnlinePost;
 import com.athpotha.carrierGuidanceSystem.model.OnlinePostType;
 import com.athpotha.carrierGuidanceSystem.model.Post;
@@ -29,6 +30,7 @@ import com.athpotha.carrierGuidanceSystem.model.Question;
 import com.athpotha.carrierGuidanceSystem.model.Student;
 import com.athpotha.carrierGuidanceSystem.model.User;
 import com.athpotha.carrierGuidanceSystem.model.UserInfo;
+import com.athpotha.carrierGuidanceSystem.repository.CategoryRepository;
 import com.athpotha.carrierGuidanceSystem.repository.OnlinePostRepository;
 import com.athpotha.carrierGuidanceSystem.repository.PostRepository;
 import com.athpotha.carrierGuidanceSystem.repository.QuestionRepository;
@@ -54,6 +56,9 @@ public class OnliePostsController {
 
 	@Autowired
 	private OnlinePostRepository onlinePostRepo;
+	
+	@Autowired
+	private CategoryRepository categoryRepo;
 
 	@Autowired
 	private FileUploadService fileUploadService;
@@ -63,12 +68,14 @@ public class OnliePostsController {
 	@PostMapping("/add-post")
 	public ResponseEntity<?> addPost(@RequestParam(name = "imageFile", required = false) MultipartFile file,
 			@RequestParam("email") String email, @RequestParam("type") OnlinePostType type,
-			@RequestParam("content") String title) throws IllegalStateException, IOException {
+			@RequestParam("content") String title, @RequestParam("postCategory") String postCategory) throws IllegalStateException, IOException {
 		User user = userRepo.findByEmailIgnoreCase(email);
 
+		System.out.println(postCategory);
 		if (type == OnlinePostType.post) {
 
 			Post newPost = new Post();
+			Category category = categoryRepo.findByCategoryId(Long.parseLong(postCategory));
 			if (file != null) {
 				OnlinePost topPost = onlinePostRepo.findTopByOrderByPostIdDesc();
 
@@ -84,15 +91,20 @@ public class OnliePostsController {
 			newPost.setUser(user);
 			newPost.setTitle(title);
 			newPost.setType(type);
+
+			category.addPost(newPost);
 			postRepo.save(newPost);
+			return ResponseEntity.ok("POST_ADDED_SUCCESS");
 		} else if (type == OnlinePostType.question) {
 			Question newQuestion = new Question();
+			Category category = categoryRepo.findByCategoryId(Long.parseLong(postCategory));
 			newQuestion.setUser(user);
 			newQuestion.setQuestion(title);
 			newQuestion.setType(type);
+			category.addQuestion(newQuestion);
 			questionRepo.save(newQuestion);
+			return ResponseEntity.ok("QUESTION_ADDED_SUCCESS");
 		}
-
 		return null;
 	}
 

@@ -6,6 +6,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
+import ViewCategories from "./ViewCategories";
+import ViewPosts from "./ViewPosts";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -48,40 +50,25 @@ function FeedsSection(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    let posts = <Typography>Found no posts</Typography>
-    let questions = <Typography>Found no Questions</Typography>
 
-    if (props.posts.length > 0) {
-        posts = props.posts.map((post) => (
-            post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
-        ))
-
-        questions = props.posts.map((post) => (
-            post.postType == "question" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
-        ))
-    }
-    if (props.isLoading) {
-        posts = <BeforeDisplay />;
-        questions = <BeforeDisplay />;
-    }
-
-    if (posts[0] === "") {
-        posts = <Typography>Found no posts</Typography>
-    } else if (questions[0] === "") {
-        questions = <Typography>Found no Questions</Typography>
-    }
+    const userType = localStorage.getItem("USER_TYPE");
     return (
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
                 <Tab label="Posts" {...a11yProps(0)} />
-                <Tab label="Questions" {...a11yProps(1)} />
+                {(userType === "student" || userType === "community") && <Tab label="Questions" {...a11yProps(1)} />}
+                <Tab label="Categories" {...a11yProps(2)} />
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
-                {posts}
+                <ViewPosts user={props.user} postType={"post"} />
             </TabPanel>
+            {(userType === "student" || userType === "community") && 
             <TabPanel value={value} index={1}>
-                {questions}
+                <ViewPosts user={props.user} postType={"question"} />
+            </TabPanel>}
+            <TabPanel value={value} index={2}>
+                <ViewCategories user={props.user} />
             </TabPanel>
         </React.Fragment>
     );

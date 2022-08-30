@@ -33,16 +33,16 @@ public class User implements UserDetails {
 			strategy = GenerationType.SEQUENCE,
 			generator = "student_sequence"
 	)
-	private Long user_id;
-	private String first_name;
-	private String last_name;
+	private Long userId;
+	private String firstName;
+	private String lastName;
 	@Enumerated(value = EnumType.STRING)
-	private UserType user_type;
+	private UserType userType;
 	@Column(unique = true)
 	private String email;
 	private String password;
-	private String profile_picture = "images/profile/default_profile.jpg";
-	private String cover_picture = "images/profile/cover.jpg";
+	private String profilePicture = "/images/profile/default_profile.jpg";
+	private String coverPicture = "/images/profile/cover.jpg";
 	private boolean userDeleted;
 	private boolean enabled;
 	private boolean verified;
@@ -86,26 +86,12 @@ public class User implements UserDetails {
 		return this.enabled;
 	}
 
-	public User(String first_name, String last_name, UserType user_type, String email, String password,
-			String profile_picture, boolean userDeleted, boolean enabled, boolean verified, Date created_at) {
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.user_type = user_type;
-		this.email = email;
-		this.password = password;
-		this.profile_picture = profile_picture;
-		this.userDeleted = userDeleted;
-		this.enabled = enabled;
-		this.verified = verified;
-		this.created_at = created_at;
-	}
-
 	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "pk_user_id",referencedColumnName = "user_id")
+	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
 	private List<Follower> followers;
 
 	@OneToMany(targetEntity = Following.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "pk_user_id",referencedColumnName = "user_id")
+	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
 	private List<Following> followings;
 
 	public List<Follower> getFollowers() {
@@ -121,6 +107,26 @@ public class User implements UserDetails {
 	}
 
 	public void setFollowings(List<Following> followings) {
+		this.followings = followings;
+	}
+
+	public User(String firstName, String lastName, UserType userType, String email, String password,
+			String profilePicture, String coverPicture, boolean userDeleted, boolean enabled, boolean verified,
+			Date created_at, boolean hasLogged, List<Follower> followers, List<Following> followings) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userType = userType;
+		this.email = email;
+		this.password = password;
+		this.profilePicture = profilePicture;
+		this.coverPicture = coverPicture;
+		this.userDeleted = userDeleted;
+		this.enabled = enabled;
+		this.verified = verified;
+		this.created_at = created_at;
+		this.hasLogged = hasLogged;
+		this.followers = followers;
 		this.followings = followings;
 	}
 }

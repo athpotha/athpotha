@@ -38,25 +38,25 @@ public class NetworkController {
 
     @PostMapping("getTutors")
     public List<Tutor> getTutors(@RequestBody User user){
-        List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUser_id(),UserType.tutor);
+        List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUserId(),UserType.tutor);
         return tutorsa;
     }
 
     @PostMapping("getUniversities")
     public List<University> getUniversities(@RequestBody User user){
-        List<University> universities = universityRepository.findUniversitiesunFollowing(user.getUser_id(),UserType.university);
+        List<University> universities = universityRepository.findUniversitiesunFollowing(user.getUserId(),UserType.university);
         return universities;
     }
 
     @PostMapping("getCommunities")
     public List<Community> getCommunities(@RequestBody User user){
-        List<Community> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUser_id(),UserType.community);
+        List<Community> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUserId(),UserType.community);
         return commiunitiesa;
     }
 
     @PostMapping("getStudents")
     public List<Student> getStudents(@RequestBody User user){
-        List<Student> studentsa  = studentRepository.findStudentssunFollowing(user.getUser_id(),UserType.student);
+        List<Student> studentsa  = studentRepository.findStudentssunFollowing(user.getUserId(),UserType.student);
         return studentsa;
     }
 

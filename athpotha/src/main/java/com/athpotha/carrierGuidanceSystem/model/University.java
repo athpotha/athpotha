@@ -19,8 +19,8 @@ import java.util.List;
 @Setter
 @Getter
 public class University extends User {
-
 	private String faculty;
 	private String university;
+	private String description;
 
 }

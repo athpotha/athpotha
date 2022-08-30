@@ -64,24 +64,25 @@ export const AuthContextProvider = (props) => {
 
   const userInfoHandler = (user) => {
     console.log(user);
-    localStorage.setItem("USER_TYPE", user.user_type);
-    localStorage.setItem("USER_ID", user.user_id);
-    localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);
-    localStorage.setItem("FIRST_NAME", user.first_name);
-    localStorage.setItem("LAST_NAME", user.last_name);
+    localStorage.setItem("USER_TYPE", user.userType);
+    localStorage.setItem("USER_ID", user.userId);
+    localStorage.setItem("USER_NAME", `${user.firstName} ${user.lastName}`);
+    localStorage.setItem("FIRST_NAME", user.firstName);
+    localStorage.setItem("LAST_NAME", user.lastName);
     localStorage.setItem("USER_EMAIL", user.email);
-    localStorage.setItem("PROFILE_PIC", user.profile_picture);
-    localStorage.setItem("COVER_PIC", user.cover_picture);
+    localStorage.setItem("PROFILE_PIC", user.profilePicture);
+    localStorage.setItem("COVER_PIC", user.coverPicture);
     localStorage.setItem("HAS_LOGGED", user.hasLogged);
     hasLoggedHandler(user.hasLogged);
-    if(user.user_type === "student") {
+    if (user.userType === "student") {
       localStorage.setItem("STUDENT_TYPE", user.studentType);
-    } else if(user.user_type === 'tutor') {
-
-    } else if(user.user_type === 'university') {
-
-    } else if(user.user_type === 'commiunity') {
-
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'tutor') {
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'university') {
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'commiunity') {
+      localStorage.setItem("DESCRIPTION", user.description);
     }
   }
 
