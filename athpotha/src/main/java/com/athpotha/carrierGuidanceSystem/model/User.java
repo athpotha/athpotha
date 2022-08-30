@@ -85,48 +85,58 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 		return this.enabled;
 	}
+//
+//	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
+//	private List<Follower> followers;
+//
+//	@OneToMany(targetEntity = Following.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
+//	private List<Following> followings;
+//
+//	public List<Follower> getFollowers() {
+//		return followers;
+//	}
 
-	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
-	private List<Follower> followers;
-
-	@OneToMany(targetEntity = Following.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
-	private List<Following> followings;
-
-	public List<Follower> getFollowers() {
-		return followers;
-	}
-
-	public void setFollowers(List<Follower> followers) {
-		this.followers = followers;
-	}
-
-	public List<Following> getFollowings() {
-		return followings;
-	}
-
-	public void setFollowings(List<Following> followings) {
-		this.followings = followings;
-	}
-
-	public User(String firstName, String lastName, UserType userType, String email, String password,
-			String profilePicture, String coverPicture, boolean userDeleted, boolean enabled, boolean verified,
-			Date created_at, boolean hasLogged, List<Follower> followers, List<Following> followings) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userType = userType;
-		this.email = email;
-		this.password = password;
-		this.profilePicture = profilePicture;
-		this.coverPicture = coverPicture;
-		this.userDeleted = userDeleted;
-		this.enabled = enabled;
-		this.verified = verified;
-		this.created_at = created_at;
-		this.hasLogged = hasLogged;
-		this.followers = followers;
-		this.followings = followings;
-	}
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "follower",
+			joinColumns = @JoinColumn(
+					name = "follower_id",
+					referencedColumnName = "userId"
+			)
+	)
+	private List<User> following;
+	
+//	public void setFollowers(List<Follower> followers) {
+//		this.followers = followers;
+//	}
+//
+//	public List<Following> getFollowings() {
+//		return followings;
+//	}
+//
+//	public void setFollowings(List<Following> followings) {
+//		this.followings = followings;
+//	}
+//
+//	public User(String firstName, String lastName, UserType userType, String email, String password,
+//			String profilePicture, String coverPicture, boolean userDeleted, boolean enabled, boolean verified,
+//			Date created_at, boolean hasLogged, List<Follower> followers, List<Following> followings) {
+//		super();
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.userType = userType;
+//		this.email = email;
+//		this.password = password;
+//		this.profilePicture = profilePicture;
+//		this.coverPicture = coverPicture;
+//		this.userDeleted = userDeleted;
+//		this.enabled = enabled;
+//		this.verified = verified;
+//		this.created_at = created_at;
+//		this.hasLogged = hasLogged;
+//		this.followers = followers;
+//		this.followings = followings;
+//	}
 }

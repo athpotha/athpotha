@@ -15,8 +15,8 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long>{
 	Student findByEmailIgnoreCase(String email);
 
-	@Query("select t from Student t where t not in (Select t from Student t join t.followings a where a.following_id in (:id)) and t.userType in (:role) and t.userId not in (:id)")
-	List<Student> findStudentssunFollowing(Long id, UserType role);
+//	@Query("select t from Student t where t not in (Select t from Student t join t.followings a where a.following_id in (:id)) and t.userType in (:role) and t.userId not in (:id)")
+//	List<Student> findStudentssunFollowing(Long id, UserType role);
 }
 
 

@@ -8,6 +8,7 @@ import BeforeDisplay from "../../../../ui/BeforeDisplay";
 import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 import Home from "./Home";
 import About from "./About";
+import ViewPosts from "../../../view-profile/ViewPosts";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -81,7 +82,7 @@ function StudentFeedSection(props) {
             </TabPanel>
 
             <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF" }}>
-                {posts}
+                <ViewPosts user={props.user} postType={"post"} />
             </TabPanel>
         </StyledEngineProvider>
     );
