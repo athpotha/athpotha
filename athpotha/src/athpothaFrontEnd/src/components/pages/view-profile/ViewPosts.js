@@ -8,7 +8,7 @@ import BeforeDisplay from "../../ui/BeforeDisplay";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
 import { fetchUserData } from "../../../api/authenticationService";
 
-function MyPosts(props) {
+function ViewPosts(props) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -22,8 +22,8 @@ function MyPosts(props) {
                 method: "post",
                 url: "api/v1/post/get-own-posts",
                 data: {
-                    userId: localStorage.getItem("USER_ID"),
-                    email: localStorage.getItem("USER_EMAIL"),
+                    userId: props.user.userId,
+                    email: props.user.email,
                 }
             });
             const myPosts = await response.data;
@@ -57,7 +57,7 @@ function MyPosts(props) {
         fetchMyPostsHandler();
     }, [])
 
-    let content = <Typography>Found no posts</Typography>
+    let content = <Typography>Found no {props.postType}</Typography>
 
     if (posts.length > 0) {
         content = posts.map((post) => (
@@ -66,7 +66,7 @@ function MyPosts(props) {
     }
 
     if (!content[0]) {
-        content = <Typography>Found no posts</Typography>
+        content = <Typography>Found no {props.postType}</Typography>
     }
     
     if (isLoading) {
@@ -78,4 +78,4 @@ function MyPosts(props) {
     )
 }
 
-export default MyPosts
+export default ViewPosts

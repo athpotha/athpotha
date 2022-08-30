@@ -94,12 +94,16 @@ public class OnliePostsController {
 
 			category.addPost(newPost);
 			postRepo.save(newPost);
+			return ResponseEntity.ok("POST_ADDED_SUCCESS");
 		} else if (type == OnlinePostType.question) {
 			Question newQuestion = new Question();
+			Category category = categoryRepo.findByCategoryId(Long.parseLong(postCategory));
 			newQuestion.setUser(user);
 			newQuestion.setQuestion(title);
 			newQuestion.setType(type);
+			category.addQuestion(newQuestion);
 			questionRepo.save(newQuestion);
+			return ResponseEntity.ok("QUESTION_ADDED_SUCCESS");
 		}
 		return null;
 	}

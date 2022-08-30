@@ -182,18 +182,7 @@ function CoverSection(props) {
                     </Box>
                     <Box sx={{ fontSize: "10pt" }}>{subText}</Box>
                     <Box sx={{ fontSize: "10pt" }}>
-                      {localStorage.getItem("USER_TYPE") === "student" && 
-                      "I am an O/L qualified student and currently reading for GCE A/L's."
-                      }
-                      {localStorage.getItem("USER_TYPE") === "university" && 
-                      "We are Government."
-                      }
-                      {localStorage.getItem("USER_TYPE") === "tutor" && 
-                      "I'm an English medium Physics tutor."
-                      }
-                      {localStorage.getItem("USER_TYPE") === "community" && 
-                      "I'm a Community Member."
-                      }
+                      {localStorage.getItem("DESCRIPTION")}
                     </Box>
 
                     {/* <Box sx={{mt:3,fontSize:'10pt'}}>1,100 followers</Box> */}
