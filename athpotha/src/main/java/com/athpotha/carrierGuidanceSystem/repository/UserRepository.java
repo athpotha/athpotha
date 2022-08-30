@@ -12,7 +12,7 @@ import com.athpotha.carrierGuidanceSystem.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByEmailIgnoreCase(String email);
 	User findByUserId(Long userId);
-	List<User> findByFollowing(User following);
+	List<User> findByFollow(User following);
 //	findByUser(User user);
 //	User findByFirst_name(String first_name);
 }
