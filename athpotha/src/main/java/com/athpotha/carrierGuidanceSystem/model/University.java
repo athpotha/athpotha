@@ -23,4 +23,15 @@ public class University extends User {
 	private String faculty;
 	private String university;
 
+	@OneToMany(targetEntity = Course.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "pk_uni_id", referencedColumnName = "user_id")
+	private List<Course> coureselist;
+
+	public List<Course> getCoureselist() {
+		return coureselist;
+	}
+
+	public void setCoureselist(List<Course> coureselist) {
+		this.coureselist = coureselist;
+	}
 }
