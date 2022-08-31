@@ -68,7 +68,7 @@ function StudentFeedSection(props) {
         <StyledEngineProvider injectFirst>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="About" {...a11yProps(0)} />
-                <Tab label="Degree Programms" {...a11yProps(1)} />
+                <Tab label="Degree Programmes" {...a11yProps(1)} />
                 <Tab label="Posts" {...a11yProps(2)} />
             </Tabs>
             <Divider></Divider>
