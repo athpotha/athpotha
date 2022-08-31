@@ -1,5 +1,5 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
 public enum StudentType {
-	after_OL, after_AL, undergraduate
+	Regular, OL_Qualified, AL_Qualified, Undergraduate
 }

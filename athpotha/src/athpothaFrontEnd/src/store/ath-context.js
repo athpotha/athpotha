@@ -8,6 +8,8 @@ const AuthContext = React.createContext({
   login: (token) => { },
   userInfo: (user) => { },
   logout: () => { },
+  userHasLogged: (isLogged) => { },
+  hasLogged: false
 });
 
 
@@ -27,9 +29,10 @@ export const AuthContextProvider = (props) => {
   }
 
   const [token, setToken] = useState(initialToken);
-  const [hasLogged, setHasLogged] = useState(false);
+  const [hasLogged, setHasLogged] = useState(localStorage.getItem("HAS_LOGGED"));
 
   const userIsLoggedIn = !!token;
+  const hasUserLoggedIn = hasLogged;
 
   const logoutHandler = useCallback(() => {
     setToken(null);
@@ -46,6 +49,7 @@ export const AuthContextProvider = (props) => {
     if (logoutTimer) {
       clearTimeout(logoutTimer);
     }
+    window.location.reload();
   }, []);
 
   const loginHandler = (token) => {
@@ -59,23 +63,27 @@ export const AuthContextProvider = (props) => {
   }
 
   const userInfoHandler = (user) => {
-    console.log(user.user_type);
-    localStorage.setItem("USER_TYPE", user.user_type);
-    localStorage.setItem("USER_ID", user.user_id);
-    localStorage.setItem("USER_NAME", `${user.first_name} ${user.last_name}`);
-    localStorage.setItem("FIRST_NAME", user.first_name);
-    localStorage.setItem("LAST_NAME", user.last_name);
+    console.log(user);
+    localStorage.setItem("USER_TYPE", user.userType);
+    localStorage.setItem("USER_ID", user.userId);
+    localStorage.setItem("USER_NAME", `${user.firstName} ${user.lastName}`);
+    localStorage.setItem("FIRST_NAME", user.firstName);
+    localStorage.setItem("LAST_NAME", user.lastName);
     localStorage.setItem("USER_EMAIL", user.email);
-    localStorage.setItem("PROFILE_PIC", user.profile_picture);
-    localStorage.setItem("COVER_PIC", user.cover_picture);
-    if(user.user_type === "student") {
-      localStorage.setItem("STUDENT_TYPE", user.student_type);
-    } else if(user.user_type === 'tutor') {
-
-    } else if(user.user_type === 'university') {
-
-    } else if(user.user_type === 'commiunity') {
-
+    localStorage.setItem("PROFILE_PIC", user.profilePicture);
+    localStorage.setItem("COVER_PIC", user.coverPicture);
+    localStorage.setItem("HAS_LOGGED", user.hasLogged);
+    hasLoggedHandler(user.hasLogged);
+    if (user.userType === "student") {
+      localStorage.setItem("STUDENT_TYPE", user.studentType);
+      localStorage.setItem("IS_PREMIUM", user.isPremium);
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'tutor') {
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'university') {
+      localStorage.setItem("DESCRIPTION", user.description);
+    } else if (user.user_type === 'commiunity') {
+      localStorage.setItem("DESCRIPTION", user.description);
     }
   }
 
@@ -92,7 +100,7 @@ export const AuthContextProvider = (props) => {
     userInfo: userInfoHandler,
     logout: logoutHandler,
     userHasLogged: hasLoggedHandler,
-    hasLogged: hasLogged
+    hasLogged: hasUserLoggedIn
   };
 
   return (

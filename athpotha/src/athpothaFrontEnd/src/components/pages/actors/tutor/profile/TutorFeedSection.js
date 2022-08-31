@@ -6,6 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../../../ui/BeforeDisplay";
 import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
+import MyCategories from "../../../profile/MyCategories";
 // import BeforeDisplay from "../../ui/BeforeDisplay";
 // import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
@@ -54,7 +55,7 @@ function TutorFeedSection(props) {
 
     if (props.posts.length > 0) {
         posts = props.posts.map((post) => (
-            post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
+            post.postType == "post" && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
         ))
     }
     if (props.isLoading) {
@@ -68,10 +69,14 @@ function TutorFeedSection(props) {
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
                 <Tab label="Posts" {...a11yProps(0)} />
+                <Tab label="Your Categories" {...a11yProps(1)} />
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
                 {posts}
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <MyCategories />
             </TabPanel>
         </React.Fragment>
     );

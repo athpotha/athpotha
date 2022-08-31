@@ -6,6 +6,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../../../ui/BeforeDisplay";
 import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
+import ViewPosts from "../../../view-profile/ViewPosts";
+import ViewCategories from "../../../view-profile/ViewCategories";
 // import BeforeDisplay from "../../ui/BeforeDisplay";
 // import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
@@ -44,34 +46,18 @@ function a11yProps(index) {
 
 
 function TutorFeedSection(props) {
-
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    let posts = <Typography>Found no posts</Typography>
-
-    if (props.posts.length > 0) {
-        posts = props.posts.map((post) => (
-            post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
-        ))
-    }
-    if (props.isLoading) {
-        posts = <BeforeDisplay />;
-    }
-
-    if (posts[0] === "") {
-        posts = <Typography>Found no posts</Typography>
-    }
     return (
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
                 <Tab label="Posts" {...a11yProps(0)} />
+                <Tab label="Categories" {...a11yProps(1)} />
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
-                {posts}
+                <ViewPosts postType="posts" />
+            </TabPanel>
+            <TabPanel value={value} index={0}>
+                <ViewCategories />
             </TabPanel>
         </React.Fragment>
     );

@@ -32,6 +32,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SimpleSnackbar from "./SimpleSnackbar";
 import HomeCardMenu from "./HomeCardMenu";
 import HomeCardActions from "./HomeCardActions";
+import { useNavigate } from "react-router-dom";
 
 
 const ExpandMore = styled((props) => {
@@ -174,6 +175,10 @@ export default function HomeCard(props) {
     isBookmarkRemoved = bookmarkPosts[bookmarkIndex].isBookmarkRemoved;
   }
 
+  const navigate = useNavigate();
+  const clickHandler = () => {
+    navigate("/Dilsha-Navodi/3")
+  }
   return (
     <StyledEngineProvider injectFirst>
       <Grid
@@ -189,6 +194,7 @@ export default function HomeCard(props) {
                 <ListItem style={{ cursor: "pointer", padding: 0 }}>
                   <ListItemAvatar>
                     <PostedPerson
+                      onClick={clickHandler}
                       src={props.postItem.personImage}
                     />
                   </ListItemAvatar>

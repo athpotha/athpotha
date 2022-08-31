@@ -88,7 +88,7 @@ public class AuthenticationController {
 	public ResponseEntity<?> getUserInfo(@RequestBody User user) {
 		User userEntity = (User) userDetailsService.loadUserByUsername(user.getUsername());
 
-		switch (userEntity.getUser_type()) {
+		switch (userEntity.getUserType()) {
 		case student:
 			Student student = studentRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			return ResponseEntity.ok(student);
@@ -116,7 +116,7 @@ public class AuthenticationController {
 	public void setHasLogin(@RequestBody User user) {
 		User userEntity = (User) userDetailsService.loadUserByUsername(user.getUsername());
 
-		switch (userEntity.getUser_type()) {
+		switch (userEntity.getUserType()) {
 		case student:
 			Student student = studentRepository.findByEmailIgnoreCase(userEntity.getUsername());
 			student.setHasLogged(true);

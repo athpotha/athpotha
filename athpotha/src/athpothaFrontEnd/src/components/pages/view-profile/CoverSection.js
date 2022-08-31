@@ -1,4 +1,4 @@
-import { Grid, StyledEngineProvider } from "@mui/material";
+import { ButtonGroup, Grid, StyledEngineProvider } from "@mui/material";
 import React from 'react';
 import { Box, Container } from "@mui/system";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import styled from "@emotion/styled";
 import ViewImage from "./ViewImage";
 
+
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CenteredBox from "../../ui/CenteredBox";
+import ViewProfileMenu from "./ViewProfileMenu";
+import ViewImageModal from "./ViewImageModal";
+import { fetchUserData } from "../../../api/authenticationService";
 function CoverSection(props) {
   const style = {
     position: "absolute",
@@ -49,9 +55,10 @@ function CoverSection(props) {
   const handleCloseTwo = () => setOpenTwo(false);
 
   let subText = ""
-  switch (localStorage.getItem("USER_TYPE")) {
+  const userType = props.user.userType;
+  switch (userType) {
     case "student":
-      subText = localStorage.getItem("STUDENT_TYPE");
+      subText = props.user.studentType;
       break;
   }
 
@@ -66,6 +73,19 @@ function CoverSection(props) {
     // maxWidth: 330,
   });
   // ----------------------------------
+
+  const makeFollowHandler = () => {
+    const formData = new FormData();
+    formData.append("follower_id", props.user.userId);
+    formData.append("following_id", localStorage.getItem("USER_ID"))
+    fetchUserData({
+      url: "api/v1/follow/add-follow",
+      method: "put",
+      data: formData
+    }).then((response) => {
+      console.log(response);
+    })
+  }
   return (
     <div sx={{ width: "100%" }}>
       <Box
@@ -77,29 +97,32 @@ function CoverSection(props) {
               <CardMedia
                 component="img"
                 height="200"
-                image="/images/profile/cover.jpg"
+                image={props.user.coverPicture}
               />
 
               <div
                 style={{ position: "absolute", top: "20px", right: "16px" }}
               >
-                <ViewImage tabValue={1}>
+                <ViewImageModal tabValue={1} user={props.user}>
                   <IconButton>
                     <PhotoCamera />
                   </IconButton>
-                </ViewImage>
+                </ViewImageModal>
+                {/*  */}
 
               </div>
               {/* ----------------------------- White section ------------------------------- */}
-              <ViewImage tabValue={0}>
+              <ViewImageModal tabValue={0} user={props.user}>
+
                 <IconButton
                   style={{ position: "absolute", top: "130px", left: "16px" }}
                 >
                   <ProfileAvatar
-                    src="/images/tutors/tutor-1.jpg"
+                    src={props.user.profilePicture}
                   />
                 </IconButton>
-              </ViewImage>
+              </ViewImageModal>
+
             </div>
             <Grid container>
               <Grid item xs={10}>
@@ -111,15 +134,61 @@ function CoverSection(props) {
                   }}
                 >
                   <Box sx={{ fontWeight: "bold" }}>
-                    Kumud Perera
+                    {`${props.user.firstName} ${props.user.lastName}`}
                   </Box>
-                  <Box sx={{ fontSize: "10pt" }}>O/L Qualified</Box>
+                  <Box sx={{ fontSize: "10pt" }}>{props.user.userType === "student" && props.user.studentType}</Box>
                   <Box sx={{ fontSize: "10pt" }}>
-                    I am an O/L qualified student and currently reading for
-                    GCE A/L's.{" "}
+                    {props.user.description}
                   </Box>
 
                 </div>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={6}>
+                <ButtonGroup sx={{ ml: "16px" }}>
+
+                  {(userType === "student" || userType === "community") ?
+                    <>
+                      <Button
+                        variant="contained"
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                        onClick={makeFollowHandler}
+                      >
+                        Connect
+                      </Button>
+                      <Button
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                      >
+                        Message
+                      </Button>
+                    </>
+                    :
+                    <>
+                      <Button
+                        variant="contained"
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                      >
+                        Follow
+                      </Button>
+                      {localStorage.getItem("IS_PREMIUM") && <Button
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                      >
+                        Message
+                      </Button>
+                      }
+                    </>
+                  }
+
+                </ButtonGroup>
+              </Grid>
+              <Grid item xs={6}>
+                <CenteredBox align="right">
+                  <IconButton>
+                    <ViewProfileMenu />
+                  </IconButton>
+                </CenteredBox>
+
               </Grid>
             </Grid>
           </Card>
