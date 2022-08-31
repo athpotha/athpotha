@@ -21,6 +21,7 @@ import { FormLabel } from "@mui/material";
 import { blue, green, red } from "@mui/material/colors";
 import CenteredBox from "../../../../ui/CenteredBox";
 
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,

@@ -15,52 +15,91 @@ import {
 
 const data = [
   {
-    name: "Monday",
+    name: "January",
     NewUsers: 590,
     Visits: 800,
     income: 140,
     reports: 4
   },
   {
-    name: "Tuesday",
+    name: "February",
     NewUsers: 868,
     Visits: 967,
     income: 1506,
     reports: 590
   },
   {
-    name: "Wednesday",
+    name: "March",
     NewUsers: 1397,
     Visits: 1098,
     income: 989,
     reports: 350
   },
   {
-    name: "Thursday",
+    name: "April",
     NewUsers: 1480,
     Visits: 1200,
     income: 1228,
     reports: 480
   },
   {
-    name: "Friday",
+    name: "May",
     NewUsers: 1520,
     Visits: 1108,
     income: 1100,
     reports: 460
   },
   {
-    name: "Saturday",
+    name: "June",
     NewUsers: 680,
     Visits:345,
     income: 1700,
     reports: 380
   },
   {
-    name: "Sunday",
+    name: "July",
+    NewUsers: 380,
+    Visits:123,
+    income: 1700,
+    reports: 380
+  },
+  {
+    name: "August",
+    NewUsers: 230,
+    Visits:123,
+    income: 1700,
+    reports: 380
+  }
+  ,
+  {
+    name: "September",
+    NewUsers: 310,
+    Visits:123,
+    income: 1100,
+    reports: 380
+  }
+  ,
+  {
+    name: "October",
     NewUsers: 680,
     Visits:123,
     income: 1700,
+    reports: 380
+  }
+  ,
+  {
+    name: "November",
+    NewUsers: 700,
+    Visits:123,
+    income: 1400,
+    reports: 380
+  }
+  ,
+  {
+    name: "December",
+    NewUsers: 980,
+    Visits:123,
+    income: 1600,
     reports: 380
   }
 ];

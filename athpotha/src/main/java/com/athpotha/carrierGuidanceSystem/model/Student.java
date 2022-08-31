@@ -20,13 +20,32 @@ import lombok.ToString;
 public class Student extends User {
 	@Enumerated(value = EnumType.STRING)
 	private StudentType studentType;
-
-	public Student(String first_name, String last_name, UserType user_type, String email, String password,
-			String profile_picture, boolean userDeleted, boolean enabled, boolean verified, Date created_at,
-			StudentType studentType) {
-		super(first_name, last_name, user_type, email, password, profile_picture, userDeleted, enabled, verified,
-				created_at);
-		this.studentType = studentType;
-	}
+	private String description;
+	private Boolean isPremium = false;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(
+//			name = "user_education_category",
+//			joinColumns = @JoinColumn(
+//					name = "category_id",
+//					referencedColumnName = "categoryId"
+//			),
+//			inverseJoinColumns = @JoinColumn(
+//					name = "user_id",
+//					referencedColumnName = "user_id"
+//			)
+//	)
+//	private List<Category> educationCategories;
 	
+//
+//	public Student(String firstName, String lastName, UserType userType, String email, String password,
+//			String profilePicture, String coverPicture, boolean userDeleted, boolean enabled, boolean verified,
+//			Date created_at, boolean hasLogged, List<Follower> followers, List<Following> followings,
+//			StudentType studentType, String description, Boolean isPremium) {
+//		super(firstName, lastName, userType, email, password, profilePicture, coverPicture, userDeleted, enabled,
+//				verified, created_at, hasLogged, followers, followings);
+//		this.studentType = studentType;
+//		this.description = description;
+//		this.isPremium = isPremium;
+//	}
+
 }
