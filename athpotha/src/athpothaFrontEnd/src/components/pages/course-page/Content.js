@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import CourseViewCard from "./CourseViewCard";
 import { fetchUserData } from "../../../api/authenticationService";
+import Category from "./Category";
 
 function Item(props) {
     const { sx, ...other } = props;
@@ -42,7 +43,7 @@ const notiCount = 7; // no of new notifications
 
 function Content() {
 
-    const [university, setUniversity] = React.useState([])
+    const [courses, setCourses] = React.useState([])
     const user_id = localStorage.getItem("USER_ID")
 
     React.useEffect(() => {
@@ -51,19 +52,19 @@ function Content() {
             method: "post",
             data: { user_id: user_id }
         }).then((response) => {
-            setUniversity(response.data)
+            setCourses(response.data)
         })
     }, [])
 
-    console.log(university)
+    //console.log(courses)
 
     return (
         <StyledEngineProvider injectFirst>
 
+            <Category></Category>
+
             <Item>
-                <div style={{ height: 'auto', display: 'flex', justifyContent: 'space-around', p: 1, m: 1, alignItems: 'center' }}>
-                    <CourseViewCard uni={university}></CourseViewCard>
-                </div>
+                <CourseViewCard course={courses}></CourseViewCard>
             </Item>
 
         </StyledEngineProvider>
