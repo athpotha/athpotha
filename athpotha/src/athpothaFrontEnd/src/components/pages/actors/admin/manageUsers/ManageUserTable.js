@@ -58,16 +58,16 @@ const ColorButton2 = styled(Button)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, calories, fat) {
+  return { name, calories, fat};
 }
 
 const rows = [
-  createData("Student", "Kasun", "Perera", "Done IJSE", "Undergraduate at UCSC", 24, 4.0),
-  createData("Student", "Nuwan", "Janitha", "Done CIMA"," Student at Leeds", 37, 4.3),
-  createData("Teacher", "Kumara", "Liyanage", "Done AAT", "Teacher at Leeds", 24, 6.0),
-  createData("Student", "Nuwan", "Janitha", "OL Qualified", "Undergraduate at UCSC", 37, 4.3),
-  createData("Teacher", "Kumara", "Liyanage", "Business Management", "Teacher at Leeds", 24, 6.0),
+  createData("Kasun", "Perera", "Done IJSE"),
+  createData("Nuwan", "Janitha", "Done CIMA"),
+  createData("Kumara", "Liyanage", "Done AAT"),
+  createData("Nuwan", "Janitha", "OL Qualified"),
+  createData("Kumara", "Liyanage", "Business Management"),
 ];
 const updateRow = () => {
   console.log("ada");
@@ -109,11 +109,9 @@ export default function CustomizedTables() {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">User Type</StyledTableCell>
               <StyledTableCell align="left">First Name</StyledTableCell>
               <StyledTableCell align="left">Last Name</StyledTableCell>
-              <StyledTableCell align="left">Qualification</StyledTableCell>
-              <StyledTableCell align="left">Bio</StyledTableCell>
+              <StyledTableCell align="left">Email</StyledTableCell>
               <StyledTableCell align="left">
                 <CenteredBox align="center">Actions</CenteredBox>
               </StyledTableCell>
@@ -128,8 +126,8 @@ export default function CustomizedTables() {
                 </StyledTableCell>
                 <StyledTableCell align="left">{row.calories}</StyledTableCell>
                 <StyledTableCell align="left">{row.fat}</StyledTableCell>
-                <StyledTableCell align="left">{row.carbs}</StyledTableCell>
-                <StyledTableCell align="left">{row.protein}</StyledTableCell>
+                {/* <StyledTableCell align="left">{row.carbs}</StyledTableCell> */}
+                {/* <StyledTableCell align="left">{row.protein}</StyledTableCell> */}
                 <StyledTableCell align="left">
                   <Grid container>
                     <Grid item xs={6}>
