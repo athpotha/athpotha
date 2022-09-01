@@ -11,7 +11,14 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Avatar, Badge, Button, Chip, createTheme, ThemeProvider } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Chip,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 
 import HouseIcon from "@mui/icons-material/House";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -22,7 +29,7 @@ import { Link } from "react-router-dom";
 import ModalOpenButton from "./ModalOpenButton";
 import ModalTabs from "./ModalTabs";
 import SearchProfiles from "./SearchProfiles";
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
 const drawerWidth = 240;
 
@@ -194,11 +201,11 @@ export default function MainHeader(props) {
             >
               <MainTab value={tabValue} />
             </Box>
-            {userType === "student" &&
+            {userType === "student" && (
               <IconButton sx={{ color: "#FFDE2E" }}>
                 <WorkspacePremiumIcon />
               </IconButton>
-            }
+            )}
             <SearchProfiles />
             <ModalOpenButton
               modalName="addQuestion-post-modal"
@@ -211,7 +218,11 @@ export default function MainHeader(props) {
                 variant="contained"
                 style={{ borderRadius: 10, textTransform: "none" }}
               >
-                {userType === "student" ? "Add Question" : "Add Post"}
+                {userType === "student"
+                  ? "Add Question"
+                  : userType === "university"
+                  ? "Add Degree"
+                  : "Add Post"}
               </Button>
             </ModalOpenButton>
           </Toolbar>
