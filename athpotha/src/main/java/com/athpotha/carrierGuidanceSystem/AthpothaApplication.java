@@ -116,7 +116,6 @@ public class AthpothaApplication {
 		}
 		
 		//Add Category
-		
 //		categoryRepository.save(new Category("Combined Maths", StudentType.OL_Qualified));
 //		categoryRepository.save(new Category("Chemisty", StudentType.OL_Qualified));
 //		categoryRepository.save(new Category("Physics", StudentType.OL_Qualified));
