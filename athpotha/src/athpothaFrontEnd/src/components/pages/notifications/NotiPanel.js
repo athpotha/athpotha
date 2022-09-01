@@ -52,44 +52,43 @@ const DUMMY_NOTIFICATIONS = [
   },
 ];
 
-
 export default function NotiPanel() {
   const [notiDBData, setNotiDBData] = React.useState([]);
   const [readUnread, setReadUnread] = React.useState([]);
 
-  function notiClicked(id){
+  function notiClicked(id) {
     changeState();
-      // alert(`Hello, ${id}!`);
-      const data = {
-        url: `notification/markAsRead/${id}`,
-          method: "put",
-          data:{id:1}
-      }
-      console.log(data.url);
-      fetchUserData(data).then((response) => {
+    // alert(`Hello, ${id}!`);
+    const data = {
+      url: `notification/markAsRead/${id}`,
+      method: "put",
+      data: { id: 1 },
+    };
+    console.log(data.url);
+    fetchUserData(data)
+      .then((response) => {
         console.log(response.data);
         setReadUnread(1);
-        
+
         // setNotiDBData(response.data);
-      }).catch(e => {
+      })
+      .catch((e) => {
         console.log("CATCH---------");
         console.log(e);
-      })
-      
+      });
   }
   //change the read_unread status of the notification
-  function changeState(){
+  function changeState() {
     // setReadUnread(0);
     console.log("chnageState");
 
-    var  state=readUnread;
-    if(state){
+    var state = readUnread;
+    if (state) {
       setReadUnread(0);
-    }else{
+    } else {
       setReadUnread(1);
     }
     // alert("ss")
-
   }
   // const GET_ALL_NOTIFICATIONS_API_URL =
   //   "localhost:8080/notification/getAllNotifications";
@@ -110,29 +109,30 @@ export default function NotiPanel() {
   // })
   // },[])
 
-  
-    //  fetchUserData({
-    //   url: "notification/getAllNotifications",
-    //   method: "post",
-    //   data:{test:"sada"},
-    // }).then((response) => {
-    //   console.log(response.data);
-    //   // setNotiDBData(response.data);
-    //   notiDBData=response.data;
-      
-    // })
+  //  fetchUserData({
+  //   url: "notification/getAllNotifications",
+  //   method: "post",
+  //   data:{test:"sada"},
+  // }).then((response) => {
+  //   console.log(response.data);
+  //   // setNotiDBData(response.data);
+  //   notiDBData=response.data;
+
+  // })
+  const userId = localStorage.getItem("USER_ID");
 
   React.useEffect(() => {
     fetchUserData({
       url: "notification/getAllNotifications",
-        method: "post",
-        data:{test:"sada"}
+      method: "post",
+      data: { userId: userId },
     }).then((response) => {
       console.log(response.data);
-      
-      setNotiDBData(response.data);
-    })
-}, [readUnread])
+      console.log(userId);
+
+      setNotiDBData(response.data.notifications);
+    });
+  }, [readUnread]);
 
   // .then(res=>res.json())
   // .then((result)=>{
@@ -149,69 +149,74 @@ export default function NotiPanel() {
 
   // })
 
-  
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-      {notiDBData.map((notification) => (
-        <React.Fragment>
-          <ListItem onClick={() => {
-        notiClicked(notification.notification_id);
-      }}
-            id={notification.notification_id}
-            key={notification.notification_id}
-            disablePadding
-            secondaryAction={
-              <Grid container direction="column">
-                <Grid item>
-                  <IconButton disabled>
-                    <Typography>{notification.receive_datetime} ago</Typography>
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <CenteredBox align="right">
-                    <NotificationMenu />
-                  </CenteredBox>
-                </Grid>
-              </Grid>
-            }
-            // style={{backgroundColor: "#000"}}
-          >
-            <ListItemButton
-              disablePadding
-              sx={{
-                height: 100,
-                backgroundColor: notification.read_Unread
-                  ? "#fff"
-                  : "#00000006",
+      {notiDBData.map((notification) => {
+        console.log(notification);
+        return (
+          <React.Fragment>
+            <ListItem
+              onClick={() => {
+                notiClicked(notification.notification_id);
               }}
+              id={notification.notification_id}
+              key={notification.notification_id}
+              disablePadding
+              secondaryAction={
+                <Grid container direction="column">
+                  <Grid item>
+                    <IconButton disabled>
+                      <Typography>
+                        {notification.firstName} ago
+                      </Typography>
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <CenteredBox align="right">
+                      <NotificationMenu />
+                    </CenteredBox>
+                  </Grid>
+                </Grid>
+              }
+              // style={{backgroundColor: "#000"}}
             >
-              <ListItemAvatar>
-                <Avatar
-                  alt={notification.sender_id}
-                  src={notification.senderProfileImage}
+              <ListItemButton
+                disablePadding
+                sx={{
+                  height: 100,
+                  backgroundColor: notification.read_Unread
+                    ? "#fff"
+                    : "#00000006",
+                }}
+              >
+                <ListItemAvatar>
+                  <Avatar
+                    alt={notification.firstName}
+                    src={notification.firstName}
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={notification.firstName}
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        {notification.message}
+                      </Typography>
+                      {` — ${notification.firstName}`}
+                    </React.Fragment>
+                  }
                 />
-              </ListItemAvatar>
-              <ListItemText
-                primary={notification.notification_Type}
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      sx={{ display: "inline" }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      {notification.message}
-                    </Typography>
-                    {` — ${notification.receiver_Id}`}
-                  </React.Fragment>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </React.Fragment>
-      ))}
+              </ListItemButton>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+          </React.Fragment>
+        );
+      })}
     </List>
   );
 }

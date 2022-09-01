@@ -1,5 +1,5 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
-public enum NotificationType {
-	admin, student, tutor, university, community
+public enum Notification_Type {
+	request, warning, report
 }

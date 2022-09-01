@@ -110,6 +110,11 @@ public class User implements UserDetails {
 		this.followings = followings;
 	}
 
+	@OneToMany(targetEntity = Notification.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "sender_id",referencedColumnName = "userId")
+	private List<Notification> notifications;
+
+
 	public User(String firstName, String lastName, UserType userType, String email, String password,
 			String profilePicture, String coverPicture, boolean userDeleted, boolean enabled, boolean verified,
 			Date created_at, boolean hasLogged, List<Follower> followers, List<Following> followings) {
