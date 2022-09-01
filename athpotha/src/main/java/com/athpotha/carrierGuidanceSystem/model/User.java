@@ -11,6 +11,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -98,15 +100,22 @@ public class User implements UserDetails {
 //		return followers;
 //	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "follow",
-			joinColumns = @JoinColumn(
-					name = "follower_id",
-					referencedColumnName = "userId"
-			)
-	)
-	private List<User> following;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinTable(
+//			name = "follow",
+//			joinColumns = @JoinColumn(
+//					name = "follower_id",
+//					referencedColumnName = "userId"
+//			)
+//	)
+//	private List<User> following;
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+    		name = "follow",
+    		joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id"))
+	@JsonIgnore
+    private List<User> following;
 	
 	public void addFollow(User user) {
 		following.add(user);
