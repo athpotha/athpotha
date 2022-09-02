@@ -30,7 +30,7 @@ function CommentSection(props) {
           commentContent: comment.comment,
           upvotes: comment.upVotes,
           downvotes: comment.downVotes,
-          haveReplies: false,
+          haveReplies: comment.replies.length !== 0,
         }
       ))))
       setIsLoading(false);
@@ -52,6 +52,7 @@ function CommentSection(props) {
           key={comment.key}
           commentItem={comment}
           subcommentMargin={comment.haveReplies ? 7 : 0}
+          replyType="comment"
         />
       ))}
     </React.Fragment>

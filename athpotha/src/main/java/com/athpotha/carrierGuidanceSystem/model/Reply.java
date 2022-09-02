@@ -1,18 +1,24 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,4 +51,16 @@ public class Reply {
 	@ManyToOne(targetEntity = User.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "replyer_id",referencedColumnName = "userId")
 	private User user;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+    		name = "repliesOfReply",
+    		joinColumns = @JoinColumn(name = "reply_id"),
+            inverseJoinColumns = @JoinColumn(name = "reply_reply_id"))
+//	@JsonIgnore
+    private List<Reply> replies;
+	
+	public void addReplyToReply(Reply reply) {
+		replies.add(reply);
+	}
 }

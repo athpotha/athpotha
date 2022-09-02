@@ -10,7 +10,9 @@ function SubComment(props) {
           {/* {props.commentItem.map((reply) => ( */}
             <Comment
               commentItem={props.commentItem}
+              commentId={props.commentId}
               subcommentMargin={0}
+              replyType="reply"
             />
           {/* ))} */}
         </Collapse>
