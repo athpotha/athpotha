@@ -1,6 +1,7 @@
 package com.athpotha.carrierGuidanceSystem.service;
 
 import com.athpotha.carrierGuidanceSystem.model.Notification;
+import com.athpotha.carrierGuidanceSystem.model.NotificationProfile;
 import com.athpotha.carrierGuidanceSystem.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,10 @@ public class NotificationServiceImpl implements NotificationService{
     @Override
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
+    }
+
+    @Override
+    public List<NotificationProfile> getNotificationProfile() {
+        return notificationRepository.getNotificationProfile();
     }
 }
