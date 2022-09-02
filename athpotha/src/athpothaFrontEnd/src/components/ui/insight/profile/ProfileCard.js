@@ -24,12 +24,15 @@ import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import ForumIcon from "@mui/icons-material/Forum";
 
-import Comment from "../wall-main/Feeds/Comment";
 import RoundedInputField from "../../RoundedInputField";
 import { useDispatch, useSelector } from "react-redux";
 import SimpleSnackbar from "../wall-main/Feeds/SimpleSnackbar";
 import ProfileCardAction from "./ProfileCardAction";
 import ProfileCardMenu from "./ProfileCardMenu";
+import { fetchUserData } from "../../../../api/authenticationService";
+import CommentSection from "../wall-main/Feeds/CommentSection";
+import { commentActions } from "../../../../store/comment-slice";
+import Swal from "sweetalert2";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -93,8 +96,8 @@ const PostedPerson = styled(Avatar)({
   "&:hover": {
     opacity: 0.6
   },
-  width: 56, 
-  height: 56, 
+  width: 56,
+  height: 56,
   marginRight: 10,
   cursor: "pointer"
 });
@@ -104,12 +107,13 @@ const PostedImage = styled(CardMedia)({
   "&:hover": {
     opacity: 0.8
   },
-  height:"460"
+  height: "460"
 })
 export default function ProfileCard(props) {
   const [expanded, setExpanded] = useState(false);
 
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   setIsLoading(true);
   //   setIsLoading(false);
@@ -133,12 +137,48 @@ export default function ProfileCard(props) {
   const bookmarkIndex = bookmarkPosts.findIndex(
     (bookmark) => bookmark.id === props.homeCardId
   );
-  
+
   if (bookmarkIndex !== -1) {
     isBookmarkAdded = bookmarkPosts[bookmarkIndex].isBookmarkAdded;
     isBookmarkRemoved = bookmarkPosts[bookmarkIndex].isBookmarkRemoved;
   }
 
+  const [comment, setComment] = useState('');
+  let isCommentValid = false;
+  if (comment !== '') {
+    isCommentValid = true;
+  }
+
+  const commentBtnClicked = useSelector((state) => state.comment.commentAdded);
+  const addComment = () => {
+    if (commentBtnClicked) {
+      dispatch(commentActions.setCommentAdded(false));
+    } else {
+      dispatch(commentActions.setCommentAdded(true));
+    }
+    const commentData = new FormData();
+    commentData.append("postId", props.homeCardId);
+    commentData.append("comment", comment);
+    commentData.append("userId", localStorage.getItem("USER_ID"));
+    fetchUserData({
+      url: "api/v1/comment/add-comment",
+      method: "post",
+      data: commentData
+    }).then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: 'Comment Added!',
+      }).then(() => {
+        setComment('');
+      })
+    })
+  }
+
+  const [noOfComments, setNoOfComments] = useState(props.postItem.noOfComments)
+  const setNumberOfComments = (value) => {
+    setNoOfComments(value)
+  }
   return (
     <StyledEngineProvider injectFirst>
       <Grid
@@ -175,9 +215,9 @@ export default function ProfileCard(props) {
             {props.postItem.postedImage && <PostedImage
               component="img"
               image={props.postItem.postedImage}
-              // alt="Paella dish"
+            // alt="Paella dish"
             />}
-            
+
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
                 <KeyboardDoubleArrowUpIcon />
@@ -189,7 +229,7 @@ export default function ProfileCard(props) {
               <Box sx={{ ml: 10 }}>
                 <IconButton aria-label="share" onClick={handleExpandClick}>
                   <ForumIcon />
-                  <Typography>{props.postItem.noOfComments}</Typography>
+                  <Typography>{noOfComments}</Typography>
                 </IconButton>
               </Box>
               <ExpandMore>
@@ -210,6 +250,10 @@ export default function ProfileCard(props) {
                     placeholder="Add a comment"
                     width="100%"
                     height="50px"
+                    value={comment}
+                    onChange={(e) => {
+                      setComment(e.target.value)
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4}>
@@ -218,19 +262,26 @@ export default function ProfileCard(props) {
                     size="large"
                     sx={{ mt: 0.6 }}
                     style={{ borderRadius: 22, textTransform: "none" }}
+                    onClick={addComment}
+                    disabled={!isCommentValid}
                   >
                     Add Comment
                   </Button>
                 </Grid>
               </Grid>
               <Grid container>
-                {commentDetatils.map((comment) => (
+                <CommentSection
+                  postId={props.homeCardId}
+                  comments={props.postItem.comments}
+                  noOfComments={setNumberOfComments}
+                />
+                {/* {commentDetatils.map((comment) => (
                   <Comment
                     key={comment.id}
                     commentItem={comment}
                     subcommentMargin={comment.haveReplies ? 7 : 0}
                   />
-                ))}
+                ))} */}
               </Grid>
               {/* <Divider variant="inset" component="li" /> */}
             </Collapse>
