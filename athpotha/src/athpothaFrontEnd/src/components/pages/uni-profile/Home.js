@@ -56,14 +56,14 @@ const Programms = [
         id: 11,
         name: 'Information System - IS',
         minirequirements: "English C pass, Merit Pass",
-        details: "This programme continued for 18 batches until the Faculty of Science 2002/03 intake. This was replaced by 3 and 4 years Computer Science degrees from the 2002/03 intake of the UCSC.",
+        details: "the Faculty of Science 2002/03 intake. This was replaced by 3 and 4 years Computer Science degrees from the 2002/03 intake of the UCSC.",
         CareerOpportunities: "Web Developer,Software Quality Assurance Engineer,Software Engineer"
     },
     {
         id: 12,
         name: 'Bachelor of Information Technology - BIT',
         minirequirements: "English C pass, Merit Pass",
-        details: "This programme continued for 18 batches until the Faculty of Science 2002/03 intake. This was replaced by 3 and 4 years Computer Science degrees from the 2002/03 intake of the UCSC.",
+        details: "This was replaced by 3 and 4 years Computer Science degrees from the 2002/03 intake of the UCSC.",
         CareerOpportunities: "Web Developer,Software Quality Assurance Engineer,Software Engineer"
     },
 ];

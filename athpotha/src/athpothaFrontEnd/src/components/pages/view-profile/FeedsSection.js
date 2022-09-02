@@ -51,26 +51,43 @@ function FeedsSection(props) {
         setValue(newValue);
     };
 
-    const userType = localStorage.getItem("USER_TYPE");
+    const userType = props.user.userType;
     return (
-        <React.Fragment>
-            <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
-                <Tab label="Posts" {...a11yProps(0)} />
-                {(userType === "student" || userType === "community") && <Tab label="Questions" {...a11yProps(1)} />}
-                <Tab label="Categories" {...a11yProps(2)} />
-            </Tabs>
-            <Divider></Divider>
-            <TabPanel value={value} index={0}>
-                <ViewPosts user={props.user} postType={"post"} />
-            </TabPanel>
-            {(userType === "student" || userType === "community") && 
-            <TabPanel value={value} index={1}>
-                <ViewPosts user={props.user} postType={"question"} />
-            </TabPanel>}
-            <TabPanel value={value} index={2}>
-                <ViewCategories user={props.user} />
-            </TabPanel>
-        </React.Fragment>
+
+        (userType === "student" || userType === "community") ? (
+            <React.Fragment>
+                <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
+                    <Tab label="Posts" {...a11yProps(0)} />
+                    <Tab label="Questions" {...a11yProps(1)} />
+                    <Tab label="Categories" {...a11yProps(2)} />
+                </Tabs>
+
+                <Divider></Divider>
+                <TabPanel value={value} index={0}>
+                    <ViewPosts user={props.user} postType={"post"} />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <ViewPosts user={props.user} postType={"question"} />
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <ViewCategories user={props.user} />
+                </TabPanel>
+            </React.Fragment>) : (
+            <React.Fragment>
+                <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
+                    <Tab label="Posts" {...a11yProps(0)} />
+                    <Tab label="Categories" {...a11yProps(1)} />
+                </Tabs>
+
+                <Divider></Divider>
+                <TabPanel value={value} index={0}>
+                    <ViewPosts user={props.user} postType={"post"} />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <ViewCategories user={props.user} />
+                </TabPanel>
+            </React.Fragment>
+        )
     );
 }
 

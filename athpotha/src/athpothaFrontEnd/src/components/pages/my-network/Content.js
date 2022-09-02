@@ -96,36 +96,39 @@ function Content() {
 
   React.useEffect(() => {
     fetchUserData({
-      url: "network/getTutors",
+      url: "network/getUser",
       method: "post",
-      data: { user_id: user_id }
+      data: { userId: user_id }
     }).then((response) => {
-      setTutor(response.data)
+      // setTutor(response.data)
+      console.log(response.data);
+    }).catch((error) => {
+      console.log("hello error")
     })
 
-    fetchUserData({
-      url: "network/getUniversities",
-      method: "post",
-      data: { user_id: user_id }
-    }).then((response) => {
-      setUniversity(response.data)
-    })
+    // fetchUserData({
+    //   url: "network/getUniversities",
+    //   method: "post",
+    //   data: { user_id: user_id }
+    // }).then((response) => {
+    //   setUniversity(response.data)
+    // })
 
-    fetchUserData({
-      url: "network/getCommunities",
-      method: "post",
-      data: { user_id: user_id }
-    }).then((response) => {
-      setCommunity(response.data)
-    })
+    // fetchUserData({
+    //   url: "network/getCommunities",
+    //   method: "post",
+    //   data: { user_id: user_id }
+    // }).then((response) => {
+    //   setCommunity(response.data)
+    // })
 
-    fetchUserData({
-      url: "network/getStudents",
-      method: "post",
-      data: { user_id: user_id }
-    }).then((response) => {
-      setStudent(response.data)
-    })
+    // fetchUserData({
+    //   url: "network/getStudents",
+    //   method: "post",
+    //   data: { user_id: user_id }
+    // }).then((response) => {
+    //   setStudent(response.data)
+    // })
 
   }, [])
 

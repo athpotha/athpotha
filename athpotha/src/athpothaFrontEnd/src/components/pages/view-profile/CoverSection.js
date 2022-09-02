@@ -27,6 +27,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CenteredBox from "../../ui/CenteredBox";
 import ViewProfileMenu from "./ViewProfileMenu";
 import ViewImageModal from "./ViewImageModal";
+import { fetchUserData } from "../../../api/authenticationService";
 function CoverSection(props) {
   const style = {
     position: "absolute",
@@ -54,9 +55,10 @@ function CoverSection(props) {
   const handleCloseTwo = () => setOpenTwo(false);
 
   let subText = ""
-  switch (localStorage.getItem("USER_TYPE")) {
+  const userType = props.user.userType;
+  switch (userType) {
     case "student":
-      subText = localStorage.getItem("STUDENT_TYPE");
+      subText = props.user.studentType;
       break;
   }
 
@@ -71,6 +73,28 @@ function CoverSection(props) {
     // maxWidth: 330,
   });
   // ----------------------------------
+
+  const makeFollowHandler = () => {
+    const formData = new FormData();
+    formData.append("follower_id", props.user.userId);
+    formData.append("following_id", localStorage.getItem("USER_ID"))
+    fetchUserData({
+      url: "api/v1/follow/add-follow",
+      method: "put",
+      data: formData
+    }).then((response) => {
+      console.log(response);
+      const formData = new FormData();
+      formData.append("following_id", localStorage.getItem("USER_ID"))
+      fetchUserData({
+        url: "api/v1/follow/get-follow",
+        method: "post",
+        data: formData
+      }).then((response) => {
+        console.log(response.data);
+      })
+    })
+  }
   return (
     <div sx={{ width: "100%" }}>
       <Box
@@ -132,17 +156,40 @@ function CoverSection(props) {
             <Grid container>
               <Grid item xs={6}>
                 <ButtonGroup sx={{ ml: "16px" }}>
-                  <Button
-                    variant="contained"
-                    style={{ borderRadius: 20, textTransform: "none" }}
-                  >
-                    Connect
-                  </Button>
-                  <Button
-                    style={{ borderRadius: 20, textTransform: "none" }}
-                  >
-                    Message
-                  </Button>
+
+                  {(userType === "student" || userType === "community") ?
+                    <>
+                      <Button
+                        variant="contained"
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                        onClick={makeFollowHandler}
+                      >
+                        Connect
+                      </Button>
+                      <Button
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                      >
+                        Message
+                      </Button>
+                    </>
+                    :
+                    <>
+                      <Button
+                        variant="contained"
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                        onClick={makeFollowHandler}
+                      >
+                        Follow
+                      </Button>
+                      {localStorage.getItem("IS_PREMIUM") && <Button
+                        style={{ borderRadius: 20, textTransform: "none" }}
+                      >
+                        Message
+                      </Button>
+                      }
+                    </>
+                  }
+
                 </ButtonGroup>
               </Grid>
               <Grid item xs={6}>

@@ -12,6 +12,7 @@ import java.util.List;
 public interface UniversityRepository extends JpaRepository<University, Long> {
 	University findByEmailIgnoreCase(String email);
 
-	@Query("select u from University u where u not in (Select u from University u join u.followings a where a.following_id in (:id)) and u.userType in (:role)")
-	List<University> findUniversitiesunFollowing(Long id,UserType role);
+//	@Query("select u from University u where u not in (Select u from University u join u.followings a where a.following_id in (:id)) and u.userType in (:role)")
+//	List<University> findUniversitiesunFollowing(Long id,UserType role);
+
 }
