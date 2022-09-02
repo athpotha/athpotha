@@ -94,7 +94,7 @@ function Comment(props) {
           </div>
           <div>
             <Collapse in={replyExpanded} timeout="auto" unmountOnExit>
-              <Reply />
+              <Reply commentId={props.commentId} />
             </Collapse>
           </div>
         </Grid>

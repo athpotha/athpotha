@@ -15,4 +15,5 @@ public interface OnlinePostRepository extends JpaRepository<OnlinePost, Long> {
 
 	List<OnlinePost> findAllByUserOrderByPostIdDesc(User user);
 	OnlinePost findTopByOrderByPostIdDesc();
+	OnlinePost findByPostId(Long postId);
 }

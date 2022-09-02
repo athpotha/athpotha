@@ -91,6 +91,7 @@ public class User implements UserDetails {
 	@OneToMany(targetEntity = Notification.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "sender_id",referencedColumnName = "userId")
 	private List<Notification> notifications;
+	
 
 //	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
 //	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
