@@ -1,7 +1,10 @@
 package com.athpotha.carrierGuidanceSystem.controller;
 
 import com.athpotha.carrierGuidanceSystem.model.Notification;
+import com.athpotha.carrierGuidanceSystem.model.NotificationProfile;
+import com.athpotha.carrierGuidanceSystem.model.User;
 import com.athpotha.carrierGuidanceSystem.repository.NotificationRepository;
+import com.athpotha.carrierGuidanceSystem.repository.UserRepository;
 import com.athpotha.carrierGuidanceSystem.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
@@ -19,9 +22,22 @@ public class NotificationController {
     private NotificationService notificationService;
     @Autowired
     private NotificationRepository notificationRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    //Get all the notifications loaded
+    Long d=1L;
     @PostMapping("/getAllNotifications")
-    public List<Notification> getAllNotifications(){
-        return notificationService.getAllNotifications();
+    public User getAllNotifications(@RequestBody User user){//User is the type.
+        //userId is filled. Others are null in the user object.
+//        return notificationService.getAllNotifications();
+//        System.out.println(user.getUserId());
+        return userRepository.findByUserId(user.getUserId());
+    }
+        @PostMapping("/getAllWithProfile")
+    public List<NotificationProfile> getAllWithProfile(){
+        return notificationService.getNotificationProfile();
     }
 
     // updating mark as read in notification
