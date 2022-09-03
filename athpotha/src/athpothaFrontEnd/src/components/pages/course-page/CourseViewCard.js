@@ -32,78 +32,126 @@ function CourseViewCard(props) {
 
     const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     const unicourses = props.course
-    console.log(unicourses);
+
+    //console.log(unicourses);
 
 
     return (
         <StyledEngineProvider injectFirst>
+
             <div sx={{ width: '100%' }}>
-                {/* <Grid container> */}
+
                 <Tabs
-        // value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons
-        aria-label="visible arrows tabs example"
-        sx={{
-          [`& .${tabsClasses.scrollButtons}`]: {
-            '&.Mui-disabled': { opacity: 0.3 },
-          },
-        }}
-      >
+                    // value={value}
+                    onChange={handleChange}
+                    variant="scrollable"
+                    scrollButtons
+                    aria-label="visible arrows tabs example"
+                    sx={{
+                        [`& .${tabsClasses.scrollButtons}`]: {
+                            '&.Mui-disabled': { opacity: 0.3 },
+                        },
+                    }}
+                >
                     {unicourses.map((university) => {
-                        return (
-                            university.coureselist.map((course) => {
-                                return (
-                                    <Grid item xs={4}>
-                                        <Box sx={{ p: 1, m: 1, }} >
-                                            <Card sx={{ maxWidth: 360, p: 1 }}>
-                                                <div style={{ position: 'relative' }}>
-                                                    <CardMedia
-                                                        component="img"
-                                                        height="90"
-                                                        image="images/tutors/tutor-1.jpg"
-                                                        alt="green iguana"
-                                                    />
-                                                    <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                        <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90 }} />
-                                                    </div>
-                                                </div>
-                                                <div style={{ marginTop: '35px', marginLeft: '16px' }}>
-                                                    <Box sx={{ mb: "px" }}>{university.university}</Box>
-                                                    <Box sx={{ mb: "30px" }}>{course.course_name}</Box>
-                                                    <CenteredBox >
-                                                        <Stack direction="row" spacing={1}>
-                                                            <StyledRating
-                                                                value={course.rate}
-                                                                readOnly
-                                                                icon={<StarIcon />}
-                                                                emptyIcon={<StarBorderIcon />}
+                            return (
+                                university.coureselist.map((course) => {
+                                    if(props.filtern == null){
+                                        return (
+                                            <Grid item xs={4}>
+                                                <Box sx={{ p: 1, m: 1, }} >
+                                                    <Card sx={{ maxWidth: 360, p: 1 }}>
+                                                        <div style={{ position: 'relative' }}>
+                                                            <CardMedia
+                                                                component="img"
+                                                                height="90"
+                                                                image="images/tutors/tutor-1.jpg"
+                                                                alt="green iguana"
                                                             />
-                                                            <div>
-                                                                <CenteredBox>(2400)</CenteredBox>
+                                                            <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
+                                                                <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90 }} />
                                                             </div>
-                                                        </Stack>
-                                                    </CenteredBox>
-                                                </div>
-                                                <CardActions>
-                                                    <Button size="small" variant="outlined" onClick={navigateuniprofile}>View</Button>
-                                                </CardActions>
-                                            </Card>
-                                        </Box>
-                                    </Grid>
-                                );
-                            })
-                        );
+                                                        </div>
+                                                        <div style={{ marginTop: '35px', marginLeft: '16px' }}>
+                                                            <Box sx={{ mb: "px" }}>{university.university}</Box>
+                                                            <Box sx={{ mb: "30px" }}>{course.courseName}</Box>
+                                                            <CenteredBox >
+                                                                <Stack direction="row" spacing={1}>
+                                                                    <StyledRating
+                                                                        value={course.rate}
+                                                                        readOnly
+                                                                        icon={<StarIcon />}
+                                                                        emptyIcon={<StarBorderIcon />}
+                                                                    />
+                                                                    <div>
+                                                                        <CenteredBox>(2400)</CenteredBox>
+                                                                    </div>
+                                                                </Stack>
+                                                            </CenteredBox>
+                                                        </div>
+                                                        <CardActions>
+                                                            <Button size="small" variant="outlined" onClick={navigateuniprofile}>View</Button>
+                                                        </CardActions>
+                                                    </Card>
+                                                </Box>
+                                            </Grid>
+                                        );
+                                    }
+                                    else if(props.filtern == course.courseName){
+                                        return (
+                                            <Grid item xs={4}>
+                                                <Box sx={{ p: 1, m: 1, }} >
+                                                    <Card sx={{ maxWidth: 360, p: 1 }}>
+                                                        <div style={{ position: 'relative' }}>
+                                                            <CardMedia
+                                                                component="img"
+                                                                height="90"
+                                                                image="images/tutors/tutor-1.jpg"
+                                                                alt="green iguana"
+                                                            />
+                                                            <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
+                                                                <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90 }} />
+                                                            </div>
+                                                        </div>
+                                                        <div style={{ marginTop: '35px', marginLeft: '16px' }}>
+                                                            <Box sx={{ mb: "px" }}>{university.university}</Box>
+                                                            <Box sx={{ mb: "30px" }}>{course.courseName}</Box>
+                                                            <CenteredBox >
+                                                                <Stack direction="row" spacing={1}>
+                                                                    <StyledRating
+                                                                        value={course.rate}
+                                                                        readOnly
+                                                                        icon={<StarIcon />}
+                                                                        emptyIcon={<StarBorderIcon />}
+                                                                    />
+                                                                    <div>
+                                                                        <CenteredBox>(2400)</CenteredBox>
+                                                                    </div>
+                                                                </Stack>
+                                                            </CenteredBox>
+                                                        </div>
+                                                        <CardActions>
+                                                            <Button size="small" variant="outlined" onClick={navigateuniprofile}>View</Button>
+                                                        </CardActions>
+                                                    </Card>
+                                                </Box>
+                                            </Grid>
+                                        );
+                                    }
+                                })
+                            );
+
                     })}
-                {/* </Grid> */}
+                    
                 </Tabs>
+
             </div>
+
         </StyledEngineProvider>
     );
 }
