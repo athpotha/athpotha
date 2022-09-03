@@ -27,7 +27,6 @@ public class UniversityController {
         return universityRepository.findAll();
     }
 
-    // view degrees by filter name of degree
 
 
 }
