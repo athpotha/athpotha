@@ -43,6 +43,11 @@ const notiCount = 7; // no of new notifications
 
 function Content() {
 
+    const [filter,setFilter] = React.useState(null);
+    const getFilterName = name => {
+        setFilter(name)
+    }
+
     const [courses, setCourses] = React.useState([])
     const user_id = localStorage.getItem("USER_ID")
 
@@ -61,10 +66,10 @@ function Content() {
     return (
         <StyledEngineProvider injectFirst>
 
-            <Category></Category>
+            <Category getFilterName={getFilterName}></Category>
 
             <Item>
-                <CourseViewCard course={courses}></CourseViewCard>
+                <CourseViewCard course={courses} filtern={filter}></CourseViewCard>
             </Item>
 
         </StyledEngineProvider>
