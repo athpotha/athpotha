@@ -223,9 +223,9 @@ function UniversityRegistrationForm(props) {
     );
 
     universityRegistration({
-      first_name: fname,
-      last_name: lname,
-      user_type: user_type,
+      firstName: fname,
+      lastName: lname,
+      userType: user_type,
       email: email,
       university: university,
       faculty: faculty,

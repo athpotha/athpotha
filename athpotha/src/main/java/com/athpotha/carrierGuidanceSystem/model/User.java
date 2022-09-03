@@ -11,6 +11,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,16 +35,16 @@ public class User implements UserDetails {
 			strategy = GenerationType.SEQUENCE,
 			generator = "student_sequence"
 	)
-	private Long user_id;
-	private String first_name;
-	private String last_name;
+	private Long userId;
+	private String firstName;
+	private String lastName;
 	@Enumerated(value = EnumType.STRING)
-	private UserType user_type;
+	private UserType userType;
 	@Column(unique = true)
 	private String email;
 	private String password;
-	private String profile_picture = "images/profile/default_profile.jpg";
-	private String cover_picture = "images/profile/cover.jpg";
+	private String profilePicture = "/images/profile/default_profile.jpg";
+	private String coverPicture = "/images/profile/cover.jpg";
 	private boolean userDeleted;
 	private boolean enabled;
 	private boolean verified;
@@ -86,41 +88,42 @@ public class User implements UserDetails {
 		return this.enabled;
 	}
 
-	public User(String first_name, String last_name, UserType user_type, String email, String password,
-			String profile_picture, boolean userDeleted, boolean enabled, boolean verified, Date created_at) {
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.user_type = user_type;
-		this.email = email;
-		this.password = password;
-		this.profile_picture = profile_picture;
-		this.userDeleted = userDeleted;
-		this.enabled = enabled;
-		this.verified = verified;
-		this.created_at = created_at;
+	@OneToMany(targetEntity = Notification.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "sender_id",referencedColumnName = "userId")
+	private List<Notification> notifications;
+	
+
+//	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
+//	private List<Follower> followers;
+//
+//	@OneToMany(targetEntity = Following.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
+//	private List<Following> followings;
+//
+//	public List<Follower> getFollowers() {
+//		return followers;
+//	}
+
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinTable(
+//			name = "follow",
+//			joinColumns = @JoinColumn(
+//					name = "follower_id",
+//					referencedColumnName = "userId"
+//			)
+//	)
+//	private List<User> following;
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+    		name = "follow",
+    		joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id"))
+	@JsonIgnore
+    private List<User> following;
+	
+	public void addFollow(User user) {
+		following.add(user);
 	}
-
-	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "pk_user_id",referencedColumnName = "user_id")
-	private List<Follower> followers;
-
-	@OneToMany(targetEntity = Following.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "pk_user_id",referencedColumnName = "user_id")
-	private List<Following> followings;
-
-	public List<Follower> getFollowers() {
-		return followers;
-	}
-
-	public void setFollowers(List<Follower> followers) {
-		this.followers = followers;
-	}
-
-	public List<Following> getFollowings() {
-		return followings;
-	}
-
-	public void setFollowings(List<Following> followings) {
-		this.followings = followings;
-	}
+	
 }

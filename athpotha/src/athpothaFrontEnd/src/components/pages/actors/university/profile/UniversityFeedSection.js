@@ -8,6 +8,7 @@ import BeforeDisplay from "../../../../ui/BeforeDisplay";
 import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 import Home from "./Home";
 import About from "./About";
+import MyPosts from "../../../profile/MyPosts";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -50,25 +51,12 @@ function StudentFeedSection(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    let posts = <Typography>Found no posts</Typography>
-
-    if (props.posts.length > 0) {
-        posts = props.posts.map((post) => (
-            post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
-        ))
-    }
-    if (props.isLoading) {
-        posts = <BeforeDisplay />;
-    }
-
-    if (posts[0] === "") {
-        posts = <Typography>Found no posts</Typography>
-    }
+    
     return (
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="About" {...a11yProps(0)} />
-                <Tab label="Degree Programms" {...a11yProps(1)} />
+                <Tab label="Degree Programmes" {...a11yProps(1)} />
                 <Tab label="Posts" {...a11yProps(2)} />
             </Tabs>
             <Divider></Divider>
@@ -81,7 +69,7 @@ function StudentFeedSection(props) {
             </TabPanel>
 
             <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF" }}>
-                {posts}
+                <MyPosts postType="post" />
             </TabPanel>
         </React.Fragment>
     );

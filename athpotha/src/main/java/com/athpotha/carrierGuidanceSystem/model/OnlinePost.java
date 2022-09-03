@@ -1,7 +1,9 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,6 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -54,10 +57,15 @@ public class OnlinePost {
 	@ManyToOne
 	@JoinColumn(
 			name = "user_id",
-			referencedColumnName = "user_id"
+			referencedColumnName = "userId"
 	)
 	private User user;
-	
+	@OneToMany
+	@JoinColumn(
+			name = "onlinepost_id",
+			referencedColumnName = "postId"
+	)
+	private List<Comment> comments;
 	
 	public OnlinePost(OnlinePostType type, Long upVotes, Long downVotes, Date addedTime) {
 		this.type = type;
@@ -66,5 +74,10 @@ public class OnlinePost {
 		this.downVotes = downVotes;
 		this.addedTime = addedTime;
 	}
+	
+	public void addComent(Comment comment) {
+		comments.add(comment);
+	}
+
 
 }

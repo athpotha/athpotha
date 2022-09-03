@@ -19,9 +19,9 @@ import java.util.List;
 @Setter
 @Getter
 public class University extends User {
-
 	private String faculty;
 	private String university;
+	private String description;
 
 	@OneToMany(targetEntity = Course.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pk_uni_id", referencedColumnName = "user_id")

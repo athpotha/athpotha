@@ -25,7 +25,7 @@ export const userLogin = (authRequest) => {
 
 export const fetchUserData = (authRequest) => {
   if (authRequest.method === "post") {
-    return axios.post(authRequest.url, authRequest.data, {
+    return axios.post(`${authRequest.url}`, authRequest.data, {
       headers: {
         'Authorization': "Bearer " + getToken(),
       }
