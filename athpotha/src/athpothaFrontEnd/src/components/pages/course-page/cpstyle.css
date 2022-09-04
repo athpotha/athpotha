@@ -2,3 +2,8 @@
     background-color: #2196f3; /* blue */
     color: white;
   }
+
+  .btn:focus {
+    background-color: #2196f3; /* blue */
+    color: white;
+  }

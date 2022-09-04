@@ -64,8 +64,8 @@ function CourseViewCard(props) {
                                     if(props.filtern == null){
                                         return (
                                             <Grid item xs={4}>
-                                                <Box sx={{ p: 1, m: 1, }} >
-                                                    <Card sx={{ maxWidth: 360, p: 1 }}>
+                                                <Box sx={{ p: 2, m: 1, }} >
+                                                    <Card sx={{ maxWidth: 370}}>
                                                         <div style={{ position: 'relative' }}>
                                                             <CardMedia
                                                                 component="img"
