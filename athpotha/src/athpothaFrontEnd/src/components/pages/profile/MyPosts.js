@@ -61,7 +61,7 @@ function MyPosts(props) {
         fetchMyPostsHandler();
     }, [])
 
-    let content = <Typography>Found no posts</Typography>
+    let content = <Typography>Found no {props.postType}s</Typography>
 
     if (posts.length > 0) {
         content = posts.map((post) => (
@@ -69,8 +69,8 @@ function MyPosts(props) {
         ))
     }
 
-    if (!content[0]) {
-        content = <Typography>Found no posts</Typography>
+    if (content.length < 0) {
+        content = <Typography>Found no {props.postType}s</Typography>
     }
     
     if (isLoading) {

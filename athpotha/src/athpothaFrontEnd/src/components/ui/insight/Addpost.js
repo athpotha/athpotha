@@ -22,6 +22,9 @@ import { fetchUserData } from "../../../api/authenticationService";
 import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { storage } from '../../../Firebase';
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 function Addpost(props) {
   const [postSuccess, setPostSuccess] = useState(true);
@@ -70,7 +73,7 @@ function Addpost(props) {
     imageData: postImageData
   } = UseImageInput(() => { })
 
-
+  const [imageUrl, setImageUrl] = useState('');
   let formIsValid = false;
   if (contentIsValid && categoryIsValid) {
     formIsValid = true;
@@ -79,36 +82,97 @@ function Addpost(props) {
     if (!contentIsValid && !categoryIsValid) {
       return;
     }
-    postData.append('imageFile', postImageData);
-    postData.append('type', "post");
-    postData.append('content', content);
-    postData.append('postCategory', category)
-    postData.append('email', localStorage.getItem('USER_EMAIL'));
+    props.close();
+    if (postImageData) {
+      const imagePath = `images/posts/${postImageData.name + v4()}`
+      const imageRef = ref(storage, imagePath);
+      console.log(postImageData);
 
-    fetchUserData({
-      url: "api/v1/post/add-post",
-      method: "post",
-      data: postData
-    }).then((response) => {
-      if (response.status === 200) {
-        contentReset();
-        setPostSuccess(true);
-        props.close();
-        Swal.fire({
-          icon: 'success',
-          title: 'Updated!',
-          text: 'Post Added!',
-        }).then(() => {
-          if (window.location.pathname === "/profile") {
-            window.location.reload();
-          } else {
-            navigate("/profile");
-          }
+      uploadBytes(imageRef, postImageData)
+        .then(() => {
+          getDownloadURL(imageRef)
+            .then((url) => {
+              setImageUrl(url);
+              console.log(url);
+              postData.append('imageFile', url);
+              postData.append('type', "post");
+              postData.append('content', content);
+              postData.append('postCategory', category)
+              postData.append('email', localStorage.getItem('USER_EMAIL'));
+
+              fetchUserData({
+                url: "api/v1/post/add-post",
+                method: "post",
+                data: postData
+              }).then((response) => {
+                if (response.status === 200) {
+                  contentReset();
+                  setPostSuccess(true);
+                  props.close();
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Updated!',
+                    text: 'Post Added!',
+                  }).then(() => {
+                    if (window.location.pathname === "/profile") {
+                      window.location.reload();
+                    } else {
+                      navigate("/profile");
+                    }
+                  })
+                }
+              }).catch((error) => {
+                alert(error);
+              })
+            })
+            .catch((error) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong !',
+              })
+              console.log(error.message)
+            });
         })
-      }
-    }).catch((error) => {
-      alert(error);
-    })
+        .catch((error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong !',
+          })
+          console.log(error.message)
+        });
+    } else {
+      postData.append('type', "post");
+      postData.append('content', content);
+      postData.append('postCategory', category)
+      postData.append('email', localStorage.getItem('USER_EMAIL'));
+
+      fetchUserData({
+        url: "api/v1/post/add-post",
+        method: "post",
+        data: postData
+      }).then((response) => {
+        if (response.status === 200) {
+          contentReset();
+          setPostSuccess(true);
+          props.close();
+          Swal.fire({
+            icon: 'success',
+            title: 'Updated!',
+            text: 'Post Added!',
+          }).then(() => {
+            if (window.location.pathname === "/profile") {
+              window.location.reload();
+            } else {
+              navigate("/profile");
+            }
+          })
+        }
+      }).catch((error) => {
+        alert(error);
+      })
+    }
   }
 
   const fetchMyPostsHandler = async () => {
