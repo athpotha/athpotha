@@ -55,7 +55,8 @@ const DUMMY_NOTIFICATIONS = [
 export default function NotiPanel() {
   const [notiDBData, setNotiDBData] = React.useState([]);
   const [readUnread, setReadUnread] = React.useState([]);
-
+  // const [profilePic,setProfilePic] = React.useState([]);
+  var profilePic;
   function notiClicked(id) {
     changeState();
     // alert(`Hello, ${id}!`);
@@ -64,10 +65,10 @@ export default function NotiPanel() {
       method: "put",
       data: { id: 1 },
     };
-    console.log(data.url);
+    // console.log(data.url);
     fetchUserData(data)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setReadUnread(1);
 
         // setNotiDBData(response.data);
@@ -80,7 +81,7 @@ export default function NotiPanel() {
   //change the read_unread status of the notification
   function changeState() {
     // setReadUnread(0);
-    console.log("chnageState");
+    // console.log("chnageState");
 
     var state = readUnread;
     if (state) {
@@ -127,10 +128,11 @@ export default function NotiPanel() {
       method: "post",
       data: { userId: userId },
     }).then((response) => {
-      console.log(response.data);
-      console.log(userId);
+      console.log(response.data); //object
+      // setProfilePic(response.data.profilePicture);
+      // console.log(userId);
 
-      setNotiDBData(response.data.notifications);
+      setNotiDBData(response.data.notifications); //arrayh-it's saved in usestate which is an array
     });
   }, [readUnread]);
 
@@ -153,6 +155,13 @@ export default function NotiPanel() {
     <List sx={{ width: "100%", bgcolor: "background.paper" }}>
       {notiDBData.map((notification) => {
         console.log(notification);
+        if(notification.notification_type=="request"){
+          profilePic="/images/notifications/request.png"
+        }
+        else if(notification.notification_type=="warning"){
+          profilePic="/images/notifications/general-warning.jpg"
+
+        }
         return (
           <React.Fragment>
             <ListItem
@@ -167,7 +176,7 @@ export default function NotiPanel() {
                   <Grid item>
                     <IconButton disabled>
                       <Typography>
-                        {notification.firstName} ago
+                        {notification.receive_datetime}
                       </Typography>
                     </IconButton>
                   </Grid>
@@ -192,11 +201,12 @@ export default function NotiPanel() {
                 <ListItemAvatar>
                   <Avatar
                     alt={notification.firstName}
-                    src={notification.firstName}
+                    
+                    src={profilePic}
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={notification.firstName}
+                  primary={notification.notification_type}
                   secondary={
                     <React.Fragment>
                       <Typography
@@ -207,7 +217,7 @@ export default function NotiPanel() {
                       >
                         {notification.message}
                       </Typography>
-                      {` — ${notification.firstName}`}
+                      {/* {` — ${notification.firstName}`} */}
                     </React.Fragment>
                   }
                 />

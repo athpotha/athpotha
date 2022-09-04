@@ -89,7 +89,7 @@ public class User implements UserDetails {
 	}
 
 	@OneToMany(targetEntity = Notification.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "sender_id",referencedColumnName = "userId")
+	@JoinColumn(name = "receiver_id",referencedColumnName = "userId")
 	private List<Notification> notifications;
 	
 
