@@ -10,3 +10,18 @@
 .wall-container-out {
   background-color: rgb(242, 250, 255);
 }
+
+.mainFeeds {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.mainFeeds::-webkit-scrollbar {
+    display: none;
+}
+
+.mainFeeds {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

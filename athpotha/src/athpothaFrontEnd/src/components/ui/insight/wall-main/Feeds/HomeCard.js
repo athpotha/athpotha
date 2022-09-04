@@ -33,6 +33,10 @@ import SimpleSnackbar from "./SimpleSnackbar";
 import HomeCardMenu from "./HomeCardMenu";
 import HomeCardActions from "./HomeCardActions";
 import { useNavigate } from "react-router-dom";
+import { fetchUserData } from "../../../../../api/authenticationService";
+import CommentSection from "./CommentSection";
+import { commentActions } from "../../../../../store/comment-slice";
+import Swal from "sweetalert2";
 
 
 const ExpandMore = styled((props) => {
@@ -67,85 +71,8 @@ const PostedImage = styled(CardMedia)({
 export default function HomeCard(props) {
   const [expanded, setExpanded] = useState(false);
 
-  const commentDetatils = [
-    {
-      id: "comment-1",
-      avatarImage:
-        "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-      commentOwnerName: "Melaka Pathiranagama",
-      commentContent:
-        "How much is the price?",
-      upvotes: 123,
-      haveReplies: true,
-      replies: [
-        {
-          id: "comment-reply-1",
-          avatarImage: "https://images.unsplash.com/photo-1507438222021-237ff73669b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80",
-          commentOwnerName: "Kumud Perera",
-          commentContent:
-            "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-          upvotes: 125,
-          haveReplies: false,
-          replies: [{}],
-        },
-
-        {
-          id: "comment-reply-2",
-          avatarImage: "/images/tutors/tutor-1.jpg",
-          commentOwnerName: "Rahal Jayasundara",
-          commentContent:
-            "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-          upvotes: 126,
-          haveReplies: true,
-          replies: [
-            {
-              id: "comment-reply-reply-1",
-              avatarImage: props.postItem.personImage,
-              commentOwnerName: props.postItem.personName,
-              commentContent:
-                "Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken, shrimp an chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.",
-              upvotes: 125,
-              haveReplies: false,
-              replies: [{}],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "comment-2",
-      avatarImage:
-        "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-      commentOwnerName: "Ranga madura",
-      commentContent:
-        "Is this available in Matara?",
-      upvotes: 123,
-      haveReplies: true,
-      replies: [
-        {
-          id: "comment-reply-2-1",
-          avatarImage: "https://images.unsplash.com/photo-1507438222021-237ff73669b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80",
-          commentOwnerName: "Kumud Perera",
-          commentContent:
-            "8th  September at Susipwan Nugegoda",
-          upvotes: 125,
-          haveReplies: false,
-          replies: [{}],
-        },
-      ],
-    },
-    {
-      id: "comment-3",
-      avatarImage:
-        "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-      commentOwnerName: "Sirimal Rajapaksha",
-      commentContent:
-        "Great job Janaka",
-      upvotes: 123,
-      haveReplies: false,
-    },
-  ];
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   setIsLoading(true);
   //   setIsLoading(false);
@@ -175,9 +102,46 @@ export default function HomeCard(props) {
     isBookmarkRemoved = bookmarkPosts[bookmarkIndex].isBookmarkRemoved;
   }
 
+  const [comment, setComment] = useState('');
+  let isCommentValid = false;
+  if (comment !== '') {
+    isCommentValid = true;
+  }
+
+  const commentBtnClicked = useSelector((state) => state.comment.commentAdded);
+  const addComment = () => {
+    if (commentBtnClicked) {
+      dispatch(commentActions.setCommentAdded(false));
+    } else {
+      dispatch(commentActions.setCommentAdded(true));
+    }
+    const commentData = new FormData();
+    commentData.append("postId", props.homeCardId);
+    commentData.append("comment", comment);
+    commentData.append("userId", localStorage.getItem("USER_ID"));
+    fetchUserData({
+      url: "api/v1/comment/add-comment",
+      method: "post",
+      data: commentData
+    }).then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: 'Comment Added!',
+      }).then(() => {
+        setComment('');
+      })
+    })
+  }
+
+  const [noOfComments, setNoOfComments] = useState(props.postItem.noOfComments)
+  const setNumberOfComments = (value) => {
+    setNoOfComments(value)
+  }
+
   const navigate = useNavigate();
   const clickHandler = () => {
-    navigate("/Dilsha-Navodi/3")
+    navigate(`/profile/${props.postItem.userId}`)
   }
   return (
     <StyledEngineProvider injectFirst>
@@ -186,6 +150,7 @@ export default function HomeCard(props) {
         xs={12}
         // style={{ backgroundColor: "#e91e63" }}
         sx={{ bgcolor: "background", mb: 3, borderRadius: 2 }}
+        onMouseEnter={() => { console.log("hello world") }}
       >
         <div>
           <Card sx={{ width: "100%", pb: 2 }}>
@@ -251,6 +216,10 @@ export default function HomeCard(props) {
                     placeholder="Add a comment"
                     width="100%"
                     height="50px"
+                    value={comment}
+                    onChange={(e) => {
+                      setComment(e.target.value)
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4}>
@@ -259,19 +228,19 @@ export default function HomeCard(props) {
                     size="large"
                     sx={{ mt: 0.6 }}
                     style={{ borderRadius: 22, textTransform: "none" }}
+                    onClick={addComment}
+                    disabled={!isCommentValid}
                   >
                     Add Comment
                   </Button>
                 </Grid>
               </Grid>
               <Grid container>
-                {commentDetatils.map((comment) => (
-                  <Comment
-                    key={comment.id}
-                    commentItem={comment}
-                    subcommentMargin={comment.haveReplies ? 7 : 0}
-                  />
-                ))}
+                <CommentSection
+                  postId={props.homeCardId}
+                  comments={props.postItem.comments}
+                  noOfComments={setNumberOfComments}
+                />
               </Grid>
               {/* <Divider variant="inset" component="li" /> */}
             </Collapse>

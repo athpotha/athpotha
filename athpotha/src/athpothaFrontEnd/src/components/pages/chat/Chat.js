@@ -34,9 +34,9 @@ function Chat() {
           item
           xs={2}
           style={{
-            // height: "100vh",
-            // position: "sticky",
-            // top: 0,
+            height: "100vh",
+            position: "sticky",
+            top: 0,
             paddingTop: 100,
           }}
         >
@@ -53,20 +53,8 @@ function Chat() {
             </List>
           </Leftbar>
         </Grid>
-        <Grid item xs={9} style={{ paddingTop: 120 }}>
+        <Grid item xs={10} style={{ paddingTop: 120 }}>
           <Content></Content>
-        </Grid>
-        <Grid
-          item
-          xs={3}
-          style={{
-            // height: "100vh",
-            // position: "sticky",
-            // top: 0,
-            paddingTop: 100,
-          }}
-        >
-          {/* <Rightbar></Rightbar> */}
         </Grid>
       </Grid>
     </StyledEngineProvider>
