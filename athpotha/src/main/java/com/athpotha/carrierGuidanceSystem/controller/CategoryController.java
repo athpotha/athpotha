@@ -25,6 +25,7 @@ import com.athpotha.carrierGuidanceSystem.repository.StudentRepository;
 import com.athpotha.carrierGuidanceSystem.repository.TutorRepository;
 import com.athpotha.carrierGuidanceSystem.repository.UserRepository;
 import com.athpotha.carrierGuidanceSystem.requests.CategoryRequest;
+import com.athpotha.carrierGuidanceSystem.service.CategoryService;
 
 @CrossOrigin
 @RestController
@@ -45,6 +46,9 @@ public class CategoryController {
 	
 	@Autowired
 	private CommiunityRepository communityRepository;
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	@PutMapping("/add-categories")
 	public ResponseEntity<?> addCategory(@RequestBody CategoryRequest categoryRequest) {
@@ -95,21 +99,6 @@ public class CategoryController {
 	
 	@PostMapping("/get-my-category")
 	public List<Category> getStudentCategory(@RequestBody User user) {
-		Student student = new Student();
-		Community community = new Community();
-		Tutor tutor = new Tutor();
-		System.out.println(user.getUserType());
-		if(user.getUserType() == UserType.student) {
-			student = studentRepository.findByEmailIgnoreCase(user.getEmail());
-			return categoryRepository.findByStudents(student);
-		} else if(user.getUserType() == UserType.community) {
-			community = communityRepository.findByEmailIgnoreCase(user.getEmail());
-			return categoryRepository.findByCommunities(community);
-		} else if(user.getUserType() == UserType.tutor) {
-			tutor = tutorRepository.findByEmailIgnoreCase(user.getEmail());
-			return categoryRepository.findByTutors(tutor);
-		}
-		
-		return null;
+		return categoryService.getUserCategory(user);
 	}
 }

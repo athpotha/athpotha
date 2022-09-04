@@ -10,6 +10,7 @@ import BeforeDisplay from "../../ui/BeforeDisplay";
 import ModalOpenButton from "../../ui/insight/ModalOpenButton";
 import ModalTabs from "../../ui/insight/ModalTabs";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
+import { fetchUserData } from "../../../api/authenticationService";
 
 const postDetails = [
   {
@@ -112,20 +113,51 @@ const addQuestionModalTabs = [
 function Feeds() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  useEffect(() => {
+  const [posts, setPosts] = useState([]);
+  const userId = localStorage.getItem("USER_ID");
+
+  const fetchPosts = async () => {
     setIsLoading(true);
-    // for(var i = 0; i < 100000; i++) {F
-    //   console.log('hello')
-    // }
+    const response = await fetchUserData({
+      url: "api/v1/feeds/get-user-post",
+      method: "post",
+      data: { userId: userId }
+    })
+    const posts = await response.data;
+    console.log(posts)
+    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const transformedPosts = posts.map((post) => {
+      let d = new Date(post.addedTime);
+      let addedDate = `${month[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+      return {
+        id: post.postId,
+        personName: `${post.user.firstName} ${post.user.lastName}`,
+        postDate: addedDate,
+        postType: post.type,
+        postContent: post.type === "post" ? post.title : post.question,
+        postedImage: post.image,
+        personImage: post.user.profilePicture,
+        userImage: post.user.profilePicture,
+        userId: post.user.userId,
+        noOfPostUpvotes: post.upVotes,
+        noOfComments: post.comments.length,
+        comments: post.comments
+      };
+    })
+    setPosts(transformedPosts);
     setIsLoading(false);
+  }
+  useEffect(() => {
+    fetchPosts();
   }, []);
 
   if (isLoading) {
     return <BeforeDisplay />;
   }
 
+
   return (
-    <div>
+    <div onScroll={() => { console.log("hello") }}>
       <Grid container>
         <Grid
           item
@@ -136,7 +168,7 @@ function Feeds() {
 
         </Grid>
 
-        {postDetails.map((post) => (
+        {posts.map((post) => (
           <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
         ))}
       </Grid>

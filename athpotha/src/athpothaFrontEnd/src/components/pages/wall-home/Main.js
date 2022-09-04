@@ -16,6 +16,7 @@ import Rightbar from "../../ui/insight/rightbar/Rightbar";
 import NewContacts from "../../ui/insight/rightbar/NewContacts";
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate } from "react-router-dom";
+import classes from "./Main.module.css";
 
 
 function Main() {
@@ -59,7 +60,7 @@ function Main() {
             </List>
           </Leftbar>
         </Grid>
-        <Grid item xs={7} style={{ paddingTop: 120 }}>
+        <Grid item xs={7} className={classes.mainFeeds} style={{paddingTop: "120px"}}>
           <Feeds></Feeds>
         </Grid>
         <Grid

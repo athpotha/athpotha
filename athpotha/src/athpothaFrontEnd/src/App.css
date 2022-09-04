@@ -10,5 +10,5 @@
 
 body {
   background-color: rgb(242, 250, 255);
-  overflow-y:scroll;
+  /* overflow-y:scroll; */
 }

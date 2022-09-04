@@ -21,7 +21,7 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate } from "react-router-dom";
-
+import classes from "../wall-home/Main.module.css";
 
 function Notifications() {
 
@@ -67,7 +67,7 @@ function Notifications() {
             </List>
           </Leftbar>
         </Grid>
-        <Grid item xs={7} style={{ paddingTop: 120 }}>
+        <Grid item xs={7} className={classes.mainFeeds} style={{ paddingTop: 120 }}>
           {/* Middle Section comes here */}
           <Content></Content>
         </Grid>
