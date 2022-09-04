@@ -84,6 +84,15 @@ function CoverSection(props) {
       data: formData
     }).then((response) => {
       console.log(response);
+      const formData = new FormData();
+      formData.append("following_id", localStorage.getItem("USER_ID"))
+      fetchUserData({
+        url: "api/v1/follow/get-follow",
+        method: "post",
+        data: formData
+      }).then((response) => {
+        console.log(response.data);
+      })
     })
   }
   return (
@@ -168,6 +177,7 @@ function CoverSection(props) {
                       <Button
                         variant="contained"
                         style={{ borderRadius: 20, textTransform: "none" }}
+                        onClick={makeFollowHandler}
                       >
                         Follow
                       </Button>

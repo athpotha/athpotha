@@ -8,6 +8,8 @@ function RoundedInputField(props) {
       placeholder={props.placeholder}
       style={{ width: `${props.width}`, height: `${props.height}` }}
       className={classes["rounded-inputField"]}
+      value={props.value}
+      onChange={props.onChange}
     />
   );
 }

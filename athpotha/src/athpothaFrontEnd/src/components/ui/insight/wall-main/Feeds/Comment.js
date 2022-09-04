@@ -17,6 +17,7 @@ import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import Reply from "./Reply";
 import SubComment from "./SubComment";
+import SubCommentSection from "./SubCommentSection";
 
 function Comment(props) {
   const [replyExpanded, setReplyExpanded] = useState(false);
@@ -94,21 +95,19 @@ function Comment(props) {
           </div>
           <div>
             <Collapse in={replyExpanded} timeout="auto" unmountOnExit>
-              <Reply />
+              <Reply replyType={props.replyType} commentId={props.commentId} />
             </Collapse>
           </div>
         </Grid>
       </Grid>
-      {props.commentItem.haveReplies
-        ? props.commentItem.replies.map((reply) => (
-            <SubComment
-              subcommentMargin={props.subcommentMargin}
-              in={viewReplyExpanded}
-              key={reply.id}
-              commentItem={reply}
-            />
-          ))
-        : ""}
+      {props.commentItem.haveReplies &&
+        <SubCommentSection
+          subcommentMargin={props.subcommentMargin}
+          in={viewReplyExpanded}
+          commentId={props.commentId}
+          replyType={props.replyType}
+        />
+      }
     </>
   );
 }

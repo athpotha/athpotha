@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("network")
+@RequestMapping("/network")
 public class NetworkController {
 
     @Autowired
@@ -36,16 +36,16 @@ public class NetworkController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("getUser")
-    public List<User> getTutors(@RequestBody User userEntity){
+    @PostMapping("/getUser")
+    public List<User> getUser(@RequestBody User userEntity){
     	
 //        List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUserId(),UserType.tutor);
 //        return tutorsa;
     	User user = userRepository.findByUserId(userEntity.getUserId());
-//    	List<User> users = userRepository.findByFollow(user);
+    	List<User> users = userRepository.findByFollowing(user);
     	
 //    	return users;
-    	return null;
+    	return users;
     }
 
 //    @PostMapping("getUniversities")

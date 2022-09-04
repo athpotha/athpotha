@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -60,7 +62,12 @@ public class OnlinePost {
 			referencedColumnName = "userId"
 	)
 	private User user;
-	
+	@OneToMany
+	@JoinColumn(
+			name = "onlinepost_id",
+			referencedColumnName = "postId"
+	)
+	private List<Comment> comments;
 	
 	public OnlinePost(OnlinePostType type, Long upVotes, Long downVotes, Date addedTime) {
 		this.type = type;
@@ -70,6 +77,21 @@ public class OnlinePost {
 		this.addedTime = addedTime;
 	}
 	
+	public void addComent(Comment comment) {
+		comments.add(comment);
+	}
 
-
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "user_view_post",
+			joinColumns = @JoinColumn(
+					name = "post_id",
+					referencedColumnName = "postId"
+			),
+			inverseJoinColumns = @JoinColumn(
+					name = "user_id",
+					referencedColumnName = "userId"
+			)
+	)
+	private List<User> users;
 }

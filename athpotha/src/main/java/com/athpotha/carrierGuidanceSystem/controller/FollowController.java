@@ -1,7 +1,10 @@
 package com.athpotha.carrierGuidanceSystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +29,11 @@ public class FollowController {
 		
 		follower.addFollow(following);
 		userRepo.save(follower);
+	}
+	
+	@PostMapping("/get-follow")
+	public List<User> getFollow(@RequestParam("following_id") Long followingId) {
+		User user = userRepo.findByUserId(followingId);
+		return userRepo.findByFollowing(user);
 	}
 }

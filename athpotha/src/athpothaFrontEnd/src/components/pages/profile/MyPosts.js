@@ -7,14 +7,16 @@ import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
 import { fetchUserData } from "../../../api/authenticationService";
+import { useSelector } from "react-redux";
 
 function MyPosts(props) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
+    // console.log(commentBtnClicked);
 
-    const fetchMyPostsHandler = useCallback(async () => {
+    const fetchMyPostsHandler = async () => {
         setIsLoading(true);
         setError(null)
         try {
@@ -27,6 +29,7 @@ function MyPosts(props) {
                 }
             });
             const myPosts = await response.data;
+            console.log(myPosts);
 
             const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const transformedPosts = myPosts.map((post) => {
@@ -42,7 +45,8 @@ function MyPosts(props) {
                     personImage: post.user.profilePicture,
                     userImage: post.user.profilePicture,
                     noOfPostUpvotes: post.upVotes,
-                    noOfComments: post.numberOfComments,
+                    noOfComments: post.comments.length,
+                    comments: post.comments
                 };
             })
             setPosts(transformedPosts);
@@ -51,7 +55,7 @@ function MyPosts(props) {
             setError(error.message);
         }
         setIsLoading(false);
-    }, [])
+    }
 
     useEffect(() => {
         fetchMyPostsHandler();
