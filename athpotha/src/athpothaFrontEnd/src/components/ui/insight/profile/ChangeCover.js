@@ -4,6 +4,10 @@ import Swal from 'sweetalert2'
 import { fetchUserData } from '../../../../api/authenticationService'
 import UseImageInput from '../../../../hooks/use-imageInput'
 import CenteredBox from '../../CenteredBox'
+import { storage } from '../../../../Firebase';
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
+import { useState } from 'react'
 
 function ChangeCover(props) {
     const {
@@ -12,30 +16,59 @@ function ChangeCover(props) {
         fileInput: profileImageInput,
         imageData: profileImageData
     } = UseImageInput(() => { })
+
+    const [imageUrl, setImageUrl] = useState('');
     const imageSubmitHandler = () => {
-        const imageData = new FormData();
-        imageData.append("imageFile", profileImageData);
-        imageData.append("email", localStorage.getItem("USER_EMAIL"));
-        imageData.append("imageType", props.imageType);
-        fetchUserData({
-            url: "api/v1/logged-user/change-profileImage",
-            method: "put",
-            data: imageData
-        }).then((response) => {
-            if (props.imageType === "PROFILE_PIC") {
-                localStorage.setItem("PROFILE_PIC", response.data);
-            } else {
-                localStorage.setItem("COVER_PIC", response.data);
-            }
-            props.close();
-            Swal.fire({
-                icon: 'success',
-                title: 'Updated!',
-                text: 'Profile Image Changed!',
-            }).then(() => {
-                window.location.reload();
+        props.close();
+        const imagePath = `images/cover/${profileImageData.name + v4()}`
+        const imageRef = ref(storage, imagePath);
+        console.log(profileImageData);
+        uploadBytes(imageRef, profileImageData)
+            .then(() => {
+                getDownloadURL(imageRef)
+                    .then((url) => {
+                        setImageUrl(url);
+                        console.log(url);
+                        const imageData = new FormData();
+                        imageData.append("imagePath", url);
+                        imageData.append("email", localStorage.getItem("USER_EMAIL"));
+                        imageData.append("imageType", props.imageType);
+                        fetchUserData({
+                            url: "api/v1/logged-user/change-profileImage",
+                            method: "put",
+                            data: imageData
+                        }).then((response) => {
+                            if (props.imageType === "PROFILE_PIC") {
+                                localStorage.setItem("PROFILE_PIC", response.data);
+                            } else {
+                                localStorage.setItem("COVER_PIC", response.data);
+                            }
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Updated!',
+                                text: 'Profile Image Changed!',
+                            }).then(() => {
+                                window.location.reload();
+                            })
+                        })
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong !',
+                        })
+                        console.log(error.message)
+                    });
             })
-        })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong !',
+                })
+                console.log(error.message)
+            });
     }
     return (
         <Grid container>
