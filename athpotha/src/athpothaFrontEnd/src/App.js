@@ -110,7 +110,7 @@ function App() {
             <Route key={`${user.first_name}-${user.last_name}-${user.user_id}`} path={`/${user.first_name}-${user.last_name}/${user.user_id}`} element={<ViewProfile user={user} />}></Route>
           ))} */}
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
-          <Route path="/:name/:userId" element={<ViewProfile />}></Route>
+          <Route path="/profile/:userId" element={<ViewProfile />}></Route>
           <Route path="/university/view-user" element={<ViewProfile />}></Route>
           <Route path="/community/view-user" element={<ViewProfile />}></Route>
           <Route path="*" element={<Navigate to="/" />} />

@@ -22,16 +22,16 @@ import SchoolIcon from "@mui/icons-material/School";
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchUserData } from "../../../api/authenticationService";
-
+import classes from "../wall-home/Main.module.css";
 
 function ViewProfile(props) {
   const navigate = useNavigate();
   const listItems = leftbarItem();
-  const { name } = useParams();
+  // const { name } = useParams();
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState([]);
-  console.log(name, userId);
+  console.log(userId);
 
 
   const fetchUsers = async () => {
@@ -108,7 +108,7 @@ function ViewProfile(props) {
             </List>
           </Leftbar>
         </Grid>
-        <Grid item xs={7} style={{ paddingTop: 120 }}>
+        <Grid item xs={7} className={classes.mainFeeds} style={{ paddingTop: 120 }}>
           {/* Middle Section comes here */}
           <Content user={user}></Content>
         </Grid>
