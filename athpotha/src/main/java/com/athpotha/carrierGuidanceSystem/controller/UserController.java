@@ -33,14 +33,8 @@ public class UserController {
 	private static String imageDirectory = System.getProperty("user.dir") + "/src/athpothaFrontEnd/public/images/profile";
 
 	@PutMapping("/change-profileImage")
-	public ResponseEntity<?> ChangeProfileImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("email") String email, @RequestParam("imageType") ImageType imageType) throws IllegalStateException, IOException {
+	public ResponseEntity<?> ChangeProfileImage(@RequestParam("imagePath") String filePath, @RequestParam("email") String email, @RequestParam("imageType") ImageType imageType) throws IllegalStateException, IOException {
 		User user = userRepo.findByEmailIgnoreCase(email);
-
-		fileUploadService.makeDirectoryIfNotExist(imageDirectory);
-		String newProfileImage = user.getFirstName() + "-" + user.getLastName() + "-" + imageType + "-" + String.valueOf(user.getUserId());
-		String imageExtention = fileUploadService.generateFile(file, newProfileImage, imageDirectory);
-
-		String filePath = "/images/profile/" + newProfileImage + "." + imageExtention;
 
 		if(imageType == ImageType.PROFILE_PIC) {
 			user.setProfilePicture(filePath);

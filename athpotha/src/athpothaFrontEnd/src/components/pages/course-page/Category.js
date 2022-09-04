@@ -51,13 +51,15 @@ function a11yProps(index) {
     };
 }
 
-function Category({getFilterName}) {
+function Category(props) {
 
     const [value, setValue] = React.useState(0);
-
+        
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        props.getTid(newValue);
     };
+
 
     // const getFilterName = (filtername) => {
     //     alert(filtername)
@@ -70,7 +72,7 @@ function Category({getFilterName}) {
             <Box sx={style}>
 
                 <Box >
-                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tabs value={value} onChange={handleChange}  aria-label="basic tabs example">
                         <Tab label="Physical Science" {...a11yProps(0)} />
                         <Tab label="Bio Science" {...a11yProps(1)} />
                         <Tab label="Commerce" {...a11yProps(2)} />
@@ -85,12 +87,12 @@ function Category({getFilterName}) {
                         p: 1,
                         gap:2,
                     }}>
-                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => getFilterName("Engineering")} >Engineering</Button>
-                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => getFilterName("Computer Science")}>Computer Science</Button>
-                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => getFilterName("Information Technology")}>Information Technology</Button>
-                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => getFilterName("Physical Science")}>Physical Science</Button>
-                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => getFilterName("Applied Science")}>Applied Science</Button>
-                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => getFilterName("Quantity Surveying")}>Quantity Surveying</Button>
+                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Engineering")} >Engineering</Button>
+                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Computer Science")}>Computer Science</Button>
+                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Information Technology")}>Information Technology</Button>
+                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Physical Science")}>Physical Science</Button>
+                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Applied Science")}>Applied Science</Button>
+                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Quantity Surveying")}>Quantity Surveying</Button>
                     </Box>
                 </TabPanel>
                 <TabPanel value={value} index={1}>

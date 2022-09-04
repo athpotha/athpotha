@@ -56,19 +56,15 @@ public class OnliePostsController {
 
 	@Autowired
 	private OnlinePostRepository onlinePostRepo;
-	
+
 	@Autowired
 	private CategoryRepository categoryRepo;
 
-	@Autowired
-	private FileUploadService fileUploadService;
-
-	private static String imageDirectory = System.getProperty("user.dir") + "/src/athpothaFrontEnd/public/images/posts";
-
 	@PostMapping("/add-post")
-	public ResponseEntity<?> addPost(@RequestParam(name = "imageFile", required = false) MultipartFile file,
+	public ResponseEntity<?> addPost(@RequestParam(name = "imageFile", required = false) String filePath,
 			@RequestParam("email") String email, @RequestParam("type") OnlinePostType type,
-			@RequestParam("content") String title, @RequestParam("postCategory") String postCategory) throws IllegalStateException, IOException {
+			@RequestParam("content") String title, @RequestParam("postCategory") String postCategory)
+			throws IllegalStateException, IOException {
 		User user = userRepo.findByEmailIgnoreCase(email);
 
 		System.out.println(postCategory);
@@ -76,15 +72,7 @@ public class OnliePostsController {
 
 			Post newPost = new Post();
 			Category category = categoryRepo.findByCategoryId(Long.parseLong(postCategory));
-			if (file != null) {
-				OnlinePost topPost = onlinePostRepo.findTopByOrderByPostIdDesc();
-
-				String newImageName = "post-" + String.valueOf(topPost.getPostId() + 1);
-				fileUploadService.makeDirectoryIfNotExist(imageDirectory);
-				String imageExtention = fileUploadService.generateFile(file, newImageName, imageDirectory);
-
-				String filePath = "/images/posts/" + newImageName + "." + imageExtention;
-
+			if (filePath != "") {
 				newPost.setImage(filePath);
 			}
 
