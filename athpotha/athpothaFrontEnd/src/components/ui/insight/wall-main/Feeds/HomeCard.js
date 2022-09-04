@@ -143,6 +143,18 @@ export default function HomeCard(props) {
   const clickHandler = () => {
     navigate(`/profile/${props.postItem.userId}`)
   }
+
+  const postSeenHandler = () => {
+    console.log("hello world");
+    const postData = new FormData();
+    postData.append("postId", props.homeCardId);
+    postData.append("userId", localStorage.getItem("USER_ID"))
+    fetchUserData({
+      url: "api/v1/feeds/set-post-seen",
+      method: "post",
+      data: postData
+    })
+  }
   return (
     <StyledEngineProvider injectFirst>
       <Grid
@@ -150,7 +162,7 @@ export default function HomeCard(props) {
         xs={12}
         // style={{ backgroundColor: "#e91e63" }}
         sx={{ bgcolor: "background", mb: 3, borderRadius: 2 }}
-        onMouseEnter={() => { console.log("hello world") }}
+        onMouseEnter={postSeenHandler}
       >
         <div>
           <Card sx={{ width: "100%", pb: 2 }}>
