@@ -43,6 +43,24 @@ const notiCount = 7; // no of new notifications
 
 function Content() {
 
+    const [count, setCount] = React.useState(null);
+
+    const [filter, setFilter] = React.useState(null);
+    const [tid, setTid] = React.useState(0);
+
+    const getFilterName = name=> {
+        if (count == 1 && filter == name) {
+            window.location.reload(false);
+        } else {
+            setCount(1);
+        }
+        setFilter(name)
+    }
+
+    const getTid = id => {
+        setTid(id)
+    }
+
     const [courses, setCourses] = React.useState([])
     const user_id = localStorage.getItem("USER_ID")
 
@@ -61,11 +79,42 @@ function Content() {
     return (
         <StyledEngineProvider injectFirst>
 
-            <Category></Category>
+            <Category getFilterName={getFilterName} getTid={getTid}></Category>
 
-            <Item>
-                <CourseViewCard course={courses}></CourseViewCard>
-            </Item>
+            {/* <Item>
+                <CourseViewCard course={courses} filtern={filter}></CourseViewCard>
+            </Item> */}
+
+            <div>
+                {(() => {
+                    if (tid == 0) {
+                        return (
+                            <Item>
+                                <CourseViewCard course={courses} filtern={filter}></CourseViewCard>
+                            </Item>
+
+                        )
+                    } else if (tid == 1) {
+                        return (
+                            // <CourseViewCard course={null} filtern={}></CourseViewCard>
+                            <Item>no data</Item>
+                            
+                        )
+                    } else if (tid == 2) {
+                        return (
+                            // <CourseViewCard course={} filtern={}></CourseViewCard>
+                            <Item>no data</Item>
+                            
+                        )
+                    } else if (tid == 3) {
+                        return (
+                            // <CourseViewCard course={} filtern={}></CourseViewCard>
+                            <Item>no data</Item>
+                            
+                        )
+                    }
+                })()}
+            </div>
 
         </StyledEngineProvider>
     );
