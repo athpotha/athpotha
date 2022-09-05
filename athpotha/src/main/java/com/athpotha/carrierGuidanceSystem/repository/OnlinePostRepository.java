@@ -11,7 +11,7 @@ import com.athpotha.carrierGuidanceSystem.model.OnlinePost;
 import com.athpotha.carrierGuidanceSystem.model.Student;
 import com.athpotha.carrierGuidanceSystem.model.User;
 import com.athpotha.carrierGuidanceSystem.model.UserFeeds;
-import com.athpotha.carrierGuidanceSystem.model.UserFeeds;
+//import com.athpotha.carrierGuidanceSystem.model.UserFeeds;
 
 @Repository
 public interface OnlinePostRepository extends JpaRepository<OnlinePost, Long> {
