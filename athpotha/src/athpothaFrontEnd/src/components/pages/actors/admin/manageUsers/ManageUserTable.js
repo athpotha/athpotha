@@ -145,7 +145,7 @@ const style = {
   borderRadius:"0.5%",
   backgroundColor:"white"
 };
-export default function DonationPendingTable() {
+export default function ManageUSerTable() {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
