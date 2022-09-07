@@ -65,8 +65,6 @@ public class UserRegistrationController {
 
 	@PostMapping("/check-email")
 	public String userLogin(@RequestBody User user) {
-
-		System.out.println(user.getEmail());
 		User loginUser = userRepository.findByEmailIgnoreCase(user.getEmail());
 		if (loginUser == null) {
 			return "EMAIL_OK";
@@ -108,6 +106,7 @@ public class UserRegistrationController {
 			Student student = new Student();
 			student.setFirstName(userEntity.getFirstName());
 			student.setLastName(userEntity.getLastName());
+			student.setUserName(userEntity.getFirstName().toLowerCase() + " " + userEntity.getLastName().toLowerCase());
 			student.setEmail(userEntity.getEmail());
 			student.setUserType(userEntity.getUserType());
 			student.setPassword(userEntity.getPassword());
@@ -118,6 +117,7 @@ public class UserRegistrationController {
 			Admin admin = new Admin();
 			admin.setFirstName(userEntity.getFirstName());
 			admin.setLastName(userEntity.getLastName());
+			admin.setUserName(userEntity.getFirstName().toLowerCase() + " " + userEntity.getLastName().toLowerCase());
 			admin.setEmail(userEntity.getEmail());
 			admin.setUserType(userEntity.getUserType());
 			admin.setPassword(userEntity.getPassword());
@@ -128,6 +128,7 @@ public class UserRegistrationController {
 			University university = new University();
 			university.setFirstName(userEntity.getFirstName());
 			university.setLastName(userEntity.getLastName());
+			university.setUserName(userEntity.getFirstName().toLowerCase() + " " + userEntity.getLastName().toLowerCase());
 			university.setEmail(userEntity.getEmail());
 			university.setUserType(userEntity.getUserType());
 			university.setPassword(userEntity.getPassword());
@@ -138,6 +139,7 @@ public class UserRegistrationController {
 			Tutor tutor = new Tutor();
 			tutor.setFirstName(userEntity.getFirstName());
 			tutor.setLastName(userEntity.getLastName());
+			tutor.setUserName(userEntity.getFirstName().toLowerCase() + " " + userEntity.getLastName().toLowerCase());
 			tutor.setEmail(userEntity.getEmail());
 			tutor.setUserType(userEntity.getUserType());
 			tutor.setPassword(userEntity.getPassword());
@@ -148,6 +150,7 @@ public class UserRegistrationController {
 			Community commiunity = new Community();
 			commiunity.setFirstName(userEntity.getFirstName());
 			commiunity.setLastName(userEntity.getLastName());
+			commiunity.setUserName(userEntity.getFirstName().toLowerCase() + " " + userEntity.getLastName().toLowerCase());
 			commiunity.setEmail(userEntity.getEmail());
 			commiunity.setUserType(userEntity.getUserType());
 			commiunity.setPassword(userEntity.getPassword());
@@ -156,9 +159,8 @@ public class UserRegistrationController {
 			break;
 		}
 
-		System.out.println(userEntity.toString());
 		User user = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
-		System.out.println(user.toString());
+
 		ConfirmationToken confirmationToken = new ConfirmationToken(user);
 
 		confirmationTokenRepository.save(confirmationToken);

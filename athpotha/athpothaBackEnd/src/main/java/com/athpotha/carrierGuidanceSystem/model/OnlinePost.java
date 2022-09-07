@@ -62,6 +62,11 @@ public class OnlinePost {
 			referencedColumnName = "userId"
 	)
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+	
 	@OneToMany
 	@JoinColumn(
 			name = "onlinepost_id",
@@ -94,4 +99,8 @@ public class OnlinePost {
 			)
 	)
 	private List<User> users;
+	
+	public void addUser(User user) {
+		users.add(user);
+	}
 }

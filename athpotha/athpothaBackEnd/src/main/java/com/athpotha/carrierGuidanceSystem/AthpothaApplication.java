@@ -67,6 +67,7 @@ public class AthpothaApplication {
 		if(!isExistingUser("athpothaAdmin121@gmail.com")) {
 			admin.setFirstName("Athpotha");
 			admin.setLastName("Admin");
+			admin.setUserName("athpotha admin");
 			admin.setUserType(UserType.admin);
 			admin.setEmail("athpothaAdmin121@gmail.com");
 			admin.setPassword(passwordEncoder.encode("Athpotha@123"));
@@ -77,6 +78,7 @@ public class AthpothaApplication {
 		if(!isExistingUser("athpothaStudent121@gmail.com")) {
 			student.setFirstName("Hiruni");
 			student.setLastName("Maleesha");
+			student.setUserName("hiruni maleesha");
 			student.setUserType(UserType.student);
 			student.setEmail("athpothaStudent121@gmail.com");
 			student.setPassword(passwordEncoder.encode("Athpotha@123"));
@@ -87,6 +89,7 @@ public class AthpothaApplication {
 		if(!isExistingUser("athpothaCommunity121@gmail.com")) {
 			community.setFirstName("Dilsha");
 			community.setLastName("Navodi");
+			community.setUserName("dilsha navodi");
 			community.setUserType(UserType.community);
 			community.setEmail("athpothaCommunity121@gmail.com");
 			community.setPassword(passwordEncoder.encode("Athpotha@123"));
@@ -97,6 +100,7 @@ public class AthpothaApplication {
 		if(!isExistingUser("athpothaTutor121@gmail.com")) {
 			tutor.setFirstName("Maduni");
 			tutor.setLastName("Tharushi");
+			tutor.setUserName("maduni tharushi");
 			tutor.setUserType(UserType.tutor);
 			tutor.setEmail("athpothaTutor121@gmail.com");
 			tutor.setPassword(passwordEncoder.encode("Athpotha@123"));
@@ -107,6 +111,7 @@ public class AthpothaApplication {
 		if(!isExistingUser("athpothaUniversity121@gmail.com")) {
 			university.setFirstName("University");
 			university.setLastName("Of Colombo");
+			university.setUserName("university of colombo");
 			university.setUserType(UserType.university);
 			university.setEmail("athpothaUniversity121@gmail.com");
 			university.setPassword(passwordEncoder.encode("Athpotha@123"));

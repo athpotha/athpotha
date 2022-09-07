@@ -41,7 +41,7 @@ import com.athpotha.carrierGuidanceSystem.service.FileUploadService;
 @RestController
 @RequestMapping("api/v1/post")
 @CrossOrigin
-public class OnliePostsController {
+public class OnlinePostsController {
 //	@Autowired
 //	private OnlinePostRepository onlinePostRepo;
 
@@ -66,12 +66,12 @@ public class OnliePostsController {
 			@RequestParam("content") String title, @RequestParam("postCategory") String postCategory)
 			throws IllegalStateException, IOException {
 		User user = userRepo.findByEmailIgnoreCase(email);
-
+		Category category = categoryRepo.findByCategoryId(Long.parseLong(postCategory));
 		System.out.println(postCategory);
 		if (type == OnlinePostType.post) {
 
 			Post newPost = new Post();
-			Category category = categoryRepo.findByCategoryId(Long.parseLong(postCategory));
+			
 			if (filePath != "") {
 				newPost.setImage(filePath);
 			}
@@ -79,17 +79,17 @@ public class OnliePostsController {
 			newPost.setUser(user);
 			newPost.setTitle(title);
 			newPost.setType(type);
+			newPost.setCategory(category);
 
-			category.addPost(newPost);
 			postRepo.save(newPost);
 			return ResponseEntity.ok("POST_ADDED_SUCCESS");
 		} else if (type == OnlinePostType.question) {
 			Question newQuestion = new Question();
-			Category category = categoryRepo.findByCategoryId(Long.parseLong(postCategory));
+			
 			newQuestion.setUser(user);
 			newQuestion.setQuestion(title);
 			newQuestion.setType(type);
-			category.addQuestion(newQuestion);
+			newQuestion.setCategory(category);
 			questionRepo.save(newQuestion);
 			return ResponseEntity.ok("QUESTION_ADDED_SUCCESS");
 		}

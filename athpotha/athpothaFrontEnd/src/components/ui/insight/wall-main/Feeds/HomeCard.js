@@ -181,9 +181,9 @@ export default function HomeCard(props) {
                   />
                 </ListItem>
               }
-              action={
-                <HomeCardActions />
-              }
+              // action={
+              //   <HomeCardActions />
+              // }
             />
             <CardContent>
               <Typography variant="body" color="text">
