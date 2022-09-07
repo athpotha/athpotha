@@ -7,16 +7,12 @@ import {
   gridClasses,
 } from "@mui/x-data-grid";
 // import styled from "@emotion/styled";
-import { green, red, blue, orange } from "@mui/material/colors";
-import CenteredBox from "../../../../ui/CenteredBox";
+import { green, red, blue } from "@mui/material/colors";
+import CenteredBox from "../../../ui/CenteredBox";
 import {
   Box,
   Button,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
 } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 
@@ -56,15 +52,6 @@ const ColorButton3 = styled(Button)(({ theme }) => ({
   textTransform: "none",
   "&:hover": {
     backgroundColor: red[700],
-  },
-}));
-
-const ColorButton4 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(orange[600]),
-  backgroundColor: orange[600],
-  textTransform: "none",
-  "&:hover": {
-    backgroundColor: orange[700],
   },
 }));
 
@@ -110,31 +97,25 @@ const rows = [
 const columns = [
   {
     field: "col1",
-    headerName: "Reporter",
+    headerName: "University",
     headerClassName: "header-class-name",
-    width: 100,
+    width: 150,
   },
   {
     field: "col2",
-    headerName: "Reportee",
+    headerName: "Faculty",
     headerClassName: "header-class-name",
-    width: 100,
+    width: 150,
   },
   {
     field: "col3",
-    headerName: "Date",
-    headerClassName: "header-class-name",
-    width: 300,
-  },
-  {
-    field: "col4",
-    headerName: "Reason",
+    headerName: "Email",
     headerClassName: "header-class-name",
     width: 300,
   },
 
   {
-    field: "col5",
+    field: "col6",
     headerName: "Actions",
     headerClassName: "header-class-name",
     width: 400,
@@ -146,10 +127,8 @@ const columns = [
 
       return (
         <CenteredBox align='left'>
-          <ColorButton1 style={{ marginRight: 6 }}>View User</ColorButton1>
-          <ColorButton2 style={{ marginRight: 6 }}>Reports</ColorButton2>
-          <ColorButton4 style={{ marginRight: 6 }}>Warn</ColorButton4>
-          <ColorButton3>Block</ColorButton3>
+          <ColorButton2 style={{ marginRight: 6 }}>Verify</ColorButton2>
+          <ColorButton3>Reject</ColorButton3>
         </CenteredBox>
       );
     },
@@ -161,7 +140,7 @@ const style = {
   borderRadius:"0.5%",
   backgroundColor:"white"
 };
-export default function ManageUSerTable() {
+export default function UniversityRegistrationTable() {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
