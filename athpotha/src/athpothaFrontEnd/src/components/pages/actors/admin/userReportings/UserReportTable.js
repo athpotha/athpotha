@@ -124,7 +124,7 @@ const columns = [
     field: "col3",
     headerName: "Date",
     headerClassName: "header-class-name",
-    width: 300,
+    width: 150,
   },
   {
     field: "col4",
