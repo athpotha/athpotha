@@ -144,6 +144,7 @@ function CoverSection(props) {
                 >
                   <Box sx={{ fontWeight: "bold" }}>
                     {`${props.user.firstName} ${props.user.lastName}`}
+                    {/* {localStorage.getItem("FIRST_NAME")} {localStorage.getItem("LAST_NAME")} */}
                   </Box>
                   <Box sx={{ fontSize: "10pt" }}>{props.user.userType === "student" && props.user.studentType}</Box>
                   <Box sx={{ fontSize: "10pt" }}>

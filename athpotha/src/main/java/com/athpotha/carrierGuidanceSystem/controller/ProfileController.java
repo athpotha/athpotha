@@ -21,6 +21,7 @@ public class ProfileController {
 
         user.setFirstName(userDetails.getFirstName());
         user.setLastName(userDetails.getLastName());
+        user.setDescription(userDetails.getDescription());
 
 //        user.setRead_Unread(1);
         User updatedUser= userRepository.save(user);

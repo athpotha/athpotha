@@ -96,7 +96,12 @@ const editInfo =(e)=>{
         // setReadUnread(1);
 
         // setNotiDBData(response.data);
+        localStorage.setItem("FIRST_NAME",firstName);
+        localStorage.setItem("LAST_NAME",lastName);
+        localStorage.setItem("DESCRIPTION",description);
+
         window.location.replace("/profile");
+
       })
       .catch((e) => {
         console.log("CATCH---------");
@@ -200,10 +205,10 @@ const editInfo =(e)=>{
                             label="Bio"
                             multiline
                             rows={4}
+                            defaultValue={localStorage.getItem("DESCRIPTION")}
                             
                             onChange={(e)=>setDescription(e.target.value)}
                             value={description}
-                            defaultValue="Default Value"
                           />
                           <Button variant="contained" type="submit" >Save</Button>
                           {/* <input type="submit"/> */}
@@ -225,7 +230,7 @@ const editInfo =(e)=>{
                     }}
                   >
                     <Box sx={{ fontWeight: "bold" }}>
-                      {localStorage.getItem("USER_NAME")}
+                      {localStorage.getItem("FIRST_NAME")} {localStorage.getItem("LAST_NAME")}
                     </Box>
                     <Box sx={{ fontSize: "10pt" }}>{subText}</Box>
                     <Box sx={{ fontSize: "10pt" }}>
