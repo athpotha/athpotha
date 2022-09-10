@@ -205,7 +205,7 @@ const editInfo =(e)=>{
                             label="Bio"
                             multiline
                             rows={4}
-                            defaultValue={localStorage.getItem("DESCRIPTION")}
+                            defaultValue={localStorage.getItem("DESCRIPTION") }
                             
                             onChange={(e)=>setDescription(e.target.value)}
                             value={description}
