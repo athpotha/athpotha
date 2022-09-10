@@ -22,6 +22,9 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ChangePassword from "./ChangePassword"
 import styled from "@emotion/styled";
 import ChangeImage from "./ChangeImage";
+import { fetchUserData } from "../../../api/authenticationService";
+
+
 
 function CoverSection(props) {
   const style = {
@@ -37,8 +40,10 @@ function CoverSection(props) {
     width: "58%",
 
   };
-
-
+  
+const editInfo =(e)=>{
+  e.preventDeafult();
+}
   // ------------- Model -----------
 
   const [openOne, setOpenOne] = React.useState(false);
@@ -48,6 +53,10 @@ function CoverSection(props) {
   const [openTwo, setOpenTwo] = React.useState(false);
   const handleOpenTwo = () => setOpenTwo(true);
   const handleCloseTwo = () => setOpenTwo(false);
+  
+  const [firstName,setFirstName]= React.useState( localStorage.getItem("FIRST_NAME"));
+  const [lastName,setLastName]= React.useState(localStorage.getItem("LAST_NAME"));
+  const [description,setDescription]= React.useState(localStorage.getItem("DESCRIPTION"));
 
   let subText = ""
   switch (localStorage.getItem("USER_TYPE")) {
@@ -67,6 +76,35 @@ function CoverSection(props) {
     // maxWidth: 330,
   });
   // ----------------------------------
+  var id=localStorage.getItem("USER_ID");
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log(id) ;
+    // var dataSet=JSON.stringify(data);
+    const data = {
+      url: `profile/edit-info/${id}`,
+      method: "put",
+      data: {
+        firstName,
+        lastName,
+        description
+      },
+    };
+    fetchUserData(data)
+      .then((response) => {
+        console.log(response.data);
+        // setReadUnread(1);
+
+        // setNotiDBData(response.data);
+        window.location.replace("/profile");
+      })
+      .catch((e) => {
+        console.log("CATCH---------");
+        console.log(e);
+      });
+    // console.log(data);
+  }
+
   return (
     <StyledEngineProvider injectFirst>
       <div sx={{ width: "100%" }}>
@@ -136,13 +174,17 @@ function CoverSection(props) {
                       >
                         {/* ---------------------content of the model start ------------------ */}
 
-                        <form style={{ maxWidth: "100%" }}>
+                        <form style={{ maxWidth: "100%" }} onSubmit={handleSubmit} >
                           <TextField
                             id="First Name"
                             label="First Name"
                             variant="outlined"
-                            defaultValue={localStorage.getItem("FIRST_NAME")}
                             fullWidth
+                            onChange={(e)=>setFirstName(e.target.value)} // 
+                            value={firstName}
+                            
+                            defaultValue={localStorage.getItem("FIRST_NAME")}
+
                           />
 
                           <TextField
@@ -150,16 +192,21 @@ function CoverSection(props) {
                             label="Last Name"
                             variant="outlined"
                             defaultValue={localStorage.getItem("LAST_NAME")}
+                            onChange={(e)=>setLastName(e.target.value)}
+                            value={lastName}
                           />
                           <TextField
                             id="Bio"
                             label="Bio"
                             multiline
                             rows={4}
+                            
+                            onChange={(e)=>setDescription(e.target.value)}
+                            value={description}
                             defaultValue="Default Value"
                           />
-                          <Button variant="contained">Save</Button>
-
+                          <Button variant="contained" type="submit" >Save</Button>
+                          {/* <input type="submit"/> */}
                           {/* ---------------------content of the model end ------------------ */}
                         </form>
                       </Box>
