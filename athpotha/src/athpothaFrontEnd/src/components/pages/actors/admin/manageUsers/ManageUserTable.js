@@ -11,7 +11,7 @@ import { green, red, blue } from "@mui/material/colors";
 import CenteredBox from "../../../../ui/CenteredBox";
 import { Box, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import ViewUserModal from "./ViewUserModal";
+import Popup from "./Popup";
 import { useRef } from "react";
 
 //Filter panel
@@ -100,7 +100,7 @@ export default function ManageUSerTable() {
       col1: "Roneki",
       col2: "Manamperi",
       col3: "roneki.saranga12@gmail.com",
-    },
+    }
   ];
 
   const columns = [
@@ -124,7 +124,7 @@ export default function ManageUSerTable() {
     },
 
     {
-      field: "col6",
+      field: "col4",
       headerName: "Actions",
       headerClassName: "header-class-name",
       width: 400,
@@ -144,11 +144,11 @@ export default function ManageUSerTable() {
             >
               View User
             </ColorButton1>
-            {value ? <ViewUserModal flag={true} data={params.row} /> : <></>}
+            {value ? <Popup flag={true} data={params.row} /> : <></>}
 
             <ColorButton2 style={{ marginRight: 6 }}>Update</ColorButton2>
             <ColorButton3>Delete</ColorButton3>
-          </CenteredBox>
+          </CenteredBox>         
         );
       },
     },
