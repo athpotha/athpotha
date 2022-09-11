@@ -46,6 +46,7 @@ public class User implements UserDetails {
 	private String profilePicture = "/images/profile/default_profile.jpg";
 	private String coverPicture = "/images/profile/cover.jpg";
 	private boolean userDeleted;
+	private String description;
 	private boolean enabled;
 	private boolean verified;
 	@CreationTimestamp
