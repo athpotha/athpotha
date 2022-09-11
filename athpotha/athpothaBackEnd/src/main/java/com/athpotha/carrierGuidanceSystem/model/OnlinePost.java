@@ -32,7 +32,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class OnlinePost {
@@ -56,6 +55,8 @@ public class OnlinePost {
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date addedTime;
 	private Long numberOfComments = (long) 0;
+	private boolean upVoted = false;
+	private boolean downVoted = false;
 	@ManyToOne
 	@JoinColumn(
 			name = "user_id",
@@ -99,6 +100,42 @@ public class OnlinePost {
 			)
 	)
 	private List<User> users;
+	
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "user_upvote_post",
+			joinColumns = @JoinColumn(
+					name = "post_id",
+					referencedColumnName = "postId"
+			),
+			inverseJoinColumns = @JoinColumn(
+					name = "user_id",
+					referencedColumnName = "userId"
+			)
+	)
+	private List<User> upvotedUsers;
+	public void addUpvote(User user) {
+		upvotedUsers.add(user);
+	}
+	
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "user_downvote_post",
+			joinColumns = @JoinColumn(
+					name = "post_id",
+					referencedColumnName = "postId"
+			),
+			inverseJoinColumns = @JoinColumn(
+					name = "user_id",
+					referencedColumnName = "userId"
+			)
+	)
+	private List<User> downvotedUsers;
+	public void addDownvote(User user) {
+		downvotedUsers.add(user);
+	}
 	
 	public void addUser(User user) {
 		users.add(user);

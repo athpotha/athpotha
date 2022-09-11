@@ -45,6 +45,7 @@ function MyPosts(props) {
                     personImage: post.user.profilePicture,
                     userImage: post.user.profilePicture,
                     noOfPostUpvotes: post.upVotes,
+                    noOfPostDownvotes: post.downVotes,
                     noOfComments: post.comments.length,
                     comments: post.comments
                 };
@@ -65,7 +66,7 @@ function MyPosts(props) {
 
     if (posts.length > 0) {
         content = posts.map((post) => (
-            post.postType == props.postType && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
+            post.postType == props.postType && <ProfileCard cardType="profile" homeCardId={post.id} key={post.id} postItem={post} />
         ))
     }
 

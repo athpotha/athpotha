@@ -51,20 +51,6 @@ function StudentFeedSection(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    let posts = <Typography>Found no posts</Typography>
-
-    if (props.posts.length > 0) {
-        posts = props.posts.map((post) => (
-            post.postType == "post" ? <ProfileCard homeCardId={post.id} key={post.id} postItem={post} /> : ""
-        ))
-    }
-    if (props.isLoading) {
-        posts = <BeforeDisplay />;
-    }
-
-    if (posts[0] === "") {
-        posts = <Typography>Found no posts</Typography>
-    }
     return (
         <StyledEngineProvider injectFirst>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">

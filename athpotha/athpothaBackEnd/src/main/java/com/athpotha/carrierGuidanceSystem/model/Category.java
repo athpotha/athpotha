@@ -29,7 +29,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 @Entity
 public class Category {
 	@Id

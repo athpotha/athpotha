@@ -9,7 +9,7 @@ import CenteredBox from "../CenteredBox";
 import PropTypes from "prop-types";
 
 const StyledRating = styled(Rating)({
-  "& .MuiRating-iconFilled": {
+  "& .MuiRating-iconFilled" : {
     color: "#285e89",
   },
   "& .MuiRating-iconHover": {

@@ -10,6 +10,7 @@ import LeftbarList from "./LeftbarList";
 
 const userType = localStorage.getItem("USER_TYPE");
 const studentType = localStorage.getItem("STUDENT_TYPE");
+console.log(userType);
 function Leftbar(props) {
   return (
     <div>

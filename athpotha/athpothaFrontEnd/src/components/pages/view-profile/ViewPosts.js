@@ -62,7 +62,7 @@ function ViewPosts(props) {
 
     if (posts.length > 0) {
         content = posts.map((post) => (
-            post.postType == props.postType && <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
+            post.postType == props.postType && <ProfileCard cardType="mainWall" homeCardId={post.id} key={post.id} postItem={post} />
         ))
     }
 

@@ -11,6 +11,7 @@ import ModalOpenButton from "../../ui/insight/ModalOpenButton";
 import ModalTabs from "../../ui/insight/ModalTabs";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import { fetchUserData } from "../../../api/authenticationService";
+import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
 const postDetails = [
   {
@@ -178,7 +179,7 @@ function Feeds() {
         </Grid>
 
         {posts.map((post) => (
-          <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
+          <ProfileCard cardType="mainWall" homeCardId={post.id} key={post.id} postItem={post} />
         ))}
       </Grid>
     </div>
