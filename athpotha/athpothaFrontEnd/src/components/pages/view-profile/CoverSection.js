@@ -156,7 +156,6 @@ function CoverSection(props) {
             <Grid container>
               <Grid item xs={6}>
                 <ButtonGroup sx={{ ml: "16px" }}>
-
                   {(userType === "student" || userType === "community") ?
                     <>
                       <Button

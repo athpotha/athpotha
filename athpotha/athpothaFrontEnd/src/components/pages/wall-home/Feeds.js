@@ -124,14 +124,14 @@ function Feeds() {
       data: { userId: userId }
     })
     let posts = await response.data;
-    if (posts.length !== 5) {
-      response = await fetchUserData({
-        url: "api/v1/feeds/get-user-postByCategory",
-        method: "post",
-        data: { userId: userId }
-      })
-    }
-    posts = await response.data;
+    // if (posts.length !== 0 ) {
+    //   response = await fetchUserData({
+    //     url: "api/v1/feeds/get-user-postByCategory",
+    //     method: "post",
+    //     data: { userId: userId }
+    //   })
+    // }
+    // posts = await response.data;
     console.log(posts)
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 

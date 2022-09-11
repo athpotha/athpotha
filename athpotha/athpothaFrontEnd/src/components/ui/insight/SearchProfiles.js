@@ -112,6 +112,7 @@ function SearchProfiles() {
       data: searchData
     }).then((response) => {
       console.log(response.data)
+      setSearchUsers(response.data);
     }).catch((error) => {
       console.log(error);
     })
@@ -155,14 +156,13 @@ function SearchProfiles() {
               <ListItemButton>
                 <ListItemAvatar sx={{ mr: 1 }}>
                   <Avatar
-                    src="/images/tutors/tutor-1.jpg"
+                    src={user.profilePicture}
                     sx={{ width: 56, height: 56 }}
                   />
                 </ListItemAvatar>
                 <ListItemText
                   style={{ color: "#000" }}
-                  primary="Kumud Perera"
-                  secondary="O/L Qualified"
+                  primary={`${user.firstName} ${user.lastName}`}
                 />
               </ListItemButton>
             </ListItem>

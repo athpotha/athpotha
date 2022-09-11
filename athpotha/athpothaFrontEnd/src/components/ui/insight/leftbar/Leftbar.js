@@ -8,6 +8,8 @@ import { Grid, ListItemButton } from "@mui/material";
 import LeftbarList from "./LeftbarList";
 // import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 
+const userType = localStorage.getItem("USER_TYPE");
+const studentType = localStorage.getItem("STUDENT_TYPE");
 function Leftbar(props) {
   return (
     <div>
@@ -21,7 +23,7 @@ function Leftbar(props) {
                   sx={{ width: 56, height: 56 }}
                 />
               </ListItemAvatar>
-              <ListItemText primary={localStorage.getItem("USER_NAME")} secondary={localStorage.getItem("STUDENT_TYPE")} />
+              <ListItemText primary={localStorage.getItem("USER_NAME")} secondary={userType === "student" && studentType} />
             </ListItemButton>
           </ListItem>
         </Grid>
