@@ -11,6 +11,7 @@ import ModalOpenButton from "../../ui/insight/ModalOpenButton";
 import ModalTabs from "../../ui/insight/ModalTabs";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import { fetchUserData } from "../../../api/authenticationService";
+import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
 const postDetails = [
   {
@@ -118,14 +119,23 @@ function Feeds() {
 
   const fetchPosts = async () => {
     setIsLoading(true);
-    const response = await fetchUserData({
-      url: "api/v1/feeds/get-user-post",
+    let response = await fetchUserData({
+      url: "api/v1/feeds/get-user-postByFollowing",
       method: "post",
       data: { userId: userId }
     })
-    const posts = await response.data;
+    let posts = await response.data;
+    // if (posts.length !== 0 ) {
+    //   response = await fetchUserData({
+    //     url: "api/v1/feeds/get-user-postByCategory",
+    //     method: "post",
+    //     data: { userId: userId }
+    //   })
+    // }
+    // posts = await response.data;
     console.log(posts)
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
     const transformedPosts = posts.map((post) => {
       let d = new Date(post.addedTime);
       let addedDate = `${month[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
@@ -169,7 +179,7 @@ function Feeds() {
         </Grid>
 
         {posts.map((post) => (
-          <HomeCard homeCardId={post.id} key={post.id} postItem={post} />
+          <ProfileCard cardType="mainWall" homeCardId={post.id} key={post.id} postItem={post} />
         ))}
       </Grid>
     </div>

@@ -1,11 +1,11 @@
 import React from 'react'
 import Dashboard from './Dashboard'
-import UniversityRegistrationTable from './UniversityRegistrationTable'
+import UniversityRegistrationForm from './UniversityRegistrationForm'
 
 function UniversityRegistration() {
     return (
         <React.Fragment>
-            <Dashboard content={<UniversityRegistrationTable/>} />
+            <Dashboard content={<UniversityRegistrationForm/>} />
         </React.Fragment>
     )
 }

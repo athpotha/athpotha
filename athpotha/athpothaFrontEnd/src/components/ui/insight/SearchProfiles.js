@@ -10,6 +10,9 @@ import Avatar from "@mui/material/Avatar";
 import InputBase from "@mui/material/InputBase";
 
 import SearchIcon from "@mui/icons-material/Search";
+import { fetchUserData } from "../../../api/authenticationService";
+import useInput from "../../../hooks/use-input";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -78,12 +81,42 @@ const searchModalStyle = {
 };
 
 function SearchProfiles() {
+  const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
-
   const expandHandler = () => {
     setExpanded(!expanded);
   };
 
+  const [searchedUsers, setSearchUsers] = useState([]);
+  const {
+    value: searchName,
+    isValid: searchNameIsValid,
+    hasError: searchNameHasError,
+    error: searchNameError,
+    valueChangeHandler: searchNameChangeHandler,
+    inputBlurHandler: searchNameBlurHandler,
+  } = useInput((value) => {
+    return { inputIsValid: true, error: "" };
+  })
+
+
+
+  // const [searchName, setSearchName] = useState('');
+  const searchUserHandler = (event) => {
+    const searchData = new FormData();
+    searchData.append("searchName", searchName)
+    console.log(searchName);
+    fetchUserData({
+      url: "api/v1/logged-user/search-user",
+      method: "post",
+      data: searchData
+    }).then((response) => {
+      console.log(response.data)
+      setSearchUsers(response.data);
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
   return (
     <Search>
       <SearchIconWrapper>
@@ -109,27 +142,32 @@ function SearchProfiles() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               style={{ width: "100%" }}
-              onKeyDown={(event) => console.log(event.target.value)}
+              value={searchName}
+              onChange={searchNameChangeHandler}
+              onBlur={searchNameBlurHandler}
+              onKeyDown={searchUserHandler}
             />
           </Search>
         }
       >
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemAvatar sx={{ mr: 1 }}>
-                <Avatar
-                  src="/images/tutors/tutor-1.jpg"
-                  sx={{ width: 56, height: 56 }}
+          {searchedUsers.map((user) => (
+            <ListItem key={user.userId} disablePadding onClick={() => { navigate(`/profile/${user.userId}`) }}>
+              <ListItemButton>
+                <ListItemAvatar sx={{ mr: 1 }}>
+                  <Avatar
+                    src={user.profilePicture}
+                    sx={{ width: 56, height: 56 }}
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  style={{ color: "#000" }}
+                  primary={`${user.firstName} ${user.lastName}`}
                 />
-              </ListItemAvatar>
-              <ListItemText
-                style={{ color: "#000" }}
-                primary="Kumud Perera"
-                secondary="O/L Qualified"
-              />
-            </ListItemButton>
-          </ListItem>
+              </ListItemButton>
+            </ListItem>
+          ))}
+
         </List>
       </BasicModal>
     </Search>

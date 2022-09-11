@@ -26,9 +26,7 @@ import UniversityRegistration from "./components/pages/actors/admin/UniversityRe
 import UserReport from "./components/pages/actors/admin/userReportings/UserReport";
 import CoursePage from "./components/pages/course-page/CoursePage";
 import ViewProfile from "./components/pages/view-profile/ViewProfile";
-
 import { fetchUserData } from "./api/authenticationService";
-import UpdateInfo from "./components/pages/profile/UpdateInfo";
 function App() {
   const theme = createTheme({
     palette: {
@@ -115,10 +113,8 @@ function App() {
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
           <Route path="/university/view-user" element={<ViewProfile />}></Route>
           <Route path="/community/view-user" element={<ViewProfile />}></Route>
-          <Route path="/profile/edit-info/:id" element={<UpdateInfo />}></Route>
-
+	    {/* <Route path="/profile/edit-info/:id" element={<UpdateInfo />}></Route> */}
           <Route path="*" element={<Navigate to="/" />} />
-          
         </Routes>
       </ThemeProvider>
     </StyledEngineProvider>

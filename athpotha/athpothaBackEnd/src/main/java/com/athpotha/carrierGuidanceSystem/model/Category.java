@@ -18,7 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
-import com.athpotha.carrierGuidanceSystem.controller.OnliePostsController;
+import com.athpotha.carrierGuidanceSystem.controller.OnlinePostsController;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 @Entity
 public class Category {
 	@Id
@@ -102,8 +102,8 @@ public class Category {
 		return null;
 	}
 	
-	@OneToMany(targetEntity = OnlinePost.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "category_id",referencedColumnName = "categoryId")
+	@OneToMany(mappedBy="category")
+	@JsonIgnore
 	List<OnlinePost> posts;
 	
 	public void addPost(Post post) {

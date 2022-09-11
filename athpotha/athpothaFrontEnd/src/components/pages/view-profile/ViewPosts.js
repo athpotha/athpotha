@@ -7,6 +7,7 @@ import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
 import { fetchUserData } from "../../../api/authenticationService";
+import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
 
 function ViewPosts(props) {
 
@@ -61,7 +62,7 @@ function ViewPosts(props) {
 
     if (posts.length > 0) {
         content = posts.map((post) => (
-            post.postType == props.postType && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
+            post.postType == props.postType && <ProfileCard cardType="mainWall" homeCardId={post.id} key={post.id} postItem={post} />
         ))
     }
 

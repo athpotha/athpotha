@@ -23,8 +23,9 @@ import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { storage } from '../../../Firebase';
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { v4 } from "uuid";
+import Spinner from "../Spinner";
 
 function Addpost(props) {
   const [postSuccess, setPostSuccess] = useState(true);
@@ -88,60 +89,82 @@ function Addpost(props) {
       const imageRef = ref(storage, imagePath);
       console.log(postImageData);
 
-      uploadBytes(imageRef, postImageData)
-        .then(() => {
-          getDownloadURL(imageRef)
-            .then((url) => {
-              setImageUrl(url);
-              console.log(url);
-              postData.append('imageFile', url);
-              postData.append('type', "post");
-              postData.append('content', content);
-              postData.append('postCategory', category)
-              postData.append('email', localStorage.getItem('USER_EMAIL'));
-
-              fetchUserData({
-                url: "api/v1/post/add-post",
-                method: "post",
-                data: postData
-              }).then((response) => {
-                if (response.status === 200) {
-                  contentReset();
-                  setPostSuccess(true);
-                  props.close();
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Updated!',
-                    text: 'Post Added!',
-                  }).then(() => {
-                    if (window.location.pathname === "/profile") {
-                      window.location.reload();
-                    } else {
-                      navigate("/profile");
-                    }
-                  })
-                }
-              }).catch((error) => {
-                alert(error);
-              })
+      const uploadTask = uploadBytesResumable(imageRef, postImageData);
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          if (progress !== 100) {
+            Swal.showLoading()
+            Swal.fire({
+              title: 'Auto close alert!',
+              html: 'I will close in <b></b> milliseconds.',
+              timer: 2000 + (100 - progress),
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
+                clearInterval(progress === 100)
+              }
             })
-            .catch((error) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong !',
-              })
-              console.log(error.message)
-            });
-        })
-        .catch((error) => {
+          }
+
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        },
+        (error) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong !',
           })
-          console.log(error.message)
-        });
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            postData.append('imageFile', downloadURL);
+            postData.append('type', "post");
+            postData.append('content', content);
+            postData.append('postCategory', category)
+            postData.append('email', localStorage.getItem('USER_EMAIL'));
+            fetchUserData({
+              url: "api/v1/post/add-post",
+              method: "post",
+              data: postData
+            }).then((response) => {
+              if (response.status === 200) {
+                contentReset();
+                setPostSuccess(true);
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Updated!',
+                  text: 'Post Added!',
+                }).then(() => {
+                  if (window.location.pathname === "/profile") {
+                    window.location.reload();
+                  } else {
+                    navigate("/profile");
+                  }
+                })
+              }
+            }).catch((error) => {
+              alert(error);
+            })
+          }).catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong !',
+            })
+            console.log(error.message)
+          });
+        }
+      );
     } else {
       postData.append('type', "post");
       postData.append('content', content);

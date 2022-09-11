@@ -1,8 +1,10 @@
 package com.athpotha.carrierGuidanceSystem.model;
 
+import java.sql.Date;
+
 public interface UserFeeds {
 	Long getPost_id();
-	String getAdded_time();
+	Date getAdded_time();
 	Long getDown_votes();
 	Long getNumber_of_comments();
 	OnlinePostType getType();

@@ -38,6 +38,7 @@ public class User implements UserDetails {
 	private Long userId;
 	private String firstName;
 	private String lastName;
+	private String userName;
 	@Enumerated(value = EnumType.STRING)
 	private UserType userType;
 	@Column(unique = true)
@@ -46,9 +47,9 @@ public class User implements UserDetails {
 	private String profilePicture = "/images/profile/default_profile.jpg";
 	private String coverPicture = "/images/profile/cover.jpg";
 	private boolean userDeleted;
-	private String description;
 	private boolean enabled;
 	private boolean verified;
+	private String description;
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date created_at;
@@ -93,28 +94,6 @@ public class User implements UserDetails {
 	@JoinColumn(name = "receiver_id",referencedColumnName = "userId")
 	private List<Notification> notifications;
 	
-
-//	@OneToMany(targetEntity = Follower.class,cascade = CascadeType.ALL)
-//	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
-//	private List<Follower> followers;
-//
-//	@OneToMany(targetEntity = Following.class,cascade = CascadeType.ALL)
-//	@JoinColumn(name = "pk_userId",referencedColumnName = "userId")
-//	private List<Following> followings;
-//
-//	public List<Follower> getFollowers() {
-//		return followers;
-//	}
-
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinTable(
-//			name = "follow",
-//			joinColumns = @JoinColumn(
-//					name = "follower_id",
-//					referencedColumnName = "userId"
-//			)
-//	)
-//	private List<User> following;
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
     		name = "follow",

@@ -144,7 +144,6 @@ function CoverSection(props) {
                 >
                   <Box sx={{ fontWeight: "bold" }}>
                     {`${props.user.firstName} ${props.user.lastName}`}
-                    {/* {localStorage.getItem("FIRST_NAME")} {localStorage.getItem("LAST_NAME")} */}
                   </Box>
                   <Box sx={{ fontSize: "10pt" }}>{props.user.userType === "student" && props.user.studentType}</Box>
                   <Box sx={{ fontSize: "10pt" }}>
@@ -157,7 +156,6 @@ function CoverSection(props) {
             <Grid container>
               <Grid item xs={6}>
                 <ButtonGroup sx={{ ml: "16px" }}>
-
                   {(userType === "student" || userType === "community") ?
                     <>
                       <Button
