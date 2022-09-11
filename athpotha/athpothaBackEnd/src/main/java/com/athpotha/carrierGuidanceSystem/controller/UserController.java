@@ -61,4 +61,11 @@ public class UserController {
 	public User getUser(@RequestBody User user) {
 		return userRepo.findByUserId(user.getUserId());
 	}
+	
+	@PostMapping("/search-user")
+	public ResponseEntity<?> searchUser(@RequestParam("searchName") String searchName) {
+		System.out.println(searchName);
+		List<User> searchedUsers = userRepo.findByUserName(searchName);
+		return ResponseEntity.ok(searchedUsers);
+	}
 }
