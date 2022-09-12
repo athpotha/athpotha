@@ -24,7 +24,11 @@ function Leftbar(props) {
                   sx={{ width: 56, height: 56 }}
                 />
               </ListItemAvatar>
+<<<<<<< HEAD
               <ListItemText primary={localStorage.getItem("USER_NAME")} secondary={userType === "student" && studentType} />
+=======
+              <ListItemText primary={localStorage.getItem("FIRST_NAME")+" "+localStorage.getItem("LAST_NAME")  } secondary={userType === "student" && studentType} />
+>>>>>>> fdd58da438b8c85638e2dd4fb4b6fdeb9d9b0e98
             </ListItemButton>
           </ListItem>
         </Grid>
