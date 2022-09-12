@@ -113,7 +113,6 @@ function App() {
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
           <Route path="/university/view-user" element={<ViewProfile />}></Route>
           <Route path="/community/view-user" element={<ViewProfile />}></Route>
-	    {/* <Route path="/profile/edit-info/:id" element={<UpdateInfo />}></Route> */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ThemeProvider>
