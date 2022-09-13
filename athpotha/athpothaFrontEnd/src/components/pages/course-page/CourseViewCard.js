@@ -26,9 +26,15 @@ const StyledRating = styled(Rating)({
 function CourseViewCard(props) {
 
     const navigate = useNavigate();
-    const navigateuniprofile = () => {
-        navigate('/uni-profile');
-    };
+
+    // const navigateuniprofile = (uniid,cid) => {
+    //     navigate('/profile/'+ uniid, {cid: cid});
+    //     alert(cid)
+    // };
+
+    function navigateuniprofile(uniid,cid){
+        navigate('/profile/'+ uniid, {state: {cid: cid}});
+    }
 
     const [value, setValue] = React.useState(0);
 
@@ -39,7 +45,6 @@ function CourseViewCard(props) {
     const unicourses = props.course
 
     //console.log(unicourses);
-
 
     return (
         <StyledEngineProvider injectFirst>
@@ -95,7 +100,7 @@ function CourseViewCard(props) {
                                                             </CenteredBox>
                                                         </div>
                                                         <CardActions>
-                                                            <Button size="small" variant="outlined" onClick={navigateuniprofile}>View</Button>
+                                                            <Button size="small" variant="outlined" onClick={() => navigateuniprofile(university.userId,course.id)}>View</Button>
                                                         </CardActions>
                                                     </Card>
                                                 </Box>
