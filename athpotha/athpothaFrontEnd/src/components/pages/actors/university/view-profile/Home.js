@@ -73,7 +73,7 @@ function replaceCommaLine(data) {
     return Requirements;
 }
 
-function Home() {
+function Home(props) {
 
     const [programm, setPogramm] = React.useState('');
 

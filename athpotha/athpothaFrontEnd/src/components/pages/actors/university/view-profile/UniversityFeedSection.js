@@ -9,6 +9,7 @@ import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 import Home from "./Home";
 import About from "./About";
 import ViewPosts from "../../../view-profile/ViewPosts";
+import { useLocation } from "react-router-dom";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -51,6 +52,11 @@ function StudentFeedSection(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const { state } = useLocation();
+    const { cid} = state
+    
+
     return (
         <StyledEngineProvider injectFirst>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -64,7 +70,7 @@ function StudentFeedSection(props) {
             </TabPanel>
 
             <TabPanel value={value} index={1} style={{ backgroundColor: "#FFF", padding: "20px" }}>
-                <Home></Home>
+                <Home courseid={cid}></Home>
             </TabPanel>
 
             <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF" }}>
