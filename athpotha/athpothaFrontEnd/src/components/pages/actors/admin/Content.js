@@ -12,7 +12,7 @@ import BarChart from "./BarChart";
 import PeiChart from "./PieChart";
 
 
-function  Content(){
+function Content(){
     return (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={3}>
