@@ -70,7 +70,7 @@ function App() {
 
   // let users = [];
   // let content = ""
-  
+
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
@@ -94,26 +94,34 @@ function App() {
           {authCtx.isLoggedIn && (
             <Route path="/profile" element={<Profile />}></Route>
           )}
+          <Route path="/categories" element={<Categories />}></Route>
 
           <Route path="/test" element={<Test />}></Route>
           <Route path="/uni-profile" element={<UniProfile />}></Route>
           {/* {authCtx.isLoggedIn && <Route path="/admin" element={<Admin />}></Route>} */}
-          <Route path="/admin" element={<Admin />}></Route>
-          <Route path="/admin/manage-users" element={<ManageUser />}></Route>
-          <Route path="/admin/university-registration" element={<UniversityRegistration />}></Route>
-          <Route path="/categories" element={<Categories />}></Route>
-          <Route path="/admin/website-activity" element={<WebsiteActivity />}></Route>
-          <Route path="/admin/user-reports" element={<UserReport />}></Route>
+          {authCtx.isLoggedIn && userType === "admin" && (
+            <Route path="/admin" element={<Admin />}></Route>
+          )}
+
+          {authCtx.isLoggedIn && userType === "admin" && (
+            <Route path="/admin/manage-users" element={<ManageUser />}></Route>
+          )}
+
+          {authCtx.isLoggedIn && userType === "admin" && (
+            <Route path="/admin/university-registration" element={<UniversityRegistration />}></Route>
+          )}
+
+          {authCtx.isLoggedIn && userType === "admin" && (
+            <Route path="/admin/website-activity" element={<WebsiteActivity />}></Route>
+          )}
+
+          {authCtx.isLoggedIn && userType === "admin" && (
+            <Route path="/admin/user-reports" element={<UserReport />}></Route>
+          )}
           <Route path="/course-page" element={<CoursePage />} />
-          {/* {!isLoading && content} */}
-          {/* {users.map((user) => (
-            <Route key={`${user.first_name}-${user.last_name}-${user.user_id}`} path={`/${user.first_name}-${user.last_name}/${user.user_id}`} element={<ViewProfile user={user} />}></Route>
-          ))} */}
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
-          <Route path="/university/view-user" element={<ViewProfile />}></Route>
-          <Route path="/community/view-user" element={<ViewProfile />}></Route>
-	    {/* <Route path="/profile/edit-info/:id" element={<UpdateInfo />}></Route> */}
+          {/* <Route path="/profile/edit-info/:id" element={<UpdateInfo />}></Route> */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ThemeProvider>
