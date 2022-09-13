@@ -49,6 +49,7 @@ public class User implements UserDetails {
 	private boolean userDeleted;
 	private boolean enabled;
 	private boolean verified;
+	private String description;
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date created_at;
