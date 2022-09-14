@@ -13,6 +13,9 @@ import { Box, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Popup from "./Popup";
 import { useRef } from "react";
+import { fetchUserData } from "../../../../../api/authenticationService";
+import { useState } from "react";
+//import { fetchUserData } from "../../../api/authenticationService";
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -58,50 +61,90 @@ const style = {
   borderRadius: "0.5%",
   backgroundColor: "white",
 };
+
+
+
 export default function ManageUSerTable() {
   const [age, setAge] = React.useState("");
-  const [value, setValue] = React.useState(false);
+  // const [value, setValue] = React.useState(false);
+//  const [rows, setRows] = React.useState([{}])
+const [tableData, setTableData]= useState([]);
 
   const modelRef = useRef();
 
-  const rows = [
-    {
-      id: 1,
-      col1: "Kasun",
-      col2: "Perera",
-      col3: "kasun@gmail.com",
-    },
-    {
-      id: 2,
-      col1: "Roneki",
-      col2: "Manamperi",
-      col3: "roneki.saranga12@gmail.com",
-    },
-    {
-      id: 3,
-      col1: "Roneki",
-      col2: "Manamperi",
-      col3: "roneki.saranga12@gmail.com",
-    },
-    {
-      id: 4,
-      col1: "Roneki",
-      col2: "Manamperi",
-      col3: "roneki.saranga12@gmail.com",
-    },
-    {
-      id: 5,
-      col1: "Roneki",
-      col2: "Manamperi",
-      col3: "roneki.saranga12@gmail.com",
-    },
-    {
-      id: 6,
-      col1: "Roneki",
-      col2: "Manamperi",
-      col3: "roneki.saranga12@gmail.com",
-    }
-  ];
+  //get data from database
+
+  React.useEffect(() => {
+    fetchUserData({
+        url: "/admin/getAll",
+        method: "post",
+    }).then((response) => {
+      console.log(response)
+        setTableData(response.data)
+    })
+}, [])
+  
+
+// React.useEffect(() => {
+//   fetchUserData({
+//        url: "/admin/getAll",
+//               method: "post",
+//               data : ""
+              
+//           }) 
+//           // .then((data) => data.json())
+//           .then((data) => setTableData(data))
+//       }, [])
+//        console.log(tableData.data[0]);
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     col1: "Kasun",
+  //     col2: "Perera",
+  //     col3: "kasun@gmail.com",
+  //   },
+  //   {
+  //     id: 2,
+  //     col1: "Roneki",
+  //     col2: "Manamperi",
+  //     col3: "roneki.saranga12@gmail.com",
+  //   },
+  //   {
+  //     id: 3,
+  //     col1: "Roneki",
+  //     col2: "Manamperi",
+  //     col3: "roneki.saranga12@gmail.com",
+  //   },
+  //   {
+  //     id: 4,
+  //     col1: "Roneki",
+  //     col2: "Manamperi",
+  //     col3: "roneki.saranga12@gmail.com",
+  //   },
+  //   {
+  //     id: 5,
+  //     col1: "Roneki",
+  //     col2: "Manamperi",
+  //     col3: "roneki.saranga12@gmail.com",
+  //   },
+  //   {
+  //     id: 6,
+  //     col1: "Roneki",
+  //     col2: "Manamperi",
+  //     col3: "roneki.saranga12@gmail.com",
+  //   }
+  // ];
+
+  // const tableRows = tableData.map((row) => {
+  //   return {
+  //     firstName: row.firstName,
+  //     lastname: row.lastName,
+  //     email: row.email,
+  //   };
+  // });
+  // console.log("Table Rows");
+  // console.log(tableRows);
+  
 
   const columns = [
     {
@@ -145,10 +188,11 @@ export default function ManageUSerTable() {
     },
   ];
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setAge(event.target.value);
+  // };
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
+  
   return (
     <div>
       <Grid>
@@ -173,7 +217,7 @@ export default function ManageUSerTable() {
                   setFilterButtonEl,
                 },
               }}
-              rows={rows}
+              rows={tableData}
               columns={columns}
             />
           </Box>
