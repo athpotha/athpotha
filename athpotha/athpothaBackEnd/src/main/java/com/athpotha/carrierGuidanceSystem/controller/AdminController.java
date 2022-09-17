@@ -19,17 +19,16 @@ import com.athpotha.carrierGuidanceSystem.service.AdminService;
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin
-
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-//	@Autowired
-//	private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@PostMapping("/getAll")
 	public List<User> getAllUsers() {
-		return adminService.getAllUsers();
+		return userRepository.findAll();
 //		return userRepository.findAll();
 	}
 }
