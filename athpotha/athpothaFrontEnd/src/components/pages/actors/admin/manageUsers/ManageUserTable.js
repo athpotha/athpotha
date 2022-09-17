@@ -54,96 +54,45 @@ export default function ManageUSerTable() {
   // const [value, setValue] = React.useState(false);
   //  const [rows, setRows] = React.useState([{}])
   const [tableData, setTableData] = useState([]);
-
+  let tableRows = []
   //get data from database
-
   React.useEffect(() => {
     fetchUserData({
-      url: "/admin/getAll",
+      url: "admin/getAll",
       method: "post",
-    })
-      // .then((data) => data.json())
-      .then((data) => setTableData(data));
+    }).then((response) => {
+      response.data.map((row) => {
+        if (row.userType !== "admin") {
+          tableRows.push({
+            id: row.userId,
+            col1: `${row.firstName} ${row.lastName}`,
+            col2: row.email,
+          })
+        }
+      })
+      setTableData(tableRows);
+    });
   }, []);
-  console.log("table data");
-  console.log(tableData.data);
-
-  
-  // const tableRows = tableData.map((row) => {
-  //   return {
-  //     firstName: row.firstName,
-  //     lastname: row.lastName,
-  //     email: row.email,
-  //   };
-  // });
-  // console.log("Table Rows");
-  // console.log(tableRows);
-
-
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     col1: "Kasun",
-  //     col2: "Perera",
-  //     col3: "kasun@gmail.com",
-  //   },
-  //   {
-  //     id: 2,
-  //     col1: "Roneki",
-  //     col2: "Manamperi",
-  //     col3: "roneki.saranga12@gmail.com",
-  //   },
-  //   {
-  //     id: 3,
-  //     col1: "Roneki",
-  //     col2: "Manamperi",
-  //     col3: "roneki.saranga12@gmail.com",
-  //   },
-  //   {
-  //     id: 4,
-  //     col1: "Roneki",
-  //     col2: "Manamperi",
-  //     col3: "roneki.saranga12@gmail.com",
-  //   },
-  //   {
-  //     id: 5,
-  //     col1: "Roneki",
-  //     col2: "Manamperi",
-  //     col3: "roneki.saranga12@gmail.com",
-  //   },
-  //   {
-  //     id: 6,
-  //     col1: "Roneki",
-  //     col2: "Manamperi",
-  //     col3: "roneki.saranga12@gmail.com",
-  //   }
-  // ];
-
 
   const columns = [
     {
       field: "col1",
-      headerName: "First Name",
+      headerName: "User Name",
       headerClassName: "header-class-name",
-      width: 150,
+      width: 300,
     },
     {
       field: "col2",
-      headerName: "Last Name",
-      headerClassName: "header-class-name",
-      width: 150,
-    },
-    {
-      field: "col3",
       headerName: "Email",
       headerClassName: "header-class-name",
       width: 300,
     },
 
     {
-      field: "col4",
+      field: "col3",
       headerName: "Actions",
       headerClassName: "header-class-name",
+      headerAlign: 'center',
       width: 400,
       align: "center",
       disableColumnMenu: true,

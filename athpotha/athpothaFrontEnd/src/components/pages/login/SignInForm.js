@@ -113,7 +113,6 @@ function SignInForm({ loading, error, ...props }) {
 
       const userInfo = await userInfoResponse.data;
       authCtx.userInfo(userInfo);
-
       const user_type = localStorage.getItem("USER_TYPE");
       console.log(userInfo);
       if (user_type === "admin") {
