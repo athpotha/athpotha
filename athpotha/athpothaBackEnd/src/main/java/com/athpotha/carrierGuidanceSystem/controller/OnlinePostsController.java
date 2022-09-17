@@ -119,10 +119,10 @@ public class OnlinePostsController {
 
 		if (voteType == VoteType.upvote) {
 			if (onlinePost.getDownvotedUsers().contains(user)) {
-				onlinePost.addUpvote(user);
-				onlinePost.setUpVotes(onlinePost.getUpVotes() + 1);
 				onlinePost.getDownvotedUsers().remove(user);
 				onlinePost.setDownVotes(onlinePost.getDownVotes() - 1);
+				onlinePost.addUpvote(user);
+				onlinePost.setUpVotes(onlinePost.getUpVotes() + 1);
 				onlinePostRepo.save(onlinePost);
 			} else if (!onlinePost.getUpvotedUsers().contains(user)) {
 				onlinePost.addUpvote(user);
@@ -133,14 +133,20 @@ public class OnlinePostsController {
 				onlinePost.setUpVotes(onlinePost.getUpVotes() - 1);
 				onlinePostRepo.save(onlinePost);
 			}
-		} else {
-			if (!onlinePost.getDownvotedUsers().contains(user)) {
+		} else if (voteType == VoteType.downvote) {
+			if (onlinePost.getUpvotedUsers().contains(user)) {
+				onlinePost.getUpvotedUsers().remove(user);
+				onlinePost.setUpVotes(onlinePost.getUpVotes() - 1);
+				onlinePost.addDownvote(user);
+				onlinePost.setDownVotes(onlinePost.getDownVotes() + 1);
+				onlinePostRepo.save(onlinePost);
+			} else if (!onlinePost.getDownvotedUsers().contains(user)) {
 				onlinePost.addDownvote(user);
 				onlinePost.setDownVotes(onlinePost.getDownVotes() + 1);
 				onlinePostRepo.save(onlinePost);
 			} else {
 				onlinePost.getDownvotedUsers().remove(user);
-				onlinePost.setDownVotes(onlinePost.getUpVotes() - 1);
+				onlinePost.setDownVotes(onlinePost.getDownVotes() - 1);
 				onlinePostRepo.save(onlinePost);
 			}
 		}
