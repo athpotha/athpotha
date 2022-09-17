@@ -4,18 +4,15 @@ import {
   DataGrid,
   GridToolbarContainer,
   GridToolbarFilterButton,
-  gridClasses,
 } from "@mui/x-data-grid";
 // import styled from "@emotion/styled";
-import { green, red, blue } from "@mui/material/colors";
+import { green, red } from "@mui/material/colors";
 import CenteredBox from "../../../../ui/CenteredBox";
 import { Box, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Popup from "./Popup";
-import { useRef } from "react";
 import { fetchUserData } from "../../../../../api/authenticationService";
 import { useState } from "react";
-//import { fetchUserData } from "../../../api/authenticationService";
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -29,15 +26,6 @@ CustomToolbar.propTypes = {
 };
 
 //Colour buttons
-const ColorButton1 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(blue[600]),
-  textTransform: "none",
-  backgroundColor: blue[600],
-  "&:hover": {
-    backgroundColor: blue[700],
-  },
-}));
-
 const ColorButton2 = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(green[600]),
   textTransform: "none",
@@ -62,40 +50,36 @@ const style = {
   backgroundColor: "white",
 };
 
-
-
 export default function ManageUSerTable() {
-  const [age, setAge] = React.useState("");
   // const [value, setValue] = React.useState(false);
-//  const [rows, setRows] = React.useState([{}])
-const [tableData, setTableData]= useState([]);
-
-  const modelRef = useRef();
+  //  const [rows, setRows] = React.useState([{}])
+  const [tableData, setTableData] = useState([]);
 
   //get data from database
 
   React.useEffect(() => {
     fetchUserData({
-        url: "/admin/getAll",
-        method: "post",
-    }).then((response) => {
-      console.log(response)
-        setTableData(response.data)
+      url: "/admin/getAll",
+      method: "post",
     })
-}, [])
-  
+      // .then((data) => data.json())
+      .then((data) => setTableData(data));
+  }, []);
+  console.log("table data");
+  console.log(tableData.data);
 
-// React.useEffect(() => {
-//   fetchUserData({
-//        url: "/admin/getAll",
-//               method: "post",
-//               data : ""
-              
-//           }) 
-//           // .then((data) => data.json())
-//           .then((data) => setTableData(data))
-//       }, [])
-//        console.log(tableData.data[0]);
+  
+  // const tableRows = tableData.map((row) => {
+  //   return {
+  //     firstName: row.firstName,
+  //     lastname: row.lastName,
+  //     email: row.email,
+  //   };
+  // });
+  // console.log("Table Rows");
+  // console.log(tableRows);
+
+
   // const rows = [
   //   {
   //     id: 1,
@@ -135,16 +119,6 @@ const [tableData, setTableData]= useState([]);
   //   }
   // ];
 
-  // const tableRows = tableData.map((row) => {
-  //   return {
-  //     firstName: row.firstName,
-  //     lastname: row.lastName,
-  //     email: row.email,
-  //   };
-  // });
-  // console.log("Table Rows");
-  // console.log(tableRows);
-  
 
   const columns = [
     {
@@ -182,17 +156,14 @@ const [tableData, setTableData]= useState([]);
             <Popup />
             <ColorButton2 style={{ marginRight: 6 }}>Update</ColorButton2>
             <ColorButton3>Delete</ColorButton3>
-          </CenteredBox>         
+          </CenteredBox>
         );
       },
     },
   ];
 
-  // const handleChange = (event) => {
-  //   setAge(event.target.value);
-  // };
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
-  
+
   return (
     <div>
       <Grid>
