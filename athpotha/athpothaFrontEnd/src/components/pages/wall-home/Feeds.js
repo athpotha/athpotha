@@ -68,6 +68,7 @@ function Feeds() {
         userImage: post.user.profilePicture,
         userId: post.user.userId,
         noOfPostUpvotes: post.upVotes,
+        noOfPostDownvotes: post.downVotes,
         noOfComments: post.comments.length,
         comments: post.comments
       };

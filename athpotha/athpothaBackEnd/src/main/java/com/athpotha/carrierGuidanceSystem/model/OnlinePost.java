@@ -55,8 +55,6 @@ public class OnlinePost {
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date addedTime;
 	private Long numberOfComments = (long) 0;
-	private boolean upVoted = false;
-	private boolean downVoted = false;
 	@ManyToOne
 	@JoinColumn(
 			name = "user_id",
