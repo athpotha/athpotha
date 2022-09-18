@@ -1,93 +1,11 @@
 import { Avatar, Chip, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
-import HomeCard from "../../ui/insight/wall-main/Feeds/HomeCard";
-import CenteredBox from "../../ui/CenteredBox";
-import SimpleSnackbar from "../../ui/insight/wall-main/Feeds/SimpleSnackbar";
 import { useDispatch, useSelector } from "react-redux";
 import BeforeDisplay from "../../ui/BeforeDisplay";
-import ModalOpenButton from "../../ui/insight/ModalOpenButton";
-import ModalTabs from "../../ui/insight/ModalTabs";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import { fetchUserData } from "../../../api/authenticationService";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
-
-const postDetails = [
-  {
-    id: "post-1",
-    personName: "Ashani Imalsha",
-    postDate: "Jan 9, 2014",
-    postContent:
-      "After A/L? Interested In Java?",
-    postedImage:
-      "/images/main-wall/post.jpeg",
-    personImage:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-    userImage: "/images/tutors/tutor-1.jpg",
-    noOfPostUpvotes: 123,
-    noOfComments: 23,
-  },
-
-  {
-    id: "post-2",
-    personName: "Roneki Manamperi",
-    postDate: "Jan 9, 2014",
-    postContent:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    postedImage:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    personImage: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-    userImage: "/images/tutors/tutor-1.jpg",
-    noOfPostUpvotes: 123,
-    noOfComments: 23,
-  },
-
-  {
-    id: "post-3",
-    personName: "Pavani Mandira",
-    postDate: "Jan 9, 2014",
-    postContent:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    postedImage:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    personImage:
-      "https://images.unsplash.com/photo-1599842057874-37393e9342df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-    userImage: "/images/tutors/tutor-1.jpg",
-    noOfPostUpvotes: 123,
-    noOfComments: 23,
-  },
-
-  {
-    id: "post-4",
-    personName: "Melaka Pathiranagama",
-    postDate: "Jan 9, 2014",
-    postContent:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    postedImage:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    personImage:
-      "https://images.unsplash.com/photo-1615109398623-88346a601842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-    userImage: "/images/tutors/tutor-1.jpg",
-    noOfPostUpvotes: 123,
-    noOfComments: 23,
-  },
-
-  {
-    id: "post-5",
-    personName: "Minura Ratnayake",
-    postDate: "Jan 9, 2014",
-    postContent:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    postedImage:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    personImage:
-      "https://images.unsplash.com/photo-1508852951744-beab078a4b2b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-    userImage: "/images/tutors/tutor-1.jpg",
-    noOfPostUpvotes: 123,
-    noOfComments: 23,
-  },
-];
 
 const addQuestionModalStyle = {
   position: "absolute",
@@ -150,6 +68,7 @@ function Feeds() {
         userImage: post.user.profilePicture,
         userId: post.user.userId,
         noOfPostUpvotes: post.upVotes,
+        noOfPostDownvotes: post.downVotes,
         noOfComments: post.comments.length,
         comments: post.comments
       };

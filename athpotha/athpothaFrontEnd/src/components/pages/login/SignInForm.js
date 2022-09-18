@@ -113,17 +113,16 @@ function SignInForm({ loading, error, ...props }) {
 
       const userInfo = await userInfoResponse.data;
       authCtx.userInfo(userInfo);
-
       const user_type = localStorage.getItem("USER_TYPE");
       console.log(userInfo);
-      if (!userInfo.hasLogged) {
+      if (user_type === "admin") {
+        window.location.href = "/admin"
+      } else if (!userInfo.hasLogged) {
         window.location.href = "/categories";
       } else {
         console.log(user_type)
         if (user_type !== "university" && user_type !== "admin") {
           window.location.href = "/main";
-        } else if (user_type === "admin") {
-          window.location.href = "/admin"
         } else if (user_type === "university") {
           window.location.href = "/university"
         }
