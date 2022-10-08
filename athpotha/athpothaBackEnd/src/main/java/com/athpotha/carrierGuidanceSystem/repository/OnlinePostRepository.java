@@ -38,6 +38,7 @@ public interface OnlinePostRepository extends JpaRepository<OnlinePost, Long> {
 //	List<User> getFollowing(Long userId);
 	
 	List<OnlinePost> findAllByCategoryOrderByPostIdDesc(Category category);
+	List<OnlinePost> findAllByCategoryAndPostDeletedFalseOrderByPostIdDesc(Category category);
 	
 	void deleteByPostId(Long postId);
 }

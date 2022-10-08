@@ -7,10 +7,11 @@ import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
 import { fetchUserData } from "../../../api/authenticationService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { commentActions } from "../../../store/comment-slice";
 
 function MyPosts(props) {
-
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
@@ -18,6 +19,7 @@ function MyPosts(props) {
     const isPostDeleted = useSelector((state) => state.post.isDeleted);
     console.log("hello Post delete: " + isPostDeleted);
     const fetchMyPostsHandler = async () => {
+        dispatch(commentActions.setCommentAddedLoading());
         setIsLoading(true);
         setError(null)
         try {
