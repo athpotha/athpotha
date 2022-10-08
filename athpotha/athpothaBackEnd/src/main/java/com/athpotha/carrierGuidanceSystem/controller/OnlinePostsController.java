@@ -104,7 +104,7 @@ public class OnlinePostsController {
 
 //		ArrayList<OnlinePost> onlinePosts = onlinePostRepo.findById(userInfo.getUserId());
 		User user = userRepo.findByEmailIgnoreCase(userInfo.getEmail());
-		List<OnlinePost> onlinePosts = onlinePostRepo.findAllByUserOrderByPostIdDesc(user);
+		List<OnlinePost> onlinePosts = onlinePostRepo.findAllByUserAndPostDeletedFalseOrderByPostIdDesc(user);
 
 		printData(onlinePosts);
 		return onlinePosts;
@@ -167,9 +167,18 @@ public class OnlinePostsController {
 
 	}
 
+	@PutMapping("/delete-post")
+	public void deletePost(@RequestParam("postId") String postId) {
+		Long deletePostId = Long.parseLong(postId);
+		OnlinePost deletePost = onlinePostRepo.findByPostId(deletePostId);
+		deletePost.setPostDeleted(true);
+		onlinePostRepo.save(deletePost);
+	}
+	
 	public void printData(List<OnlinePost> posts) {
 		for (int i = 0; i < posts.size(); i++) {
 			System.out.println(posts.get(i).getAddedTime());
 		}
 	}
+	
 }

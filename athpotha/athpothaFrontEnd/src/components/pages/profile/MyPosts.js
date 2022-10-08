@@ -14,8 +14,9 @@ function MyPosts(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
-    // console.log(commentBtnClicked);
 
+    const isPostDeleted = useSelector((state) => state.post.isDeleted);
+    console.log("hello Post delete: " + isPostDeleted);
     const fetchMyPostsHandler = async () => {
         setIsLoading(true);
         setError(null)
@@ -60,20 +61,27 @@ function MyPosts(props) {
 
     useEffect(() => {
         fetchMyPostsHandler();
-    }, [])
+    }, [isPostDeleted])
 
     let content = <Typography>Found no {props.postType}s</Typography>
 
     if (posts.length > 0) {
         content = posts.map((post) => (
-            post.postType == props.postType && <ProfileCard cardType="profile" homeCardId={post.id} key={post.id} postItem={post} />
+            post.postType == props.postType &&
+            <ProfileCard
+                postType={props.postType}
+                cardType="profile"
+                homeCardId={post.id}
+                key={post.id}
+                postItem={post}
+            />
         ))
     }
 
     if (content.length < 0) {
         content = <Typography>Found no {props.postType}s</Typography>
     }
-    
+
     if (isLoading) {
         content = <BeforeDisplay />;
     }

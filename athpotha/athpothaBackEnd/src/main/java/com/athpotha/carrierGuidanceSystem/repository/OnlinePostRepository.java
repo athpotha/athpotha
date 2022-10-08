@@ -19,6 +19,7 @@ import com.athpotha.carrierGuidanceSystem.model.UserFeeds;
 public interface OnlinePostRepository extends JpaRepository<OnlinePost, Long> {
 
 	List<OnlinePost> findAllByUserOrderByPostIdDesc(User user);
+	List<OnlinePost> findAllByUserAndPostDeletedFalseOrderByPostIdDesc(User user);
 	OnlinePost findTopByOrderByPostIdDesc();
 	OnlinePost findByPostId(Long postId);
 //	List<OnliePost> findAllByCategoryOrderByPostIdDesc()
@@ -37,4 +38,6 @@ public interface OnlinePostRepository extends JpaRepository<OnlinePost, Long> {
 //	List<User> getFollowing(Long userId);
 	
 	List<OnlinePost> findAllByCategoryOrderByPostIdDesc(Category category);
+	
+	void deleteByPostId(Long postId);
 }

@@ -180,7 +180,7 @@ export default function ProfileCard(props) {
                 </ListItem>
               }
               action={
-                props.cardType == "profile" && <ProfileCardAction />
+                props.cardType == "profile" && <ProfileCardAction postId={props.homeCardId} postType={props.postType} />
               }
             />
             <CardContent>
