@@ -32,7 +32,7 @@ export default function SimpleSnackbar(props) {
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           {props.message}
-          <Link sx={{ml: 2}}>hello</Link>
+          {/* <Link sx={{ml: 2}}>hello</Link> */}
         </Alert>
       </Snackbar>
     </div>
