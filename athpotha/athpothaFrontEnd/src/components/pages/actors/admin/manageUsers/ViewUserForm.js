@@ -45,7 +45,7 @@ function UniversityRegistrationForm(props) {
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
            <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="user_name">User Name</InputLabel>
-            <Input disabled defaultValue="user name" inputProps={ariaLabel} />
+            <Input disabled defaultValue="user name" value={props.tableData} />
           </FormControl>
           
         </div>
