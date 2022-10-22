@@ -65,8 +65,9 @@ export default function ManageUSerTable() {
         if (row.userType !== "admin") {
           tableRows.push({
             id: row.userId,
-            col1: `${row.firstName} ${row.lastName}`,
-            col2: row.email,
+            col1: `${row.userType}`,
+            col2: `${row.firstName} ${row.lastName}`,
+            col3: row.email,
           })
         }
       })
@@ -77,19 +78,25 @@ export default function ManageUSerTable() {
   const columns = [
     {
       field: "col1",
+      headerName: "User Type",
+      headerClassName: "header-class-name",
+      width: 200,
+    },
+    {
+      field: "col2",
       headerName: "User Name",
       headerClassName: "header-class-name",
       width: 300,
     },
     {
-      field: "col2",
+      field: "col3",
       headerName: "Email",
       headerClassName: "header-class-name",
       width: 300,
     },
 
     {
-      field: "col3",
+      field: "col4",
       headerName: "Actions",
       headerClassName: "header-class-name",
       headerAlign: 'center',

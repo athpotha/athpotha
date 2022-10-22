@@ -15,6 +15,8 @@ import {
   Grid,
 } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
+import { fetchUserData } from "../../../../api/authenticationService";
+import { useState } from "react";
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -55,57 +57,57 @@ const ColorButton3 = styled(Button)(({ theme }) => ({
   },
 }));
 
-const rows = [
-  {
-    id: 1,
-    col1: "Kasun",
-    col2: "Perera",
-    col3: "kasun@gmail.com",
-  },
-  {
-    id: 2,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 3,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 4,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 5,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 6,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-];
+// const rows = [
+//   {
+//     id: 1,
+//     col1: "Kasun",
+//     col2: "Perera",
+//     col3: "kasun@gmail.com",
+//   },
+//   {
+//     id: 2,
+//     col1: "Roneki",
+//     col2: "Manamperi",
+//     col3: "roneki.saranga12@gmail.com",
+//   },
+//   {
+//     id: 3,
+//     col1: "Roneki",
+//     col2: "Manamperi",
+//     col3: "roneki.saranga12@gmail.com",
+//   },
+//   {
+//     id: 4,
+//     col1: "Roneki",
+//     col2: "Manamperi",
+//     col3: "roneki.saranga12@gmail.com",
+//   },
+//   {
+//     id: 5,
+//     col1: "Roneki",
+//     col2: "Manamperi",
+//     col3: "roneki.saranga12@gmail.com",
+//   },
+//   {
+//     id: 6,
+//     col1: "Roneki",
+//     col2: "Manamperi",
+//     col3: "roneki.saranga12@gmail.com",
+//   },
+// ];
 
 const columns = [
   {
     field: "col1",
     headerName: "University",
     headerClassName: "header-class-name",
-    width: 150,
+    width: 300,
   },
   {
     field: "col2",
     headerName: "Faculty",
     headerClassName: "header-class-name",
-    width: 150,
+    width: 200,
   },
   {
     field: "col3",
@@ -118,7 +120,7 @@ const columns = [
     field: "col6",
     headerName: "Actions",
     headerClassName: "header-class-name",
-    width: 400,
+    width: 200,
     align: "center",
     disableColumnMenu: true,
     sortable: false,
@@ -141,6 +143,27 @@ const style = {
   backgroundColor:"white"
 };
 export default function UniversityRegistrationTable() {
+  const [tableData, setTableData] = useState([]);
+  let tableRows = []
+  //get data from database
+  React.useEffect(() => {
+    fetchUserData({
+      url: "admin/getAllUni",
+      method: "post",
+    }).then((response) => {
+      response.data.map((row) => {
+        if (row.userType == "university") {
+          tableRows.push({
+            id: row.userId,
+            col1: `${row.university}`,
+            col2: `${row.faculty} `,
+            col3: row.email,
+          })
+        }
+      })
+      setTableData(tableRows);
+    });
+  }, []);
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
@@ -169,7 +192,7 @@ export default function UniversityRegistrationTable() {
                 setFilterButtonEl,
               },
             }}
-            rows={rows}
+            rows={tableData}
             columns={columns}
           />
         </Box>

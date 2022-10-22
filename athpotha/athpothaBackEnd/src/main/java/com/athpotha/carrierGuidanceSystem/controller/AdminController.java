@@ -26,10 +26,19 @@ public class AdminController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private UniversityRepository universityRepository;
+	
 	@PostMapping("/getAll")
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
+		
 //		return userRepository.findAll();
+	}
+	
+	@PostMapping("/getAllUni")
+	public List<University> getAllUni() {
+		return universityRepository.findAll();
 	}
 }
 	
