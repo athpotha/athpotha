@@ -7,16 +7,19 @@ import Tab from '@mui/material/Tab';
 import BeforeDisplay from "../../ui/BeforeDisplay";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
 import { fetchUserData } from "../../../api/authenticationService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { commentActions } from "../../../store/comment-slice";
 
 function MyPosts(props) {
-
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
-    // console.log(commentBtnClicked);
 
+    const isPostDeleted = useSelector((state) => state.post.isDeleted);
+    console.log("hello Post delete: " + isPostDeleted);
     const fetchMyPostsHandler = async () => {
+        dispatch(commentActions.setCommentAddedLoading());
         setIsLoading(true);
         setError(null)
         try {
@@ -60,20 +63,27 @@ function MyPosts(props) {
 
     useEffect(() => {
         fetchMyPostsHandler();
-    }, [])
+    }, [isPostDeleted])
 
     let content = <Typography>Found no {props.postType}s</Typography>
 
     if (posts.length > 0) {
         content = posts.map((post) => (
-            post.postType == props.postType && <ProfileCard cardType="profile" homeCardId={post.id} key={post.id} postItem={post} />
+            post.postType == props.postType &&
+            <ProfileCard
+                postType={props.postType}
+                cardType="profile"
+                homeCardId={post.id}
+                key={post.id}
+                postItem={post}
+            />
         ))
     }
 
     if (content.length < 0) {
         content = <Typography>Found no {props.postType}s</Typography>
     }
-    
+
     if (isLoading) {
         content = <BeforeDisplay />;
     }

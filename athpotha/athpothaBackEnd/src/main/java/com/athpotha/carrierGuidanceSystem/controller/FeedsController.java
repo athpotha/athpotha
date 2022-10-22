@@ -41,7 +41,7 @@ public class FeedsController {
 
 		List<User> userFollowing = userRepo.findByFollowing(user);
 		for (int i = 0; i < userFollowing.size(); i++) {
-			for (OnlinePost onlinePost : onlinePostRepository.findAllByUserOrderByPostIdDesc(userFollowing.get(i))) {
+			for (OnlinePost onlinePost : onlinePostRepository.findAllByUserAndPostDeletedFalseOrderByPostIdDesc(userFollowing.get(i))) {
 				userPosts.add(onlinePost);
 			}
 		}
@@ -63,7 +63,7 @@ public class FeedsController {
 		List<Category> userCategories = categoryService.getUserCategory(user);
 
 		for (int i = 0; i < userCategories.size(); i++) {
-			for (OnlinePost onlinePost : onlinePostRepository.findAllByCategoryOrderByPostIdDesc(userCategories.get(i))) {
+			for (OnlinePost onlinePost : onlinePostRepository.findAllByCategoryAndPostDeletedFalseOrderByPostIdDesc(userCategories.get(i))) {
 				userPosts.add(onlinePost);
 			}
 		}

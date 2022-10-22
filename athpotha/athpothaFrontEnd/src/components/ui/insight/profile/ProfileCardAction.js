@@ -7,14 +7,17 @@ import PropTypes from "prop-types";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IconButton, ListItemIcon, Typography } from "@mui/material";
 import Swal from "sweetalert2";
+import { fetchUserData } from "../../../../api/authenticationService";
+import { postActions } from "../../../../store/post-slice";
 ProfileCardAction.propTypes = {
     button: PropTypes.element,
 };
 
 export default function ProfileCardAction(props) {
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const bookmarkPosts = useSelector((state) => state.bookmarks.bookmarkedPosts);
@@ -34,6 +37,9 @@ export default function ProfileCardAction(props) {
 
     const deleteHandler = () => {
         handleClose();
+        const postData = new FormData();
+        postData.append("postId", props.postId);
+        postData.append("postType", props.postType)
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -44,11 +50,19 @@ export default function ProfileCardAction(props) {
             confirmButtonText: 'Yes, Remove it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been removed.',
-                    'success'
-                )
+                fetchUserData({
+                    method: "put",
+                    url: "api/v1/post/delete-post",
+                    data: postData
+                }).then(() => {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been removed.',
+                        'success'
+                    ).then(() => {
+                        dispatch(postActions.setPostDelete())
+                    })
+                })
             }
         })
     }

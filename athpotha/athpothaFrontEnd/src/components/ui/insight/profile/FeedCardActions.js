@@ -37,7 +37,7 @@ function FeedCardActions(props) {
     postData.append("postId", props.menuId);
     useEffect(() => {
         setIsLoading(true);
-
+        console.log("called")
         postData.append("voteType", "upvote")
         fetchUserData({
             url: "api/v1/post/is-user-voted",
@@ -61,38 +61,46 @@ function FeedCardActions(props) {
             console.log(error.message)
         })
         setIsLoading(false);
-    }, []);
+    }, [upvoted, downvoted]);
 
     if (isLoading) {
         return <p>Loading...</p>
     }
-    const addUpvoteHandler = () => {
-        if (!upvoted) {
-            setUpvotes(props.noOfPostUpvotes + 1);
-            setUpvoted(true);
-        } else {
-            setUpvotes((prevNoOfPostUpvotes) => { return prevNoOfPostUpvotes - 1 });
-            setUpvoted(false);
-        }
-        postData.set("voteType", "upvote")
+
+    const voteApiCall = (voteType) => {
+        postData.set("voteType", voteType);
         fetchUserData({
             url: "api/v1/post/vote-post",
             method: "put",
             data: postData
         })
     }
+    const addVoteHandler = (voted, voting, votingMethod, voteType) => {
+        if (!voted) {
+            if (voteType === "downvote" && upvoted) {
+                setUpvotes((prevNoOfVotes) => { return prevNoOfVotes - 1 });
+                setUpvoted(false);
+                voteApiCall("upvote");
+            } else if(voteType === "upvote" && downvoted) {
+                setDownvotes((prevNoOfVotes) => { return prevNoOfVotes - 1 });
+                setDownvoted(false);
+                voteApiCall("downvote");
+            }
+            voting((prevNoOfVotes) => { return prevNoOfVotes + 1 });
+            votingMethod(true);
+        } else {
+            voting((prevNoOfVotes) => { return prevNoOfVotes - 1 });
+            votingMethod(false);
+        }
+        voteApiCall(voteType);
+    }
+    const addUpvoteHandler = () => {
+        addVoteHandler(upvoted, setUpvotes, setUpvoted, "upvote");
+    }
 
     const addDownvoteHandler = () => {
-        if (!downvoted) {
-            setDownvotes(props.noOfPostDownvotes + 1);
-            setDownvoted(true);
-        } else {
-            setDownvotes((prevNoOfPostDownvotes) => { return prevNoOfPostDownvotes - 1 });
-            setDownvoted(false);
-        }
+        addVoteHandler(downvoted, setDownvotes, setDownvoted, "downvote");
     }
-    console.log(upvoted);
-    console.log(downvoted);
     return (
         <CardActions disableSpacing>
             <IconButton color={upvoted ? "primary" : "default"} onClick={addUpvoteHandler}>

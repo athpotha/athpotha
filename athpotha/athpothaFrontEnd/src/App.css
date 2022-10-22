@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
+:root {
+  scrollbar-color: rgb(210, 210, 210) rgb(46, 54, 69) !important;
+  scrollbar-width: thin !important;
+  --white: #fff;
+  --black: #131417;
+  --dark: #131313;
+  --gray: rgba(255, 255, 255, 0.6);
+  --lite: rgba(1, 1, 1, 0.6);
+  --cream: #f9f9f9;
+}
+
 *,
 *::before,
 *::after {
@@ -11,4 +22,17 @@
 body {
   background-color: rgb(242, 250, 255);
   /* overflow-y:scroll; */
+}
+
+::-webkit-scrollbar {
+  height: 12px;
+  width: 8px;
+  background: var(--dark);
+}
+::-webkit-scrollbar-thumb {
+  background: gray;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+::-webkit-scrollbar-corner {
+  background: var(--dark);
 }

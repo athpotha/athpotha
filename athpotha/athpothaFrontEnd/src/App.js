@@ -83,19 +83,21 @@ function App() {
           {authCtx.isLoggedIn && authCtx.hasLogged && userType !== "university" && userType !== "admin" && (
             <Route path="/main" element={<Main />}></Route>
           )}
-          {authCtx.isLoggedIn && (
+          {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/my-network" element={<MyNetwork />}></Route>
           )}
-          {authCtx.isLoggedIn && (
+          {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/notifications" element={<Notifications />}></Route>
           )}
-          {authCtx.isLoggedIn && (
+          {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/chat" element={<Chat />}></Route>
           )}
-          {authCtx.isLoggedIn && (
+          {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/profile" element={<Profile />}></Route>
           )}
-          <Route path="/categories" element={<Categories />}></Route>
+          {authCtx.isLoggedIn && (
+            <Route path="/categories" element={<Categories />}></Route>
+          )}
 
           <Route path="/test" element={<Test />}></Route>
           <Route path="/uni-profile" element={<UniProfile />}></Route>
@@ -123,7 +125,6 @@ function App() {
           <Route path="/tutor-page" element={<TutorPage/>} />
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
-          {/* <Route path="/profile/edit-info/:id" element={<UpdateInfo />}></Route> */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ThemeProvider>
