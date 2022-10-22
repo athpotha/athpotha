@@ -70,7 +70,7 @@ function CourseViewCard(props) {
                                         return (
                                             <Grid item xs={4}>
                                                 <Box sx={{ p: 2, m: 1, }} >
-                                                    <Card sx={{ maxWidth: 370}}>
+                                                    <Card sx={{ width: 220}}>
                                                         <div style={{ position: 'relative' }}>
                                                             <CardMedia
                                                                 component="img"
@@ -111,7 +111,7 @@ function CourseViewCard(props) {
                                         return (
                                             <Grid item xs={4}>
                                                 <Box sx={{ p: 1, m: 1, }} >
-                                                    <Card sx={{ maxWidth: 360, p: 1 }}>
+                                                    <Card sx={{ width: 220}}>
                                                         <div style={{ position: 'relative' }}>
                                                             <CardMedia
                                                                 component="img"
