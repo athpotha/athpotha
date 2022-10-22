@@ -54,6 +54,7 @@ public class OnlinePost {
 	@CreationTimestamp
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date addedTime;
+	private boolean postDeleted = false;
 	private Long numberOfComments = (long) 0;
 	@ManyToOne
 	@JoinColumn(

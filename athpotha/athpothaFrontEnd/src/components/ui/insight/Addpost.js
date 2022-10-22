@@ -26,6 +26,7 @@ import { storage } from '../../../Firebase';
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { v4 } from "uuid";
 import Spinner from "../Spinner";
+import BackDrop from "../BackDrop";
 
 function Addpost(props) {
   const [postSuccess, setPostSuccess] = useState(true);
@@ -35,6 +36,7 @@ function Addpost(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
+  const [dataUploading, setDataUploading] = useState(false);
   const {
     value: content,
     isValid: contentIsValid,
@@ -80,6 +82,7 @@ function Addpost(props) {
     formIsValid = true;
   }
   const postSubmitHandler = () => {
+    setDataUploading(true);
     if (!contentIsValid && !categoryIsValid) {
       return;
     }
@@ -93,21 +96,7 @@ function Addpost(props) {
       uploadTask.on('state_changed',
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          if (progress !== 100) {
-            Swal.showLoading()
-            Swal.fire({
-              title: 'Auto close alert!',
-              html: 'I will close in <b></b> milliseconds.',
-              timer: 2000 + (100 - progress),
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading()
-              },
-              willClose: () => {
-                clearInterval(progress === 100)
-              }
-            })
-          }
+          
 
           switch (snapshot.state) {
             case 'paused':
@@ -140,6 +129,7 @@ function Addpost(props) {
               if (response.status === 200) {
                 contentReset();
                 setPostSuccess(true);
+                setDataUploading(false);
                 Swal.fire({
                   icon: 'success',
                   title: 'Updated!',
@@ -179,6 +169,7 @@ function Addpost(props) {
         if (response.status === 200) {
           contentReset();
           setPostSuccess(true);
+          setDataUploading(false);
           props.close();
           Swal.fire({
             icon: 'success',
@@ -228,6 +219,7 @@ function Addpost(props) {
   return (
     <div style={{ marginTop: "20px" }}>
       {/* {postSuccess && <SimpleSnackbar message="Post added Sucess" />} */}
+      <BackDrop dataUploading={dataUploading} />
       <Grid container>
         <Grid item xs={12}>
           <div style={{ height: "300px", overflowY: "auto" }}>

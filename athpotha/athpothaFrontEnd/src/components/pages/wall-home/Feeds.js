@@ -6,6 +6,7 @@ import BeforeDisplay from "../../ui/BeforeDisplay";
 import FeedsStart from "../../ui/insight/wall-main/Feeds/FeedsStart";
 import { fetchUserData } from "../../../api/authenticationService";
 import ProfileCard from "../../ui/insight/profile/ProfileCard";
+import { commentActions } from "../../../store/comment-slice";
 
 const addQuestionModalStyle = {
   position: "absolute",
@@ -36,6 +37,7 @@ function Feeds() {
   const userId = localStorage.getItem("USER_ID");
 
   const fetchPosts = async () => {
+    dispatch(commentActions.setCommentAddedLoading());
     setIsLoading(true);
     let response = await fetchUserData({
       url: "api/v1/feeds/get-user-postByFollowing",
