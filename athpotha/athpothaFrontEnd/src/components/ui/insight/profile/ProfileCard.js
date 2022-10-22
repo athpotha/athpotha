@@ -106,13 +106,7 @@ export default function ProfileCard(props) {
     isCommentValid = true;
   }
 
-  const commentBtnClicked = useSelector((state) => state.comment.commentAdded);
   const addComment = () => {
-    if (commentBtnClicked) {
-      dispatch(commentActions.setCommentAdded(false));
-    } else {
-      dispatch(commentActions.setCommentAdded(true));
-    }
     const commentData = new FormData();
     commentData.append("postId", props.homeCardId);
     commentData.append("comment", comment);
@@ -122,16 +116,13 @@ export default function ProfileCard(props) {
       method: "post",
       data: commentData
     }).then(() => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Updated!',
-        text: 'Comment Added!',
-      }).then(() => {
-        setComment('');
-      })
+      dispatch(commentActions.setCommentAdded());
+      setComment('');
+      // dispatch(commentActions.setCommentAdded());
     })
   }
-
+  const commentBtnClicked = useSelector((state) => state.comment.commentAdded);
+  console.log(commentBtnClicked);
   const [noOfComments, setNoOfComments] = useState(props.postItem.noOfComments)
   const setNumberOfComments = (value) => {
     setNoOfComments(value)
@@ -155,6 +146,7 @@ export default function ProfileCard(props) {
   }
   return (
     <StyledEngineProvider injectFirst>
+      {commentBtnClicked !== -1 && <SimpleSnackbar message="comment added !" />}
       <Grid
         item
         xs={12}
@@ -180,7 +172,7 @@ export default function ProfileCard(props) {
                 </ListItem>
               }
               action={
-                props.cardType == "profile" && <ProfileCardAction />
+                props.cardType == "profile" && <ProfileCardAction postId={props.homeCardId} postType={props.postType} />
               }
             />
             <CardContent>
@@ -234,7 +226,7 @@ export default function ProfileCard(props) {
                   </Button>
                 </Grid>
               </Grid>
-              <Grid container>
+              <Grid container sx={{maxHeight: "400px", overflowY: "auto"}}>
                 <CommentSection
                   postId={props.homeCardId}
                   comments={props.postItem.comments}

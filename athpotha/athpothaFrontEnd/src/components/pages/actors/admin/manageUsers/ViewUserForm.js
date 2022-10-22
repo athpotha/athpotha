@@ -7,6 +7,9 @@ import classes from "../Form.module.css"
 import { FormControl,  Grid,  InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, red } from "@mui/material/colors";
+import Input from '@mui/material/Input';
+
+const ariaLabel = { 'aria-label': 'description' };
 
 const ColorButton1 = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(green[600]),
@@ -40,7 +43,54 @@ function UniversityRegistrationForm(props) {
 
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
-          <Grid container>
+           <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="user_name">User Name</InputLabel>
+            <Input disabled defaultValue="user name" value={props.tableData} />
+          </FormControl>
+          
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="user_type">User Type</InputLabel>
+            <Input disabled defaultValue="user type" inputProps={ariaLabel} />
+          </FormControl>
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="description">Description</InputLabel>
+            <Input disabled defaultValue="description" inputProps={ariaLabel} />
+          </FormControl>
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="email">Email</InputLabel>
+            <Input disabled defaultValue="email" inputProps={ariaLabel} />
+          </FormControl>
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="university">University</InputLabel>
+            <Input disabled defaultValue="university" inputProps={ariaLabel} />
+          </FormControl>
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="faculty">Faculty</InputLabel>
+            <Input disabled defaultValue="faculty" inputProps={ariaLabel} />
+          </FormControl>
+        </div>
+         <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}}>Update</ColorButton1>
+            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}}>Delete</ColorButton2>
+      </div>
+    </form>
+  );
+}
+
+export default UniversityRegistrationForm;
+
+
+//parallel inputs
+ {/* <Grid container>
             <Grid item xs={6}>
               <TextField
                 label="First Name"
@@ -58,47 +108,4 @@ function UniversityRegistrationForm(props) {
               />
             </Grid>
 
-          </Grid>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="university">University</InputLabel>
-          </FormControl>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="faculty">Faculty</InputLabel>
-          </FormControl>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <TextField
-            type="email"
-            label="Email"
-            name="email"
-            variant="standard"
-            fullWidth
-          />
-        </div>
-        <div className={classes["input-wrap"]}>
-          <InputField
-            label="Password"
-            id="standard-adornment-sign-up-password"
-            name="password"
-          />
-        </div>
-        <div className={classes["input-wrap"]}>
-          <InputField
-            label="Confirm Password"
-            name="confirm_password"
-            id="standard-adornment-sign-up-confirm-password"
-          />
-        </div>
-         <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}}>Update</ColorButton1>
-            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}}>Delete</ColorButton2>
-      </div>
-    </form>
-  );
-}
-
-export default UniversityRegistrationForm;
-
+          </Grid> */}

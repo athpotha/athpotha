@@ -42,7 +42,7 @@ public class Comment {
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private Date addedDate;
 	private String comment;
-	
+	private boolean commentDeleted = false;
 	@ManyToOne(targetEntity = User.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "commenter_id",referencedColumnName = "userId")
 	private User user;

@@ -7,6 +7,7 @@ import SignupButtonSlice from "./signup-button-slice";
 import authSlice from "./auth/auth-slice";
 import educationCategorySlice from "./educationCategory-slice";
 import commentSlice from "./comment-slice";
+import postSlice from "./post-slice";
 
 const initialLandingState = { clickedButton: "" };
 const landingSlice = createSlice({
@@ -29,7 +30,8 @@ const store = configureStore({
     signupButton: SignupButtonSlice.reducer,
     loginAuth: authSlice.reducer,
     educationCategory: educationCategorySlice.reducer,
-    comment: commentSlice.reducer
+    comment: commentSlice.reducer,
+    post: postSlice.reducer
   },
 });
 
