@@ -20,6 +20,72 @@ import { useState } from "react";
 import ConfirmPopup from "./manageUsers/ConfirmPopup";
 import RejectDeletePopUp from "./manageUsers/RejectDeletePopUp";
 
+//colour buttons
+const ColorButton2 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(green[600]),
+  textTransform: "none",
+  backgroundColor: green[600],
+  "&:hover": {
+    backgroundColor: green[700],
+  },
+}));
+
+const ColorButton3 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(red[600]),
+  backgroundColor: red[600],
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: red[700],
+  },
+}));
+
+
+//sweet alert
+const Swal = require("sweetalert2");
+
+ //open sweet alert when clicked delete button
+ const verifyUser= () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#388e3c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, verify!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Added!",
+        text: "University added",
+        icon: "success",
+        confirmButtonColor: "#388e3c",
+      });
+    }
+  });
+};
+
+const rejectUser= () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#388e3c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, reject!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Rejected!",
+        text: "University rejected",
+        icon: "error",
+        confirmButtonColor: "#e53935",
+      });
+    }
+  });
+};
+
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
   <GridToolbarContainer>
@@ -64,8 +130,15 @@ const columns = [
 
       return (
         <CenteredBox align='left'>
-          <ConfirmPopup />
-          <RejectDeletePopUp text="Reject"/>
+           <ColorButton2 
+     style={{ marginRight: 6 }} onClick={verifyUser}>
+     Verify
+      </ColorButton2>
+      <ColorButton3
+      onClick={rejectUser}
+      >
+        Reject
+        </ColorButton3>
         </CenteredBox>
       );
     },
@@ -99,11 +172,7 @@ export default function UniversityRegistrationTable() {
       setTableData(tableRows);
     });
   }, []);
-  const [age, setAge] = React.useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
   return (
     <Grid>

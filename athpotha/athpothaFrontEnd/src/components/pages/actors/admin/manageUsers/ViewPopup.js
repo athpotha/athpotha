@@ -52,7 +52,7 @@ export default function ViewPopup(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ViewUserForm>
+          <ViewUserForm >
           </ViewUserForm>
         </Box>
       </Modal>
