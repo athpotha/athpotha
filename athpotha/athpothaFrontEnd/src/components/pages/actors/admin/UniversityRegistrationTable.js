@@ -17,6 +17,8 @@ import {
 import { alpha, styled } from "@mui/material/styles";
 import { fetchUserData } from "../../../../api/authenticationService";
 import { useState } from "react";
+import ConfirmPopup from "./manageUsers/ConfirmPopup";
+import RejectDeletePopUp from "./manageUsers/RejectDeletePopUp";
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -28,73 +30,6 @@ const CustomToolbar = ({ setFilterButtonEl }) => (
 CustomToolbar.propTypes = {
   setFilterButtonEl: PropTypes.func.isRequired,
 };
-
-//Colour buttons
-const ColorButton1 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(blue[600]),
-  textTransform: "none",
-  backgroundColor: blue[600],
-  "&:hover": {
-    backgroundColor: blue[700],
-  },
-}));
-
-const ColorButton2 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(green[600]),
-  textTransform: "none",
-  backgroundColor: green[600],
-  "&:hover": {
-    backgroundColor: green[700],
-  },
-}));
-
-const ColorButton3 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(red[600]),
-  backgroundColor: red[600],
-  textTransform: "none",
-  "&:hover": {
-    backgroundColor: red[700],
-  },
-}));
-
-// const rows = [
-//   {
-//     id: 1,
-//     col1: "Kasun",
-//     col2: "Perera",
-//     col3: "kasun@gmail.com",
-//   },
-//   {
-//     id: 2,
-//     col1: "Roneki",
-//     col2: "Manamperi",
-//     col3: "roneki.saranga12@gmail.com",
-//   },
-//   {
-//     id: 3,
-//     col1: "Roneki",
-//     col2: "Manamperi",
-//     col3: "roneki.saranga12@gmail.com",
-//   },
-//   {
-//     id: 4,
-//     col1: "Roneki",
-//     col2: "Manamperi",
-//     col3: "roneki.saranga12@gmail.com",
-//   },
-//   {
-//     id: 5,
-//     col1: "Roneki",
-//     col2: "Manamperi",
-//     col3: "roneki.saranga12@gmail.com",
-//   },
-//   {
-//     id: 6,
-//     col1: "Roneki",
-//     col2: "Manamperi",
-//     col3: "roneki.saranga12@gmail.com",
-//   },
-// ];
 
 const columns = [
   {
@@ -129,8 +64,8 @@ const columns = [
 
       return (
         <CenteredBox align='left'>
-          <ColorButton2 style={{ marginRight: 6 }}>Verify</ColorButton2>
-          <ColorButton3>Reject</ColorButton3>
+          <ConfirmPopup />
+          <RejectDeletePopUp text="Reject"/>
         </CenteredBox>
       );
     },
