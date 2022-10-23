@@ -38,49 +38,49 @@ function ViewUserForm(props) {
       </div>
 
       <div className={classes.heading}>
-        <h2>User Details</h2>
+        <h2>Edit Details</h2>
       </div>
 
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
            <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="user_name">User Name</InputLabel>
-            <Input disabled defaultValue="user name" value={props.tableData} />
+            <Input placeholder="user name" inputProps={ariaLabel} />
           </FormControl>
           
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="user_type">User Type</InputLabel>
-            <Input disabled defaultValue="user type" inputProps={ariaLabel} />
+            <Input placeholder="user type" inputProps={ariaLabel} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="description">Description</InputLabel>
-            <Input disabled defaultValue="description" inputProps={ariaLabel} />
+            <Input placeholder="decsription" inputProps={ariaLabel} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="email">Email</InputLabel>
-            <Input disabled defaultValue="email" inputProps={ariaLabel} />
+            <Input placeholder="email" inputProps={ariaLabel} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="university">University</InputLabel>
-            <Input disabled defaultValue="university" inputProps={ariaLabel} />
+            <Input placeholder="university" inputProps={ariaLabel} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="faculty">Faculty</InputLabel>
-            <Input disabled defaultValue="faculty" inputProps={ariaLabel} />
+            <Input placeholder="faculty" inputProps={ariaLabel} />
           </FormControl>
         </div>
-         {/* <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}}>Update</ColorButton1>
-            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}}>Delete</ColorButton2> */}
+         <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}}>Update</ColorButton1>
+            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}}>Cancel</ColorButton2>
       </div>
     </form>
   );
