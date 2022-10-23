@@ -45,7 +45,7 @@ function ViewUserForm(props) {
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
            <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="user_name">User Name</InputLabel>
-            <Input disabled defaultValue="user name" value={props.tableData} />
+            <Input disabled defaultValue="user name" value={props.userData} />
           </FormControl>
           
         </div>
@@ -79,8 +79,6 @@ function ViewUserForm(props) {
             <Input disabled defaultValue="faculty" inputProps={ariaLabel} />
           </FormControl>
         </div>
-         {/* <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}}>Update</ColorButton1>
-            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}}>Delete</ColorButton2> */}
       </div>
     </form>
   );
