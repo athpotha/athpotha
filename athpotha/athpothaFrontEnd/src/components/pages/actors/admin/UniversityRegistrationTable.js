@@ -99,11 +99,7 @@ export default function UniversityRegistrationTable() {
       setTableData(tableRows);
     });
   }, []);
-  const [age, setAge] = React.useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
   return (
     <Grid>

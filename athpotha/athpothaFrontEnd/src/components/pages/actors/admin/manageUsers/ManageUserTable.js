@@ -14,8 +14,6 @@ import ViewPopup from "./ViewPopup";
 import { fetchUserData } from "../../../../../api/authenticationService";
 import { useState } from "react";
 import EditPopUp from "./EditPopUp";
-import RejectDeletePopUp from "./RejectDeletePopUp";
-import swal from "sweetalert2";
 
 //sweet alert
 const Swal = require("sweetalert2");
