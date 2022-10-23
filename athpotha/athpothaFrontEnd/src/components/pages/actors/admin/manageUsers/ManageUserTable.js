@@ -10,7 +10,7 @@ import { green, red } from "@mui/material/colors";
 import CenteredBox from "../../../../ui/CenteredBox";
 import { Box, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Popup from "./Popup";
+import ViewPopup from "./ViewPopup";
 import { fetchUserData } from "../../../../../api/authenticationService";
 import { useState } from "react";
 import EditPopUp from "./EditPopUp";
@@ -105,7 +105,7 @@ export default function ManageUSerTable() {
 
         return (
           <CenteredBox align="left">
-            <Popup />
+            <ViewPopup />
             <EditPopUp/>
             <RejectDeletePopUp text="Delete"/>
           </CenteredBox>
