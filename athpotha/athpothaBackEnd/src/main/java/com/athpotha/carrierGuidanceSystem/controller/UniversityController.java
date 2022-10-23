@@ -27,6 +27,4 @@ public class UniversityController {
         return universityRepository.findAll();
     }
 
-
-
 }
