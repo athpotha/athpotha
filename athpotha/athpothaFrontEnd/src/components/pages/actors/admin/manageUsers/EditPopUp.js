@@ -1,11 +1,10 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import ViewUserForm from './ViewUserForm';
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
-import { blue } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
+import EditUserForm from "./EditUserForm";
 
 const style = {
   position: 'absolute',
@@ -20,18 +19,18 @@ const style = {
 };
 
 //Colour buttons
-const ColorButton1 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(blue[600]),
-  textTransform: "none",
-  backgroundColor: blue[600],
-  "&:hover": {
-    backgroundColor: blue[700],
-  },
-}));
+const ColorButton2 = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(green[600]),
+    textTransform: "none",
+    backgroundColor: green[600],
+    "&:hover": {
+      backgroundColor: green[700],
+    },
+  }));
 
 export default function Popup(props) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   React.useEffect(() => {
@@ -40,12 +39,9 @@ export default function Popup(props) {
 
   return (
     <React.Fragment>
-      <ColorButton1
-        style={{ marginRight: 6 }}
-        onClick={handleOpen}
-      >
-        View User
-      </ColorButton1>
+      <ColorButton2 style={{ marginRight: 6 }}  onClick={handleClickOpen}>
+        Update
+        </ColorButton2>
       <Modal
         open={open}
         onClose={handleClose}
@@ -53,13 +49,8 @@ export default function Popup(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            {props.data.id}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
-          <ViewUserForm></ViewUserForm>
+          <EditUserForm>
+          </EditUserForm>
         </Box>
       </Modal>
     </React.Fragment>

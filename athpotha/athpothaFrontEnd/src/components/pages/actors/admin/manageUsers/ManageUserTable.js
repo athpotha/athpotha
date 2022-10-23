@@ -10,9 +10,12 @@ import { green, red } from "@mui/material/colors";
 import CenteredBox from "../../../../ui/CenteredBox";
 import { Box, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Popup from "./Popup";
+import ViewPopup from "./ViewPopup";
 import { fetchUserData } from "../../../../../api/authenticationService";
 import { useState } from "react";
+import EditPopUp from "./EditPopUp";
+import RejectDeletePopUp from "./RejectDeletePopUp"
+
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -26,14 +29,7 @@ CustomToolbar.propTypes = {
 };
 
 //Colour buttons
-const ColorButton2 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(green[600]),
-  textTransform: "none",
-  backgroundColor: green[600],
-  "&:hover": {
-    backgroundColor: green[700],
-  },
-}));
+
 
 const ColorButton3 = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(red[600]),
@@ -109,9 +105,9 @@ export default function ManageUSerTable() {
 
         return (
           <CenteredBox align="left">
-            <Popup />
-            <ColorButton2 style={{ marginRight: 6 }}>Update</ColorButton2>
-            <ColorButton3>Delete</ColorButton3>
+            <ViewPopup />
+            <EditPopUp/>
+            <RejectDeletePopUp text="Delete"/>
           </CenteredBox>
         );
       },
