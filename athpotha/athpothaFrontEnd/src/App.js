@@ -27,6 +27,7 @@ import UserReport from "./components/pages/actors/admin/userReportings/UserRepor
 import CoursePage from "./components/pages/course-page/CoursePage";
 import ViewProfile from "./components/pages/view-profile/ViewProfile";
 import { fetchUserData } from "./api/authenticationService";
+import TutorPage from "./components/pages/tutor-page/TutorPage";
 function App() {
   const theme = createTheme({
     palette: {
@@ -121,6 +122,7 @@ function App() {
             <Route path="/admin/user-reports" element={<UserReport />}></Route>
           )}
           <Route path="/course-page" element={<CoursePage />} />
+          <Route path="/tutor-page" element={<TutorPage/>} />
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
           <Route path="*" element={<Navigate to="/" />} />
