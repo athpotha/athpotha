@@ -22,6 +22,7 @@ public class Student extends User {
 	private StudentType studentType;
 	private String description;
 	private Boolean isPremium = false;
+	private Date paymentDate;
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinTable(
 //			name = "user_education_category",
