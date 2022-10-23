@@ -28,7 +28,7 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function Popup(props) {
+export default function ViewPopup(props) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
