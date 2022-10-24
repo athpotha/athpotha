@@ -8,6 +8,7 @@ import { FormControl,  Grid,  InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, red } from "@mui/material/colors";
 import Input from '@mui/material/Input';
+import { fetchUserData } from "../../../../../api/authenticationService";
 
 const ariaLabel = { 'aria-label': 'description' };
 //sweet alert
@@ -45,19 +46,84 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
       backgroundColor: red[700],
     },
   }));
-function ViewUserForm(props) {
-  
-  // const handleClose = () => {
-  //   props.state= false;
-  // }
-  const UpdateUser = () => {
-    Swal.fire({
-      title: "Updated!",
-      text: "The user has been updated.",
-      icon: "success",
-      confirmButtonColor: "#388e3c"
-    });
+function EditUserForm(props) {
+  //close popup
+  const [open, setOpen] = React.useState(props.state);
+  const handleClickOpen = () => setOpen(true);
+  console.log("open");
+  console.log(open);
+  const handleClose = () => setOpen(false);
+  React.useEffect(() => {
+    setOpen(props.flag);
+  }, []);
+
+  //get user with the relevent id
+  const [userData, setUserData] = React.useState([])
+
+ 
+  var id=props.userId;
+
+  const data = {
+    url: `admin/getUser/${id}`,
+    method: "post",
+    data: null,
   };
+
+  React.useEffect(()=>{
+      fetchUserData(data).then((response) => {
+        setUserData(response.data)
+          // console.log("User Data");
+          // console.log(response.data);
+      })
+  }, [])
+
+   console.log(userData);
+  //sweet alert
+  const [firstName,setFirstName]= useState( userData['firstName']);
+  const [lastName, setLastName] = useState(userData['lastName']);
+  const [userType, setUserType] = useState(userData['userType']);
+  const [description, setDescription] = useState(userData['description']);
+  const [email, setEmail] = useState(userData['email']);
+  
+  console.log("FirstName - "+firstName);
+
+  const UpdateUser=(e)=>{
+    e.preventDefault();
+    // setFirstName(e.target.value);
+    // setLastName(e.target.value);
+    // setUserType(e.target.value);
+    // setDescription(e.target.value);
+    // setEmail(e.target.value);
+
+    const data = {
+      url: `admin/updateUser/${id}`,
+      method: "put",
+      data: {
+        firstName,
+        lastName,
+        userType,
+        description,
+        email
+      },
+    };
+    fetchUserData(data)
+      .then((response) => {
+        console.log(response.data);
+      });
+  }
+  
+  // const UpdateUser = () => {
+  //   Swal.fire({
+  //     title: "Updated!",
+  //     text: "The user has been updated.",
+  //     icon: "success",
+  //     confirmButtonColor: "#388e3c"
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //      console.log("success");
+  //     }
+  //   });
+  // };
 
   return (
     <form
@@ -74,49 +140,55 @@ function ViewUserForm(props) {
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
            <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="user_name">User Name</InputLabel>
-            <Input placeholder="user name" inputProps={ariaLabel} />
+            <InputLabel id="first_name">First Name</InputLabel>
+            {console.log("Username"+userData['firstName'])}
+            <Input placeholder="first name" value={userData['firstName']} onChange={(e) => setFirstName(e.target.value)} />
           </FormControl>
-          
+        </div>
+        <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
+           <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="last_name">Last Name</InputLabel>
+            <Input  placeholder="last name" value={userData['lastName']} onChange={(e) => setLastName(e.target.value)} />
+          </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="user_type">User Type</InputLabel>
-            <Input placeholder="user type" inputProps={ariaLabel} />
+            <Input placeholder="user type" value={userData['userType']} onChange={(e) => setUserType(e.target.value)}  />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="description">Description</InputLabel>
-            <Input placeholder="decsription" inputProps={ariaLabel} />
+            <Input multiline placeholder="decsription" value={userData['description']} onChange={(e) => setDescription(e.target.value)}  />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="email">Email</InputLabel>
-            <Input placeholder="email" inputProps={ariaLabel} />
+            <Input placeholder="email" value={userData['email']} onChange={(e) => setEmail(e.target.value)}  />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="university">University</InputLabel>
-            <Input placeholder="university" inputProps={ariaLabel} />
+            <Input placeholder="university" value={userData['university']}  />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="faculty">Faculty</InputLabel>
-            <Input placeholder="faculty" inputProps={ariaLabel} />
+            <Input placeholder="faculty" value={userData['faculty']}  />
           </FormControl>
         </div>
          <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}} onClick={UpdateUser}>Update</ColorButton1>
-            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}} >Cancel</ColorButton2>
+            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}} onClick={handleClose}>Cancel</ColorButton2>
       </div>
     </form>
   );
 }
 
-export default ViewUserForm;
+export default EditUserForm;
 
 
 //parallel inputs

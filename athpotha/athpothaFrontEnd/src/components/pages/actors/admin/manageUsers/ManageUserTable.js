@@ -73,7 +73,8 @@ export default function ManageUSerTable() {
   }, []);
 
   //open sweet alert when clicked delete button
-  const openSweetAlert = () => {
+  const openSweetAlert = () => {  
+    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -93,6 +94,23 @@ export default function ManageUSerTable() {
       }
     });
   };
+//delete user function
+// const handleDelete (id)=>{
+//   const data = {
+//     url: `admin/deleteUser/${id}`,
+//     method: "delete",
+//     data: null,
+//   };
+
+//   React.useEffect(()=>{
+//       fetchUserData(data).then((response) => {
+//         // setUserData(response.data)
+//           console.log("User Data");
+//           console.log(response.data);
+//       })
+//   }, [])
+
+// }
 
   const columns = [
     {
@@ -125,14 +143,13 @@ export default function ManageUSerTable() {
       sortable: false,
       renderCell: (params) => {
         // console.log(params.row)
-        // const onClick = (e) => {};
-        
+        // const onClick = (e) => {}    
         return (
           
           <CenteredBox align="left">
           
             <ViewPopup userId={params.row.id} />
-            <EditPopUp />
+            <EditPopUp userId={params.row.id} />
             <ColorButton3 onClick={openSweetAlert}>Delete</ColorButton3>
           </CenteredBox>
         );
