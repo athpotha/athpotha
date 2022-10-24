@@ -14,8 +14,9 @@ import ViewPopup from "./ViewPopup";
 import { fetchUserData } from "../../../../../api/authenticationService";
 import { useState } from "react";
 import EditPopUp from "./EditPopUp";
-import RejectDeletePopUp from "./RejectDeletePopUp"
 
+//sweet alert
+const Swal = require("sweetalert2");
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -29,8 +30,6 @@ CustomToolbar.propTypes = {
 };
 
 //Colour buttons
-
-
 const ColorButton3 = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(red[600]),
   backgroundColor: red[600],
@@ -50,7 +49,7 @@ export default function ManageUSerTable() {
   // const [value, setValue] = React.useState(false);
   //  const [rows, setRows] = React.useState([{}])
   const [tableData, setTableData] = useState([]);
-  let tableRows = []
+  let tableRows = [];
   //get data from database
   React.useEffect(() => {
     fetchUserData({
@@ -64,12 +63,36 @@ export default function ManageUSerTable() {
             col1: `${row.userType}`,
             col2: `${row.firstName} ${row.lastName}`,
             col3: row.email,
-          })
+          });
+        //   console.log(tableRows['id]);
+        // console.log(tableRows[0]['col1']);
         }
-      })
+      });
       setTableData(tableRows);
     });
   }, []);
+
+  //open sweet alert when clicked delete button
+  const openSweetAlert = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#388e3c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "The user has been deleted.",
+          icon: "success",
+          confirmButtonColor: "#388e3c",
+        });
+      }
+    });
+  };
 
   const columns = [
     {
@@ -95,25 +118,28 @@ export default function ManageUSerTable() {
       field: "col4",
       headerName: "Actions",
       headerClassName: "header-class-name",
-      headerAlign: 'center',
+      headerAlign: "center",
       width: 400,
       align: "center",
       disableColumnMenu: true,
       sortable: false,
       renderCell: (params) => {
+        // console.log(params.row)
         // const onClick = (e) => {};
-
+        
         return (
+          
           <CenteredBox align="left">
-            <ViewPopup />
-            <EditPopUp/>
-            <RejectDeletePopUp text="Delete"/>
+          
+            <ViewPopup userId={params.row.id} />
+            <EditPopUp />
+            <ColorButton3 onClick={openSweetAlert}>Delete</ColorButton3>
           </CenteredBox>
         );
       },
     },
   ];
-
+  
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
 
   return (

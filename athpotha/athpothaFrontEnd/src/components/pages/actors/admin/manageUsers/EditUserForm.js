@@ -10,7 +10,24 @@ import { green, red } from "@mui/material/colors";
 import Input from '@mui/material/Input';
 
 const ariaLabel = { 'aria-label': 'description' };
+//sweet alert
+const Swal = require("sweetalert2");
 
+ //open sweet alert when clicked delete button
+ const UpdateUser = () => {
+
+  Swal.fire({
+    title: "Updated!",
+    text: "The user has been updated.",
+    icon: "success",
+    confirmButtonColor: "#388e3c"
+  });
+};
+
+
+
+
+//colour buttons
 const ColorButton1 = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(green[600]),
     textTransform: "none",
@@ -29,6 +46,19 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
     },
   }));
 function ViewUserForm(props) {
+  
+  // const handleClose = () => {
+  //   props.state= false;
+  // }
+  const UpdateUser = () => {
+    Swal.fire({
+      title: "Updated!",
+      text: "The user has been updated.",
+      icon: "success",
+      confirmButtonColor: "#388e3c"
+    });
+  };
+
   return (
     <form
       className={classes[props.className]}
@@ -79,8 +109,8 @@ function ViewUserForm(props) {
             <Input placeholder="faculty" inputProps={ariaLabel} />
           </FormControl>
         </div>
-         <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}}>Update</ColorButton1>
-            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}}>Cancel</ColorButton2>
+         <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}} onClick={UpdateUser}>Update</ColorButton1>
+            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}} >Cancel</ColorButton2>
       </div>
     </form>
   );
