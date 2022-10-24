@@ -8,6 +8,7 @@ import { FormControl,  Grid,  InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, red } from "@mui/material/colors";
 import Input from '@mui/material/Input';
+import { useGridApiEventHandler } from "@mui/x-data-grid";
 
 const ariaLabel = { 'aria-label': 'description' };
 
@@ -29,6 +30,7 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
     },
   }));
 function ViewUserForm(props) {
+  console.log(props.userId)
   return (
     <form
       className={classes[props.className]}
@@ -45,7 +47,7 @@ function ViewUserForm(props) {
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
            <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="user_name">User Name</InputLabel>
-            <Input disabled defaultValue="user name" value={props.userData} />
+            <Input disabled defaultValue="user name" inputProps={ariaLabel} />
           </FormControl>
           
         </div>
