@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +41,12 @@ public class AdminController {
 	@PostMapping("/getAllUni")
 	public List<University> getAllUni() {
 		return universityRepository.findAll();
+	}
+	
+	@PostMapping("/getUser/{userId}")
+	public User getUser(@PathVariable long userId) {
+		System.out.println("User id"+userId);
+		return userRepository.findByUserId(userId);
 	}
 }
 	

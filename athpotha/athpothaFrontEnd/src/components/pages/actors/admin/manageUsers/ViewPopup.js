@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { blue } from '@mui/material/colors';
 
+
 const style = {
   position: 'absolute',
   top: '50%',
