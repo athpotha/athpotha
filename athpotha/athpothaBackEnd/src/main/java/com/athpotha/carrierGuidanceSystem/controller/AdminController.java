@@ -3,8 +3,10 @@ package com.athpotha.carrierGuidanceSystem.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,13 +53,34 @@ public class AdminController {
 		return userRepository.findByUserId(userId);
 	}
 	
-	@PutMapping("/updateUser/{userId}")
-	public ResponseEntity  updateUser(@PathVariable long userId, @RequestBody User updatedUser){
-		System.out.println("User id"+userId);
-	User newUpdatedUser = userRepository.save(updatedUser);
-	return ResponseEntity.ok(newUpdatedUser);
-		
+//	@PutMapping("/updateUser/{userId}")
+//	public ResponseEntity  updateUser(@PathVariable long userId, @RequestBody User updatedUser){
+//		System.out.println("User id"+userId);
+//	User newUpdatedUser = userRepository.save(updatedUser);
+//	return ResponseEntity.ok(newUpdatedUser);
+//		
+//	}
+//	
+//	@DeleteMapping("/deleteUser/{userId}")
+//	public ResponseEntity deleteUser(@PathVariable long userId) {
+//		userRepository.deleteById(userId); 
+//		System.out.println("User to delete"+userId);
+//		return new ResponseEntity<>(HttpStatus.OK);
+//	}
+	
+	@PostMapping("/getTotUsers")
+	public int getTotUsers() {
+		int tot = userRepository.getTotUsers();
+		return(tot);
 	}
+	
+
+	@PostMapping("/getNewUsers")
+	public int getNewUsers() {
+		int newUsers = userRepository.getNewUsers();
+		return(newUsers);
+	}
+	
 	
 	
 }
