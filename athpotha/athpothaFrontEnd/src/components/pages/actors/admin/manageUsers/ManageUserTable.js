@@ -64,7 +64,7 @@ export default function ManageUSerTable() {
             col2: `${row.firstName} ${row.lastName}`,
             col3: row.email,
           });
-        //   console.log(tableRows[0]);
+        //   console.log(tableRows['id]);
         // console.log(tableRows[0]['col1']);
         }
       });
@@ -124,13 +124,14 @@ export default function ManageUSerTable() {
       disableColumnMenu: true,
       sortable: false,
       renderCell: (params) => {
+        // console.log(params.row)
         // const onClick = (e) => {};
         
         return (
           
           <CenteredBox align="left">
           
-            <ViewPopup/>
+            <ViewPopup userId={params.row.id} />
             <EditPopUp />
             <ColorButton3 onClick={openSweetAlert}>Delete</ColorButton3>
           </CenteredBox>
@@ -138,8 +139,7 @@ export default function ManageUSerTable() {
       },
     },
   ];
-  console.log("table data")
-  console.log(tableData[0]);
+  
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
 
   return (
