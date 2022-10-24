@@ -33,7 +33,8 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
   };
 
 function ViewUserForm(props) {
-  console.log(typeof(props.userId));
+  // console.log(typeof(props.userId));
+  //get user with the relevent id
   const [userData, setUserData] = React.useState([])
 
  
@@ -53,7 +54,7 @@ function ViewUserForm(props) {
       })
   }, [])
 
-   console.log(userData);
+  //  console.log(userData);
   return (
     <form
       className={classes[props.className]}

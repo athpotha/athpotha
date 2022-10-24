@@ -49,7 +49,7 @@ export default function Popup(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <EditUserForm state={open}>
+          <EditUserForm userId={props.userId} state={open}>
           </EditUserForm>
         </Box>
       </Modal>
