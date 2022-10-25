@@ -1,0 +1,45 @@
+.main {
+    font-weight: bold;
+    margin-bottom: 0.4em;
+  }
+  
+  .info {
+    font-size: 0.8rem;
+  }
+  
+  .file-card {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed #cbd5e0;
+    background-color: #edf2f7;
+    min-width: 300px;
+    min-height: 200px;
+  }
+  
+  .file-inputs {
+    position: relative;
+    margin-bottom: 1.5em;
+  }
+  
+  .input {
+    position: relative;
+    text-align: right;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+    height: 46px;
+    max-width: 200px;
+  }
+  
+  .li {
+    list-style: none;
+    margin: 1.2em 0;
+    background-color: #e8f5e9;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  }
+  

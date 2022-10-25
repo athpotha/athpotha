@@ -12,6 +12,8 @@ import SimpleSnackbar from "./wall-main/Feeds/SimpleSnackbar";
 import ChangeProfile from "./profile/ChangeProfile";
 import ChangeCover from "./profile/ChangeCover";
 import ViewPic from "../../pages/view-profile/ViewPic";
+import AddStudentMaterial from "./AddStudentMaterial";
+import AddDegree from "./AddDegree";
 
 // import modalActions
 
@@ -31,6 +33,8 @@ export default function BasicModal(props) {
 
   // }
   const tabValue = useSelector((state) => state.modal.modalTabValue);
+  const userType = localStorage.getItem("USER_TYPE");
+  console.log(userType);
   return (
     <Modal
       open={props.open}
@@ -56,7 +60,11 @@ export default function BasicModal(props) {
           {props.isTabHave ? (
             props.modalName === "addQuestion-post-modal" ? (
               tabValue === 0 ? (
-                <Addquestion close={props.onClose} />
+                <React.Fragment>
+                  {userType === "tutor" && <AddStudentMaterial />}
+                  {(userType === "student" || userType === "community") && <Addquestion close={props.onClose} />}
+                  {userType === "university" && <AddDegree />}
+                </React.Fragment>
               ) : (
                 <Addpost close={props.onClose} />
               )
