@@ -18,5 +18,11 @@ public class AdminServiceImp implements AdminService{
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
+	
+	@Override
+	public User getUser(Long userId){
+		return userRepository.findByUserId(userId);
+	}
+	
 
 }

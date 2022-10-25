@@ -64,7 +64,7 @@ export default function ManageUSerTable() {
             col2: `${row.firstName} ${row.lastName}`,
             col3: row.email,
           });
-        //   console.log(tableRows[0]);
+        //   console.log(tableRows['id]);
         // console.log(tableRows[0]['col1']);
         }
       });
@@ -73,7 +73,8 @@ export default function ManageUSerTable() {
   }, []);
 
   //open sweet alert when clicked delete button
-  const openSweetAlert = () => {
+  const openSweetAlert = () => {  
+    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -93,6 +94,23 @@ export default function ManageUSerTable() {
       }
     });
   };
+//delete user function
+// const handleDelete (id)=>{
+//   const data = {
+//     url: `admin/deleteUser/${id}`,
+//     method: "delete",
+//     data: null,
+//   };
+
+//   React.useEffect(()=>{
+//       fetchUserData(data).then((response) => {
+//         // setUserData(response.data)
+//           console.log("User Data");
+//           console.log(response.data);
+//       })
+//   }, [])
+
+// }
 
   const columns = [
     {
@@ -124,22 +142,21 @@ export default function ManageUSerTable() {
       disableColumnMenu: true,
       sortable: false,
       renderCell: (params) => {
-        // const onClick = (e) => {};
-        
+        // console.log(params.row)
+        // const onClick = (e) => {}    
         return (
           
           <CenteredBox align="left">
           
-            <ViewPopup/>
-            <EditPopUp />
+            <ViewPopup userId={params.row.id} />
+            <EditPopUp userId={params.row.id} />
             <ColorButton3 onClick={openSweetAlert}>Delete</ColorButton3>
           </CenteredBox>
         );
       },
     },
   ];
-  console.log("table data")
-  console.log(tableData[0]);
+  
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
 
   return (

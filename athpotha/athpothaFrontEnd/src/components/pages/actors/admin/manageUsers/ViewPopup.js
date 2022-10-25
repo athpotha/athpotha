@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { blue } from '@mui/material/colors';
 
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -52,7 +53,7 @@ export default function ViewPopup(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ViewUserForm >
+          <ViewUserForm userId={props.userId}>
           </ViewUserForm>
         </Box>
       </Modal>

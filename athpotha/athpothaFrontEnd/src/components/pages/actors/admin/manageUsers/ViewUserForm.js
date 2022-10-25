@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import InputField from "../../../login/InputField"
-// import classes from "./Form.module.css";
 import classes from "../Form.module.css"
 import { FormControl,  Grid,  InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, red } from "@mui/material/colors";
 import Input from '@mui/material/Input';
+import { fetchUserData } from "../../../../../api/authenticationService";
+import TextField from '@mui/material/TextField';
 
 const ariaLabel = { 'aria-label': 'description' };
 
@@ -28,7 +27,34 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
       backgroundColor: red[700],
     },
   }));
+
+  const lblStyle = {
+    color:'Black'
+  };
+
 function ViewUserForm(props) {
+  // console.log(typeof(props.userId));
+  //get user with the relevent id
+  const [userData, setUserData] = React.useState([])
+
+ 
+  var id=props.userId;
+
+  const data = {
+    url: `admin/getUser/${id}`,
+    method: "post",
+    data: null,
+  };
+
+  React.useEffect(()=>{
+      fetchUserData(data).then((response) => {
+        setUserData(response.data)
+          // console.log("User Data");
+          // console.log(response.data);
+      })
+  }, [])
+
+  //  console.log(userData);
   return (
     <form
       className={classes[props.className]}
@@ -44,38 +70,39 @@ function ViewUserForm(props) {
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
            <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="user_name">User Name</InputLabel>
-            <Input disabled defaultValue="user name" value={props.userData} />
+            <InputLabel style={lblStyle} id="user_name">User Name</InputLabel>
+            <Input style={{color:'black'}} disabled defaultValue="user name" value={userData['firstName']+" "+userData['lastName']} />
           </FormControl>
           
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="user_type">User Type</InputLabel>
-            <Input disabled defaultValue="user type" inputProps={ariaLabel} />
+            <InputLabel style={lblStyle} id="user_type">User Type</InputLabel>
+            <Input disabled defaultValue="user type" value={userData['userType']} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="description">Description</InputLabel>
-            <Input disabled defaultValue="description" inputProps={ariaLabel} />
+            <InputLabel style={lblStyle} id="description">Description</InputLabel>
+            <Input  multiline disabled defaultValue="No Description" value={userData['description']} />            
+          </FormControl>
+        </div>
+
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel style={lblStyle} id="email">Email</InputLabel>
+            <Input disabled defaultValue="email" value={userData['email']} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="email">Email</InputLabel>
-            <Input disabled defaultValue="email" inputProps={ariaLabel} />
-          </FormControl>
-        </div>
-        <div className={classes["input-wrap"]}>
-        <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="university">University</InputLabel>
+            <InputLabel style={lblStyle} id="university">University</InputLabel>
             <Input disabled defaultValue="university" inputProps={ariaLabel} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="faculty">Faculty</InputLabel>
+            <InputLabel style={lblStyle} id="faculty">Faculty</InputLabel>
             <Input disabled defaultValue="faculty" inputProps={ariaLabel} />
           </FormControl>
         </div>

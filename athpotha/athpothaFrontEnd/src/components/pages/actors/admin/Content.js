@@ -9,17 +9,45 @@ import PersonIcon from '@mui/icons-material/Person';
 import ErrorIcon from '@mui/icons-material/Error';
 import PaidIcon from '@mui/icons-material/Paid';
 import BarChart from "./BarChart";
-import PeiChart from "./PieChart";
+import PieChart from "./PieChart";
+import { useState } from "react";
+import { fetchUserData } from "../../../../../src/api/authenticationService";
 
 
 function Content(){
+  const [totalUsers, setTotalUsers] = useState();
+  const[newUsers,setNewUsers] = useState();
+
+  //get data from database
+  //total users
+  React.useEffect(() => {
+    fetchUserData({
+      url: "admin/getTotUsers",
+      method: "post",
+    }).then((response) => {
+      console.log("Response data"+response.data);
+      setTotalUsers(response.data)
+    });
+  }, []);
+
+  //new users
+  React.useEffect(() => {
+    fetchUserData({
+      url: "admin/getNewUsers",
+      method: "post",
+    }).then((response) => {
+      console.log("Response data"+response.data);
+      setNewUsers(response.data)
+    });
+  }, []);
+
     return (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={3}>
           <AppWidgetSummary
             bgColor="rgb(209, 233, 252)"
-            title="Weekly Visits"
-            total={714000}
+            title="Total Users"
+            total={totalUsers}
             icon={<VisibilityIcon></VisibilityIcon>}
           />
         </Grid>
@@ -28,7 +56,7 @@ function Content(){
           <AppWidgetSummary
             bgColor="rgb(208, 242, 255)"
             title="New Users"
-            total={1352831}
+            total={newUsers}
             color="info"
             icon={<PersonIcon></PersonIcon>}
           />
@@ -60,7 +88,7 @@ function Content(){
             <BarChart></BarChart>
           </Grid>
           <Grid item xs={6}>
-            <PeiChart></PeiChart>
+            <PieChart></PieChart>
           </Grid>
         </Grid>
       </Grid>

@@ -1,5 +1,6 @@
 package com.athpotha.carrierGuidanceSystem.controller;
 
+import com.athpotha.carrierGuidanceSystem.model.Course;
 import com.athpotha.carrierGuidanceSystem.model.University;
 import com.athpotha.carrierGuidanceSystem.model.User;
 import com.athpotha.carrierGuidanceSystem.repository.CourseRepository;
@@ -45,8 +46,46 @@ public class UniversityController {
         university.setAbout(uniAbout.getAbout());
 
         University updateAbout = universityRepository.save(university);
-        return ResponseEntity.ok("Succefully Updated");
+        return ResponseEntity.ok("Successfully Updated");
 
     }
 
+    @PutMapping("updateCourseReq/{cid}")
+    public ResponseEntity updateUniRequirements(@PathVariable long cid, @RequestBody Course courseReq){
+
+        Course course = courseRepository.findById(cid).
+                orElseThrow(() -> new RuntimeException(("User doesn't exist :"+cid)));
+
+        course.setPreRequirements(courseReq.getPreRequirements());
+
+        courseRepository.save(course);
+        return ResponseEntity.ok("Successfully Updated");
+
+    }
+
+    @PutMapping("updateCourseDes/{cid}")
+    public ResponseEntity updateUniDescription(@PathVariable long cid, @RequestBody Course courseDes){
+
+        Course course = courseRepository.findById(cid).
+                orElseThrow(() -> new RuntimeException("User doesn't exist :"+cid));
+
+        course.setCourseDescription(courseDes.getCourseDescription());
+
+        courseRepository.save(course);
+        return ResponseEntity.ok("Successfully Updated");
+
+    }
+
+    @PutMapping("updateCourseOpp/{cid}")
+    public ResponseEntity updateUniOppertunities(@PathVariable long cid, @RequestBody Course courseOpp){
+
+        Course course = courseRepository.findById(cid).
+                orElseThrow(() -> new RuntimeException("User doesn't exist"+cid));
+
+        course.setCarrerOpertunities(courseOpp.getCarrerOpertunities());
+
+        courseRepository.save(course);
+        return ResponseEntity.ok("Successfully Updated");
+
+    }
 }
