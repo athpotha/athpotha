@@ -11,6 +11,8 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import StripeCheckout from 'react-stripe-checkout';
+
 import {
   Avatar,
   Badge,
@@ -168,6 +170,10 @@ export default function MainHeader(props) {
     { id: "addQuestionModalTab-2", label: "Add Post", value: 1 },
   ];
 
+  const onToken = (token) => {
+    console.log(token)
+  }
+
   const userType = localStorage.getItem("USER_TYPE");
   console.log(userType);
   return (
@@ -203,7 +209,19 @@ export default function MainHeader(props) {
             </Box>
             {userType === "student" && (
               <IconButton sx={{ color: "#FFDE2E" }}>
-                <WorkspacePremiumIcon />
+                {/* <WorkspacePremiumIcon /> */}
+                <StripeCheckout
+                  token={onToken}
+                  name="Active Premium Account"
+                  currency="LKR"
+                  amount="30000"
+                  stripeKey="pk_test_51LfjCRCymXNwLFxCUdec7D7gEOdseuDGuk7BgaKLQgt7jaWPfcJ269PgmYiHLen172by7UbQBhSKaelsoflrzEeB003T1nj8Xb"
+                >
+
+                  <button style={{color: "#FFDE2E", border: "none", background: "transparent"}}><WorkspacePremiumIcon /></button>
+
+                </StripeCheckout>
+
               </IconButton>
             )}
             <SearchProfiles />
@@ -221,8 +239,8 @@ export default function MainHeader(props) {
                 {userType === "student"
                   ? "Add Question"
                   : userType === "university"
-                  ? "Add Degree"
-                  : "Add Post"}
+                    ? "Add Degree"
+                    : "Add Post"}
               </Button>
             </ModalOpenButton>
           </Toolbar>
