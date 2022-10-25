@@ -213,7 +213,7 @@
 import React, { useState } from 'react'
 
 import { ChatEngine, getOrCreateChat } from 'react-chat-engine'
-
+import '../index.css';
 const DirectChatPage = () => {
 	const [username, setUsername] = useState('')
 
