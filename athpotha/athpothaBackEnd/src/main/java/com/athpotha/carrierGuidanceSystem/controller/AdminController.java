@@ -3,9 +3,15 @@ package com.athpotha.carrierGuidanceSystem.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +37,7 @@ public class AdminController {
 	
 	@PostMapping("/getAll")
 	public List<User> getAllUsers() {
-		return userRepository.findAll();
+		return userRepository.findByUserDeletedFalse();
 		
 //		return userRepository.findAll();
 	}
@@ -40,5 +46,43 @@ public class AdminController {
 	public List<University> getAllUni() {
 		return universityRepository.findAll();
 	}
+	
+	@PostMapping("/getUser/{userId}")
+	public User getUser(@PathVariable long userId) {
+//		System.out.println("User id"+userId);
+		return userRepository.findByUserId(userId);
+	}
+	
+//	@PutMapping("/updateUser/{userId}")
+//	public ResponseEntity  updateUser(@PathVariable long userId, @RequestBody User updatedUser){
+//		System.out.println("User id"+userId);
+//	User newUpdatedUser = userRepository.save(updatedUser);
+//	return ResponseEntity.ok(newUpdatedUser);
+//		
+//	}
+//	
+	@PutMapping("/deleteUser/{userId}")
+	public ResponseEntity deleteUser(@PathVariable long userId) {
+		User user = userRepository.findByUserId(userId);
+		user.setUserDeleted(true);
+		userRepository.save(user); 
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PostMapping("/getTotUsers")
+	public int getTotUsers() {
+		int tot = userRepository.getTotUsers();
+		return(tot);
+	}
+	
+
+	@PostMapping("/getNewUsers")
+	public int getNewUsers() {
+		int newUsers = userRepository.getNewUsers();
+		return(newUsers);
+	}
+	
+	
+	
 }
 	
