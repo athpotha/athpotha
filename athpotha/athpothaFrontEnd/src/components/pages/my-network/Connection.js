@@ -50,7 +50,7 @@ const StyledRating = styled(Rating)({
                     gap: 2,
                     gridTemplateColumns: 'repeat(3, 1fr)',
                 }}>
-                    {products.map(({user_id,first_name, last_name,studentType}) => (
+                    {products.map(({userId,firstName, lastName,studentType}) => (
                         <Box sx={{ p: 1, m: 1, }}>
                             <Card sx={{ maxWidth: 320 }}>
                                 <div style={{ position: 'relative' }}>
@@ -67,7 +67,7 @@ const StyledRating = styled(Rating)({
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '35px', marginLeft: '16px' }}>
-                                    <Box>{first_name + " "}{last_name}</Box>
+                                    <Box>{firstName + " "}{lastName}</Box>
                                     <Box sx={{ fontSize: '10pt' }}>{studentType}</Box>
                                     <Box sx={{ mt: 3, fontSize: '10pt' }}>1,100 followers</Box>
                                 </div>
