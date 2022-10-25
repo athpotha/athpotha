@@ -22,6 +22,7 @@ public class University extends User {
 	private String faculty;
 	private String university;
 	private String about;
+	private float uniRate;
 
 	@OneToMany(targetEntity = Course.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pk_uni_id", referencedColumnName = "user_id")
@@ -34,4 +35,6 @@ public class University extends User {
 	public void setCoureselist(List<Course> coureselist) {
 		this.coureselist = coureselist;
 	}
+	
+
 }

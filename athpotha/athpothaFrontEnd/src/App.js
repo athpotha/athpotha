@@ -12,7 +12,12 @@ import Main from "./components/pages/wall-home/Main";
 // import { Theme } from "@mui/material";
 import Notifications from "./components/pages/notifications/Notifications";
 import Profile from "./components/pages/profile/Profile";
-import Chat from "./components/pages/chat/Chat";
+// import Chat from "./components/pages/chat/Chat";
+// import Chat from "./components/pages/chat/unichat";
+//// .......................................................................................//
+import Chats from "./components/pages/chat/unichat/components/chatPage";
+// import ChatLogin from "./components/pages/chat/unichat/components/Login"
+// .........................................................................................//
 import MyNetwork from "./components/pages/my-network/MyNetwork";
 import AuthContext from "./store/ath-context";
 import UniProfile from "./components/pages/uni-profile/UniProfile";
@@ -27,7 +32,12 @@ import UserReport from "./components/pages/actors/admin/userReportings/UserRepor
 import CoursePage from "./components/pages/course-page/CoursePage";
 import ViewProfile from "./components/pages/view-profile/ViewProfile";
 import { fetchUserData } from "./api/authenticationService";
+
+import { AuthProvider } from "./components/pages/chat/unichat/context/AuthContext"
+
+
 import TutorPage from "./components/pages/tutor-page/TutorPage";
+
 function App() {
   const theme = createTheme({
     palette: {
@@ -75,6 +85,8 @@ function App() {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
+      {/* <AuthProvider> */}
+
         <Routes>
           <Route path="/" element={<Home />} exact></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -89,8 +101,13 @@ function App() {
           {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/notifications" element={<Notifications />}></Route>
           )}
+          {/* {authCtx.isLoggedIn && authCtx.hasLogged && (
+            <Route path="/chat" element={<ChatLogin />}></Route>
+            
+          )} */}
           {authCtx.isLoggedIn && authCtx.hasLogged && (
-            <Route path="/chat" element={<Chat />}></Route>
+            <Route path="/chat" element={<Chats />}></Route>
+            
           )}
           {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/profile" element={<Profile />}></Route>
@@ -127,6 +144,7 @@ function App() {
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        {/* </AuthProvider> */}
       </ThemeProvider>
     </StyledEngineProvider>
   );

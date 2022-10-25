@@ -24,6 +24,7 @@ public class Course {
     private String courseDescription;
     private String preRequirements;
     private String carrerOpertunities;
+    private float cRate;
 
     @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "pk_course_id", referencedColumnName = "id")
