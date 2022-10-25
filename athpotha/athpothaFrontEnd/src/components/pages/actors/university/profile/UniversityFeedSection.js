@@ -9,6 +9,7 @@ import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 import Home from "./Home";
 import About from "./About";
 import MyPosts from "../../../profile/MyPosts";
+import { fetchUserData } from "../../../../../api/authenticationService";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -51,7 +52,22 @@ function StudentFeedSection(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    
+
+    const user_id = localStorage.getItem("USER_ID")
+    const [uniDetails, setUniDetails] = React.useState([])
+
+    React.useEffect(()=>{
+        fetchUserData({
+            url: "/university/getUniDetails",
+            method: "post",
+            data: { userId: user_id }
+        }).then((response) => {
+            setUniDetails(response.data)
+        })
+    }, [])
+
+    console.log(uniDetails['coureselist'])
+
     return (
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -61,11 +77,11 @@ function StudentFeedSection(props) {
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0} style={{ backgroundColor: "#FFF", padding: "20px" }}>
-                <About></About>
+                <About aboutdata={uniDetails['about']}></About>
             </TabPanel>
 
             <TabPanel value={value} index={1} style={{ backgroundColor: "#FFF", padding: "20px" }}>
-                <Home></Home>
+                <Home homedata={uniDetails['coureselist']}></Home>
             </TabPanel>
 
             <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF" }}>

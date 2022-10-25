@@ -27,4 +27,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 //	User findByFirst_name(String first_name);
 	
 	List<User> findByUserName(String userName);
+	
+	@Query("SELECT COUNT(user_id) AS tot_users FROM User")
+	int getTotUsers();
+	
+	@Query(nativeQuery=true, value="SELECT COUNT(DISTINCT user_id) FROM User WHERE created_at > NOW() - INTERVAL 1 WEEK")
+	int getNewUsers();
 }

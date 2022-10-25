@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import InputField from "../../../login/InputField"
-// import classes from "./Form.module.css";
 import classes from "../Form.module.css"
 import { FormControl,  Grid,  InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, red } from "@mui/material/colors";
+import Input from '@mui/material/Input';
+import { fetchUserData } from "../../../../../api/authenticationService";
+import TextField from '@mui/material/TextField';
+
+const ariaLabel = { 'aria-label': 'description' };
 
 const ColorButton1 = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(green[600]),
@@ -25,7 +27,34 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
       backgroundColor: red[700],
     },
   }));
-function UniversityRegistrationForm(props) {
+
+  const lblStyle = {
+    color:'Black'
+  };
+
+function ViewUserForm(props) {
+  // console.log(typeof(props.userId));
+  //get user with the relevent id
+  const [userData, setUserData] = React.useState([])
+
+ 
+  var id=props.userId;
+
+  const data = {
+    url: `admin/getUser/${id}`,
+    method: "post",
+    data: null,
+  };
+
+  React.useEffect(()=>{
+      fetchUserData(data).then((response) => {
+        setUserData(response.data)
+          // console.log("User Data");
+          // console.log(response.data);
+      })
+  }, [])
+
+  //  console.log(userData);
   return (
     <form
       className={classes[props.className]}
@@ -40,7 +69,53 @@ function UniversityRegistrationForm(props) {
 
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
-          <Grid container>
+           <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel style={lblStyle} id="user_name">User Name</InputLabel>
+            <Input style={{color:'black'}} disabled defaultValue="user name" value={userData['firstName']+" "+userData['lastName']} />
+          </FormControl>
+          
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel style={lblStyle} id="user_type">User Type</InputLabel>
+            <Input disabled defaultValue="user type" value={userData['userType']} />
+          </FormControl>
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel style={lblStyle} id="description">Description</InputLabel>
+            <Input  multiline disabled defaultValue="No Description" value={userData['description']} />            
+          </FormControl>
+        </div>
+
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel style={lblStyle} id="email">Email</InputLabel>
+            <Input disabled defaultValue="email" value={userData['email']} />
+          </FormControl>
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel style={lblStyle} id="university">University</InputLabel>
+            <Input disabled defaultValue="university" inputProps={ariaLabel} />
+          </FormControl>
+        </div>
+        <div className={classes["input-wrap"]}>
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel style={lblStyle} id="faculty">Faculty</InputLabel>
+            <Input disabled defaultValue="faculty" inputProps={ariaLabel} />
+          </FormControl>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+export default ViewUserForm;
+
+
+//parallel inputs
+ {/* <Grid container>
             <Grid item xs={6}>
               <TextField
                 label="First Name"
@@ -58,47 +133,4 @@ function UniversityRegistrationForm(props) {
               />
             </Grid>
 
-          </Grid>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="university">University</InputLabel>
-          </FormControl>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="faculty">Faculty</InputLabel>
-          </FormControl>
-        </div>
-        <div className={classes["input-wrap"]}>
-          <TextField
-            type="email"
-            label="Email"
-            name="email"
-            variant="standard"
-            fullWidth
-          />
-        </div>
-        <div className={classes["input-wrap"]}>
-          <InputField
-            label="Password"
-            id="standard-adornment-sign-up-password"
-            name="password"
-          />
-        </div>
-        <div className={classes["input-wrap"]}>
-          <InputField
-            label="Confirm Password"
-            name="confirm_password"
-            id="standard-adornment-sign-up-confirm-password"
-          />
-        </div>
-         <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}}>Update</ColorButton1>
-            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}}>Delete</ColorButton2>
-      </div>
-    </form>
-  );
-}
-
-export default UniversityRegistrationForm;
-
+          </Grid> */}

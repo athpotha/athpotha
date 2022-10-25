@@ -24,7 +24,7 @@
     "react-simple-star-rating": "^4.0.5",
     "recharts": "^2.1.13",
     "redux": "^4.2.0",
-    "sweetalert2": "^11.4.28",
+    "sweetalert2": "^11.6.1",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },

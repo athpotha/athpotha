@@ -1,9 +1,12 @@
-import { Button, Grid, StyledEngineProvider, TextField, Typography } from "@mui/material";
+import { Button, Grid, StyledEngineProvider, TextareaAutosize, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { hover } from "@testing-library/user-event/dist/hover";
+import { fetchUserData } from "../../../../../api/authenticationService";
+import Swal from "sweetalert2";
 
 const style = {
     fontWeight: "normal",
@@ -16,7 +19,7 @@ const textfield = {
     fontWeight: "normal",
     color: "grey.600",
     mb: 2,
-    width: 400,
+    mt: 2,
 }
 
 const stylebox1 = {
@@ -33,24 +36,54 @@ const stylebox1 = {
     pb: 3,
 };
 
-function About() {
+function About(props) {
+
+    var id=localStorage.getItem("USER_ID");
+
+    const showAlert = () => {
+        Swal.fire({
+            title: "Success",
+            text: "Alert successful",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.replace("/profile");
+            }
+          });
+    }
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setAboutUni(props.aboutdata);
+    }
 
-    const [contentOne, setContentOne] = React.useState('University of Colombo School of Computing (UCSC) was established by merging The Institute of Computer Technology(ICT Ordinance 1987.09.21) and The Department of Computer Science both of the University of Colombo, as the first centre of higher learning of computing in Sri Lanka.');
-    const [contentTwo, setContentTwo] = React.useState('The major goal of the UCSC is to prepare students for careers in Information and Communication Technology as Software Developers, Systems Analysts, Network Administrators, Database Administrators, Web Developers, IT Managers, IT Strategic Planners and IT Policy Makers.')
-    const handleChangeOne = (event) => {
-        setContentOne(event.target.value);
-    };
-    const handleChangeTwo = (event) => {
-        setContentTwo(event.target.value);
-    };
+    const [aboutUni, setAboutUni] = React.useState(props.aboutdata);
 
     const onSubmit = (e) => {
         e.preventDefault()
+        const data = {
+            url: `university/updateUniDetails/${id}`,
+            method: "put",
+            data: {
+                about: aboutUni
+            },
+          };
+          fetchUserData(data)
+            .then((response) => {
+
+              console.log(response.data);
+              handleClose();
+              showAlert();
+      
+            })
+            .catch((e) => {
+              console.log(e);
+            });
     }
+
 
     return (
         <StyledEngineProvider injectFirst>
@@ -58,11 +91,26 @@ function About() {
             <Grid >
 
                 <Typography variant="body2" gutterBottom textAlign="justify" sx={style} >
-                    {contentOne}
-                </Typography>
+                    <textarea
+                        name="Text1"
+                        cols="90"
+                        rows="15"
+                        value={props.aboutdata}
+                        readOnly
+                        style={{
+                            width: "700px",
+                            border: "0px solid #ccc",
+                            resize: "none",
+                            fontFamily: 'poppins',
+                            fontSize: '11pt',
+                            textAlign: 'justify',
+                            boxShadow: "none",
+                            outline: "none",
+                            paddingLeft: "30px",
+                        }}
 
-                <Typography variant="body2" gutterBottom textAlign="justify" sx={style}>
-                    {contentTwo}
+                    >
+                    </textarea>
                 </Typography>
 
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -84,43 +132,43 @@ function About() {
                             <CloseIcon />
                         </IconButton>
                         <Box sx={{
-                            mt: "20px"
+                            mt: "20px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}>
 
-                            <form onSubmit={onSubmit}>
+                            <form onSubmit={onSubmit} style={{ maxWidth: "100%" }}>
+
 
                                 <TextField
-                                    id="filled-multiline-flexible"
-                                    label=""
+
+                                    sx={textfield}
+                                    id="description"
+                                    label="description"
                                     multiline
                                     maxRows={10}
-                                    value={contentOne}
-                                    sx={textfield}
-                                    onChange={handleChangeOne}
+                                    value={aboutUni}
+                                    onChange={(e) => setAboutUni(e.target.value)}
+                                    defaultValue={props.aboutdata}
+
                                 />
 
-                                <TextField
-                                    id="filled-multiline-flexible"
-                                    label=""
-                                    multiline
-                                    maxRows={10}
-                                    value={contentTwo}
-                                    sx={textfield}
-                                    onChange={handleChangeTwo}
-                                />
 
                                 <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px", mt: "10px" }}>
-                                    <Button type="submit">Save</Button>
+                                    <Button type="submit" variant="contained" >Save</Button>
                                 </Box>
 
                             </form>
+
+
                         </Box>
                     </Box>
                 </Modal>
 
             </Grid>
 
-        </StyledEngineProvider>
+        </StyledEngineProvider >
     );
 }
 

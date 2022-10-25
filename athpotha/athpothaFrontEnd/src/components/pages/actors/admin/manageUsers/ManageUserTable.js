@@ -10,9 +10,13 @@ import { green, red } from "@mui/material/colors";
 import CenteredBox from "../../../../ui/CenteredBox";
 import { Box, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Popup from "./Popup";
+import ViewPopup from "./ViewPopup";
 import { fetchUserData } from "../../../../../api/authenticationService";
 import { useState } from "react";
+import EditPopUp from "./EditPopUp";
+
+//sweet alert
+const Swal = require("sweetalert2");
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -26,15 +30,6 @@ CustomToolbar.propTypes = {
 };
 
 //Colour buttons
-const ColorButton2 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(green[600]),
-  textTransform: "none",
-  backgroundColor: green[600],
-  "&:hover": {
-    backgroundColor: green[700],
-  },
-}));
-
 const ColorButton3 = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(red[600]),
   backgroundColor: red[600],
@@ -54,7 +49,7 @@ export default function ManageUSerTable() {
   // const [value, setValue] = React.useState(false);
   //  const [rows, setRows] = React.useState([{}])
   const [tableData, setTableData] = useState([]);
-  let tableRows = []
+  let tableRows = [];
   //get data from database
   React.useEffect(() => {
     fetchUserData({
@@ -65,52 +60,103 @@ export default function ManageUSerTable() {
         if (row.userType !== "admin") {
           tableRows.push({
             id: row.userId,
-            col1: `${row.firstName} ${row.lastName}`,
-            col2: row.email,
-          })
+            col1: `${row.userType}`,
+            col2: `${row.firstName} ${row.lastName}`,
+            col3: row.email,
+          });
+        //   console.log(tableRows['id]);
+        // console.log(tableRows[0]['col1']);
         }
-      })
+      });
       setTableData(tableRows);
     });
   }, []);
 
+  //open sweet alert when clicked delete button
+  const openSweetAlert = () => {  
+    
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#388e3c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "The user has been deleted.",
+          icon: "success",
+          confirmButtonColor: "#388e3c",
+        });
+      }
+    });
+  };
+//delete user function
+// const handleDelete (id)=>{
+//   const data = {
+//     url: `admin/deleteUser/${id}`,
+//     method: "delete",
+//     data: null,
+//   };
+
+//   React.useEffect(()=>{
+//       fetchUserData(data).then((response) => {
+//         // setUserData(response.data)
+//           console.log("User Data");
+//           console.log(response.data);
+//       })
+//   }, [])
+
+// }
+
   const columns = [
     {
       field: "col1",
+      headerName: "User Type",
+      headerClassName: "header-class-name",
+      width: 200,
+    },
+    {
+      field: "col2",
       headerName: "User Name",
       headerClassName: "header-class-name",
       width: 300,
     },
     {
-      field: "col2",
+      field: "col3",
       headerName: "Email",
       headerClassName: "header-class-name",
       width: 300,
     },
 
     {
-      field: "col3",
+      field: "col4",
       headerName: "Actions",
       headerClassName: "header-class-name",
-      headerAlign: 'center',
+      headerAlign: "center",
       width: 400,
       align: "center",
       disableColumnMenu: true,
       sortable: false,
       renderCell: (params) => {
-        // const onClick = (e) => {};
-
+        // console.log(params.row)
+        // const onClick = (e) => {}    
         return (
+          
           <CenteredBox align="left">
-            <Popup />
-            <ColorButton2 style={{ marginRight: 6 }}>Update</ColorButton2>
-            <ColorButton3>Delete</ColorButton3>
+          
+            <ViewPopup userId={params.row.id} />
+            <EditPopUp userId={params.row.id} />
+            <ColorButton3 onClick={openSweetAlert}>Delete</ColorButton3>
           </CenteredBox>
         );
       },
     },
   ];
-
+  
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
 
   return (
