@@ -41,10 +41,10 @@ public class AdminController {
 		
 //		return userRepository.findAll();
 	}
-	
 	@PostMapping("/getAllUni")
-	public List<University> getAllUni() {
-		return universityRepository.findAllByIsVerifiedFalse();
+public List<University> getAllUni() {
+		int x = 0;
+		return universityRepository.findAllByIsVerified(x);
 	}
 	
 	@PostMapping("/getUser/{userId}")
@@ -82,7 +82,25 @@ public class AdminController {
 		return(newUsers);
 	}
 	
+	@PutMapping("/verifyUser/{userId}")
+	public ResponseEntity verifyUser(@PathVariable long userId) {
+		University uni = universityRepository.findByUserId(userId);
+		int x=1;
+		uni.setIsVerified(x);
+		universityRepository.save(uni); 
+		return new ResponseEntity<>(HttpStatus.OK);
+		
+	}
 	
+	@PutMapping("/rejectUser/{userId}")
+	public ResponseEntity rejectUser(@PathVariable long userId) {
+		University uni = universityRepository.findByUserId(userId);
+		int x = 2;
+		uni.setIsVerified(x);
+		universityRepository.save(uni); 
+		return new ResponseEntity<>(HttpStatus.OK);
+		
+	}
 	
 }
 	
