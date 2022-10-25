@@ -33,4 +33,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	@Query(nativeQuery=true, value="SELECT COUNT(DISTINCT user_id) FROM User WHERE created_at > NOW() - INTERVAL 1 WEEK")
 	int getNewUsers();
+	
+	List<User> findByUserDeletedFalse();
+	
+	
 }
