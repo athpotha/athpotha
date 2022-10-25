@@ -22,6 +22,7 @@ public class University extends User {
 	private String faculty;
 	private String university;
 	private String about;
+	private boolean isVerified;
 	private float uniRate;
 
 	@OneToMany(targetEntity = Course.class, cascade = CascadeType.ALL)
