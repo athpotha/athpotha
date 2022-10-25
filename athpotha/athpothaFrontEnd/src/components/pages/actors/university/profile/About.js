@@ -94,7 +94,7 @@ function About(props) {
                     <textarea
                         name="Text1"
                         cols="90"
-                        rows="10"
+                        rows="15"
                         value={props.aboutdata}
                         readOnly
                         style={{

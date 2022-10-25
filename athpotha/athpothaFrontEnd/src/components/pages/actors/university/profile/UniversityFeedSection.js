@@ -66,7 +66,7 @@ function StudentFeedSection(props) {
         })
     }, [])
 
-    console.log(uniDetails)
+    console.log(uniDetails['coureselist'])
 
     return (
         <React.Fragment>
@@ -81,7 +81,7 @@ function StudentFeedSection(props) {
             </TabPanel>
 
             <TabPanel value={value} index={1} style={{ backgroundColor: "#FFF", padding: "20px" }}>
-                <Home></Home>
+                <Home homedata={uniDetails['coureselist']}></Home>
             </TabPanel>
 
             <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF" }}>
