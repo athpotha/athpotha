@@ -100,35 +100,35 @@ function Content() {
       method: "post",
       data: { userId: user_id }
     }).then((response) => {
-      // setTutor(response.data)
+      setTutor(response.data)
       console.log(response.data);
     }).catch((error) => {
       console.log("hello error")
     })
 
-    // fetchUserData({
-    //   url: "network/getUniversities",
-    //   method: "post",
-    //   data: { user_id: user_id }
-    // }).then((response) => {
-    //   setUniversity(response.data)
-    // })
+    fetchUserData({
+      url: "network/getUniversities",
+      method: "post",
+      data: { user_id: user_id }
+    }).then((response) => {
+      setUniversity(response.data)
+    })
 
-    // fetchUserData({
-    //   url: "network/getCommunities",
-    //   method: "post",
-    //   data: { user_id: user_id }
-    // }).then((response) => {
-    //   setCommunity(response.data)
-    // })
+    fetchUserData({
+      url: "network/getCommunities",
+      method: "post",
+      data: { user_id: user_id }
+    }).then((response) => {
+      setCommunity(response.data)
+    })
 
-    // fetchUserData({
-    //   url: "network/getStudents",
-    //   method: "post",
-    //   data: { user_id: user_id }
-    // }).then((response) => {
-    //   setStudent(response.data)
-    // })
+    fetchUserData({
+      url: "network/getStudents",
+      method: "post",
+      data: { user_id: user_id }
+    }).then((response) => {
+      setStudent(response.data)
+    })
 
   }, [])
 
@@ -268,7 +268,7 @@ function Content() {
               <FollowStudent value={7} students={student}></FollowStudent>
             </Item>
 
-            <Item>
+            {/* <Item>
               <div style={{ height: '40px', display: 'flex', justifyContent: 'space-between', p: 1, m: 1, alignItems: 'center' }}>
                 <div>More sugession for you</div>
                 <div><Button onClick={handleOpenFour}>See all</Button></div>
@@ -297,7 +297,7 @@ function Content() {
                 </Modal>
               </div>
               <ConnectionStudent value={9} students={student}></ConnectionStudent>
-            </Item>
+            </Item> */}
             
           </Box>
         </div>

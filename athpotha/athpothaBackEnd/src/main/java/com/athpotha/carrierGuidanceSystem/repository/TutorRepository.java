@@ -14,4 +14,5 @@ public interface TutorRepository extends JpaRepository<Tutor, Long> {
 //	@Query("select t from Tutor t where t not in (Select t from Tutor t join t.followings a where a.following_id in (:id)) and t.userType in (:role)")
 //	List<Tutor> findTutorsunFollowing(Long id,UserType role);
 
+
 }
