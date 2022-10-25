@@ -15,28 +15,12 @@ import {
   Grid,
 } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
+import { fetchUserData } from "../../../../api/authenticationService";
+import { useState } from "react";
+import ConfirmPopup from "./manageUsers/ConfirmPopup";
+import RejectDeletePopUp from "./manageUsers/RejectDeletePopUp";
 
-//Filter panel
-const CustomToolbar = ({ setFilterButtonEl }) => (
-  <GridToolbarContainer>
-    <GridToolbarFilterButton ref={setFilterButtonEl} />
-  </GridToolbarContainer>
-);
-
-CustomToolbar.propTypes = {
-  setFilterButtonEl: PropTypes.func.isRequired,
-};
-
-//Colour buttons
-const ColorButton1 = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(blue[600]),
-  textTransform: "none",
-  backgroundColor: blue[600],
-  "&:hover": {
-    backgroundColor: blue[700],
-  },
-}));
-
+//colour buttons
 const ColorButton2 = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(green[600]),
   textTransform: "none",
@@ -55,57 +39,76 @@ const ColorButton3 = styled(Button)(({ theme }) => ({
   },
 }));
 
-const rows = [
-  {
-    id: 1,
-    col1: "Kasun",
-    col2: "Perera",
-    col3: "kasun@gmail.com",
-  },
-  {
-    id: 2,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 3,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 4,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 5,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-  {
-    id: 6,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
-  },
-];
+
+//sweet alert
+const Swal = require("sweetalert2");
+
+ //open sweet alert when clicked delete button
+ const verifyUser= () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#388e3c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, verify!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Added!",
+        text: "University added",
+        icon: "success",
+        confirmButtonColor: "#388e3c",
+      });
+    }
+  });
+};
+
+const rejectUser= () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#388e3c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, reject!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Rejected!",
+        text: "University rejected",
+        icon: "error",
+        confirmButtonColor: "#e53935",
+      });
+    }
+  });
+};
+
+//Filter panel
+const CustomToolbar = ({ setFilterButtonEl }) => (
+  <GridToolbarContainer>
+    <GridToolbarFilterButton ref={setFilterButtonEl} />
+  </GridToolbarContainer>
+);
+
+CustomToolbar.propTypes = {
+  setFilterButtonEl: PropTypes.func.isRequired,
+};
 
 const columns = [
   {
     field: "col1",
     headerName: "University",
     headerClassName: "header-class-name",
-    width: 150,
+    width: 300,
   },
   {
     field: "col2",
     headerName: "Faculty",
     headerClassName: "header-class-name",
-    width: 150,
+    width: 200,
   },
   {
     field: "col3",
@@ -118,7 +121,7 @@ const columns = [
     field: "col6",
     headerName: "Actions",
     headerClassName: "header-class-name",
-    width: 400,
+    width: 200,
     align: "center",
     disableColumnMenu: true,
     sortable: false,
@@ -127,8 +130,15 @@ const columns = [
 
       return (
         <CenteredBox align='left'>
-          <ColorButton2 style={{ marginRight: 6 }}>Verify</ColorButton2>
-          <ColorButton3>Reject</ColorButton3>
+           <ColorButton2 
+     style={{ marginRight: 6 }} onClick={verifyUser}>
+     Verify
+      </ColorButton2>
+      <ColorButton3
+      onClick={rejectUser}
+      >
+        Reject
+        </ColorButton3>
         </CenteredBox>
       );
     },
@@ -141,11 +151,28 @@ const style = {
   backgroundColor:"white"
 };
 export default function UniversityRegistrationTable() {
-  const [age, setAge] = React.useState("");
+  const [tableData, setTableData] = useState([]);
+  let tableRows = []
+  //get data from database
+  React.useEffect(() => {
+    fetchUserData({
+      url: "admin/getAllUni",
+      method: "post",
+    }).then((response) => {
+      response.data.map((row) => {
+        if (row.userType == "university") {
+          tableRows.push({
+            id: row.userId,
+            col1: `${row.university}`,
+            col2: `${row.faculty} `,
+            col3: row.email,
+          })
+        }
+      })
+      setTableData(tableRows);
+    });
+  }, []);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
   const [filterButtonEl, setFilterButtonEl] = React.useState(null);
   return (
     <Grid>
@@ -169,7 +196,7 @@ export default function UniversityRegistrationTable() {
                 setFilterButtonEl,
               },
             }}
-            rows={rows}
+            rows={tableData}
             columns={columns}
           />
         </Box>

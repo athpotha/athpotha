@@ -21,9 +21,9 @@ public class Course {
     private Long id;
 
     private String courseName;
-    private String description;
-    private float rate;
-    private Text about;
+    private String courseDescription;
+    private String preRequirements;
+    private String carrerOpertunities;
 
     @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "pk_course_id", referencedColumnName = "id")
@@ -36,4 +36,5 @@ public class Course {
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
     }
+
 }
