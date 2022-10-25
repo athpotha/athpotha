@@ -73,7 +73,7 @@ export const FollowStudent = (props) => {
                         }}
                     >
 
-                        {products.map(({ userId, firstName, lastName, studentType }) => (
+                        {products.map(({ userId, firstName, lastName, studentType, coverPicture, profilePicture }) => (
                             <Grid item xs={4}>
                                 <Box sx={{ p: 1, m: 1, }}>
                                     <Card sx={{ width: 220 }}>
@@ -81,11 +81,11 @@ export const FollowStudent = (props) => {
                                             <CardMedia
                                                 component="img"
                                                 height="90"
-                                                image="images/tutors/tutor-1.jpg"
+                                                image={coverPicture}
                                                 alt="green iguana"
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                <Avatar alt="Remy Sharp" src="images/tutors/tutor-2.png" sx={{ width: 90, height: 90, cursor: 'pointer' }}
+                                                <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
                                                     onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
@@ -163,7 +163,7 @@ export const FollowTeacher = (props) => {
                             },
                         }}
                     >
-                        {products.map(({ userId, firstName, lastName, subject }) => (
+                        {products.map(({ userId, firstName, lastName, subject, coverPicture, profilePicture }) => (
                             <Grid item xs={4}>
                                 <Box sx={{ p: 1, m: 1, }} key={userId}>
                                     <Card sx={{ width: 220 }}>
@@ -171,11 +171,11 @@ export const FollowTeacher = (props) => {
                                             <CardMedia
                                                 component="img"
                                                 height="90"
-                                                image="images/tutors/tutor-1.jpg"
+                                                image={coverPicture}
                                                 alt="green iguana"
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90, cursor: 'pointer' }}
+                                                <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
                                                     onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
@@ -267,7 +267,7 @@ export const FollowUniversity = (props) => {
                             },
                         }}
                     >
-                        {products.map(({ userId, faculty, university, uniRate }) => (
+                        {products.map(({ userId, faculty, university, uniRate, coverPicture, profilePicture }) => (
                             <Grid item xs={4}>
                                 <Box sx={{ p: 1, m: 1, }} key={userId}>
                                     <Card sx={{ width: 220 }}>
@@ -275,11 +275,11 @@ export const FollowUniversity = (props) => {
                                             <CardMedia
                                                 component="img"
                                                 height="90"
-                                                image="images/tutors/tutor-1.jpg"
+                                                image={coverPicture}
                                                 alt="green iguana"
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90, cursor: 'pointer' }}
+                                                <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
                                                     onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
@@ -369,7 +369,7 @@ export const FollowCommunity = (props) => {
                             },
                         }}
                     >
-                        {products.map(({ userId, firstName, lastName }) => (
+                        {products.map(({ userId, firstName, lastName, coverPicture, profilePicture }) => (
                             <Grid item xs={4}>
                                 <Box sx={{ p: 1, m: 1, }}>
                                     <Card sx={{ width: 220 }}>
@@ -377,11 +377,11 @@ export const FollowCommunity = (props) => {
                                             <CardMedia
                                                 component="img"
                                                 height="90"
-                                                image="images/tutors/tutor-1.jpg"
+                                                image={coverPicture}
                                                 alt="green iguana"
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                <Avatar alt="Remy Sharp" src="images/tutors/tutor-2.png" sx={{ width: 90, height: 90, cursor: 'pointer' }}
+                                                <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
                                                     onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
