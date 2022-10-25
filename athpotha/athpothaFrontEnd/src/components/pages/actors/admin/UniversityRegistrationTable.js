@@ -43,8 +43,14 @@ const ColorButton3 = styled(Button)(({ theme }) => ({
 //sweet alert
 const Swal = require("sweetalert2");
 
- //open sweet alert when clicked delete button
- const verifyUser= () => {
+ //verify User
+ const verifyUser= (id) => {
+  const data = {
+    url: `admin/verifyUser/${id}`,
+    method: "put",
+    data: null
+  };
+
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -55,17 +61,28 @@ const Swal = require("sweetalert2");
     confirmButtonText: "Yes, verify!",
   }).then((result) => {
     if (result.isConfirmed) {
+      console.log("Clicked Verify");
       Swal.fire({
         title: "Added!",
         text: "University added",
         icon: "success",
         confirmButtonColor: "#388e3c",
-      });
+      }).then(() => {        
+        console.log("After Verified");
+        window.location.replace("/admin/university-registration");
+      })
     }
   });
 };
 
-const rejectUser= () => {
+//Reject User
+const rejectUser= (id) => {
+  const data = {
+    url: `admin/rejectUser/${id}`,
+    method: "put",
+    data: null
+  };
+
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -76,12 +93,16 @@ const rejectUser= () => {
     confirmButtonText: "Yes, reject!",
   }).then((result) => {
     if (result.isConfirmed) {
+      console.log("Click reject");
       Swal.fire({
         title: "Rejected!",
         text: "University rejected",
         icon: "error",
         confirmButtonColor: "#e53935",
-      });
+      }).then(() => {        
+        console.log("After reject");
+        window.location.replace("/admin/university-registration");
+      })
     }
   });
 };
@@ -131,7 +152,7 @@ const columns = [
       return (
         <CenteredBox align='left'>
            <ColorButton2 
-     style={{ marginRight: 6 }} onClick={verifyUser}>
+     style={{ marginRight: 6 }} onClick={() => {verifyUser(params.row.id)}}>
      Verify
       </ColorButton2>
       <ColorButton3

@@ -72,7 +72,7 @@ export default function ManageUSerTable() {
     });
   }, []);
 
-  //open sweet alert when clicked delete button
+  //Delete User
   
   const openSweetAlert = (id) => {  
     const data = {
@@ -95,7 +95,7 @@ export default function ManageUSerTable() {
         fetchUserData(data).then(() => {
           Swal.fire({
             title: "Deleted!",
-            text: "User deletedS",
+            text: "User deleted",
             icon: "success",
             confirmButtonColor: "#388e3c",
           }).then(() => {        
