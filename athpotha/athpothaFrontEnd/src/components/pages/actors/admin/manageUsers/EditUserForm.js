@@ -84,8 +84,9 @@ function EditUserForm(props) {
       setLastName(response.data.lastName);
       setUserType(response.data.userType);
       setEmail(response.data.email);
-      if (response.data.userType === "University") {
+      if (response.data.userType === "university") {
         setUniversity(response.data.university);
+        console.log("University"+response.data.faculty);
         setFaculty(response.data.faculty);
       }
       // setDescription(response.data.)

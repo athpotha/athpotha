@@ -1,5 +1,6 @@
 package com.athpotha.carrierGuidanceSystem.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,22 @@ public class AdminController {
 	
 	@PostMapping("/getAll")
 	public List<User> getAllUsers() {
-		return userRepository.findByUserDeletedFalse();
+	    List <User> userList = new ArrayList<User>();
+	    List <User> newUserList = new ArrayList<User>();
+	    userList = userRepository.findByUserDeletedFalse();
+	    for (User user : userList) {
+	        if (user.getUserType().equals(UserType.university)) {
+	            University university = universityRepository.findByUserId(user.getUserId());
+	            if(university.getIsVerified() == 1) {
+	                newUserList.add(university);
+	            }
+	            
+	        }
+	        else {
+	            newUserList.add(user);
+	        }
+	    }
+		return newUserList;
 		
 //		return userRepository.findAll();
 	}
