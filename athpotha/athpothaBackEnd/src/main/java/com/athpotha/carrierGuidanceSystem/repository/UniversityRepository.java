@@ -12,8 +12,11 @@ import java.util.List;
 public interface UniversityRepository extends JpaRepository<University, Long> {
 
 	University findByEmailIgnoreCase(String email);
+	University findByUserId(Long userId);
+	List<University> findAllByIsVerified(int x);
+	
 
-	List<University> findAllByIsVerifiedFalse();
+//	List<University> findAllByIsVerifiedTwo();
 
 
 //	@Query("select u from University u where u not in (Select u from University u join u.followings a where a.following_id in (:id)) and u.userType in (:role)")
