@@ -116,14 +116,14 @@ function SignInForm({ loading, error, ...props }) {
       const user_type = localStorage.getItem("USER_TYPE");
       if (user_type === "admin") {
         window.location.href = "/admin"
-      } else if (!userInfo.hasLogged) {
+      } else if (!userInfo.hasLogged && user_type !== "university") {
         window.location.href = "/categories";
       } else {
         console.log(user_type)
         if (user_type !== "university" && user_type !== "admin") {
           window.location.href = "/main";
         } else if (user_type === "university") {
-          window.location.href = "/university"
+          window.location.href = "/profile"
         }
       }
     } catch {
