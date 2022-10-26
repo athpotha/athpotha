@@ -14,6 +14,7 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import { leftbarItem } from "../../../services/ListItemService";
 import { useNavigate } from "react-router-dom";
+import Content from "./Content";
 
 
 function MyNetwork() {
@@ -59,7 +60,7 @@ function MyNetwork() {
           </Leftbar>
         </Grid>
         <Grid item xs={7} style={{ paddingTop: 120 }}>
-          {/* <Content></Content> */}
+          <Content></Content>
         </Grid>
         <Grid
           item

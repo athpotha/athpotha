@@ -280,7 +280,7 @@ const DirectChatPage = () => {
 		
 		<ChatEngine
 			height='80vh'
-			userName={localStorage.getItem('USER_NAME')}
+			userName={localStorage.getItem("FIRST_NAME")+'_'+localStorage.getItem("LAST_NAME")}
 			userSecret='1234'
 			projectID='dbee0612-9a82-4b05-9cae-f5048f73dffb'
 			renderNewChatForm={(creds) => renderChatForm(creds)}
