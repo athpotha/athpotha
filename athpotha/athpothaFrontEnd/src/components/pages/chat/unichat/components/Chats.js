@@ -219,7 +219,7 @@ import axios from "axios";
 function createUser(params) {
 	// var axios = require('axios');
 var data = {
-	"username": localStorage.getItem("USER_NAME"),
+	"username": localStorage.getItem("FIRST_NAME")+'_'+localStorage.getItem("LAST_NAME"),
 	"secret": "1234",
 	"email": localStorage.getItem("USER_EMAIL"),
 	"first_name": localStorage.getItem("FIRST_NAME"),
