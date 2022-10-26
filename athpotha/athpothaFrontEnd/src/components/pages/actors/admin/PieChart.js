@@ -5,12 +5,12 @@ import { useState } from "react";
 import { fetchUserData } from "../../../../../src/api/authenticationService";
 
 const data = [
-  { name: 'OL students', value: 400 },
-  { name: 'AL students', value: 300 },
-  { name: 'University Rep ', value: 300 },
-  { name: 'Teachers', value: 200 },
-  { name: 'Post AL', value: 200 },
-  { name: 'Stakeholders', value: 300 },
+  { name: 'OL students', value: 1 },
+  { name: 'AL students', value: 1 },
+  { name: 'University Rep ', value: 3 },
+  { name: 'Teachers', value: 2 },
+  { name: 'Post AL', value: 1 },
+  { name: 'Community', value: 1 },
 ];
 
 const renderActiveShape = (props) => {
@@ -27,6 +27,7 @@ const renderActiveShape = (props) => {
   const textAnchor = cos >= 0 ? 'start' : 'end';
 
   return (
+    
     
     <g>
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>

@@ -15,93 +15,40 @@ import {
 
 const data = [
   {
-    name: "January",
-    NewUsers: 590,
-    Visits: 800,
-    income: 140,
-    reports: 4
-  },
-  {
-    name: "February",
-    NewUsers: 868,
-    Visits: 967,
-    income: 1506,
-    reports: 590
-  },
-  {
-    name: "March",
-    NewUsers: 1397,
-    Visits: 1098,
-    income: 989,
-    reports: 350
-  },
-  {
-    name: "April",
-    NewUsers: 1480,
-    Visits: 1200,
-    income: 1228,
-    reports: 480
-  },
-  {
-    name: "May",
-    NewUsers: 1520,
-    Visits: 1108,
-    income: 1100,
-    reports: 460
-  },
-  {
-    name: "June",
-    NewUsers: 680,
-    Visits:345,
-    income: 1700,
-    reports: 380
-  },
-  {
-    name: "July",
-    NewUsers: 380,
-    Visits:123,
-    income: 1700,
-    reports: 380
-  },
-  {
-    name: "August",
-    NewUsers: 230,
-    Visits:123,
-    income: 1700,
-    reports: 380
-  }
-  ,
-  {
-    name: "September",
-    NewUsers: 310,
-    Visits:123,
-    income: 1100,
-    reports: 380
-  }
-  ,
-  {
-    name: "October",
-    NewUsers: 680,
-    Visits:123,
-    income: 1700,
-    reports: 380
-  }
-  ,
-  {
-    name: "November",
-    NewUsers: 700,
-    Visits:123,
+    name: "Monday",
+    totalUsers: 4,
+    newUsers: 0,
     income: 1400,
-    reports: 380
-  }
-  ,
+    report: 4
+  },
   {
-    name: "December",
-    NewUsers: 980,
-    Visits:123,
-    income: 1600,
-    reports: 380
-  }
+    name: "Tuesday",
+    totalUsers: 4,
+    newUsers: 1,
+    income: 1400,
+    report: 4
+  },
+  {
+    name: "Wednesday",
+    totalUsers: 5,
+    newUsers: 3,
+    income: 1400,
+    report: 4
+  },
+  {
+      name: "Thursday",
+      totalUsers: 8,
+      newUsers: 3,
+      income: 2312,
+      report: 4
+    },
+    {
+      name: "Friday",
+      totalUsers: 10,
+      newUsers: 0,
+      income: 3000,
+      report: 3
+    }
 ];
 
 export default function App() {
@@ -122,10 +69,10 @@ export default function App() {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Area type="monotone" dataKey="Visits" fill="#8884d8" stroke="#8884d8" />
-      <Bar dataKey="NewUsers" barSize={20} fill="#413ea0" />
+      <Area type="monotone" dataKey="totalUsers" fill="#8884d8" stroke="#8884d8" />
+      <Bar dataKey="newUsers" barSize={100} fill="#413ea0" />
       <Line type="monotone" dataKey="income" stroke="#ff7300" />
-      <Scatter dataKey="reports" fill="red" />
+      <Scatter dataKey="report" fill="red" />
     </ComposedChart>
   );
 }
