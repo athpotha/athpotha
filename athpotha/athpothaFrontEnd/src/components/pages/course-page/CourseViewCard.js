@@ -33,7 +33,9 @@ function CourseViewCard(props) {
     // };
 
     function navigateuniprofile(uniid,cid){
-        navigate('/profile/'+ uniid, {state: {cid: cid}});
+        navigate('/profile/'+ uniid);
+        localStorage.setItem("UNI_ID", uniid)
+        
     }
 
     const [value, setValue] = React.useState(0);
