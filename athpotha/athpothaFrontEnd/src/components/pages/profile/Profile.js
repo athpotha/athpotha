@@ -81,7 +81,7 @@ function Profile() {
             paddingTop: 100,
           }}
         >
-          <Rightbar></Rightbar>
+          {userType !== "university" && <Rightbar></Rightbar>}
         </Grid>
       </Grid>
     </StyledEngineProvider>
