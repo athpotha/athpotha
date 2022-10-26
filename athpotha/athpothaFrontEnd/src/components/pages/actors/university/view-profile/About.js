@@ -33,34 +33,34 @@ const stylebox1 = {
     pb: 3,
 };
 
-function About() {
+function About(props) {
 
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-    const [contentOne, setContentOne] = React.useState('University of Colombo School of Computing (UCSC) was established by merging The Institute of Computer Technology(ICT Ordinance 1987.09.21) and The Department of Computer Science both of the University of Colombo, as the first centre of higher learning of computing in Sri Lanka.');
-    const [contentTwo, setContentTwo] = React.useState('The major goal of the UCSC is to prepare students for careers in Information and Communication Technology as Software Developers, Systems Analysts, Network Administrators, Database Administrators, Web Developers, IT Managers, IT Strategic Planners and IT Policy Makers.')
-    const handleChangeOne = (event) => {
-        setContentOne(event.target.value);
-    };
-    const handleChangeTwo = (event) => {
-        setContentTwo(event.target.value);
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault()
-    }
 
     return (
         <div>
             <Typography variant="body2" gutterBottom textAlign="justify" sx={style} >
-                {contentOne}
-            </Typography>
+                    <textarea
+                        name="Text1"
+                        cols="90"
+                        rows="15"
+                        value={props.aboutdata}
+                        readOnly
+                        style={{
+                            width: "700px",
+                            border: "0px solid #ccc",
+                            resize: "none",
+                            fontFamily: 'poppins',
+                            fontSize: '11pt',
+                            textAlign: 'justify',
+                            boxShadow: "none",
+                            outline: "none",
+                            paddingLeft: "30px",
+                        }}
 
-            <Typography variant="body2" gutterBottom textAlign="justify" sx={style}>
-                {contentTwo}
-            </Typography>
+                    >
+                    </textarea>
+                </Typography>
         </div>
     );
 }

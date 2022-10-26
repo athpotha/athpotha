@@ -69,12 +69,13 @@ const Programms = [
 ];
 
 function replaceCommaLine(data) {
-    const Requirements = data.split(',')
+    const Requirements = data.split('/')
     return Requirements;
 }
 
 function Home(props) {
 
+    console.log(props.homedata)
     const [programm, setPogramm] = React.useState('');
 
     const [req, setReq] = React.useState('');
@@ -130,15 +131,15 @@ function Home(props) {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        {Programms.map(({ id, name }) =>
-                            <MenuItem value={id}>{name}</MenuItem>
+                        {props.homedata.map(({ id, courseName }) =>
+                            <MenuItem value={id}>{courseName}</MenuItem>
                         )}
 
                     </Select>
 
                 </FormControl>
                 <Box>
-                    {Programms.map(({ id, name, minirequirements, details, CareerOpportunities }) => {
+                    {props.homedata.map(({ id, courseName, preRequirements, courseDescription, carrerOpertunities }) => {
                         if (id == programm) {
 
                             return (
@@ -147,7 +148,7 @@ function Home(props) {
                                     <CardContent>
 
                                         <Typography variant="h5" component="div" sx={{ fontWeight: "600", fontSize: "13pt", mb: "10px", color: "#2196f3" }}>
-                                            {name}
+                                            {courseName}
                                         </Typography>
 
                                         <Grid>
@@ -155,7 +156,7 @@ function Home(props) {
                                                 Pre Requirements
                                             </Typography>
 
-                                            {replaceCommaLine(minirequirements).map(name =>
+                                            {replaceCommaLine(preRequirements).map(name =>
                                                 <Grid sx={{ ml: "20px" }}><CheckIcon sx={{ color: "green" }} /><span style={{ fontSize: "11pt" }}>{name}</span></Grid>)}
                                             {/* <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
                                                 <Button onClick={handleOpenReq(minirequirements)}>Edit</Button>
@@ -203,7 +204,7 @@ function Home(props) {
                                                 Course Description
                                             </Typography>
                                             <Typography variant="body2" sx={{ ml: "20px" }}>
-                                                {details}
+                                                {courseDescription}
                                             </Typography>
                                             {/* <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
                                                 <Button onClick={handleOpenDes(details)}>Edit</Button>
@@ -255,7 +256,7 @@ function Home(props) {
                                             <Typography variant="h6" component="div" sx={{ fontWeight: "normal", fontSize: "12pt", mb: "20px", mt: "10px", color: "#ff9800" }}>
                                                 Career Opportunities
                                             </Typography>
-                                            {replaceCommaLine(CareerOpportunities).map(name =>
+                                            {replaceCommaLine(carrerOpertunities).map(name =>
                                                 <Grid sx={{ ml: "20px" }}><CheckIcon sx={{ color: "green" }} /><span style={{ fontSize: "11pt" }}>{name}</span></Grid>)}
                                             {/* <Box sx={{ display: "flex", justifyContent: "flex-end", mb: "10px" }}>
                                                 <Button onClick={handleOpenOpp(CareerOpportunities)}>Edit</Button>

@@ -13,16 +13,19 @@ export const leftbarItem = () => {
                 id: "leftbar-listItem-1",
                 listName: "Connections",
                 icon: <PeopleAltIcon />,
+                link:'/my-network'
             },
             {
                 id: "leftbar-listItem-3",
                 listName: "Community Experts",
                 icon: <CellTowerIcon />,
+                link:'/community'
             },
             {
                 id: "leftbar-listItem-2",
                 listName: "Teachers",
                 icon: <CastForEducationIcon />,
+                link:"/tutor-page"
             },
             {
                 id: "leftbar-listItem-5",
@@ -57,11 +60,13 @@ export const leftbarItem = () => {
                 id: "leftbar-listItem-1",
                 listName: "Connections",
                 icon: <PeopleAltIcon />,
+                link:'/my-network'
             },
             {
                 id: "leftbar-listItem-3",
                 listName: "Community Experts",
                 icon: <CellTowerIcon />,
+                link:'/community'
             },
             {
                 id: "leftbar-listItem-4",

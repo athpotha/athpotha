@@ -34,7 +34,7 @@ import ViewProfile from "./components/pages/view-profile/ViewProfile";
 import { fetchUserData } from "./api/authenticationService";
 
 import { AuthProvider } from "./components/pages/chat/unichat/context/AuthContext"
-
+import Community from "./components/pages/community/Community";
 
 import TutorPage from "./components/pages/tutor-page/TutorPage";
 
@@ -101,6 +101,9 @@ function App() {
           {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/notifications" element={<Notifications />}></Route>
           )}
+          {authCtx.isLoggedIn && authCtx.hasLogged && (
+            <Route path="/community" element={<Community />}></Route>
+          )}
           {/* {authCtx.isLoggedIn && authCtx.hasLogged && (
             <Route path="/chat" element={<ChatLogin />}></Route>
             
@@ -142,6 +145,7 @@ function App() {
           <Route path="/tutor-page" element={<TutorPage/>} />
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         {/* </AuthProvider> */}

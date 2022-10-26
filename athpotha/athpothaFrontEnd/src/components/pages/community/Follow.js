@@ -33,8 +33,7 @@ export const FollowStudent = (props) => {
     const products = props.students
 
     const handleProfileClick = (event, param) => {
-        // navigate('/profile')
-        navigate('/profile/'+param)
+        navigate('/profile')
     };
 
     const [value, setValue] = React.useState(0);
@@ -87,7 +86,7 @@ export const FollowStudent = (props) => {
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
                                                 <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
-                                                    onClick={event => handleProfileClick(event, userId)} />
+                                                    onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
                                         </div>
@@ -122,8 +121,7 @@ export const FollowTeacher = (props) => {
     const products = props.tutors
 
     const handleProfileClick = (event, param) => {
-        // navigate('/profile')
-        navigate('/profile/'+param)
+        navigate('/profile')
     };
 
 
@@ -178,7 +176,7 @@ export const FollowTeacher = (props) => {
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
                                                 <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
-                                                    onClick={event => handleProfileClick(event, userId)} />
+                                                    onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
                                         </div>
@@ -229,8 +227,7 @@ export const FollowUniversity = (props) => {
     const products = props.Universities
 
     const handleProfileClick = (event, param) => {
-        navigate('/profile/'+param)
-        // alert(param)
+        navigate('/profile')
     };
 
 
@@ -283,7 +280,7 @@ export const FollowUniversity = (props) => {
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
                                                 <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
-                                                    onClick={event => handleProfileClick(event, userId)} />
+                                                    onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
                                         </div>
@@ -332,8 +329,7 @@ export const FollowCommunity = (props) => {
     const products = props.communities
 
     const handleProfileClick = (event, param) => {
-        // navigate('/profile')
-        navigate('/profile/'+param)
+        navigate('/profile')
     };
 
 
@@ -386,7 +382,7 @@ export const FollowCommunity = (props) => {
                                             />
                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
                                                 <Avatar alt="Remy Sharp" src={profilePicture} sx={{ width: 90, height: 90, cursor: 'pointer' }}
-                                                    onClick={event => handleProfileClick(event, userId)} />
+                                                    onClick={event => handleProfileClick(event, 'myprofile')} />
                                                 <Link to="/profile"></Link>
                                             </div>
                                         </div>
