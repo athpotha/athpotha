@@ -87,7 +87,7 @@ function Category(props) {
                         p: 1,
                         gap:2,
                     }}>
-                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Engineering")} >Engineering</Button>
+                        <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Engineering Faculty")} >Engineering</Button>
                         <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Computer Science")}>Computer Science</Button>
                         <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Information Technology")}>Information Technology</Button>
                         <Button className="btn" sx={{ borderRadius: '20px' }} variant="outlined" onClick={event => props.getFilterName("Physical Science")}>Physical Science</Button>

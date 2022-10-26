@@ -77,16 +77,16 @@ function CourseViewCard(props) {
                                                             <CardMedia
                                                                 component="img"
                                                                 height="90"
-                                                                image="images/tutors/tutor-1.jpg"
+                                                                image={university.coverPicture}
                                                                 alt="green iguana"
                                                             />
                                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                                <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90 }} />
+                                                                <Avatar alt="Remy Sharp" src={university.profilePicture} sx={{ width: 90, height: 90 }} />
                                                             </div>
                                                         </div>
-                                                        <div style={{ marginTop: '35px', marginLeft: '16px' }}>
-                                                            <Box sx={{ mb: "px" }}>{university.university}</Box>
-                                                            <Box sx={{ mb: "30px" }}>{course.courseName}</Box>
+                                                        <div style={{ marginTop: '35px', marginLeft: '12px' }}>
+                                                            <Box sx={{ mb: "5px" }}>{university.university}</Box>
+                                                            <Box sx={{ width:"100%", height:50, fontSize:"10pt"}}>{course.courseName}</Box>
                                                             <CenteredBox >
                                                                 <Stack direction="row" spacing={1}>
                                                                     <StyledRating
@@ -109,7 +109,7 @@ function CourseViewCard(props) {
                                             </Grid>
                                         );
                                     }
-                                    else if(props.filtern == course.courseName){
+                                    else if(props.filtern == university.faculty || props.filtern == course.courseName){
                                         return (
                                             <Grid item xs={4}>
                                                 <Box sx={{ p: 1, m: 1, }} >
@@ -118,11 +118,11 @@ function CourseViewCard(props) {
                                                             <CardMedia
                                                                 component="img"
                                                                 height="90"
-                                                                image="images/tutors/tutor-1.jpg"
+                                                                image={university.coverPicture}
                                                                 alt="green iguana"
                                                             />
                                                             <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                                <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90 }} />
+                                                                <Avatar alt="Remy Sharp" src={university.profilePicture} sx={{ width: 90, height: 90 }} />
                                                             </div>
                                                         </div>
                                                         <div style={{ marginTop: '35px', marginLeft: '16px' }}>

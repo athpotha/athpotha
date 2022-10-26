@@ -8,6 +8,7 @@ import BeforeDisplay from "../../../../ui/BeforeDisplay";
 import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 import MyCategories from "../../../profile/MyCategories";
 import StudentMaterials from "./StudentMaterials";
+import { fetchUserData } from "../../../../../api/authenticationService";
 // import BeforeDisplay from "../../ui/BeforeDisplay";
 // import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
@@ -46,6 +47,7 @@ function a11yProps(index) {
 
 
 function TutorFeedSection(props) {
+
 
     const [value, setValue] = React.useState(0);
 
