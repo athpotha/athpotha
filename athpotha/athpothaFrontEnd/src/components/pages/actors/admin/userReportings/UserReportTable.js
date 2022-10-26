@@ -1,5 +1,8 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import ViewPopup from "../manageUsers/ViewPopup";
+// import BlockUser from "./BlockUser.js";
+
 import {
   DataGrid,
   GridToolbarContainer,
@@ -19,6 +22,52 @@ import {
   Select,
 } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
+import EditPopUp from "../manageUsers/EditPopUp";
+import Swal from "sweetalert2";
+
+//open sweet alert when clicked block button
+const openSweetAlert = () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "User will be blocked after this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#388e3c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Block User",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Blocked!",
+        text: "The user has been blocked.",
+        icon: "success",
+        confirmButtonColor: "#388e3c",
+      });
+    }
+  });
+};
+
+//open sweet alert1 when clicked warn user button
+const openSweetAlert1 = () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "User will be warned after this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#388e3c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Warn User",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Warned!",
+        text: "The user has been warned.",
+        icon: "success",
+        confirmButtonColor: "#388e3c",
+      });
+    }
+  });
+};
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -72,51 +121,57 @@ const rows = [
   {
     id: 1,
     col1: "Kasun",
-    col2: "Perera",
-    col3: "kasun@gmail.com",
+    col2: "Pavani",
+    col3: "2022-09-13",
+    col4: "Incorrect Content",
   },
   {
     id: 2,
     col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
+    col2: "Kasun",
+    col3: "2022-09-26",
+    col4: "Incorrect Content",
   },
   {
     id: 3,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
+    col1: "Melaka",
+    col2: "Kumud",
+    col3: "2022-09-29",
+    col4: "Incorrect Content",
   },
   {
     id: 4,
     col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
+    col2: "Ashani",
+    col3: "2022-10-12",
+    col4: "Incorrect Content",
   },
   {
     id: 5,
     col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
+    col2: "Pavani",
+    col3: "2022-10-15",
+    col4: "Incorrect Content",
   },
   {
     id: 6,
-    col1: "Roneki",
-    col2: "Manamperi",
-    col3: "roneki.saranga12@gmail.com",
+    col1: "Sumudu",
+    col2: "Kasun",
+    col3: "2022-10-26",
+    col4: "Incorrect Content",
   },
 ];
 
 const columns = [
   {
     field: "col1",
-    headerName: "Reporter",
+    headerName: "Reported By",
     headerClassName: "header-class-name",
     width: 100,
   },
   {
     field: "col2",
-    headerName: "Reportee",
+    headerName: "User",
     headerClassName: "header-class-name",
     width: 100,
   },
@@ -146,10 +201,10 @@ const columns = [
 
       return (
         <CenteredBox align='left'>
-          <ColorButton1 style={{ marginRight: 6 }}>View User</ColorButton1>
-          <ColorButton2 style={{ marginRight: 6 }}>Reports</ColorButton2>
-          <ColorButton4 style={{ marginRight: 6 }}>Warn</ColorButton4>
-          <ColorButton3>Block</ColorButton3>
+          <ViewPopup/>
+          <ColorButton2 style={{ marginRight: 6 }}>Previous Reportings</ColorButton2>
+          <ColorButton4 onClick={openSweetAlert1} style={{ marginRight: 6 }}>Warn User</ColorButton4>
+          <ColorButton3 onClick={openSweetAlert}>Block</ColorButton3>
         </CenteredBox>
       );
     },
