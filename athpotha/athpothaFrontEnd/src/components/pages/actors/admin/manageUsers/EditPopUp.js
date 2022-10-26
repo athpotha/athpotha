@@ -44,12 +44,12 @@ export default function Popup(props) {
         </ColorButton2>
       <Modal
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <EditUserForm userId={props.userId} state={open}>
+          <EditUserForm userId={props.userId} handleClose={handleClose}>
           </EditUserForm>
         </Box>
       </Modal>

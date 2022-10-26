@@ -44,7 +44,7 @@ public class AdminController {
 	
 	@PostMapping("/getAllUni")
 	public List<University> getAllUni() {
-		return universityRepository.findAll();
+		return universityRepository.findAllByIsVerifiedFalse();
 	}
 	
 	@PostMapping("/getUser/{userId}")

@@ -4,18 +4,20 @@ import Button from "@mui/material/Button";
 import InputField from "../../../login/InputField"
 // import classes from "./Form.module.css";
 import classes from "../Form.module.css"
-import { FormControl,  Grid,  InputLabel } from "@mui/material";
+import { FormControl, Grid, InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { green, red } from "@mui/material/colors";
 import Input from '@mui/material/Input';
 import { fetchUserData } from "../../../../../api/authenticationService";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 const ariaLabel = { 'aria-label': 'description' };
 //sweet alert
 const Swal = require("sweetalert2");
 
- //open sweet alert when clicked delete button
- const UpdateUser = () => {
+//open sweet alert when clicked delete button
+const UpdateUser = () => {
 
   Swal.fire({
     title: "Updated!",
@@ -30,22 +32,22 @@ const Swal = require("sweetalert2");
 
 //colour buttons
 const ColorButton1 = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(green[600]),
-    textTransform: "none",
-    backgroundColor: green[600],
-    "&:hover": {
-      backgroundColor: green[700],
-    },
-  }));
-  
-  const ColorButton2 = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(red[600]),
-    backgroundColor: red[600],
-    textTransform: "none",
-    "&:hover": {
-      backgroundColor: red[700],
-    },
-  }));
+  color: theme.palette.getContrastText(green[600]),
+  textTransform: "none",
+  backgroundColor: green[600],
+  "&:hover": {
+    backgroundColor: green[700],
+  },
+}));
+
+const ColorButton2 = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(red[600]),
+  backgroundColor: red[600],
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: red[700],
+  },
+}));
 function EditUserForm(props) {
   //close popup
   const [open, setOpen] = React.useState(props.state);
@@ -60,34 +62,45 @@ function EditUserForm(props) {
   //get user with the relevent id
   const [userData, setUserData] = React.useState([])
 
- 
-  var id=props.userId;
+
+  var id = props.userId;
 
   const data = {
     url: `admin/getUser/${id}`,
     method: "post",
     data: null,
   };
-
-  React.useEffect(()=>{
-      fetchUserData(data).then((response) => {
-        setUserData(response.data)
-          // console.log("User Data");
-          // console.log(response.data);
-      })
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userType, setUserType] = useState("");
+  const [description, setDescription] = useState("");
+  const [email, setEmail] = useState("");
+  const [university, setUniversity] = useState("");
+  const [faculty, setFaculty] = useState("");
+  React.useEffect(() => {
+    fetchUserData(data).then((response) => {
+      console.log(response.data)
+      setFirstName(response.data.firstName);
+      setLastName(response.data.lastName);
+      setUserType(response.data.userType);
+      setEmail(response.data.email);
+      if (response.data.userType === "University") {
+        setUniversity(response.data.university);
+        setFaculty(response.data.faculty);
+      }
+      // setDescription(response.data.)
+      // setUserData(response.data)
+      // console.log("User Data");
+      // console.log(response.data);
+    })
   }, [])
 
-   console.log(userData);
+  //  console.log(userData);
   //sweet alert
-  const [firstName,setFirstName]= useState( userData['firstName']);
-  const [lastName, setLastName] = useState(userData['lastName']);
-  const [userType, setUserType] = useState(userData['userType']);
-  const [description, setDescription] = useState(userData['description']);
-  const [email, setEmail] = useState(userData['email']);
-  
-  console.log("FirstName - "+firstName);
 
-  const UpdateUser=(e)=>{
+  // console.log("FirstName - "+firstName);
+
+  const UpdateUser = (e) => {
     e.preventDefault();
     // setFirstName(e.target.value);
     // setLastName(e.target.value);
@@ -102,7 +115,7 @@ function EditUserForm(props) {
         firstName,
         lastName,
         userType,
-        description,
+        // description,
         email
       },
     };
@@ -111,7 +124,7 @@ function EditUserForm(props) {
         console.log(response.data);
       });
   }
-  
+
   // const UpdateUser = () => {
   //   Swal.fire({
   //     title: "Updated!",
@@ -139,50 +152,68 @@ function EditUserForm(props) {
 
       <div className={classes["actual-form"]}>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
-           <FormControl variant="standard" sx={{ width: "100%" }}>
+          <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="first_name">First Name</InputLabel>
-            {console.log("Username"+userData['firstName'])}
-            <Input placeholder="first name" value={userData['firstName']} onChange={(e) => setFirstName(e.target.value)} />
+            <Input placeholder="first name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]} style={{ marginTop: "10px" }}>
-           <FormControl variant="standard" sx={{ width: "100%" }}>
+          <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="last_name">Last Name</InputLabel>
-            <Input  placeholder="last name" value={userData['lastName']} onChange={(e) => setLastName(e.target.value)} />
+            <Input placeholder="last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
-        <FormControl variant="standard" sx={{ width: "100%" }}>
+          <FormControl variant="standard" fullWidth>
+            <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={userType}
+              label="User Type"
+              onChange={(e) => {setUserType(e.target.value)}}
+            >
+              <MenuItem value="student">Student</MenuItem>
+              <MenuItem value="tutor">Tutor</MenuItem>
+              <MenuItem value="university">University</MenuItem>
+              <MenuItem value="community">Community</MenuItem>
+            </Select>
+          </FormControl>
+          {/* <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="user_type">User Type</InputLabel>
-            <Input placeholder="user type" value={userData['userType']} onChange={(e) => setUserType(e.target.value)}  />
-          </FormControl>
+            <Input placeholder="user type" value={userType} onChange={(e) => setUserType(e.target.value)} />
+          </FormControl> */}
         </div>
-        <div className={classes["input-wrap"]}>
+        {/* <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="description">Description</InputLabel>
             <Input multiline placeholder="decsription" value={userData['description']} onChange={(e) => setDescription(e.target.value)}  />
           </FormControl>
-        </div>
+        </div> */}
         <div className={classes["input-wrap"]}>
-        <FormControl variant="standard" sx={{ width: "100%" }}>
+          <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel id="email">Email</InputLabel>
-            <Input placeholder="email" value={userData['email']} onChange={(e) => setEmail(e.target.value)}  />
+            <Input placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </FormControl>
         </div>
-        <div className={classes["input-wrap"]}>
-        <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="university">University</InputLabel>
-            <Input placeholder="university" value={userData['university']}  />
-          </FormControl>
-        </div>
-        <div className={classes["input-wrap"]}>
-        <FormControl variant="standard" sx={{ width: "100%" }}>
-            <InputLabel id="faculty">Faculty</InputLabel>
-            <Input placeholder="faculty" value={userData['faculty']}  />
-          </FormControl>
-        </div>
-         <ColorButton1 style={{ marginRight: 50, marginLeft:40 , paddingLeft:30, paddingRight:30}} onClick={UpdateUser}>Update</ColorButton1>
-            <ColorButton2 style={{ paddingLeft:30, paddingRight:30}} onClick={handleClose}>Cancel</ColorButton2>
+        {userType === "university" &&
+          <React.Fragment>
+            <div className={classes["input-wrap"]}>
+              <FormControl variant="standard" sx={{ width: "100%" }}>
+                <InputLabel id="university">University</InputLabel>
+                <Input placeholder="university" value={userData['university']} />
+              </FormControl>
+            </div>
+            <div className={classes["input-wrap"]}>
+              <FormControl variant="standard" sx={{ width: "100%" }}>
+                <InputLabel id="faculty">Faculty</InputLabel>
+                <Input placeholder="faculty" value={userData['faculty']} />
+              </FormControl>
+            </div>
+          </React.Fragment>
+        }
+        <ColorButton1 style={{ marginRight: 50, marginLeft: 40, paddingLeft: 30, paddingRight: 30 }} onClick={UpdateUser}>Update</ColorButton1>
+        <ColorButton2 style={{ paddingLeft: 30, paddingRight: 30 }} onClick={props.handleClose}>Cancel</ColorButton2>
       </div>
     </form>
   );
@@ -192,7 +223,7 @@ export default EditUserForm;
 
 
 //parallel inputs
- {/* <Grid container>
+{/* <Grid container>
             <Grid item xs={6}>
               <TextField
                 label="First Name"

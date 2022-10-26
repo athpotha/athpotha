@@ -29,6 +29,9 @@ import Content from './Content';
 import PropTypes from 'prop-types'
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useContext } from 'react';
+import AuthContext from '../../../../store/ath-context';
+import Swal from 'sweetalert2';
 
 // import { mainListItems, secondaryListItems } from './listItems';
 // import Chart from './Chart';
@@ -106,18 +109,36 @@ export default function Dashboard(props) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const universityReg=()=>{
+  let navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure to logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/login');
+        authCtx.logout();
+      }
+    })
+  };
+
+  const universityReg = () => {
     navigate("/admin/university-registration");
   }
 
-  let navigate = useNavigate();
   const mangeUserHandler = (event) => {
     navigate("/admin/manage-users");
   }
-  const manageDashboard=()=>{
+  const manageDashboard = () => {
     navigate("/admin")
   }
-  const webActivity =()=>{
+  const webActivity = () => {
     navigate("/admin/website-activity")
   }
 
@@ -156,18 +177,17 @@ export default function Dashboard(props) {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
+            {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
-                {/* <NotificationsIcon /> */}
                 <NotificationMenu />
                 
               </Badge>
-            </IconButton>
+            </IconButton> */}
 
             <Button color="inherit">
-                
-            <LogoutIcon fontSize="large" sx={{pl:1}}></LogoutIcon>
-              
+
+              <LogoutIcon onClick={handleLogout} fontSize="large" sx={{ pl: 1 }}></LogoutIcon>
+
             </Button>
 
           </Toolbar>
