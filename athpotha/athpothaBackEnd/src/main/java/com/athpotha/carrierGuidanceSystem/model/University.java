@@ -35,6 +35,6 @@ public class University extends User {
 	public void setCoureselist(List<Course> coureselist) {
 		this.coureselist = coureselist;
 	}
-	
+
 
 }

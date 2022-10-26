@@ -10,6 +10,7 @@ import Home from "./Home";
 import About from "./About";
 import ViewPosts from "../../../view-profile/ViewPosts";
 import { useLocation } from "react-router-dom";
+import { fetchUserData } from "../../../../../api/authenticationService";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -53,9 +54,20 @@ function StudentFeedSection(props) {
         setValue(newValue);
     };
 
-    const { state } = useLocation();
-    const { cid} = state
-    
+    // const { state } = useLocation();
+    // const { cid} = state
+
+
+    const user_id = localStorage.getItem("USER_ID")
+
+    const [uniDetails, setUniDetails] = React.useState(props)
+
+    React.useEffect(() => {
+        //console.log(props)
+        console.log(props['user']['coureselist'])
+    }, [])
+    //alert(uniDetails)
+
 
     return (
         <StyledEngineProvider injectFirst>
@@ -66,11 +78,11 @@ function StudentFeedSection(props) {
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0} style={{ backgroundColor: "#FFF", padding: "20px" }}>
-                <About></About>
+                <About aboutdata = {props['user']['about']} ></About>
             </TabPanel>
 
             <TabPanel value={value} index={1} style={{ backgroundColor: "#FFF", padding: "20px" }}>
-                <Home courseid={cid}></Home>
+                <Home homedata = {props['user']['coureselist']}></Home>
             </TabPanel>
 
             <TabPanel value={value} index={2} style={{ backgroundColor: "#FFF" }}>
