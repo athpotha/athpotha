@@ -2,6 +2,7 @@ package com.athpotha.carrierGuidanceSystem.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,7 @@ public class Tutor extends User  {
 	private String description;
 	private String qualification;
 	private float rate = 0;
+
+
 
 }

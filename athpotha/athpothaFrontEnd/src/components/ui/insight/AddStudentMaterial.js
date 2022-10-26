@@ -70,16 +70,30 @@ function AddStudentMaterial(props) {
     }
   })
 
-  
+
   const [fileMaterial, setFileMaterial] = useState("");
   const setFileMaterialHandler = (material) => {
     setFileMaterial(material);
   }
-  
+
   const [imageUrl, setImageUrl] = useState('');
   let formIsValid = false;
-  if (contentIsValid && categoryIsValid) {
+  if (contentIsValid && fileMaterial !== "") {
     formIsValid = true;
+  }
+
+  const user_id = localStorage.getItem("USER_ID")
+  const showAlert = () => {
+    Swal.fire({
+      title: "Success",
+      text: "Alert successful",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload(false);
+      }
+    });
   }
 
   const postSubmitHandler = () => {
@@ -88,12 +102,21 @@ function AddStudentMaterial(props) {
       return;
     }
     const data = {
-      url: fileMaterial,
+      materialUrl: fileMaterial,
       content: content,
+      userId: user_id
     }
     //api call here
+    fetchUserData({
+      url: "materials/add-material",
+      method: "post",
+      data: data
+    }).then((response) => {
+      showAlert()
+      window.location.reload(false);
+    })
     props.close();
-    
+
   }
 
   return (
@@ -104,7 +127,7 @@ function AddStudentMaterial(props) {
         <Grid item xs={12}>
           <div style={{ height: "300px", overflowY: "auto" }}>
             <div style={{ marginRight: "30px" }}>
-              <ProfileImage size="small" />
+              {/* <ProfileImage size="small" /> */}
               <TextField
                 sx={{ my: 2 }}
                 placeholder="Say something..."
