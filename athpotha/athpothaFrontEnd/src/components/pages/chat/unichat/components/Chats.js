@@ -214,9 +214,41 @@ import React, { useState } from 'react'
 
 import { ChatEngine, getOrCreateChat } from 'react-chat-engine'
 import '../index.css';
+import axios from "axios";
+
+function createUser(params) {
+	// var axios = require('axios');
+var data = {
+	"username": localStorage.getItem("USER_NAME"),
+	"secret": "1234",
+	"email": localStorage.getItem("USER_EMAIL"),
+	"first_name": localStorage.getItem("FIRST_NAME"),
+	"last_name": localStorage.getItem("LAST_NAME")
+};
+
+var config = {
+	method: 'post',
+	url: 'https://api.chatengine.io/users/',
+	headers: {
+		'PRIVATE-KEY': '4868d7e4-0e55-44ae-b4db-b434e9114bc9'
+	},
+	data : data
+};
+
+axios(config)
+.then(function (response) {
+	console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+	console.log(error);
+});
+
+}
+
+
 const DirectChatPage = () => {
 	console.log(localStorage.getItem('USER_EMAIL'));
-
+	createUser();
 	const [username, setUsername] = useState('')
 
 	function createDirectChat(creds) {
@@ -229,6 +261,7 @@ const DirectChatPage = () => {
 
 	function renderChatForm(creds) {
 		return (
+			
 			<div>
 				<input 
 					placeholder='Username' 
@@ -247,7 +280,7 @@ const DirectChatPage = () => {
 		
 		<ChatEngine
 			height='80vh'
-			userName={localStorage.getItem('USER_EMAIL')}
+			userName={localStorage.getItem('USER_NAME')}
 			userSecret='1234'
 			projectID='dbee0612-9a82-4b05-9cae-f5048f73dffb'
 			renderNewChatForm={(creds) => renderChatForm(creds)}
