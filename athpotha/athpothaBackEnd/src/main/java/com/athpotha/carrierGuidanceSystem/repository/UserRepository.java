@@ -12,7 +12,8 @@ import com.athpotha.carrierGuidanceSystem.model.User;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface
+UserRepository extends JpaRepository<User, Long> {
 	User findByEmailIgnoreCase(String email);
 	User findByUserId(Long userId);
 
@@ -33,4 +34,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	@Query(nativeQuery=true, value="SELECT COUNT(DISTINCT user_id) FROM User WHERE created_at > NOW() - INTERVAL 1 WEEK")
 	int getNewUsers();
+	
+	List<User> findByUserDeletedFalse();
+	
+	
 }

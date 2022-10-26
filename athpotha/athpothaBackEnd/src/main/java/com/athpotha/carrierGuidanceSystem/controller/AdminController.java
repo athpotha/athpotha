@@ -37,14 +37,14 @@ public class AdminController {
 	
 	@PostMapping("/getAll")
 	public List<User> getAllUsers() {
-		return userRepository.findAll();
+		return userRepository.findByUserDeletedFalse();
 		
 //		return userRepository.findAll();
 	}
 	
 	@PostMapping("/getAllUni")
 	public List<University> getAllUni() {
-		return universityRepository.findAll();
+		return universityRepository.findAllByIsVerifiedFalse();
 	}
 	
 	@PostMapping("/getUser/{userId}")
@@ -61,12 +61,13 @@ public class AdminController {
 //		
 //	}
 //	
-//	@DeleteMapping("/deleteUser/{userId}")
-//	public ResponseEntity deleteUser(@PathVariable long userId) {
-//		userRepository.deleteById(userId); 
-//		System.out.println("User to delete"+userId);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+	@PutMapping("/deleteUser/{userId}")
+	public ResponseEntity deleteUser(@PathVariable long userId) {
+		User user = userRepository.findByUserId(userId);
+		user.setUserDeleted(true);
+		userRepository.save(user); 
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
 	@PostMapping("/getTotUsers")
 	public int getTotUsers() {

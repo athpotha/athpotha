@@ -46,10 +46,10 @@ const style = {
 };
 
 export default function ManageUSerTable() {
-  // const [value, setValue] = React.useState(false);
-  //  const [rows, setRows] = React.useState([{}])
+  
   const [tableData, setTableData] = useState([]);
   let tableRows = [];
+
   //get data from database
   React.useEffect(() => {
     fetchUserData({
@@ -72,8 +72,14 @@ export default function ManageUSerTable() {
     });
   }, []);
 
-  //open sweet alert when clicked delete button
-  const openSweetAlert = () => {  
+  //Delete User
+  
+  const openSweetAlert = (id) => {  
+    const data = {
+      url: `admin/deleteUser/${id}`,
+      method: "put",
+      data: null
+    };
     
     Swal.fire({
       title: "Are you sure?",
@@ -85,32 +91,21 @@ export default function ManageUSerTable() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "The user has been deleted.",
-          icon: "success",
-          confirmButtonColor: "#388e3c",
-        });
-      }
-    });
-  };
-//delete user function
-// const handleDelete (id)=>{
-//   const data = {
-//     url: `admin/deleteUser/${id}`,
-//     method: "delete",
-//     data: null,
-//   };
-
-//   React.useEffect(()=>{
-//       fetchUserData(data).then((response) => {
-//         // setUserData(response.data)
-//           console.log("User Data");
-//           console.log(response.data);
-//       })
-//   }, [])
-
-// }
+        console.log("Clicked Confirm");
+        fetchUserData(data).then(() => {
+          Swal.fire({
+            title: "Deleted!",
+            text: "User deleted",
+            icon: "success",
+            confirmButtonColor: "#388e3c",
+          }).then(() => {        
+              console.log("After Delete");
+              window.location.replace("/admin/manage-users");
+            })
+        })
+    }
+})
+}
 
   const columns = [
     {
@@ -150,7 +145,7 @@ export default function ManageUSerTable() {
           
             <ViewPopup userId={params.row.id} />
             <EditPopUp userId={params.row.id} />
-            <ColorButton3 onClick={openSweetAlert}>Delete</ColorButton3>
+            <ColorButton3 onClick={() => {openSweetAlert(params.row.id)}}>Delete</ColorButton3>
           </CenteredBox>
         );
       },

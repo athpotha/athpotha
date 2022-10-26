@@ -37,33 +37,38 @@ public class NetworkController {
     private UserService userService;
 
     @PostMapping("/getUser")
-    public List<User> getUser(@RequestBody User userEntity){
+    public List<Tutor> getUser(@RequestBody User userEntity){
     	
-//        List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUserId(),UserType.tutor);
-//        return tutorsa;
-    	User user = userRepository.findByUserId(userEntity.getUserId());
-    	List<User> users = userRepository.findByFollowing(user);
-    	
-//    	return users;
-    	return users;
+//      List<Tutor> tutorsa  = tutorRepository.findTutorsunFollowing(user.getUserId(),UserType.tutor);
+
+    	User user = userRepository.findByUserId(2L);
+//    	List<User> users = userRepository.findByFollowing(user);
+        List<Tutor> tutor = tutorRepository.findAll();
+        System.out.println(user.getFollowing());
+
+    	return tutor;
     }
 
-//    @PostMapping("getUniversities")
-//    public List<University> getUniversities(@RequestBody User user){
-//        List<University> universities = universityRepository.findUniversitiesunFollowing(user.getUserId(),UserType.university);
-//        return universities;
-//    }
-//
-//    @PostMapping("getCommunities")
-//    public List<Community> getCommunities(@RequestBody User user){
-//        List<Community> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUserId(),UserType.community);
-//        return commiunitiesa;
-//    }
-//
-//    @PostMapping("getStudents")
-//    public List<Student> getStudents(@RequestBody User user){
-//        List<Student> studentsa  = studentRepository.findStudentssunFollowing(user.getUserId(),UserType.student);
-//        return studentsa;
-//    }
+    @PostMapping("getUniversities")
+    public List<University> getUniversities(@RequestBody User user){
+        //List<University> universities = universityRepository.findUniversitiesunFollowing(user.getUserId(),UserType.university);
+        List<University> universities = universityRepository.findAll();
+        return universities;
+    }
+
+    @PostMapping("getCommunities")
+    public List<Community> getCommunities(@RequestBody User user){
+        //List<Community> commiunitiesa  = commiunityRepository.findCommunitiesunFollowing(user.getUserId(),UserType.community);
+        List<Community> communities = commiunityRepository.findAll();
+        return communities;
+    }
+
+    @PostMapping("getStudents")
+    public List<Student> getStudents(@RequestBody User user){
+        //List<Student> studentsa  = studentRepository.findStudentssunFollowing(user.getUserId(),UserType.student);
+        List<Student> students = studentRepository.findAll();
+        System.out.println(students);
+        return students;
+    }
 
 }
