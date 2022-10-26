@@ -14,6 +14,7 @@ public interface UniversityRepository extends JpaRepository<University, Long> {
 	University findByEmailIgnoreCase(String email);
 	University findByUserId(Long userId);
 	List<University> findAllByIsVerified(int x);
+    
 	
 
 //	List<University> findAllByIsVerifiedTwo();
