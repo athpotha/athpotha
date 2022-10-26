@@ -215,6 +215,8 @@ import React, { useState } from 'react'
 import { ChatEngine, getOrCreateChat } from 'react-chat-engine'
 import '../index.css';
 const DirectChatPage = () => {
+	console.log(localStorage.getItem('USER_EMAIL'));
+
 	const [username, setUsername] = useState('')
 
 	function createDirectChat(creds) {
@@ -236,14 +238,16 @@ const DirectChatPage = () => {
 				<button onClick={() => createDirectChat(creds)}>
 					Create
 				</button>
+			
 			</div>
 		)
 	}
 
 	return (
+		
 		<ChatEngine
 			height='80vh'
-			userName='melaka36pathiranagama@gmail.com'
+			userName={localStorage.getItem('USER_EMAIL')}
 			userSecret='1234'
 			projectID='dbee0612-9a82-4b05-9cae-f5048f73dffb'
 			renderNewChatForm={(creds) => renderChatForm(creds)}
