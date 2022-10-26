@@ -6,14 +6,12 @@
 
 // import { useAuth } from "../context/AuthContext";
 
-
 // export default function Chats() {
 //     const didMountRef = useRef(false)
 //     const [loading, setLoading] = useState(true)
 //     const { user } = useAuth()
 //     const navigate = useNavigate()
-    
-   
+
 //     async function handleLogout()  {
 //         await auth.signOut();
 
@@ -37,14 +35,14 @@
 //             return
 //         }
 
-//         axios.get( 
-//             'https://api.chatengine.io/users/me/', 
+//         axios.get(
+//             'https://api.chatengine.io/users/me/',
 //             { headers: {
 //                 "project-id": 'dbee0612-9a82-4b05-9cae-f5048f73dffb',
 //                 "user-name": user.email,
 //                 "user-secret": user.uid
 //             }}
-        
+
 //         )
 //         .then(() => {setLoading(false);
 
@@ -87,7 +85,7 @@
 
 //             </div>
 
-//             <ChatEngine 
+//             <ChatEngine
 //                 height="calc(100vh - 66px)"
 //                 projectID= 'dbee0612-9a82-4b05-9cae-f5048f73dffb'
 //                 userName='melaka36pathiranagama@gmail.com'
@@ -97,12 +95,6 @@
 //         </div>
 //     )
 // }
-
-
-
-
-
-
 
 // import React, { useState } from 'react'
 
@@ -131,13 +123,13 @@
 //     const { user } = useAuth()
 
 // 	function renderChatForm(creds) {
-    
+
 // 		return (
 // 			<div>
-// 				<input 
-// 					placeholder='Username' 
-// 					value={username} 
-// 					onChange={(e) => setUsername(e.target.value)} 
+// 				<input
+// 					placeholder='Username'
+// 					value={username}
+// 					onChange={(e) => setUsername(e.target.value)}
 // 				/>
 // 				<button onClick={() => createDirectChat(creds)}>
 // 					Create
@@ -150,9 +142,6 @@
 // 	const listItems = leftbarItem();
 // 	return (
 
-
-		
- 
 //     <StyledEngineProvider injectFirst>
 //       <MainHeader value={userType === "university" ? 2 : 3} />
 //       <Grid
@@ -201,91 +190,106 @@
 //         </Grid>
 //       </Grid>
 //     </StyledEngineProvider>
-  
 
-		
 // 	)
 // }
 
 // export default DirectChatPage;
 
+import React, { useState, useEffect } from "react";
 
-import React, { useState } from 'react'
-
-import { ChatEngine, getOrCreateChat } from 'react-chat-engine'
-import '../index.css';
+import { ChatEngine, getOrCreateChat } from "react-chat-engine";
+import "../index.css";
 import axios from "axios";
 
 function createUser(params) {
-	// var axios = require('axios');
-var data = {
-	"username": localStorage.getItem("FIRST_NAME")+'_'+localStorage.getItem("LAST_NAME"),
-	"secret": "1234",
-	"email": localStorage.getItem("USER_EMAIL"),
-	"first_name": localStorage.getItem("FIRST_NAME"),
-	"last_name": localStorage.getItem("LAST_NAME")
-};
+  // var axios = require('axios');
+  var data = {
+    username:
+      localStorage.getItem("FIRST_NAME") +
+      "_" +
+      localStorage.getItem("LAST_NAME"),
+    secret: "1234",
+    email: localStorage.getItem("USER_EMAIL"),
+    first_name: localStorage.getItem("FIRST_NAME"),
+    last_name: localStorage.getItem("LAST_NAME"),
+  };
 
-var config = {
-	method: 'post',
-	url: 'https://api.chatengine.io/users/',
-	headers: {
-		'PRIVATE-KEY': '4868d7e4-0e55-44ae-b4db-b434e9114bc9'
-	},
-	data : data
-};
+  var config = {
+    method: "post",
+    url: "https://api.chatengine.io/users/",
+    headers: {
+      "PRIVATE-KEY": "4868d7e4-0e55-44ae-b4db-b434e9114bc9",
+    },
+    data: data,
+  };
 
-axios(config)
-.then(function (response) {
-	console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-	console.log(error);
-});
-
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
+const DirectChatPage = (prop) => {
+//   useEffect(() => {
+//     createUser();
+//   }, []);
+// alert("if prop"+prop);	
+const [username, setUsername] = useState("");
 
-const DirectChatPage = () => {
-	console.log(localStorage.getItem('USER_EMAIL'));
-	createUser();
-	const [username, setUsername] = useState('')
-
-	function createDirectChat(creds) {
-		getOrCreateChat(
-			creds,
-			{ is_direct_chat: true, usernames: [username] },
-			() => setUsername('')
-		)
-	}
-
-	function renderChatForm(creds) {
-		return (
-			
-			<div>
-				<input 
-					placeholder='Username' 
-					value={username} 
-					onChange={(e) => setUsername(e.target.value)} 
-				/>
-				<button onClick={() => createDirectChat(creds)}>
-					Create
-				</button>
-			
-			</div>
-		)
-	}
-
-	return (
+	// if(prop!=null){
+	// 	// alert("if prop"+prop);	
 		
-		<ChatEngine
-			height='80vh'
-			userName={localStorage.getItem("FIRST_NAME")+'_'+localStorage.getItem("LAST_NAME")}
-			userSecret='1234'
-			projectID='dbee0612-9a82-4b05-9cae-f5048f73dffb'
-			renderNewChatForm={(creds) => renderChatForm(creds)}
-		/>
-	)
-}
+	//   setUsername(prop);
+	// 	alert(username);
 
-export default DirectChatPage;  
+	//   createDirectChat();
+	// }	
+  
+  createUser();
+  
+  function createDirectChat(creds, un) {
+    getOrCreateChat(
+      creds,
+      { is_direct_chat: true, usernames: [username ?? un] },
+      () => setUsername("")
+    );
+  }
+
+  function renderChatForm(creds,name) {
+	  console.log("creds",creds);
+	  
+    return (
+      <div>
+        <input
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button onClick={() => createDirectChat(creds)}>Create</button>
+      </div>
+    );
+  }
+
+  return (
+    <ChatEngine
+      height="80vh"
+      userName={
+        localStorage.getItem("FIRST_NAME") +
+        "_" +
+        localStorage.getItem("LAST_NAME")
+      }
+      userSecret="1234"
+      projectID="dbee0612-9a82-4b05-9cae-f5048f73dffb"
+      renderNewChatForm={(creds) => renderChatForm(creds)}
+    />
+  );
+};
+
+
+export default DirectChatPage;
+
+

@@ -73,7 +73,7 @@ function EditUserForm(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userType, setUserType] = useState("");
-  const [description, setDescription] = useState("");
+  // const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const [university, setUniversity] = useState("");
   const [faculty, setFaculty] = useState("");
@@ -100,14 +100,9 @@ function EditUserForm(props) {
 
   // console.log("FirstName - "+firstName);
 
-  const UpdateUser = (e) => {
-    e.preventDefault();
-    // setFirstName(e.target.value);
-    // setLastName(e.target.value);
-    // setUserType(e.target.value);
-    // setDescription(e.target.value);
-    // setEmail(e.target.value);
-
+  const UpdateUser = () => { 
+    props.handleClose();
+    console.log("id"+id) ;
     const data = {
       url: `admin/updateUser/${id}`,
       method: "put",
@@ -115,28 +110,38 @@ function EditUserForm(props) {
         firstName,
         lastName,
         userType,
-        // description,
-        email
-      },
+        email,
+        university,
+        faculty
+      }
     };
-    fetchUserData(data)
-      .then((response) => {
-        console.log(response.data);
-      });
-  }
+    console.log(data);
 
-  // const UpdateUser = () => {
-  //   Swal.fire({
-  //     title: "Updated!",
-  //     text: "The user has been updated.",
-  //     icon: "success",
-  //     confirmButtonColor: "#388e3c"
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //      console.log("success");
-  //     }
-  //   });
-  // };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#388e3c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, update it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log("Clicked update");
+        fetchUserData(data).then(() => {
+          Swal.fire({
+            title: "Updated!",
+            text: "User updated",
+            icon: "success",
+            confirmButtonColor: "#388e3c",
+          }).then(() => {        
+              console.log("After Update");
+              window.location.replace("/admin/manage-users");
+            })
+        })
+    }
+})
+}
 
   return (
     <form
@@ -201,13 +206,13 @@ function EditUserForm(props) {
             <div className={classes["input-wrap"]}>
               <FormControl variant="standard" sx={{ width: "100%" }}>
                 <InputLabel id="university">University</InputLabel>
-                <Input placeholder="university" value={userData['university']} />
+                <Input placeholder="university" value={university} onChange={(e) => setUniversity(e.target.value)} />
               </FormControl>
             </div>
             <div className={classes["input-wrap"]}>
               <FormControl variant="standard" sx={{ width: "100%" }}>
                 <InputLabel id="faculty">Faculty</InputLabel>
-                <Input placeholder="faculty" value={userData['faculty']} />
+                <Input placeholder="faculty" value={faculty} onChange={(e) => setFaculty(e.target.value)} />
               </FormControl>
             </div>
           </React.Fragment>

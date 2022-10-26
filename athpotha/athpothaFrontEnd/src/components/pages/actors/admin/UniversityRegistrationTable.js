@@ -62,18 +62,20 @@ const Swal = require("sweetalert2");
   }).then((result) => {
     if (result.isConfirmed) {
       console.log("Clicked Verify");
-      Swal.fire({
-        title: "Added!",
-        text: "University added",
-        icon: "success",
-        confirmButtonColor: "#388e3c",
-      }).then(() => {        
-        console.log("After Verified");
-        window.location.replace("/admin/university-registration");
+      fetchUserData(data).then(() => {
+        Swal.fire({
+          title: "Added!",
+          text: "University Added",
+          icon: "success",
+          confirmButtonColor: "#388e3c",
+        }).then(() => {        
+            console.log("After Verify");
+            window.location.replace("/admin/university-registration");
+          })
       })
-    }
-  });
-};
+  }
+})
+}
 
 //Reject User
 const rejectUser= (id) => {
@@ -94,18 +96,21 @@ const rejectUser= (id) => {
   }).then((result) => {
     if (result.isConfirmed) {
       console.log("Click reject");
-      Swal.fire({
-        title: "Rejected!",
-        text: "University rejected",
-        icon: "error",
-        confirmButtonColor: "#e53935",
-      }).then(() => {        
-        console.log("After reject");
-        window.location.replace("/admin/university-registration");
+      fetchUserData(data).then(() => {
+        Swal.fire({
+          title: "Rejected!",
+          text: "University Rejected",
+          icon: "error",
+          confirmButtonColor: "#e53935",
+        }).then(() => {        
+            console.log("After reject");
+            window.location.replace("/admin/university-registration");
+          })
       })
-    }
-  });
-};
+  }
+})
+}
+
 
 //Filter panel
 const CustomToolbar = ({ setFilterButtonEl }) => (
@@ -156,7 +161,7 @@ const columns = [
      Verify
       </ColorButton2>
       <ColorButton3
-      onClick={rejectUser}
+     onClick={() => {rejectUser(params.row.id)}}
       >
         Reject
         </ColorButton3>
