@@ -1,5 +1,6 @@
 package com.athpotha.carrierGuidanceSystem.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,22 @@ public class AdminController {
 	
 	@PostMapping("/getAll")
 	public List<User> getAllUsers() {
-		return userRepository.findByUserDeletedFalse();
+	    List <User> userList = new ArrayList<User>();
+	    List <User> newUserList = new ArrayList<User>();
+	    userList = userRepository.findByUserDeletedFalse();
+	    for (User user : userList) {
+	        if (user.getUserType().equals(UserType.university)) {
+	            University university = universityRepository.findByUserId(user.getUserId());
+	            if(university.getIsVerified() == 1) {
+	                newUserList.add(university);
+	            }
+	            
+	        }
+	        else {
+	            newUserList.add(user);
+	        }
+	    }
+		return newUserList;
 		
 //		return userRepository.findAll();
 	}
@@ -108,6 +124,11 @@ public List<University> getAllUni() {
 	
 	@PutMapping("/verifyUser/{userId}")
 	public ResponseEntity verifyUser(@PathVariable long userId) {
+		User user = userRepository.findByUserId(userId);
+		user.setEnabled(true);
+		user.setVerified(true);
+		userRepository.save(user);
+		
 		University uni = universityRepository.findByUserId(userId);
 		int x=1;
 		uni.setIsVerified(x);
@@ -118,6 +139,11 @@ public List<University> getAllUni() {
 	
 	@PutMapping("/rejectUser/{userId}")
 	public ResponseEntity rejectUser(@PathVariable long userId) {
+		User user = userRepository.findByUserId(userId);
+		user.setEnabled(false);
+		user.setVerified(false);
+		userRepository.save(user);
+		
 		University uni = universityRepository.findByUserId(userId);
 		int x = 2;
 		uni.setIsVerified(x);

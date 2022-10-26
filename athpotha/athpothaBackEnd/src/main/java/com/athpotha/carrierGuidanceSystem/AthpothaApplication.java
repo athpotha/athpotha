@@ -110,7 +110,7 @@ public class AthpothaApplication {
 		}
 		if(!isExistingUser("athpothaUniversity121@gmail.com")) {
 			university.setFirstName("University");
-			university.setLastName("Of Colombo");
+			university.setLastName("Of Moratuwa");
 			university.setUserName("university of colombo");
 			university.setUserType(UserType.university);
 			university.setEmail("athpothaUniversity121@gmail.com");
