@@ -28,6 +28,8 @@ import CenteredBox from "../../ui/CenteredBox";
 import ViewProfileMenu from "./ViewProfileMenu";
 import ViewImageModal from "./ViewImageModal";
 import { fetchUserData } from "../../../api/authenticationService";
+import DirectChatPage from "../chat/unichat/components/Chats";
+
 function CoverSection(props) {
   const style = {
     position: "absolute",
@@ -53,7 +55,7 @@ function CoverSection(props) {
   const [openTwo, setOpenTwo] = React.useState(false);
   const handleOpenTwo = () => setOpenTwo(true);
   const handleCloseTwo = () => setOpenTwo(false);
-
+  const navigate=useNavigate();
   let subText = ""
   const userType = props.user.userType;
   switch (userType) {
@@ -94,6 +96,14 @@ function CoverSection(props) {
         console.log(response.data);
       })
     })
+  }
+  const sendMessege=() =>{
+    
+    // alert(props.user.firstName+"_"+props.user.lastName);
+    // DirectChatPage(props.user.firstName+"_"+props.user.lastName);
+    // window.location.reload('/chat');
+    console.log("ID"+props.user.userId);
+    navigate('/chat');
   }
   return (
     <div sx={{ width: "100%" }}>
@@ -182,6 +192,7 @@ function CoverSection(props) {
                       </Button>
                       {localStorage.getItem("IS_PREMIUM") && <Button
                         style={{ borderRadius: 20, textTransform: "none" }}
+                        onClick={sendMessege}
                       >
                         Message
                       </Button>
