@@ -36,6 +36,7 @@ UserRepository extends JpaRepository<User, Long> {
 	int getNewUsers();
 	
 	List<User> findByUserDeletedFalse();
+	List<User> findAllByUserDeletedFalseAndUserTypeNot(UserType userType);
 	
 	
 }

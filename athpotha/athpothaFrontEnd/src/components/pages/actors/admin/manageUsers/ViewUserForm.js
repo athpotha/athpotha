@@ -94,18 +94,22 @@ function ViewUserForm(props) {
             <Input disabled defaultValue="email" value={userData['email']} />
           </FormControl>
         </div>
+        {userData['userType'] ==="university" &&
+        <React.Fragment>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel style={lblStyle} id="university">University</InputLabel>
-            <Input disabled defaultValue="university" inputProps={ariaLabel} />
+            <Input disabled defaultValue="university" value={userData['university']} />
           </FormControl>
         </div>
         <div className={classes["input-wrap"]}>
         <FormControl variant="standard" sx={{ width: "100%" }}>
             <InputLabel style={lblStyle} id="faculty">Faculty</InputLabel>
-            <Input disabled defaultValue="faculty" inputProps={ariaLabel} />
+            <Input disabled defaultValue="faculty" value={userData['faculty']} />
           </FormControl>
         </div>
+        </React.Fragment>
+}
       </div>
     </form>
   );

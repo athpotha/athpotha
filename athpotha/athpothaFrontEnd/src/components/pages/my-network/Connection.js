@@ -69,7 +69,7 @@ const StyledRating = styled(Rating)({
                                 <div style={{ marginTop: '35px', marginLeft: '16px' }}>
                                     <Box>{firstName + " "}{lastName}</Box>
                                     <Box sx={{ fontSize: '10pt' }}>{studentType}</Box>
-                                    <Box sx={{ mt: 3, fontSize: '10pt' }}>1,100 followers</Box>
+                                    <Box sx={{ mt: 3, fontSize: '10pt' }}>10 followers</Box>
                                 </div>
                                 <CardActions>
                                     <Button size="small" variant="outlined">Connection</Button>

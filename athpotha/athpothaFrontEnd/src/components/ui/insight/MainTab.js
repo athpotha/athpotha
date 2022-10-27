@@ -66,9 +66,9 @@ export default function MainTab(props) {
               sx={{ minWidth: 0 }}
               value={2}
               icon={
-                <Badge badgeContent={4} color="primary">
+                // <Badge badgeContent={4} color="primary">
                   <NotificationsIcon />
-                </Badge>
+                // </Badge>
               }
               component={Link}
               to={"/notifications"}

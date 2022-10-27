@@ -77,6 +77,7 @@ function App() {
   const [content, setContent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   console.log(authCtx.hasLogged)
+  console.log(userType);
   // localStorage.setItem("USER_TYPE", "student");
 
   // let users = [];
@@ -112,10 +113,10 @@ function App() {
             <Route path="/chat" element={<Chats />}></Route>
             
           )}
-          {authCtx.isLoggedIn && authCtx.hasLogged && (
+          {authCtx.isLoggedIn && (authCtx.hasLogged || userType !== "university") && (
             <Route path="/profile" element={<Profile />}></Route>
           )}
-          {authCtx.isLoggedIn && (
+          {authCtx.isLoggedIn && userType !== "university" && (
             <Route path="/categories" element={<Categories />}></Route>
           )}
 
@@ -146,7 +147,7 @@ function App() {
           <Route path="/user/view-user" element={<ViewProfile />}></Route>
           <Route path="/profile/:userId" element={<ViewProfile />}></Route>
 
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
         {/* </AuthProvider> */}
       </ThemeProvider>
