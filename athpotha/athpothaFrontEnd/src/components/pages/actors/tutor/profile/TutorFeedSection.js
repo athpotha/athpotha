@@ -9,6 +9,7 @@ import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 import MyCategories from "../../../profile/MyCategories";
 import StudentMaterials from "./StudentMaterials";
 import { fetchUserData } from "../../../../../api/authenticationService";
+import MyPosts from "../../../profile/MyPosts";
 // import BeforeDisplay from "../../ui/BeforeDisplay";
 // import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
@@ -58,7 +59,7 @@ function TutorFeedSection(props) {
 
     if (props.posts.length > 0) {
         posts = props.posts.map((post) => (
-            post.postType == "post" && <ProfileCard homeCardId={post.id} key={post.id} postItem={post} />
+            post.postType == "post" && <ProfileCard cardType="profile" homeCardId={post.id} key={post.id} postItem={post} />
         ))
     }
     if (props.isLoading) {
@@ -77,10 +78,11 @@ function TutorFeedSection(props) {
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
-                {posts}
+                <MyPosts postType={"post"} />
+                {/* {posts} */}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <StudentMaterials />
+                <StudentMaterials profileType="own-profile" />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <MyCategories />

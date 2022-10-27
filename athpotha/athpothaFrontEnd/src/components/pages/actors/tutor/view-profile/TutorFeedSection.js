@@ -8,6 +8,7 @@ import BeforeDisplay from "../../../../ui/BeforeDisplay";
 import ProfileCard from "../../../../ui/insight/profile/ProfileCard";
 import ViewPosts from "../../../view-profile/ViewPosts";
 import ViewCategories from "../../../view-profile/ViewCategories";
+import StudentMaterials from "../profile/StudentMaterials";
 // import BeforeDisplay from "../../ui/BeforeDisplay";
 // import ProfileCard from "../../ui/insight/profile/ProfileCard";
 
@@ -50,13 +51,17 @@ function TutorFeedSection(props) {
         <React.Fragment>
             <Tabs value={value} onChange={handleChange} sx={{ bgColor: "#ffff" }} aria-label="basic tabs example">
                 <Tab label="Posts" {...a11yProps(0)} />
-                <Tab label="Categories" {...a11yProps(1)} />
+                <Tab label="Student Materials" {...a11yProps(1)} />
+                <Tab label="Categories" {...a11yProps(2)} />
             </Tabs>
             <Divider></Divider>
             <TabPanel value={value} index={0}>
                 <ViewPosts postType="posts" />
             </TabPanel>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={value} index={1}>
+                <StudentMaterials profileType="view-profile" />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
                 <ViewCategories />
             </TabPanel>
         </React.Fragment>
