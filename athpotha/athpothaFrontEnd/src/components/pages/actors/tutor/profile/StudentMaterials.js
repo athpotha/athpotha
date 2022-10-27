@@ -8,13 +8,18 @@ import BackDrop from '../../../../ui/BackDrop';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 
-function StudentMaterials() {
+function StudentMaterials(props) {
 
 
-  const id = localStorage.getItem("USER_ID")
+  let id = ""
   const [material, setMaterial] = React.useState([])
 
-
+  if (props.profileType === "own-profile") {
+    id = localStorage.getItem("USER_ID")
+  } else {
+    id = props.user.userId;
+    // i
+  }
   React.useEffect(() => {
     fetchUserData({
       url: `/materials/get-material/${id}`,
@@ -30,9 +35,7 @@ function StudentMaterials() {
   return (
 
     <Box>
-
-      <AddStudentMaterial></AddStudentMaterial>
-
+      {props.profileType === "own-profile" && <AddStudentMaterial />}
       <Typography sx={{
         ml: 2,
         color: "#2480E7",
@@ -60,12 +63,12 @@ function StudentMaterials() {
 
                 <Box sx={{
                   color: "#212E6C",
-                  fontWeight:"bold",
-                  fontSize:"12pt"
+                  fontWeight: "bold",
+                  fontSize: "12pt"
                 }}>{content}</Box>
 
                 <a href={materialUrl} target="_blank" style={{
-                  color:"#12BC22"
+                  color: "#12BC22"
                 }}><CloudDownloadIcon></CloudDownloadIcon></a>
 
                 {/* <BackDrop dataUploading={materialUrl} /> */}

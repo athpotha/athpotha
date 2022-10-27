@@ -33,11 +33,11 @@ export const leftbarItem = () => {
                 icon: <SchoolIcon />,
                 link: "/course-page"
             },
-            {
-                id: "leftbar-listItem-4",
-                listName: "Bookmarks",
-                icon: <BookmarksIcon />,
-            },
+            // {
+            //     id: "leftbar-listItem-4",
+            //     listName: "Bookmarks",
+            //     icon: <BookmarksIcon />,
+            // },
         ];
         return listItems;
     } else if (userType === "university") {
@@ -47,11 +47,11 @@ export const leftbarItem = () => {
                 listName: "Connections",
                 icon: <PeopleAltIcon />,
             },
-            {
-                id: "leftbar-listItem-4",
-                listName: "Bookmarks",
-                icon: <BookmarksIcon />,
-            },
+            // {
+            //     id: "leftbar-listItem-4",
+            //     listName: "Bookmarks",
+            //     icon: <BookmarksIcon />,
+            // },
         ];
         return listItems;
     } else {
@@ -68,11 +68,11 @@ export const leftbarItem = () => {
                 icon: <CellTowerIcon />,
                 link:'/community'
             },
-            {
-                id: "leftbar-listItem-4",
-                listName: "Bookmarks",
-                icon: <BookmarksIcon />,
-            },
+            // {
+            //     id: "leftbar-listItem-4",
+            //     listName: "Bookmarks",
+            //     icon: <BookmarksIcon />,
+            // },
         ];
         return listItems;
     }
