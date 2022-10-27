@@ -67,11 +67,11 @@ function TutorViewCard(props) {
                                                     <CardMedia
                                                         component="img"
                                                         height="90"
-                                                        image="images/tutors/tutor-1.jpg"
+                                                        image={tutor.coverPicture}
                                                         alt="green iguana"
                                                     />
                                                     <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                        <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90 }} />
+                                                        <Avatar alt="Remy Sharp" src={tutor.profilePicture} sx={{ width: 90, height: 90 }} />
                                                     </div>
                                                 </div>
                                                 <div style={{ marginTop: '35px', marginLeft: '16px' }}>
@@ -108,11 +108,11 @@ function TutorViewCard(props) {
                                                     <CardMedia
                                                         component="img"
                                                         height="90"
-                                                        image="images/tutors/tutor-1.jpg"
+                                                        image={tutor.coverPicture}
                                                         alt="green iguana"
                                                     />
                                                     <div style={{ position: 'absolute', top: '30px', left: '16px' }}>
-                                                        <Avatar alt="Remy Sharp" src="image3.jpg" sx={{ width: 90, height: 90 }} />
+                                                        <Avatar alt="Remy Sharp" src={tutor.profilePicture} sx={{ width: 90, height: 90 }} />
                                                     </div>
                                                 </div>
                                                 <div style={{ marginTop: '35px', marginLeft: '16px' }}>
