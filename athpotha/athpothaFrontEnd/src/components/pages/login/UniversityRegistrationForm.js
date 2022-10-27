@@ -314,14 +314,14 @@ function UniversityRegistrationForm(props) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={1}>University of Moratuwa</MenuItem>
-              <MenuItem value={2}>University of Colombo</MenuItem>
-              <MenuItem value={3}>University of Peradeniya</MenuItem>
-              <MenuItem value={4}>University of Kelaniya</MenuItem>
-              <MenuItem value={5}>University of Japura</MenuItem>
-              <MenuItem value={6}>University of Ruhuna</MenuItem>
-              <MenuItem value={7}>Sri Lanka Institute of Information Technology (SLIIT)</MenuItem>
-              <MenuItem value={8}>Informatics Information of Technology (IIT)</MenuItem>
+              <MenuItem value="University of Moratuwa">University of Moratuwa</MenuItem>
+              <MenuItem value={"University of Colombo"}>University of Colombo</MenuItem>
+              <MenuItem value="University of Peradeniya">University of Peradeniya</MenuItem>
+              <MenuItem value="University of Kelaniya">University of Kelaniya</MenuItem>
+              <MenuItem value="University of Japura">University of Japura</MenuItem>
+              <MenuItem value="University of Ruhuna">University of Ruhuna</MenuItem>
+              <MenuItem value="Sri Lanka Institute of Information Technology (SLIIT)">Sri Lanka Institute of Information Technology (SLIIT)</MenuItem>
+              <MenuItem value="Informatics Information of Technology (IIT)">Informatics Information of Technology (IIT)</MenuItem>
             </Select>
             <FormHelperText>{universityHasError ? universityError : ""}</FormHelperText>
           </FormControl>
@@ -340,14 +340,14 @@ function UniversityRegistrationForm(props) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={1}>Engineering</MenuItem>
-              <MenuItem value={2}>Computer Science</MenuItem>
-              <MenuItem value={3}>Information Technology</MenuItem>
-              <MenuItem value={4}>Physical Science</MenuItem>
-              <MenuItem value={5}>Applied Sciences</MenuItem>
-              <MenuItem value={6}>Quantity Surveying</MenuItem>
-              <MenuItem value={7}>Computing and Information Systems</MenuItem>
-              <MenuItem value={8}>Town and Country Planning</MenuItem>
+              <MenuItem value="Engineering">Engineering</MenuItem>
+              <MenuItem value="Computer Science">Computer Science</MenuItem>
+              <MenuItem value="Information Technology">Information Technology</MenuItem>
+              <MenuItem value="Physical Science">Physical Science</MenuItem>
+              <MenuItem value="Applied Sciences">Applied Sciences</MenuItem>
+              <MenuItem value="Quantity Surveying">Quantity Surveying</MenuItem>
+              <MenuItem value="Computing and Information Systems">Computing and Information Systems</MenuItem>
+              <MenuItem value="Town and Country Planning">Town and Country Planning</MenuItem>
             </Select>
             <FormHelperText>{facultyHasError ? facultyError : ""}</FormHelperText>
           </FormControl>

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.athpotha.carrierGuidanceSystem.model.ImageType;
 import com.athpotha.carrierGuidanceSystem.model.User;
+import com.athpotha.carrierGuidanceSystem.model.UserType;
 import com.athpotha.carrierGuidanceSystem.repository.UserRepository;
 import com.athpotha.carrierGuidanceSystem.service.FileUploadService;
 
@@ -67,5 +68,10 @@ public class UserController {
 		System.out.println(searchName);
 		List<User> searchedUsers = userRepo.findByUserName(searchName);
 		return ResponseEntity.ok(searchedUsers);
+	}
+	
+	@PostMapping("get-users-withoutAdmin")
+	public List<User> getAllUsersWithoutAdmin() {
+		return userRepo.findAllByUserDeletedFalseAndUserTypeNot(UserType.admin);
 	}
 }

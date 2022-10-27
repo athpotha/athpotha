@@ -34,7 +34,7 @@ export default function BasicModal(props) {
   // }
   const tabValue = useSelector((state) => state.modal.modalTabValue);
   const userType = localStorage.getItem("USER_TYPE");
-  console.log(userType);
+  // console.log(userType);
   return (
     <Modal
       open={props.open}

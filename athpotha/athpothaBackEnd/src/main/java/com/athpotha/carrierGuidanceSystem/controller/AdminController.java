@@ -124,6 +124,11 @@ public List<University> getAllUni() {
 	
 	@PutMapping("/verifyUser/{userId}")
 	public ResponseEntity verifyUser(@PathVariable long userId) {
+		User user = userRepository.findByUserId(userId);
+		user.setEnabled(true);
+		user.setVerified(true);
+		userRepository.save(user);
+		
 		University uni = universityRepository.findByUserId(userId);
 		int x=1;
 		uni.setIsVerified(x);
@@ -134,6 +139,11 @@ public List<University> getAllUni() {
 	
 	@PutMapping("/rejectUser/{userId}")
 	public ResponseEntity rejectUser(@PathVariable long userId) {
+		User user = userRepository.findByUserId(userId);
+		user.setEnabled(false);
+		user.setVerified(false);
+		userRepository.save(user);
+		
 		University uni = universityRepository.findByUserId(userId);
 		int x = 2;
 		uni.setIsVerified(x);
