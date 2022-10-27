@@ -133,16 +133,20 @@ function CourseViewCard(props) {
                                                         <Box sx={{ mb: "px" }}>{university.university}</Box>
                                                         <Box sx={{ mb: "30px" }}>{course.courseName}</Box>
                                                         <CenteredBox >
-                                                            <Stack direction="row" spacing={1}>
-                                                                <StyledRating
-                                                                    value={course.rate}
-                                                                    readOnly
-                                                                    icon={<StarIcon />}
-                                                                    emptyIcon={<StarBorderIcon />}
-                                                                />
-                                                                <div>
-                                                                    <CenteredBox>(2400)</CenteredBox>
-                                                                </div>
+                                                        <Stack direction="row" spacing={1}>
+                                                                <Stack direction="row" spacing={1}>
+                                                                    <Rating
+                                                                        name="half-rating-read"
+                                                                        value={university.uniRate}
+                                                                        readOnly
+                                                                        precision={0.5}
+                                                                        icon={<StarIcon />}
+                                                                        emptyIcon={<StarBorderIcon />}
+                                                                    />
+                                                                    <div>
+                                                                        <CenteredBox>{university.uniRate}</CenteredBox>
+                                                                    </div>
+                                                                </Stack>
                                                             </Stack>
                                                         </CenteredBox>
                                                     </div>
