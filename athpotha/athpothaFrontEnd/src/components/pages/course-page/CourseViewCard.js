@@ -135,13 +135,13 @@ function CourseViewCard(props) {
                                                         <CenteredBox >
                                                             <Stack direction="row" spacing={1}>
                                                                 <StyledRating
-                                                                    value={course.rate}
+                                                                    value={university.uniRate}
                                                                     readOnly
                                                                     icon={<StarIcon />}
                                                                     emptyIcon={<StarBorderIcon />}
                                                                 />
                                                                 <div>
-                                                                    <CenteredBox>(2400)</CenteredBox>
+                                                                    <CenteredBox>{university.uniRate}</CenteredBox>
                                                                 </div>
                                                             </Stack>
                                                         </CenteredBox>
